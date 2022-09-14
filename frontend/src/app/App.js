@@ -1,24 +1,20 @@
-import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+import CompanyMain from '../features/company/main/page';
+import Main from '../features/main/page';
+import CompanyRegister from '../features/company/register/register';
+import Nfts from '../features/company/nfts/nfts';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Routes>
+        <Route exact path="/" element={ <Main/> } />
+        <Route exact path="/company/123" element={ <CompanyMain/>}/>
+        <Route exact path="/company/123/register" element={ <CompanyRegister/> }></Route>
+        <Route exact path="/company/123/nfts" element={ <Nfts/>}/>
+      </Routes>
+    </Router>
   );
 }
 

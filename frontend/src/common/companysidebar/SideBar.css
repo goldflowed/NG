@@ -1,0 +1,13 @@
+.container {
+  background-color: #3E3E3E;
+  width: 300px;
+  height: 969px;
+  margin: 0px;
+  display:flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+a:visited {
+  text-decoration: none;
+}
