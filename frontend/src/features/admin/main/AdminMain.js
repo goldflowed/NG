@@ -3,33 +3,32 @@ import SideBar from "../sidebar/SideBar";
 import styled from "styled-components";
 
 const ContainerDiv = styled.div`
+  width:1900px;
   display: flex;
   flex-direction: row;
   `
 
-const SideBarDiv = styled.div`
-  background-color: #3E3E3E;
-  width: 300px;
-  height: 969px;
-  margin: 0px;
-  display:flex;
-  justify-content: center;
-  flex-direction: column;
-  `
-
 const MainDiv = styled.div`
-  /* background-color: red; */
-  width: 1600px;
+  width: 1450px;
   padding-top:50px;
-  padding-left: 100px;
   padding-right: 100px;
   font-size:20px;
+  margin-left:400px;
   `
 
 const Hr = styled.hr`
   height: 1px;
   background-color: black;
   width:100%;
+  `
+
+const InfoDiv = styled.div`
+  width: 98%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 10px;
+  margin-left:30px;
   `
 
 const TitleP = styled.p`
@@ -39,14 +38,15 @@ const TitleP = styled.p`
   margin: 0;
   margin-left: 20px;
   `
+
 function Home() {
   return (
     <ContainerDiv>
-      <SideBarDiv>
-        <SideBar/>
-      </SideBarDiv>
+      <SideBar/>
       <MainDiv>
-        <TitleP>NFT 인증서 발급</TitleP><Hr/>
+      <TitleP>요청 기업 목록</TitleP><Hr/>
+        <InfoDiv>
+        </InfoDiv>
       </MainDiv>
     </ContainerDiv>
   )

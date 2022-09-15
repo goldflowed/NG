@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import SideBar from "../../../common/companysidebar/SideBar";
+import SideBar from "../sidebar/SideBar";
 import styled from "styled-components";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -10,23 +10,13 @@ const ContainerDiv = styled.div`
   flex-direction: row;
   `
 
-const SideBarDiv = styled.div`
-  background-color: #3E3E3E;
-  width: 300px;
-  height: 969px;
-  margin: 0px;
-  display:flex;
-  justify-content: center;
-  flex-direction: column;
-  `
-
 const MainDiv = styled.div`
   /* background-color: red; */
-  width: 1600px;
+  width: 1550px;
   padding-top:50px;
-  padding-left: 100px;
   padding-right: 100px;
   font-size:20px;
+  margin-left:400px;
   `
 
 const Hr = styled.hr`
@@ -36,6 +26,7 @@ const Hr = styled.hr`
   `
 
 const TitleP = styled.p`
+  width:1350px;
   font-size: 50px;
   font-weight: bold;
   margin: 0;
@@ -86,13 +77,11 @@ function Register() {
 
   return (
     <ContainerDiv>
-      <SideBarDiv>
-        <SideBar/>
-      </SideBarDiv>
+      <SideBar/>
       <MainDiv>
         <TitleP>NFT 인증서 발급</TitleP><Hr/>
         <InfoDiv>
-          <Form >
+          <Form style={{width:"1300px",}}>
             <Logo style={{display:"block", margin:"auto"}} src={ssafy}/>
 
             <Form.Group style={{display:"flex", justifyContent:"center", marginTop: "35px", marginBottom: "35px"}} >

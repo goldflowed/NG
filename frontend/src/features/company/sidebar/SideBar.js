@@ -1,39 +1,35 @@
 import React from "react";
 import styled from "styled-components";
-import {Link, useNavigate}from 'react-router-dom'
+import {Link}from 'react-router-dom'
 import './SideBar.css';
-import ssafy from '../../assets/img/ssafy.png';
 
 const MenuList = styled.div`
-  background-color: #DDDDDD;
+  // background-color: #DDDDDD;
   border-radius: 10px;
   width: 80%;
-  height:80%;
+  height:90%;
   display: flex;
   justify-content: center;
   margin: auto;
+  color:white;
   `
 
 const ListHr = styled.hr`
   height: 1px;
-  background-color: black;
-  `
-
-const Logo = styled.img`
-  display:block;
-  margin:auto;
-  width:250px;
-  border-radius: 10px;
-  justify-content: center;
+  background-color: white;
+  margin-top:20px;
+  margin-bottom:20px;
   `
 
 const List = styled.ul`
+  width:90%;
   padding: 0;
   list-style: none;
   `
 
 const ListTitle = styled.li`
-  margin-bottom: 50px;
+  font-size:20px;
+  margin-bottom: 100px;
   `
 
 const Item = styled.ul`
@@ -42,6 +38,10 @@ const Item = styled.ul`
   `
 
 const ListItem = styled.li`
+  font-size:20px;
+  color:white;
+  margin-bottom:15px;
+  margin-top:15px;
   `
 
 const StyledLink = styled(Link)`
@@ -54,26 +54,20 @@ const StyledLink = styled(Link)`
   `
 
 function SideBar() {
-  const history = useNavigate();
-
-  const goHome = (event) => {
-    history('/company/123');
-  }
 
   return (
     <div className="container">
-      <Logo src={ssafy} onClick={goHome}/>
       <MenuList>
         <List>
           <ListTitle>NFT 인증서 관리<ListHr/>
             <Item>
               <StyledLink to={"/company/123/register"}><ListItem>NFT 인증서 발급</ListItem></StyledLink>
-              <StyledLink to={"/company/123/nfts"}><ListItem>발급한 인증서 목록 조회</ListItem></StyledLink>
+              <StyledLink to={"/company/123/nfts"}><ListItem>등록 제품 조회</ListItem></StyledLink>
             </Item>
           </ListTitle>
           <ListTitle>기업 정보 관리<ListHr/>
             <Item>
-              <ListItem>기업 정보 조회</ListItem>
+              <StyledLink to={"/company/123"}><ListItem>기업 정보 조회</ListItem></StyledLink>
             </Item>
           </ListTitle>
         </List>

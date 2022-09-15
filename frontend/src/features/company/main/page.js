@@ -1,29 +1,19 @@
 import React from "react";
-import SideBar from "../../../common/companysidebar/SideBar";
+import SideBar from "../sidebar/SideBar";
 import styled from "styled-components";
 
 const ContainerDiv = styled.div`
+  width:1900px;
   display: flex;
   flex-direction: row;
   `
 
-const SideBarDiv = styled.div`
-  background-color: #3E3E3E;
-  width: 300px;
-  height: 969px;
-  margin: 0px;
-  display:flex;
-  justify-content: center;
-  flex-direction: column;
-  `
-
 const MainDiv = styled.div`
-  /* background-color: red; */
-  width: 1600px;
+  width: 1450px;
   padding-top:50px;
-  padding-left: 10px;
-  padding-right: 10px;
+  padding-right: 100px;
   font-size:20px;
+  margin-left:400px;
   `
 
 const Hr = styled.hr`
@@ -33,11 +23,12 @@ const Hr = styled.hr`
   `
 
 const InfoDiv = styled.div`
-  width: 1580px;
+  width: 98%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   padding: 10px;
+  margin-left:30px;
   `
 
 const Button = styled.div`
@@ -57,16 +48,23 @@ const Logo = styled.div`
   background-color: gray;
   float: right;
   `
+
+const TitleP = styled.p`
+  width:1350px;
+  font-size: 50px;
+  font-weight: bold;
+  margin: 0;
+  margin-left: 20px;
+  `
+
 function Home() {
   return (
     <ContainerDiv>
-      <SideBarDiv>
-        <SideBar/>
-      </SideBarDiv>
+      <SideBar/>
       <MainDiv>
-        <p>기업 정보</p><Hr/>
+      <TitleP>기업 정보 조회</TitleP><Hr/>
         <InfoDiv>
-          <div className="info">
+          <div className="info" style={{display:"flex", flexDirection:"column"}}>
             <p>브랜드명: </p>
             <p>사업자 등록번호: </p>
             <p>브랜드 지갑 주소: </p>

@@ -7,23 +7,13 @@ const ContainerDiv = styled.div`
   flex-direction: row;
   `
 
-const SideBarDiv = styled.div`
-  background-color: #3E3E3E;
-  width: 300px;
-  height: 969px;
-  margin: 0px;
-  display:flex;
-  justify-content: center;
-  flex-direction: column;
-  `
-
 const MainDiv = styled.div`
   /* background-color: red; */
-  width: 1600px;
+  width: 1550px;
   padding-top:50px;
-  padding-left: 100px;
   padding-right: 100px;
   font-size:20px;
+  margin-left:400px;
   `
 
 const Hr = styled.hr`
@@ -39,16 +29,14 @@ const TitleP = styled.p`
   margin: 0;
   margin-left: 20px;
   `
-function Home() {
+function Nft() {
   return (
     <ContainerDiv>
-      <SideBarDiv>
-        <SideBar/>
-      </SideBarDiv>
+      <SideBar/>
       <MainDiv>
-        <TitleP>NFT 인증서 발급</TitleP><Hr/>
+        <TitleP>어쨋든Nft보여주는페이지</TitleP><Hr/>
       </MainDiv>
     </ContainerDiv>
   )
 }
-export default Home;
+export default Nft;
