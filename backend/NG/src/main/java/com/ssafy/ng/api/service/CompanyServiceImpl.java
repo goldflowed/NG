@@ -23,7 +23,7 @@ public class CompanyServiceImpl implements CompanyService{
                 .comWallet(comInfo.getComWallet())
                 .comEmail(comInfo.getComEmail())
                 .comTel(comInfo.getComTel())
-                .comLogo(null)
+                .comLogo("")
                 .build();
         return companyRepository.save(company);
     }
