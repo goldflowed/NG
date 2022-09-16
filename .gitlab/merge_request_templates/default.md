@@ -1,6 +1,7 @@
 ## FrontEnd / BackEnd
 - [ ] Front-End
 - [ ] Back-End
+- [ ] Block-Chain
 
 ## 어떤 이유로 MR를 하셨나요?
 - [ ] feat : feature 병합(feature issue #를 남겨주세요)
