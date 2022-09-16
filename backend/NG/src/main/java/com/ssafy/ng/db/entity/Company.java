@@ -37,6 +37,6 @@ public class Company {
     private String comTel;
 
     // 기업 로고 이미지 url
-    @Column(name = "com_logo", nullable = false)
+    @Column(name = "com_logo")
     private String comLogo;
 }
