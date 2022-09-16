@@ -15,9 +15,11 @@ contract ERC165 is IERC165 {
         _registerInterface(bytes4(keccak256("supportInterface(bytes4)")));
     }
 
+    //
     function supportsInterface(bytes4 interfaceID)
         external
         view
+        virtual
         override
         returns (bool)
     {

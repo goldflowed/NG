@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import "../../utils/introspection/ERC165.sol";
 import "./IERC721.sol";
 import "./IERC721Receiver.sol";
+import "../../utils/introspection/ERC165.sol";
 import "../../utils/Context.sol";
 import "../../utils/Address.sol";
 
@@ -252,5 +252,18 @@ contract ERC721 is Context, ERC165, IERC721 {
         returns (bool)
     {
         return _operatorApprovals[owner][operator];
+    }
+
+    // override from ERC165
+    function supportsInterface(bytes4 interfaceId)
+        public
+        view
+        virtual
+        override(ERC165)
+        returns (bool)
+    {
+        return
+            interfaceId == type(IERC721).interfaceId ||
+            super.supportsInterface(interfaceId);
     }
 }
