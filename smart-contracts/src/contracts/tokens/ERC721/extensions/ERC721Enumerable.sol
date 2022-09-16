@@ -17,20 +17,13 @@ contract ERC721Enumerable is IERC721Enumerable, ERC721 {
     // token ID index to owner tokens list
     mapping(uint256 => uint256) private _ownedTokensIndex;
 
-    constructor() {
-        _registerInterface(
-            bytes4(
-                keccak256("totalSupply(bytes4)") ^
-                    keccak256("tokenByIndex(bytes4)") ^
-                    keccak256("tokenOfOwnerByIndex(bytes4)")
-            )
-        );
-    }
+    constructor() {}
 
-    // ERC165 함수 Overriding
+    // ERC165 함수 Overriding from ERC721
     function supportsInterface(bytes4 interfaceId)
         public
         view
+        virtual
         override(ERC721)
         returns (bool)
     {

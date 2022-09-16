@@ -9,25 +9,14 @@ import "./IERC165.sol";
 
 */
 contract ERC165 is IERC165 {
-    mapping(bytes4 => bool) private _supportInterfaces;
-
-    constructor() {
-        _registerInterface(bytes4(keccak256("supportInterface(bytes4)")));
-    }
-
-    //
     function supportsInterface(bytes4 interfaceID)
-        external
+        public
         view
         virtual
         override
         returns (bool)
     {
-        return _supportInterfaces[interfaceID];
-    }
-
-    function _registerInterface(bytes4 interfaceId) internal {
-        require(interfaceId != 0xffffffff, "Invalid interface request");
-        _supportInterfaces[interfaceId] = true;
+        // return _supportInterfaces[interfaceID];
+        return interfaceID == type(IERC165).interfaceId;
     }
 }
