@@ -62,5 +62,31 @@ contract ERC721Enumerable is IERC721Enumerable, ERC721 {
     // 상속을 통해서 재정의한 함수를 표시
     function _mint(address to, uint256 tokenId) internal override(ERC721) {
         super._mint(to, tokenId);
+        //  1. add tokens to the owner: 소유자 추적 
+		//    -> 소유자에게 토큰을 추가하는 함수 필요
+		_addTokensToOwnerEnumeration(to, tokenId);
+
+		//  2. all tokens to our totalsupply - to allTokens: 총 공급 추적 
+		//    -> allTokens에 토큰을 추가하는 함수 필요
+		_addTokensToAllTokenEnumeration(tokenId);
     }
+
+    	// add tokens to the _allTokens array and set the position of the tokens indexes.
+	function _addTokensToAllTokenEnumeration(uint256 tokenId) private {
+		// _allTokensIndex[tokenId]: tokenId에 해당하는 토큰을 가져온다
+		_allTokensIndex[tokenId] = _allTokens.length;
+		_allTokens.push(tokenId);
+
+		// 토큰을 추가할 때 어디에 있는 tokenID 뿐만 아니라 그 위치의 길이도 추적한다. 
+	}
+
+	function _addTokensToOwnerEnumeration(address to, uint256 tokenId) private{
+		// EXERCISE - CHALLENGE - DO THESE THREE THINGS:
+		// 1. add address and token id to the _ownedTokens
+		// 2. _ownedTokensIndex tokenId set to address of ownedTokens position
+		// 3. we want to execute the function with minting
+		_ownedTokens[to].push(tokenId);
+		_ownedTokensIndex[tokenId] = _ownedTokens[to].length;
+
+	}
 }
