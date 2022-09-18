@@ -39,4 +39,9 @@ public class Company {
     // 기업 로고 이미지 url
     @Column(name = "com_logo")
     private String comLogo;
+
+    // 기업 가입 승인 여부
+    // 1: 승인중, 2:승인거부, 3:승인
+    @Column(name = "com_permit")
+    private int comPermit;
 }

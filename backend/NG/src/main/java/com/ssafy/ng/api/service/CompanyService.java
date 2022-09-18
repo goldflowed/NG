@@ -14,5 +14,5 @@ public interface CompanyService {
     Company createCompany(CompanyPostReq companyPostReq);
 
     // 기업정보 조회하기
-    CompanyGetRes getCompanyByComSeq(long comSeq);
+    CompanyGetRes getCompanyByComWallet(String comWallet);
 }

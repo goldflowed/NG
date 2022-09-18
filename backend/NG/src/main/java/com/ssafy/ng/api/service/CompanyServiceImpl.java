@@ -24,13 +24,14 @@ public class CompanyServiceImpl implements CompanyService{
                 .comEmail(comInfo.getComEmail())
                 .comTel(comInfo.getComTel())
                 .comLogo("")
+                .comPermit(1)
                 .build();
         return companyRepository.save(company);
     }
 
     @Override
-    public CompanyGetRes getCompanyByComSeq(long comSeq) {
-        Optional<Company> company = companyRepository.getByComSeq(comSeq);
+    public CompanyGetRes getCompanyByComWallet(String comWallet) {
+        Optional<Company> company = companyRepository.getByComWallet(comWallet);
         if (!company.isPresent()) {
             return null;
         }
