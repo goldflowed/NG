@@ -1622,12 +1622,12 @@
     "1662470504826": {
       "events": {},
       "links": {},
-      "address": "0x7756E7e86EDC1E0226A6C28de9a2Ef51541c97d7",
-      "transactionHash": "0xb23c8c00bf3380f96418fe077c436f8ec577b68b77b6aac45d6e9ba5289b1891"
+      "address": "0x24c1dDAC1d78B904F2e7eC2319a3C37427f5868c",
+      "transactionHash": "0xb7de2e43a291a6595ca6f68ff2c2501009acfbab831ba24c69f82fecdd241dbb"
     }
   },
   "schemaVersion": "3.4.9",
-  "updatedAt": "2022-09-16T07:27:26.342Z",
+  "updatedAt": "2022-09-18T22:32:23.825Z",
   "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",
