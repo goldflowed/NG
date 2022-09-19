@@ -22,6 +22,7 @@ public class CompanyServiceImpl implements CompanyService{
                 .comRegNum(comInfo.getComRegNum())
                 .comWallet(comInfo.getComWallet())
                 .comEmail(comInfo.getComEmail())
+                .comAddress(comInfo.getComAddress())
                 .comTel(comInfo.getComTel())
                 .comLogo("")
                 .comPermit(1)

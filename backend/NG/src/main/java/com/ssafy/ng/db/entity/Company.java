@@ -32,6 +32,10 @@ public class Company {
     @Column(name = "com_email")
     private String comEmail;
 
+    // 기업 주소
+    @Column(name = "com_address")
+    private String comAddress;
+
     // 고객센터번호
     @Column(name = "com_tel")
     private String comTel;

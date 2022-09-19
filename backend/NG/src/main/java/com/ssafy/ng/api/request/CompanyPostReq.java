@@ -16,12 +16,15 @@ public class CompanyPostReq {
     @ApiModelProperty(name = "사업자 등록번호")
     String comRegNum;
 
-    @ApiModelProperty(name = "기업 이름")
+    @ApiModelProperty(name = "기업 지갑주소")
     String comWallet;
 
-    @ApiModelProperty(name = "기업 이름")
+    @ApiModelProperty(name = "기업 이메일")
     String comEmail;
 
-    @ApiModelProperty(name = "기업 이름")
+    @ApiModelProperty(name = "기업 주소")
+    String comAddress;
+
+    @ApiModelProperty(name = "기업 전화번호")
     String comTel;
 }
