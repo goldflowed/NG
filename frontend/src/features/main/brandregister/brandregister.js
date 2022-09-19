@@ -1,8 +1,9 @@
 import axios from "axios";
 import React,{useEffect, useState} from "react";
 import Navbar from "../../../common/NavBar"
-
-// import "./brand-register.css"
+import "./brandregister.css"
+import { MDBInput } from 'mdb-react-ui-kit';
+import { MDBBtn } from 'mdb-react-ui-kit';
 
 function BrandRegister() {
 
@@ -29,7 +30,7 @@ function BrandRegister() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        setFormErrors(validate(formValues));
+        // setFormErrors(validate(formValues));
         setIsSubmit(true);
     }
 
@@ -40,14 +41,14 @@ function BrandRegister() {
         }
     })
 
-    const validate = (values) => {
-        const errors = {}
-        const regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-        if(!values.comEmail){
-            errors.comEmail = "이메일을 올바르게 입력해주세요."
-        }
-        return errors;
-    };
+    // const validate = (values) => {
+    //     const errors = {}
+    //     const regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    //     if(!values.comEmail){
+    //         errors.comEmail = "이메일을 올바르게 입력해주세요."
+    //     }
+    //     return errors;
+    // };
 
     function onSubmit(event){
 
@@ -67,79 +68,82 @@ function BrandRegister() {
     return(
         <div>
         <Navbar/>
-        <div className="container">
-            <pre>{JSON.stringify(formValues, undefined, 2)}</pre>
+        <div className="brandregister text-center">
+            {/* <pre>{JSON.stringify(formValues, undefined, 2)}</pre> */}
             <form onSubmit={handleSubmit}>
                 <h1>기업 회원 가입</h1>
+                <br/>
+                <p>저희 서비스를 이용하기 위해서는, 먼저 서비스 가입을 요청해야 합니다. 아래의 정보를 입력해서 제출해주세요.</p>
                 <div className="ui divider"></div>
-                <div className="ui form">
-                    <div className="field" style={{ marginTop: 50}}>
-                        <input
+                <div className="ui form display">
+                    <div className="field">
+                        <br/><br/>
+                        <MDBInput
                           type="text"
                           name="comName"
-                          placeholder="브랜드 명을 입력해주세요."
+                          label="브랜드 명을 입력해주세요."
+                          id='form1'
                           value={ formValues.comName}
-                          onChange={handleChange}>
-                          </input>
+                          onChange={handleChange}/>
                     </div>
-                    <div className="field" style={{ marginTop: 50}}>
-                        <input
+                    <div className="field" style={{ marginTop: 40}}>
+                        <MDBInput
                           type="text"
                           name="comRegNum"
-                          placeholder="사업자 등록 번호를 입력해주세요."
+                          label="사업자 등록 번호를 입력해 주세요."
+                          id='form1'
                           value={ formValues.comRegNum}
-                          onChange={handleChange}>
-                          </input>
+                          onChange={handleChange}/>
                     </div>
-                    <div className="field" style={{ marginTop: 50}}>
-                        <input 
+                    <div className="field" style={{ marginTop: 40}}>
+                        <MDBInput 
                           type="text"
                           name="comWallet"
-                          placeholder="지갑 주소를 입력해주세요."
+                          label="지갑 주소를 입력해주세요."
+                          id='form1'
                           value={ formValues.comWallet}
-                          onChange={handleChange}>
-                          </input>
+                          onChange={handleChange}/>
                     </div>
-                    <div className="field" style={{ marginTop: 50}}>
-                        <input 
+                    <div className="field" style={{ marginTop: 40}}>
+                        <MDBInput
                           type="text"
                           name="comEmail"
-                          placeholder="이메일 주소를 입력해주세요."
+                          label="이메일을 입력해 주세요."
+                          id='form1'
                           value={ formValues.comEmail}
-                          onChange={handleChange}>
-                          </input>
+                          onChange={handleChange}/>
                     </div>
-                    <p>{ formErrors.comEmail }</p>
-                    <div className="field" style={{ marginTop: 50}}>
-                        <input 
+                    <div className="field" style={{ marginTop: 40}}>
+                        <MDBInput
                           type="text"
                           name="comAddress"
-                          placeholder="회사 주소를 입력해주세요."
+                          label="회사 주소를 입력해주세요."
+                          id='form1'
                           value={ formValues.comAddress}
-                          onChange={handleChange}>
-                          </input>
+                          onChange={handleChange}/>
                           
                     </div>
-                    <div className="field" style={{ marginTop: 50}}>
-                        <input 
+                    <div className="field" style={{ marginTop: 40}}>
+                        <MDBInput
                           type="text"
                           name="comTel"
-                          placeholder="회사 전화번호를 입력해주세요."
+                          label="회사 전화번호를 입력해주세요."
+                          id='form1'
                           value={ formValues.comTel}
-                          onChange={handleChange}>
-                          </input>
+                          onChange={handleChange}/>
                           
                     </div>
-                    <div className="field" style={{ marginTop: 50}}>
-                        <input 
+                    <div className="field" style={{ marginTop: 40}}>
+                        <MDBInput
                           type="text" 
                           name="comLogo" 
-                          placeholder="로고를 첨부해주세요." 
+                          label="로고를 첨부해주세요."
+                          id='form1' 
                           value={ formValues.comLogo}
-                          onChange={handleChange}
-                          ></input>
+                          onChange={handleChange}/>
                     </div>
-                    <button className="button" onClick={() => onSubmit()}>제출하기</button>
+                    <br/>
+                    <MDBBtn outline color='success' onClick={() => onSubmit()}>제출하기</MDBBtn>
                 </div>
             </form>
         </div>

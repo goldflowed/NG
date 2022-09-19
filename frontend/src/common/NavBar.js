@@ -77,7 +77,6 @@ function NavBar(props){
         <Navbar.Brand href="/">Nft Guarantee</Navbar.Brand>
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
-            {defaultAccount}
           </Nav>
           <Nav>
             <Nav.Link href="#aboutus">Abuout US</Nav.Link>
@@ -86,7 +85,7 @@ function NavBar(props){
               {
                 window.localStorage.getItem('wallet')
                 ? <Nav.Link href="#mynft">My NFT</Nav.Link>
-                : <Nav.Link href="/brandregister">Brand Registration</Nav.Link>
+                : <Nav.Link href="/brandregister">Brand Register</Nav.Link>
               }
               
             </div>
