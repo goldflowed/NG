@@ -19,6 +19,26 @@ contract NG is ERC721Connector {
     // mapping(NGInfo => bool) _ngExists;
     // mapping(string => bool) _ngExists;
 
+    mapping(address => uint8) _accountsAuth; // 일반: 0, 기업: 1, 관리자: 2
+
+    modifier checkZeroAddress(address _address) {
+        require(_address!=address(0));
+        _;
+    }
+
+    function getAccountAuth(address _address) public view checkZeroAddress(_address) returns(uint8) {
+        uint8 _auth = _accountsAuth[_address];
+        return _auth;
+    }
+
+    function setBrandAccountAuth(address _address) public checkZeroAddress(_address) {
+        _accountsAuth[_address] = 1;
+    }
+
+    function setAdminAccountAuth(address _address) public  checkZeroAddress(_address) {
+        _accountsAuth[_address] = 2;
+    }
+
     modifier ngExists(
         string memory _brandNm,
         string memory _productNo,
