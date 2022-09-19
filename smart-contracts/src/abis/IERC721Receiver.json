@@ -50,15 +50,15 @@
     "absolutePath": "project:/src/contracts/tokens/ERC721/IERC721Receiver.sol",
     "exportedSymbols": {
       "IERC721Receiver": [
-        1793
+        1978
       ]
     },
-    "id": 1794,
+    "id": 1979,
     "license": "MIT",
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 1779,
+        "id": 1964,
         "literals": [
           "solidity",
           "^",
@@ -75,9 +75,9 @@
         "contractDependencies": [],
         "contractKind": "interface",
         "fullyImplemented": false,
-        "id": 1793,
+        "id": 1978,
         "linearizedBaseContracts": [
-          1793
+          1978
         ],
         "name": "IERC721Receiver",
         "nameLocation": "67:15:10",
@@ -85,7 +85,7 @@
         "nodes": [
           {
             "functionSelector": "150b7a02",
-            "id": 1792,
+            "id": 1977,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
@@ -93,17 +93,17 @@
             "nameLocation": "98:16:10",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 1788,
+              "id": 1973,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1781,
+                  "id": 1966,
                   "mutability": "mutable",
                   "name": "_operator",
                   "nameLocation": "132:9:10",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1792,
+                  "scope": 1977,
                   "src": "124:17:10",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -112,7 +112,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 1780,
+                    "id": 1965,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "124:7:10",
@@ -126,12 +126,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 1783,
+                  "id": 1968,
                   "mutability": "mutable",
                   "name": "_from",
                   "nameLocation": "159:5:10",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1792,
+                  "scope": 1977,
                   "src": "151:13:10",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -140,7 +140,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 1782,
+                    "id": 1967,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "151:7:10",
@@ -154,12 +154,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 1785,
+                  "id": 1970,
                   "mutability": "mutable",
                   "name": "_tokenId",
                   "nameLocation": "182:8:10",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1792,
+                  "scope": 1977,
                   "src": "174:16:10",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -168,7 +168,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 1784,
+                    "id": 1969,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "174:7:10",
@@ -181,12 +181,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 1787,
+                  "id": 1972,
                   "mutability": "mutable",
                   "name": "_data",
                   "nameLocation": "215:5:10",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1792,
+                  "scope": 1977,
                   "src": "200:20:10",
                   "stateVariable": false,
                   "storageLocation": "calldata",
@@ -195,7 +195,7 @@
                     "typeString": "bytes"
                   },
                   "typeName": {
-                    "id": 1786,
+                    "id": 1971,
                     "name": "bytes",
                     "nodeType": "ElementaryTypeName",
                     "src": "200:5:10",
@@ -210,17 +210,17 @@
               "src": "114:112:10"
             },
             "returnParameters": {
-              "id": 1791,
+              "id": 1976,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1790,
+                  "id": 1975,
                   "mutability": "mutable",
                   "name": "",
                   "nameLocation": "-1:-1:-1",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1792,
+                  "scope": 1977,
                   "src": "245:6:10",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -229,7 +229,7 @@
                     "typeString": "bytes4"
                   },
                   "typeName": {
-                    "id": 1789,
+                    "id": 1974,
                     "name": "bytes4",
                     "nodeType": "ElementaryTypeName",
                     "src": "245:6:10",
@@ -243,14 +243,14 @@
               ],
               "src": "244:8:10"
             },
-            "scope": 1793,
+            "scope": 1978,
             "src": "89:164:10",
             "stateMutability": "nonpayable",
             "virtual": false,
             "visibility": "external"
           }
         ],
-        "scope": 1794,
+        "scope": 1979,
         "src": "57:198:10",
         "usedErrors": []
       }
@@ -263,7 +263,7 @@
   },
   "networks": {},
   "schemaVersion": "3.4.9",
-  "updatedAt": "2022-09-19T01:16:43.457Z",
+  "updatedAt": "2022-09-19T04:31:41.345Z",
   "devdoc": {
     "kind": "dev",
     "methods": {},
