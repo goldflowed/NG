@@ -1,4 +1,4 @@
-// import axios from "axios";
+import axios from "axios";
 import React,{useEffect, useState} from "react";
 import Navbar from "../../../common/NavBar"
 
@@ -6,14 +6,16 @@ import Navbar from "../../../common/NavBar"
 
 function BrandRegister() {
 
-    const initialValues = { companyname: "",
-                            companynumber: "",
-                            companywallet: "",
-                            companyemail: "",
-                            companytellnum: "",
-                            companyaddress: "",
-                            companylogo: "" };
+    // 변수 초기화
+    const initialValues = { comName: "",
+                            comRegNum: "",
+                            comWallet: "",
+                            comEmail: "",
+                            comTel: "",
+                            comAddress: "",
+                            comLogo: "" };
 
+    // 서버로 전달한 formValues
     const [formValues, setFormValues ] = useState(initialValues);
     const [formErrors, setFormErrors ] = useState({});
     const [isSubmit, setIsSubmit] = useState(false);
@@ -41,31 +43,25 @@ function BrandRegister() {
     const validate = (values) => {
         const errors = {}
         const regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-        if(!values.companyemail){
-            errors.companyemail = "이메일을 올바르게 입력해주세요."
+        if(!values.comEmail){
+            errors.comEmail = "이메일을 올바르게 입력해주세요."
         }
         return errors;
     };
 
-    function submit(){
-        // axios(
-        //     {
-        //         url: '/company/create/',
-        //         method: 'post',
-        //         data: {
-        //             companyname: formValues.companyname,
-        //             companynumber: formValues.companynumber,
-        //             companywallet: formValues.companywallet,
-        //             companyemail: formValues.companyemail,
-        //             companytellnum: formValues.companytellnum,
-        //             companyaddress: formValues.companyaddress,
-        //             companylogo: formValues.companylogo,
-        //         },
-        //         baseURL: 'http://localhost:8080',
-        //     }
-        // ).then(function (response){
-        //     console.log(response.data)
-        // })
+    function onSubmit(event){
+
+        axios.post("http://localhost:8080/company/create/", formValues)
+            .then((response) => {
+                alert("브랜드 등록 완료!")
+            })
+            .catch((err) => {
+                if(!err.response){
+                    alert(err);
+                }else{
+                    alert(err.response.date)
+                }
+            })
     }
 
     return(
@@ -80,46 +76,46 @@ function BrandRegister() {
                     <div className="field" style={{ marginTop: 50}}>
                         <input
                           type="text"
-                          name="companyname"
+                          name="comName"
                           placeholder="브랜드 명을 입력해주세요."
-                          value={ formValues.companyname}
+                          value={ formValues.comName}
                           onChange={handleChange}>
                           </input>
                     </div>
                     <div className="field" style={{ marginTop: 50}}>
                         <input
                           type="text"
-                          name="companynumber"
+                          name="comRegNum"
                           placeholder="사업자 등록 번호를 입력해주세요."
-                          value={ formValues.companynumber}
+                          value={ formValues.comRegNum}
                           onChange={handleChange}>
                           </input>
                     </div>
                     <div className="field" style={{ marginTop: 50}}>
                         <input 
                           type="text"
-                          name="companywallet"
+                          name="comWallet"
                           placeholder="지갑 주소를 입력해주세요."
-                          value={ formValues.companywallet}
+                          value={ formValues.comWallet}
                           onChange={handleChange}>
                           </input>
                     </div>
                     <div className="field" style={{ marginTop: 50}}>
                         <input 
                           type="text"
-                          name="companyemail"
+                          name="comEmail"
                           placeholder="이메일 주소를 입력해주세요."
-                          value={ formValues.companyemail}
+                          value={ formValues.comEmail}
                           onChange={handleChange}>
                           </input>
                     </div>
-                    <p>{ formErrors.companyemail }</p>
+                    <p>{ formErrors.comEmail }</p>
                     <div className="field" style={{ marginTop: 50}}>
                         <input 
                           type="text"
-                          name="companyaddress"
+                          name="comAddress"
                           placeholder="회사 주소를 입력해주세요."
-                          value={ formValues.companyaddress}
+                          value={ formValues.comAddress}
                           onChange={handleChange}>
                           </input>
                           
@@ -127,9 +123,9 @@ function BrandRegister() {
                     <div className="field" style={{ marginTop: 50}}>
                         <input 
                           type="text"
-                          name="companytellnum"
+                          name="comTel"
                           placeholder="회사 전화번호를 입력해주세요."
-                          value={ formValues.companytellnum}
+                          value={ formValues.comTel}
                           onChange={handleChange}>
                           </input>
                           
@@ -137,13 +133,13 @@ function BrandRegister() {
                     <div className="field" style={{ marginTop: 50}}>
                         <input 
                           type="text" 
-                          name="companylogo" 
+                          name="comLogo" 
                           placeholder="로고를 첨부해주세요." 
-                          value={ formValues.companylogo}
+                          value={ formValues.comLogo}
                           onChange={handleChange}
                           ></input>
                     </div>
-                    <button className="button" onClick={() => submit()}>제출하기</button>
+                    <button className="button" onClick={() => onSubmit()}>제출하기</button>
                 </div>
             </form>
         </div>
