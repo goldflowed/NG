@@ -62,6 +62,13 @@ contract ERC721Enumerable is IERC721Enumerable, ERC721 {
     // 상속을 통해서 재정의한 함수를 표시
     function _mint(address to, uint256 tokenId) internal override(ERC721) {
         super._mint(to, tokenId);
+        //  1. add tokens to the owner: 소유자 추적 
+		//    -> 소유자에게 토큰을 추가하는 함수 필요
+		_addTokensToOwnerEnumeration(to, tokenId);
+
+		//  2. all tokens to our totalsupply - to allTokens: 총 공급 추적 
+		//    -> allTokens에 토큰을 추가하는 함수 필요
+		_addTokensToAllTokenEnumeration(tokenId);
     }
 
     /**
