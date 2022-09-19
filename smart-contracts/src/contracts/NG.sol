@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import './ERC721/ERC721Connector.sol';
+import './tokens/ERC721/ERC721Connector.sol';
 
 contract NG is ERC721Connector {
     // struct로 nft 정보 저장해서 해당 struct 배열로 nft 관리하기
