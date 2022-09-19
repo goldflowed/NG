@@ -9,6 +9,7 @@ import Nft from '../features/company/nft/nft';
 import AdminMain from '../features/admin/main/AdminMain';
 import Approve from '../features/admin/approve/Approve';
 import Deny from '../features/admin/deny/Deny';
+import 'bootstrap/dist/css/bootstrap.css';
 
 function App() {
   return (

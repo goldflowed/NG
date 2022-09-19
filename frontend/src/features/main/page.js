@@ -1,9 +1,9 @@
 import React from "react";
-
+import NavBar from "../../common/NavBar";
 function Home() {
   return (
     <div>
-      <h1>hi</h1>
+      <NavBar></NavBar>
     </div>
   )
 }

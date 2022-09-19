@@ -1,6 +1,7 @@
 import React from "react";
 import SideBar from "../sidebar/SideBar";
 import styled from "styled-components";
+import Navbar from "../../../common/NavBar"
 
 const ContainerDiv = styled.div`
   width:1900px;
@@ -14,6 +15,7 @@ const MainDiv = styled.div`
   padding-right: 100px;
   font-size:20px;
   margin-left:400px;
+  margin-top:25px;
   `
 
 const Hr = styled.hr`
@@ -60,9 +62,10 @@ const TitleP = styled.p`
 function Home() {
   return (
     <ContainerDiv>
+      <Navbar/>
       <SideBar/>
       <MainDiv>
-      <TitleP>기업 정보 조회</TitleP><Hr/>
+        <TitleP>기업 정보 조회</TitleP><Hr/>
         <InfoDiv>
           <div className="info" style={{display:"flex", flexDirection:"column"}}>
             <p>브랜드명: </p>

@@ -56,7 +56,7 @@ const StyledLink = styled(Link)`
 function SideBar() {
 
   return (
-    <div className="container">
+    <div className="SideContainer">
       <MenuList>
         <List>
           <ListTitle>NFT 인증서 관리<ListHr/>
