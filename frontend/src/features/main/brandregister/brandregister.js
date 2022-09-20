@@ -76,6 +76,18 @@ function BrandRegister() {
             })
     }
 
+    const [isActive, setIsActive] = useState(false)
+
+    // const changeButton = () => {
+        
+    //     if(formValues.comName !== '' && formValues.comRegNum !== '' && formValues.comWallet !=='' && formValues.comEmail !== '' && formValues.comTel !== '' && formValues.comAddress !== '' && formValues.comLogo !== ''){
+    //         this.setIsActive({isActive: true});
+    //     }else{
+    //         this.setIsActive({isActive: false});
+    //     }
+        
+    // }
+
     return(
         <div>
         <Navbar/>
@@ -159,7 +171,7 @@ function BrandRegister() {
                     <br/>
                     <div>
                     <MDBBtn style={{marginRight:50}} outline className='mx-2' color='dark' onClick={() => onSubmit()}>뒤로가기</MDBBtn>
-                    <MDBBtn style={{marginLeft:50}} outline color='success' onClick={() => onSubmit()}>제출하기</MDBBtn>
+                    <MDBBtn style={{marginLeft:50}} outline color='success' onClick={() => onSubmit() }>제출하기</MDBBtn>
                     </div>
                 </div>
             </form>
