@@ -23,6 +23,10 @@ function BrandRegister() {
     const [formErrors, setFormErrors ] = useState({});
     const [isSubmit, setIsSubmit] = useState(false);
 
+    // 이메일 유효성 검사
+    const [emailMessage, setEmailMessage] = useState("")
+    const [isEmail, setIsEmail] = useState(false)
+
     const handleChange = (e) => {
         console.log(e.target);
         const {name, value } = e.target;
@@ -45,11 +49,17 @@ function BrandRegister() {
 
     // 이메일 확인 정규식
     const emailRegEx = /^[A-Za-z0-9]([-_.]?[A-Za-z0-9])*@[A-Za-z0-9]([-_.]?[A-Za-z0-9])*\.[A-Za-z]{2,3}$/i;
+    const checkEmail = (e) => {
+        const emailCurrent = e.target.value;
 
-    function emailCheck(value){
-        return emailRegEx.test(value); // 형식이 맞을 경우 true 리턴
-    
-    };
+        if(!emailRegEx.test(emailCurrent)){
+            setEmailMessage('올바른 이메일을 입력해주세요.')
+            setIsEmail(false)
+        }else{
+            setEmailMessage('')
+            setIsEmail(true)
+        }
+    }
 
     function onSubmit(event){
 
@@ -113,10 +123,11 @@ function BrandRegister() {
                           id='form1'
                           value={ formValues.comEmail}
                           onChange={handleChange}
+                          onBlur={checkEmail}
                           />
+                          {formValues.comEmail.length > 0 && <span className={`message ${isEmail ? 'success' : 'error'}`}>{emailMessage}</span>}
                     </div>
 
-                    
                     <div className="field" style={{ marginTop: 40}}>
                         <MDBInput
                           type="text"
@@ -135,7 +146,6 @@ function BrandRegister() {
                           id='form1'
                           value={ formValues.comTel}
                           onChange={handleChange}/>
-                
                     </div>
                     <div className="field" style={{ marginTop: 40}}>
                         <MDBInput
