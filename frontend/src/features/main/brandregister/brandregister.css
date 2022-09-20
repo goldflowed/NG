@@ -1,0 +1,13 @@
+.brandregister {
+    margin-top: 10rem;
+}
+
+.form-outline {
+    width: 30rem;
+}
+
+.display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
