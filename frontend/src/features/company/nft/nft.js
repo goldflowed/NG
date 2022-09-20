@@ -1,7 +1,7 @@
 import React from "react";
 import SideBar from "../sidebar/SideBar";
 import styled from "styled-components";
-import Navbar from "../../../common/NavBar"
+import NavBar from "../../../common/navbar/NavBar";
 
 const ContainerDiv = styled.div`
   display: flex;
@@ -34,7 +34,7 @@ const TitleP = styled.p`
 function Nft() {
   return (
     <ContainerDiv>
-      <Navbar/>
+      <NavBar/>
       <SideBar/>
       <MainDiv>
         <TitleP>어쨋든Nft보여주는페이지</TitleP><Hr/>

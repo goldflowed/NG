@@ -1,7 +1,7 @@
 import React from "react";
 import SideBar from "../sidebar/SideBar";
 import styled from "styled-components";
-import Navbar from "../../../common/NavBar"
+import NavBar from "../../../common/navbar/NavBar";
 
 const ContainerDiv = styled.div`
   width:1900px;
@@ -62,7 +62,7 @@ const TitleP = styled.p`
 function Home() {
   return (
     <ContainerDiv>
-      <Navbar/>
+      <NavBar/>
       <SideBar/>
       <MainDiv>
         <TitleP>기업 정보 조회</TitleP><Hr/>

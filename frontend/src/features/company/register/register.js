@@ -4,7 +4,7 @@ import styled from "styled-components";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import ssafy from '../../../assets/img/ssafy.png';
-import Navbar from "../../../common/NavBar"
+import NavBar from "../../../common/navbar/NavBar";
 
 const ContainerDiv = styled.div`
   display: flex;
@@ -79,7 +79,7 @@ function Register() {
 
   return (
     <ContainerDiv>
-      <Navbar/>
+      <NavBar/>
       <SideBar/>
       <MainDiv>
         <TitleP>NFT 인증서 발급</TitleP><Hr/>

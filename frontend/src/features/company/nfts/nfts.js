@@ -2,7 +2,7 @@ import React, {useState, useEffect, useMemo} from "react";
 import SideBar from "../sidebar/SideBar";
 import styled from "styled-components";
 import Table from './table';
-import Navbar from "../../../common/NavBar"
+import NavBar from "../../../common/navbar/NavBar";
 
 const ContainerDiv = styled.div`
   display: flex;
@@ -94,7 +94,7 @@ function Nfts() {
 
   return (
     <ContainerDiv>
-      <Navbar/>
+      <NavBar/>
       <SideBar/>
       <MainDiv>
         <TitleP>등록 제품 조회</TitleP><Hr/>
