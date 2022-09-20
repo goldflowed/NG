@@ -29,7 +29,7 @@ public class CompanyServiceImpl implements CompanyService{
                 .comEmail(comInfo.getComEmail())
                 .comAddress(comInfo.getComAddress())
                 .comTel(comInfo.getComTel())
-                .comLogo("")
+                .comLogo(comInfo.getComLogo())
                 .comPermit(1)
                 .build();
         return companyRepository.save(company);

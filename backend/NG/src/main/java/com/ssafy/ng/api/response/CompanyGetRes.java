@@ -17,14 +17,20 @@ public class CompanyGetRes {
     @ApiModelProperty(name = "사업자 등록번호")
     String comRegNum;
 
-    @ApiModelProperty(name = "기업 이름")
+    @ApiModelProperty(name = "기업 지갑주소")
     String comWallet;
 
-    @ApiModelProperty(name = "기업 이름")
+    @ApiModelProperty(name = "기업 이메일")
     String comEmail;
 
-    @ApiModelProperty(name = "기업 이름")
+    @ApiModelProperty(name = "기업 주소")
+    String comAddress;
+
+    @ApiModelProperty(name = "기업 전화번호")
     String comTel;
+
+    @ApiModelProperty(name = "기업 로고")
+    String comLogo;
 
     public static CompanyGetRes of(Company com) {
         CompanyGetRes res = new CompanyGetRes();
@@ -32,7 +38,9 @@ public class CompanyGetRes {
         res.setComRegNum(com.getComRegNum());
         res.setComWallet(com.getComWallet());
         res.setComEmail(com.getComEmail());
+        res.setComAddress(com.getComAddress());
         res.setComTel(com.getComTel());
+        res.setComLogo(com.getComLogo());
         return res;
     }
 }
