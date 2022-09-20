@@ -1,7 +1,7 @@
 import axios from "axios";
 import React,{useEffect, useState} from "react";
-import Navbar from "../../../common/NavBar"
-import Footer from "../../../common/Footer"
+import Navbar from "../../../common/navbar/NavBar"
+import Footer from "../../../common/footer/Footer"
 import "./brandregister.css"
 import { MDBInput } from 'mdb-react-ui-kit';
 import { MDBBtn } from 'mdb-react-ui-kit';

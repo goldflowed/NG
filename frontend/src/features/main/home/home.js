@@ -1,5 +1,5 @@
 import React from "react";
-import NavBar from "../../../common/NavBar"
+import NavBar from "../../../common/navbar/NavBar"
 import "./home.css"
 import {
   MDBContainer,
@@ -7,7 +7,7 @@ import {
   MDBCollapse,
   MDBBtn
 } from 'mdb-react-ui-kit';
-import Footer from "../../../common/Footer"
+import Footer from "../../../common/footer/Footer"
 
 function Home() {
   return (

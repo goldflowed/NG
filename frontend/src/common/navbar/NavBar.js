@@ -39,6 +39,7 @@ function NavBar(props){
     }
 
     const accountChangeHandler = (newAccount) => {
+      window.localStorage.setItem('wallet', newAccount);
       setDefaultAccount(newAccount);
       getUserBalance(newAccount.toString());
       console.log({defaultAccount});
@@ -67,9 +68,12 @@ function NavBar(props){
     window.ethereum.on('chainChanged', chainChangedHandler)
 
     useEffect(() => {
-      const walletAddress = window.localStorage.getItem('wallet')
-      setDefaultAccount(walletAddress);
-      setUserBalance(walletAddress);
+      window.ethereum.request({method: 'eth_requestAccounts'})
+      .then( result => {
+        window.localStorage.setItem('wallet', result[0]);
+        setDefaultAccount(result[0]);
+        setUserBalance(result[0]);
+      })
     }, []);
 
     return(
@@ -87,7 +91,6 @@ function NavBar(props){
                 ? <Nav.Link href="#mynft">My NFT</Nav.Link>
                 : <Nav.Link href="/brandregister">Brand Register</Nav.Link>
               }
-              
             </div>
           </Nav>
             <div>

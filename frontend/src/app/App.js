@@ -10,6 +10,7 @@ import Nft from '../features/company/nft/nft';
 import AdminMain from '../features/admin/main/AdminMain';
 import Approve from '../features/admin/approve/Approve';
 import Deny from '../features/admin/deny/Deny';
+import CompanyRoute from '../common/companyroute/CompanyRoute';
 import 'bootstrap/dist/css/bootstrap.css';
 
 function App() {
@@ -18,11 +19,11 @@ function App() {
       <Routes>
         <Route exact path="/" element={ <Home/> } />
         <Route exact path="/brandregister" element={ <BrandRegister/> } />
-        <Route exact path="/company/123" element={ <CompanyMain/>}/>
-        <Route exact path="/company/123/register" element={ <CompanyRegister/> }></Route>
-        <Route exact path="/company/123/nfts" element={ <Nfts/>}/>
-        <Route exact path="/company/123/nfts/:productCode" element={ <Detail/>}/>
-        <Route exact path="/company/123/nfts/:productCode/:productNum" element={ <Nft/>}/>
+        <Route exact path="/company/123" element={ <CompanyRoute><CompanyMain/></CompanyRoute>}/>
+        <Route exact path="/company/123/register" element={ <CompanyRoute><CompanyRegister/></CompanyRoute> }/>
+        <Route exact path="/company/123/nfts" element={ <CompanyRoute><Nfts/></CompanyRoute>}/>
+        <Route exact path="/company/123/nfts/:productCode" element={ <CompanyRoute><Detail/></CompanyRoute>}/>
+        <Route exact path="/company/123/nfts/:productCode/:productNum" element={ <CompanyRoute><Nft/></CompanyRoute>}/>
         <Route exact path="/admin" element={<AdminMain/>}/>
         <Route exact path="/admin/approve" element={<Approve/>}/>
         <Route exact path="/admin/deny" element={<Deny/>}/>

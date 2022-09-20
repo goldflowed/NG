@@ -1,7 +1,7 @@
 import React from "react";
 import SideBar from "../sidebar/SideBar";
 import styled from "styled-components";
-import Navbar from "../../../common/NavBar"
+import Navbar from "../../../common/navbar/NavBar"
 
 const ContainerDiv = styled.div`
   width:1900px;

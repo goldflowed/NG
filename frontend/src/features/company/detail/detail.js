@@ -3,7 +3,7 @@ import SideBar from "../sidebar/SideBar";
 import styled from "styled-components";
 import Sample from "../../../assets/img/sample.png"
 import Table from './table';
-import Navbar from "../../../common/NavBar"
+import NavBar from "../../../common/navbar/NavBar"
 
 const ContainerDiv = styled.div`
   display: flex;
@@ -104,7 +104,7 @@ function Detail() {
 
   return (
     <ContainerDiv>
-      <Navbar/>
+      <NavBar/>
       <SideBar/>
       <MainDiv>
         <TitleP>등록 제품 정보 {'>'} 제품 상세 페이지</TitleP><Hr/>
