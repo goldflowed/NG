@@ -19,6 +19,11 @@ contract ERC721Enumerable is IERC721Enumerable, ERC721 {
 
     constructor() {}
 
+    //NG에서 _allTokensIndex에 접근하기 위해 추가함 (function transfer)
+    function getIndexFromTokenId(uint256 _tokenId) public view returns(uint256){
+        return _allTokensIndex[_tokenId];
+    }
+
     // ERC165 함수 Overriding from ERC721
     function supportsInterface(bytes4 interfaceId)
         public

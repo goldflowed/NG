@@ -72,6 +72,16 @@ contract NG is ERC721Connector {
         _;
     }
 
+    function transferNG(
+        address _from,
+        address _to,
+        uint256 _tokenId
+    ) public {
+        transferFrom(_from, _to, _tokenId);
+        uint256 _index = getIndexFromTokenId(_tokenId);
+        blockNos[_index] = block.number;
+    }
+
     function mint(
         string memory _brandNm,
         string memory _productNo,
