@@ -1,9 +1,11 @@
 import axios from "axios";
 import React,{useEffect, useState} from "react";
 import Navbar from "../../../common/NavBar"
+import Footer from "../../../common/Footer"
 import "./brandregister.css"
 import { MDBInput } from 'mdb-react-ui-kit';
 import { MDBBtn } from 'mdb-react-ui-kit';
+
 
 function BrandRegister() {
 
@@ -41,14 +43,13 @@ function BrandRegister() {
         }
     })
 
-    // const validate = (values) => {
-    //     const errors = {}
-    //     const regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    //     if(!values.comEmail){
-    //         errors.comEmail = "이메일을 올바르게 입력해주세요."
-    //     }
-    //     return errors;
-    // };
+    // 이메일 확인 정규식
+    const emailRegEx = /^[A-Za-z0-9]([-_.]?[A-Za-z0-9])*@[A-Za-z0-9]([-_.]?[A-Za-z0-9])*\.[A-Za-z]{2,3}$/i;
+
+    function emailCheck(value){
+        return emailRegEx.test(value); // 형식이 맞을 경우 true 리턴
+    
+    };
 
     function onSubmit(event){
 
@@ -111,8 +112,11 @@ function BrandRegister() {
                           label="이메일을 입력해 주세요."
                           id='form1'
                           value={ formValues.comEmail}
-                          onChange={handleChange}/>
+                          onChange={handleChange}
+                          />
                     </div>
+
+                    
                     <div className="field" style={{ marginTop: 40}}>
                         <MDBInput
                           type="text"
@@ -131,7 +135,7 @@ function BrandRegister() {
                           id='form1'
                           value={ formValues.comTel}
                           onChange={handleChange}/>
-                          
+                
                     </div>
                     <div className="field" style={{ marginTop: 40}}>
                         <MDBInput
@@ -143,10 +147,15 @@ function BrandRegister() {
                           onChange={handleChange}/>
                     </div>
                     <br/>
-                    <MDBBtn outline color='success' onClick={() => onSubmit()}>제출하기</MDBBtn>
+                    <div>
+                    <MDBBtn style={{marginRight:50}} outline className='mx-2' color='dark' onClick={() => onSubmit()}>뒤로가기</MDBBtn>
+                    <MDBBtn style={{marginLeft:50}} outline color='success' onClick={() => onSubmit()}>제출하기</MDBBtn>
+                    </div>
                 </div>
             </form>
         </div>
+        <br/><br/>
+        <Footer/>
         </div>
     )
 }

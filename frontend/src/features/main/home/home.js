@@ -7,6 +7,7 @@ import {
   MDBCollapse,
   MDBBtn
 } from 'mdb-react-ui-kit';
+import Footer from "../../../common/Footer"
 
 function Home() {
   return (
@@ -76,7 +77,9 @@ function Home() {
           </div>
         </div>
       </div>
+      <Footer/>
     </div>
+
   )
 }
 export default Home;
