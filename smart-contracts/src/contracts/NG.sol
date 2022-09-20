@@ -16,10 +16,21 @@ contract NG is ERC721Connector {
     NGInfo[] public ngs;
     // string[] public ngs;
 
+    uint256[] public blockNos;
+
     // mapping(NGInfo => bool) _ngExists;
     // mapping(string => bool) _ngExists;
 
     mapping(address => uint8) _accountsAuth; // 일반: 0, 기업: 1, 관리자: 2
+
+    function getBlockNoFromNGInfo() public view returns(uint256) {
+
+    }
+
+    function getTxnHash(uint256 _idx) public view returns(bytes32) {
+        uint _blockNo = blockNos[_idx];
+        return blockhash(_blockNo);
+    }
 
     modifier checkZeroAddress(address _address) {
         require(_address!=address(0));
@@ -82,6 +93,7 @@ contract NG is ERC721Connector {
         // require(!_ngExists[_ngInfo], 'Error _ngInfo already exists');
 
         ngs.push(_ngInfo);
+        blockNos.push(block.number);
         uint256 _id = ngs.length - 1;
         _mint(msg.sender, _id);
 

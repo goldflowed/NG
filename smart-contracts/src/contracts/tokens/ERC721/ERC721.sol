@@ -66,35 +66,12 @@ contract ERC721 is Context, ERC165, IERC721 {
         // 토큰이 존재하지 않음을 판별
         require(!_exists(tokenId), "ERC721: token already minted");
 
-        _beforeTokenTransfer(address(0), to, tokenId);
-        require(!_exists(tokenId), "ERC721: token already minted");
-
-        unchecked {
-            // minting되는 주소를 추적하고 +1
-            _balances[to] += 1;
-        }
         // mint 작업에 대한 tokenId와 새로운 주소를 추가
         _tokenOwner[tokenId] = to;
+        // minting되는 주소를 추적하고 +1
+        _balances[to] += 1;
 
         emit Transfer(address(0), to, tokenId);
-
-        _afterTokenTransfer(address(0), to, tokenId);
-    }
-
-    function _safeMint(address _to, uint256 _tokenId) internal virtual {
-        _safeMint(_to, _tokenId, "");
-    }
-
-    function _safeMint(
-        address _to,
-        uint256 _tokenId,
-        bytes memory data
-    ) internal virtual {
-        require(
-            _checkOnERC721Received(address(0), _to, _tokenId, data),
-            "ERC721: transfer to non ERC721Receiver implementer"
-        );
-        _mint(_to, _tokenId);
     }
 
     function transferFrom(
@@ -116,21 +93,12 @@ contract ERC721 is Context, ERC165, IERC721 {
     ) internal {
         require(
             ownerOf(_tokenId) == _from,
-            "ERC721: transfer from incorrect owner"
+            "Trying to transfer a token the address does not own!"
         );
         require(
             _to != address(0),
             "Error - ERC721 Transfer to the zero address"
         );
-
-        _beforeTokenTransfer(_from, _to, _tokenId);
-        require(
-            ownerOf(_tokenId) == _from,
-            "ERC721: transfer from incorrect owner"
-        );
-
-        // 이전 소유자를 approvals에서 삭제..?
-        delete _tokenApprovals[_tokenId];
 
         /*  unchecked block : overflow 또는 underflow가 발생하는지 solidity는 늘 확인하는데
             해당 작업에서 '가스'가 소모된다.
@@ -146,8 +114,6 @@ contract ERC721 is Context, ERC165, IERC721 {
         _tokenOwner[_tokenId] = _to;
 
         emit Transfer(_from, _to, _tokenId);
-
-        _afterTokenTransfer(_from, _to, _tokenId);
     }
 
     function safeTransferFrom(
@@ -300,41 +266,4 @@ contract ERC721 is Context, ERC165, IERC721 {
             interfaceId == type(IERC721).interfaceId ||
             super.supportsInterface(interfaceId);
     }
-
-    /**
-     * @dev Hook that is called before any (single) token transfer. This includes minting and burning.
-     * See {_beforeConsecutiveTokenTransfer}.
-     *
-     * Calling conditions:
-     *
-     * - When `from` and `to` are both non-zero, ``from``'s `tokenId` will be
-     * transferred to `to`.
-     * - When `from` is zero, `tokenId` will be minted for `to`.
-     * - When `to` is zero, ``from``'s `tokenId` will be burned.
-     * - `from` and `to` are never both zero.
-     *
-     * To learn more about hooks, head to xref:ROOT:extending-contracts.adoc#using-hooks[Using Hooks].
-     */
-    function _beforeTokenTransfer(
-        address from,
-        address to,
-        uint256 tokenId
-    ) internal virtual {}
-
-    /**
-     * @dev Hook that is called after any (single) transfer of tokens. This includes minting and burning.
-     * See {_afterConsecutiveTokenTransfer}.
-     *
-     * Calling conditions:
-     *
-     * - when `from` and `to` are both non-zero.
-     * - `from` and `to` are never both zero.
-     *
-     * To learn more about hooks, head to xref:ROOT:extending-contracts.adoc#using-hooks[Using Hooks].
-     */
-    function _afterTokenTransfer(
-        address from,
-        address to,
-        uint256 tokenId
-    ) internal virtual {}
 }
