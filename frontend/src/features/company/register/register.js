@@ -5,6 +5,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import ssafy from '../../../assets/img/ssafy.png';
 import Navbar from "../../../common/navbar/NavBar"
+import { nftContract } from "../../../common/web3/web3Config"
 
 const ContainerDiv = styled.div`
   display: flex;
@@ -67,14 +68,19 @@ function Register() {
     setC(event.currentTarget.value);
   }
 
-  const regist = (event) => {
-    event.preventDefault();
+  const regist = async (e) => {
+    e.preventDefault();
+    
+    const { event } = await nftContract.methods
+      .mint(brand, productNumber, serialNumber, makingDate, country)
+      .send({ from: "0x69f69c1c64e68c81da2a02686e3e4d86c657eace" });
 
-    console.log(brand)
-    console.log(productNumber)
-    console.log(serialNumber)
-    console.log(makingDate)
-    console.log(country)
+
+    // console.log(brand)
+    // console.log(productNumber)
+    // console.log(serialNumber)
+    // console.log(makingDate)
+    // console.log(country)
   }
 
   return (
