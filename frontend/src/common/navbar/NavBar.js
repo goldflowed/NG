@@ -5,6 +5,9 @@ import {ethers} from 'ethers'
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavButton from 'react-bootstrap/Button';
+import {
+  MDBBtn
+} from 'mdb-react-ui-kit';
 
 
 // import { fetchAccount } from '../../store/actions/thunks/account';
@@ -96,8 +99,8 @@ function NavBar(props){
             <div>
               {
                 window.localStorage.getItem('wallet')
-                ? <NavButton className="connect-wallet" variant="outline-secondary" onClick={offConnectWallet}>{disconnButton}</NavButton>
-                : <NavButton className="connect-wallet" variant="outline-secondary" onClick={onConnectWallet}>{connButtonText}</NavButton>
+                ? <MDBBtn className="connect-wallet" variant="outline-secondary" onClick={offConnectWallet}>{disconnButton}</MDBBtn>
+                : <MDBBtn className="connect-wallet" variant="outline-secondary" onClick={onConnectWallet}>{connButtonText}</MDBBtn>
               }  
             </div>
         </Navbar.Collapse>

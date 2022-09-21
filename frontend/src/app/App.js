@@ -11,6 +11,9 @@ import AdminMain from '../features/admin/main/AdminMain';
 import Approve from '../features/admin/approve/Approve';
 import Deny from '../features/admin/deny/Deny';
 import CompanyRoute from '../common/companyroute/CompanyRoute';
+import AboutUs from '../features/main/aboutus/aboutus'
+import SearchNft from "../features/main/searchnft/searchnft"
+import MyNft from "../features/main/mynft/mynft"
 import 'bootstrap/dist/css/bootstrap.css';
 
 function App() {
