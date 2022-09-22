@@ -86,12 +86,12 @@ function NavBar(props){
           <Nav className="me-auto">
           </Nav>
           <Nav>
-            <Nav.Link href="#aboutus">Abuout US</Nav.Link>
-            <Nav.Link href="#searchnft">Search NFT</Nav.Link>
+            <Nav.Link href="/aboutus">Abuout US</Nav.Link>
+            <Nav.Link href="/searchnft">Search NFT</Nav.Link>
             <div>
               {
                 window.localStorage.getItem('wallet')
-                ? <Nav.Link href="#mynft">My NFT</Nav.Link>
+                ? <Nav.Link href="/mynft">My NFT</Nav.Link>
                 : <Nav.Link href="/brandregister">Brand Register</Nav.Link>
               }
             </div>
