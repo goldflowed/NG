@@ -17,7 +17,7 @@ contract NG is ERC721Connector {
     // string[] public ngs;
 
     uint256[] public blockNos;
-    string[] public txnHashes;
+    // string[] public txnHashes;
 
     // minted account address => token ids
     mapping(address => uint256[]) private _mintedTokens;
@@ -31,18 +31,31 @@ contract NG is ERC721Connector {
 
     mapping(address => uint8) _accountsAuth; // 일반: 0, 기업: 1, 관리자: 2
 
+    // txnhash -> tokenid
+    mapping(string => uint256) private _txnHashToTokenId;
+
+    //ng) input: txnhash, output: NG
+    function getNGFromTxnHash(string memory _txnHash) public view returns (NGInfo memory) {
+        return ngs[_txnHashToTokenId[_txnHash]];
+    } 
+    //ng) input: txnhash & tokenId
+    //ng) mint, transfer시 front에서 호출
+    function setTxnHashToTokenId(string memory _txnHash, uint256 _tokenId) public {
+        _txnHashToTokenId[_txnHash] = _tokenId;
+    }
+
     //ng) msg.sender가 발행한 토큰 목록 가져오기 (토큰 아이디 리턴)
     function getMintedTokens() public view returns (uint256[] memory) {
         return _mintedTokens[msg.sender];
     }
 
-    function getTxnHash(uint256 _tokenId) public view returns (string memory) {
-        return txnHashes[_tokenId];
-    }
+    // function getTxnHash(uint256 _tokenId) public view returns (string memory) {
+    //     return txnHashes[_tokenId];
+    // }
 
-    function setTxnHash(uint256 _tokenId, string memory _txnHash) public {
-        txnHashes[_tokenId] = _txnHash;
-    }
+    // function setTxnHash(uint256 _tokenId, string memory _txnHash) public {
+    //     txnHashes[_tokenId] = _txnHash;
+    // }
 
     function getBlockHash(uint256 _idx) public view returns (bytes32) {
         uint256 _blockNo = blockNos[_idx];
