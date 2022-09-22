@@ -108,6 +108,14 @@ contract NG is ERC721Connector {
         _tokenHistory[_tokenId].push(block.number);
     }
 
+    function getTokenHistory(uint256 tokenId)
+        public
+        view
+        returns (uint256[] memory)
+    {
+        return _tokenHistory[tokenId];
+    }
+
     function transferNG(
         address _from,
         address _to,
