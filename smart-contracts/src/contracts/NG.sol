@@ -34,9 +34,9 @@ contract NG is ERC721Connector {
     // txnhash -> tokenid
     mapping(string => uint256) private _txnHashToTokenId;
 
-    //ng) input: txnhash, output: NG
-    function getNGFromTxnHash(string memory _txnHash) public view returns (NGInfo memory) {
-        return ngs[_txnHashToTokenId[_txnHash]];
+    //ng) input: txnhash, output: tokenId
+    function getTokenIdFromTxnHash(string memory _txnHash) public view returns (uint256) {
+        return _txnHashToTokenId[_txnHash];
     } 
     //ng) input: txnhash & tokenId
     //ng) mint, transfer시 front에서 호출
