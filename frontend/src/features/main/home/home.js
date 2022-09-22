@@ -1,20 +1,35 @@
-import React from "react";
+import React, { useState } from "react";
 import NavBar from "../../../common/navbar/NavBar"
 import "./home.css"
 import {
-  MDBBtn
+  MDBBtn,
+  MDBTabs,
+  MDBTabsItem,
+  MDBTabsLink,
+  MDBTabsContent,
+  MDBTabsPane
 } from 'mdb-react-ui-kit';
 import Footer from "../../../common/footer/Footer"
 import { Link } from 'react-router-dom'
 import Background from '../../../assets/img/home1.jpg'
 
 function Home() {
+
+  const [basicActive, setBasicActive] = useState('tab1');
+
+  const handleBasicClick = (value: string) => {
+    if (value === basicActive) {
+      return;
+    }
+    setBasicActive(value);
+  }
+
   return (
     <div className="home">
     <NavBar></NavBar>
     <div
       className='p-5 text-center bg-image'
-      style={{ backgroundImage: `url(${Background})`, height: '900px' }}
+      style={{ backgroundImage: `url(${Background})`, height: '800px' }}
     >
       <div className='mask' style={{ backgroundColor: 'rgba(0, 0, 0, 0.6)' }}>
         <div className='d-flex justify-content-center align-items-center mt-5'>
@@ -32,56 +47,56 @@ function Home() {
       </div>
     </div>
    <div
-        className='p-5 text-center bg-image'
-        style={{ backgroundImage: "url('https://mdbootstrap.com/img/new/slides/041.webp')", height: '700px' }}
+        className='scroll2 p-5 text-center bg-image'
+        style={{ height: '700px', backgroundColor: 'rgba(0, 0, 0, 0.3)' }}
       >
-        <div className='mask' style={{ backgroundColor: 'rgba(0, 0, 0, 0.6)' }}>
-          <div className='d-flex justify-content-center align-items-center h-100'>
-            <div className='text-white'>
-              <h1 className='mb-3'>Block Chain</h1>
-              <h4 className='mb-3'>혁명을 맞이하라</h4>
-              <MDBBtn tag="a" outline size="lg">
-                Call to action
-              </MDBBtn>
-            </div>
-          </div>
+        <div>
+          <h1> 왼쪽</h1>
+        </div>
+        <div>
+          <h1> 오른쪽</h1>
         </div>
       </div>
       <div
         className='p-5 text-center bg-image'
-        style={{ backgroundImage: "url('https://mdbootstrap.com/img/new/slides/041.webp')", height: '700px' }}
+        style={{ height: '700px', backgroundColor: 'rgba(0, 0, 0, 0)' }}
       >
-        <div className='mask' style={{ backgroundColor: 'rgba(0, 0, 0, 0.6)' }}>
-          <div className='d-flex justify-content-center align-items-center h-100'>
-            <div className='text-white'>
-              <h1 className='mb-3'>Block Chain</h1>
-              <h4 className='mb-3'>혁명을 맞이하라</h4>
-              <MDBBtn tag="a" outline size="lg">
-                Call to action
-              </MDBBtn>
-            </div>
-          </div>
-        </div>
+        <>
+      <MDBTabs pills className='mb-3'>
+        <MDBTabsItem>
+          <MDBTabsLink onClick={() => handleBasicClick('tab1')} active={basicActive === 'tab1'}>
+            Tab 1
+          </MDBTabsLink>
+        </MDBTabsItem>
+        <MDBTabsItem>
+          <MDBTabsLink onClick={() => handleBasicClick('tab2')} active={basicActive === 'tab2'}>
+            Tab 2
+          </MDBTabsLink>
+        </MDBTabsItem>
+        <MDBTabsItem>
+          <MDBTabsLink onClick={() => handleBasicClick('tab3')} active={basicActive === 'tab3'}>
+            Tab 3
+          </MDBTabsLink>
+        </MDBTabsItem>
+      </MDBTabs>
+
+      <MDBTabsContent>
+        <MDBTabsPane show={basicActive === 'tab1'}>Tab 1 content</MDBTabsPane>
+        <MDBTabsPane show={basicActive === 'tab2'}>Tab 2 content</MDBTabsPane>
+        <MDBTabsPane show={basicActive === 'tab3'}>Tab 3 content</MDBTabsPane>
+      </MDBTabsContent>
+    </>
       </div>
       <div
         className='p-5 text-center bg-image'
-        style={{ backgroundImage: "url('https://mdbootstrap.com/img/new/slides/041.webp')", height: '700px' }}
+        style={{ height: '700px', backgroundColor: 'rgba(0, 0, 0, 0.3)' }}
       >
-        <div className='mask' style={{ backgroundColor: 'rgba(0, 0, 0, 0.6)' }}>
-          <div className='d-flex justify-content-center align-items-center h-100'>
-            <div className='text-white'>
-              <h1 className='mb-3'>Block Chain</h1>
-              <h4 className='mb-3'>혁명을 맞이하라</h4>
-              <MDBBtn tag="a" outline size="lg">
-                Call to action
-              </MDBBtn>
-            </div>
-          </div>
+        <div>
+          <h1> 생명 주기 적을 예정</h1>
         </div>
       </div>
       <Footer/>
     </div>
-
   )
 }
 export default Home;
