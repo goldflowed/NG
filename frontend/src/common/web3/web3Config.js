@@ -678,6 +678,26 @@ const nftAbi = [
   {
     "inputs": [
       {
+        "internalType": "uint256",
+        "name": "tokenId",
+        "type": "uint256"
+      }
+    ],
+    "name": "getTokenHistory",
+    "outputs": [
+      {
+        "internalType": "uint256[]",
+        "name": "",
+        "type": "uint256[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true
+  },
+  {
+    "inputs": [
+      {
         "internalType": "address",
         "name": "_from",
         "type": "address"
@@ -733,7 +753,7 @@ const nftAbi = [
   }
 ]
 
-export const nftCA = `0x2812E75B3f08949649e3923342cCF8aD1FCD0E08`;
+export const nftCA = `0x088b366cC22C2dCd4FEB7BC5261d50AfbE0EB9a7`;
 
 export const web3 = new Web3(window.ethereum);
 

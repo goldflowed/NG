@@ -1,5 +1,5 @@
-
 import NavBar from "../../../common/navbar/NavBar"
+import Footer from "../../../common/footer/Footer"
 
 function AboutUs() {
 
@@ -11,7 +11,7 @@ function AboutUs() {
             style={{ height: '300px', backgroundColor: 'rgba(0, 0, 0, 0.3)' }}
             >
                 <div>
-                    <h1> 진품 인증에 관시이 많은 ~~~ 만들었다 ~~~~</h1>
+                    <h1> 진품 인증에 관심이 많은 ~~~ 만들었다 ~~~~</h1>
                 </div>
             </div>
             <div
@@ -30,6 +30,7 @@ function AboutUs() {
                     <h1> 우리 소개</h1>
                 </div>
             </div>
+            <Footer/>
         </div>
     )
 
