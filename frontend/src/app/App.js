@@ -25,11 +25,11 @@ function App() {
         <Route exact path="/aboutus" element={ <AboutUs/> } />
         <Route exact path="/searchnft" element={ <SearchNft/> } />
         <Route exact path="/mynft" element={ <MyNft/> } />
-        <Route exact path="/company/123" element={ <CompanyRoute><CompanyMain/></CompanyRoute>}/>
-        <Route exact path="/company/123/register" element={ <CompanyRoute><CompanyRegister/></CompanyRoute> }/>
-        <Route exact path="/company/123/nfts" element={ <CompanyRoute><Nfts/></CompanyRoute>}/>
-        <Route exact path="/company/123/nfts/:productCode" element={ <CompanyRoute><Detail/></CompanyRoute>}/>
-        <Route exact path="/company/123/nfts/:productCode/:productNum" element={ <CompanyRoute><Nft/></CompanyRoute>}/>
+        <Route exact path="/company/123" element={ <CompanyMain/>}/>
+        <Route exact path="/company/123/register" element={ <CompanyRegister/> }/>
+        <Route exact path="/company/123/nfts" element={ <Nfts/>}/>
+        <Route exact path="/company/123/nfts/:productCode" element={ <Detail/>}/>
+        <Route exact path="/company/123/nfts/:productCode/:productNum" element={ <Nft/>}/>
         <Route exact path="/admin" element={<AdminMain/>}/>
         <Route exact path="/admin/approve" element={<Approve/>}/>
         <Route exact path="/admin/deny" element={<Deny/>}/>

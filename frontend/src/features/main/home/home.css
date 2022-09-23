@@ -5,3 +5,8 @@
 .scroll {
     height: 500px;
 }
+
+.scroll2 {
+    display: flex;
+    justify-content: space-around;
+}

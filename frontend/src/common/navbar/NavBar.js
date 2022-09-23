@@ -70,14 +70,14 @@ function NavBar(props){
 
     window.ethereum.on('chainChanged', chainChangedHandler)
 
-    useEffect(() => {
-      window.ethereum.request({method: 'eth_requestAccounts'})
-      .then( result => {
-        window.localStorage.setItem('wallet', result[0]);
-        setDefaultAccount(result[0]);
-        setUserBalance(result[0]);
-      })
-    }, []);
+    // useEffect(() => {
+    //   window.ethereum.request({method: 'eth_requestAccounts'})
+    //   .then( result => {
+    //     window.localStorage.setItem('wallet', result[0]);
+    //     setDefaultAccount(result[0]);
+    //     setUserBalance(result[0]);
+    //   })
+    // }, []);
 
     return(
     <Navbar className="navbar" fixed="top" collapseOnSelect expand="lg" bg="dark" variant="dark">
