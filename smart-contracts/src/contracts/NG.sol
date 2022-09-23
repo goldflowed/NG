@@ -35,12 +35,19 @@ contract NG is ERC721Connector {
     mapping(string => uint256) private _txnHashToTokenId;
 
     //ng) input: txnhash, output: tokenId
-    function getTokenIdFromTxnHash(string memory _txnHash) public view returns (uint256) {
+    function getTokenIdFromTxnHash(string memory _txnHash)
+        public
+        view
+        returns (uint256)
+    {
         return _txnHashToTokenId[_txnHash];
-    } 
+    }
+
     //ng) input: txnhash & tokenId
     //ng) mint, transfer시 front에서 호출
-    function setTxnHashToTokenId(string memory _txnHash, uint256 _tokenId) public {
+    function setTxnHashToTokenId(string memory _txnHash, uint256 _tokenId)
+        public
+    {
         _txnHashToTokenId[_txnHash] = _tokenId;
     }
 
@@ -81,9 +88,26 @@ contract NG is ERC721Connector {
         public
         checkZeroAddress(_address)
     {
+        // 요청하는 계정은 0주소면 안되고, 관리자만 브랜드 권한 할당을 할 수 있다.
+        require(
+            msg.sender != address(0),
+            "requesting account is not zero-account"
+        );
+        require(
+            _accountsAuth[msg.sender] == 2,
+            "requesting account have to auth 2"
+        );
+
+        // 이미 있는 주소도 추가할 수 없음
+        require(
+            _accountsAuth[_address] == 0,
+            "registed account is can't regist again"
+        );
+
         _accountsAuth[_address] = 1;
     }
 
+    // 이건 사실.. 한 번 등록 해두고 아무도 접근을 못해야하는데..?
     function setAdminAccountAuth(address _address)
         public
         checkZeroAddress(_address)
@@ -157,6 +181,11 @@ contract NG is ERC721Connector {
         );
         // require(ngs[_ngInfo]!='', 'Error _ngInfo already exists');
         // require(!_ngExists[_ngInfo], 'Error _ngInfo already exists');
+        // mint는 계정권한에 1 또는 2로 등록되어있는 계정만 할 수 있음
+        require(
+            _accountsAuth[msg.sender] != 0,
+            "NG : mint requests can only registered accounts for company"
+        );
 
         ngs.push(_ngInfo);
         blockNos.push(block.number);
