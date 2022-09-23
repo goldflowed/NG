@@ -5,6 +5,7 @@ import Footer from "../../../common/footer/Footer"
 import "./brandregister.css"
 import { MDBInput } from 'mdb-react-ui-kit';
 import { MDBBtn } from 'mdb-react-ui-kit';
+import { useNavigate } from 'react-router-dom';
 
 
 function BrandRegister() {
@@ -87,6 +88,11 @@ function BrandRegister() {
     //     }
         
     // }
+    const navigate = useNavigate();
+
+    const check = (formValues) => {
+        
+    }
 
     return(
         <div>
@@ -170,8 +176,15 @@ function BrandRegister() {
                     </div>
                     <br/>
                     <div>
-                    <MDBBtn style={{marginRight:50}} outline className='mx-2' color='dark' onClick={() => onSubmit()}>뒤로가기</MDBBtn>
-                    <MDBBtn style={{marginLeft:50}} outline color='success' onClick={() => onSubmit() }>제출하기</MDBBtn>
+                    <MDBBtn style={{marginRight:50}} outline className='mx-2' color='dark' onClick={() => {
+                        navigate('/')
+                    }}>뒤로가기</MDBBtn>
+                    {
+                      !!formValues.comName && !!formValues.comRegNum && !!formValues.comWallet && !!formValues.comEmail && !!formValues.comAddress && !!formValues.comTel && emailRegEx.test(formValues.comEmail)
+                      ? <MDBBtn style={{marginLeft:50}} outline color='success' onClick={() => onSubmit() }>제출하기</MDBBtn>
+                      : <MDBBtn style={{marginLeft:50}} outline color='success' disabled onClick={() => onSubmit() }>제출하기</MDBBtn>
+                    }
+                    {/* <MDBBtn style={{marginLeft:50}} outline color='success' disabled onClick={() => onSubmit() }>제출하기</MDBBtn> */}
                     </div>
                 </div>
             </form>

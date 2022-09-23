@@ -1,8 +1,27 @@
 import React from "react";
 import { useTable, useGlobalFilter, useSortBy } from "react-table";
+import styled from "styled-components";
 import {useNavigate}from 'react-router-dom'
 import Search from "./search";
 import "./tableCss.css"
+
+const AdminTd = styled.td`
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 50px;
+  padding-right:50px;
+  border: 1px solid black;
+  text-align: center;
+  `
+
+const AdminTh = styled.th`
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 50px;
+  padding-right:50px;
+  border: 1px solid black;
+  text-align: center;
+  `
 
 function Table({ columns, data }) {
   const history = useNavigate();
@@ -26,9 +45,9 @@ function Table({ columns, data }) {
           {headerGroups.map((headerGroup) => (
             <tr {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map((column) => (
-                <th {...column.getHeaderProps(column.getSortByToggleProps())}>
+                <AdminTh {...column.getHeaderProps(column.getSortByToggleProps())}>
                   {column.render("Header")}
-                </th>
+                </AdminTh>
               ))}
             </tr>
           ))}
@@ -39,7 +58,7 @@ function Table({ columns, data }) {
             return (
               <tr {...row.getRowProps()} onClick={() => showDetail(row.original.code)}>
                 {row.cells.map((cell) => (
-                  <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
+                  <AdminTd {...cell.getCellProps()}>{cell.render("Cell")}</AdminTd>
                 ))}
               </tr>
             );

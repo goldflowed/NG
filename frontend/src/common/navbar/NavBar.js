@@ -5,6 +5,9 @@ import {ethers} from 'ethers'
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavButton from 'react-bootstrap/Button';
+import {
+  MDBBtn
+} from 'mdb-react-ui-kit';
 
 
 // import { fetchAccount } from '../../store/actions/thunks/account';
@@ -67,14 +70,14 @@ function NavBar(props){
 
     window.ethereum.on('chainChanged', chainChangedHandler)
 
-    useEffect(() => {
-      window.ethereum.request({method: 'eth_requestAccounts'})
-      .then( result => {
-        window.localStorage.setItem('wallet', result[0]);
-        setDefaultAccount(result[0]);
-        setUserBalance(result[0]);
-      })
-    }, []);
+    // useEffect(() => {
+    //   window.ethereum.request({method: 'eth_requestAccounts'})
+    //   .then( result => {
+    //     window.localStorage.setItem('wallet', result[0]);
+    //     setDefaultAccount(result[0]);
+    //     setUserBalance(result[0]);
+    //   })
+    // }, []);
 
     return(
     <Navbar className="navbar" fixed="top" collapseOnSelect expand="lg" bg="dark" variant="dark">
@@ -83,12 +86,12 @@ function NavBar(props){
           <Nav className="me-auto">
           </Nav>
           <Nav>
-            <Nav.Link href="#aboutus">Abuout US</Nav.Link>
-            <Nav.Link href="#searchnft">Search NFT</Nav.Link>
+            <Nav.Link href="/aboutus">Abuout US</Nav.Link>
+            <Nav.Link href="/searchnft">Search NFT</Nav.Link>
             <div>
               {
                 window.localStorage.getItem('wallet')
-                ? <Nav.Link href="#mynft">My NFT</Nav.Link>
+                ? <Nav.Link href="/mynft">My NFT</Nav.Link>
                 : <Nav.Link href="/brandregister">Brand Register</Nav.Link>
               }
             </div>
@@ -96,8 +99,8 @@ function NavBar(props){
             <div>
               {
                 window.localStorage.getItem('wallet')
-                ? <NavButton className="connect-wallet" variant="outline-secondary" onClick={offConnectWallet}>{disconnButton}</NavButton>
-                : <NavButton className="connect-wallet" variant="outline-secondary" onClick={onConnectWallet}>{connButtonText}</NavButton>
+                ? <MDBBtn className="connect-wallet" variant="outline-secondary" onClick={offConnectWallet}>{disconnButton}</MDBBtn>
+                : <MDBBtn className="connect-wallet" variant="outline-secondary" onClick={onConnectWallet}>{connButtonText}</MDBBtn>
               }  
             </div>
         </Navbar.Collapse>

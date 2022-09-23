@@ -2,6 +2,7 @@ import React, {useEffect} from "react";
 import {useNavigate}from 'react-router-dom'
 import SideBar from "../sidebar/SideBar";
 import styled from "styled-components";
+import NavBar from "../../../common/navbar/NavBar";
 
 const ContainerDiv = styled.div`
   width:1900px;
@@ -15,6 +16,7 @@ const MainDiv = styled.div`
   padding-right: 100px;
   font-size:20px;
   margin-left:400px;
+  margin-top:25px;
   `
 
 const Hr = styled.hr`
@@ -50,6 +52,7 @@ function Deny() {
 
   return (
     <ContainerDiv>
+      <NavBar/>
       <SideBar/>
       <MainDiv>
       <TitleP>거부 기업 목록</TitleP><Hr/>
