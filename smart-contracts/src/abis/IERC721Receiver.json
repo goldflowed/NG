@@ -45,7 +45,7 @@
   "sourceMap": "",
   "deployedSourceMap": "",
   "source": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.0;\r\n\r\ninterface IERC721Receiver {\r\n    function onERC721Received(\r\n        address _operator,\r\n        address _from,\r\n        uint256 _tokenId,\r\n        bytes calldata _data\r\n    ) external returns (bytes4);\r\n}\r\n",
-  "sourcePath": "C:\\Users\\SSAFY\\Desktop\\S07P22E206\\smart-contracts\\src\\contracts\\tokens\\ERC721\\IERC721Receiver.sol",
+  "sourcePath": "C:\\Users\\SSAFY\\Desktop\\NFT_PJT NG\\S07P22E206\\smart-contracts\\src\\contracts\\tokens\\ERC721\\IERC721Receiver.sol",
   "ast": {
     "absolutePath": "project:/src/contracts/tokens/ERC721/IERC721Receiver.sol",
     "exportedSymbols": {
@@ -263,7 +263,7 @@
   },
   "networks": {},
   "schemaVersion": "3.4.9",
-  "updatedAt": "2022-09-23T06:45:39.998Z",
+  "updatedAt": "2022-09-23T09:05:03.231Z",
   "devdoc": {
     "kind": "dev",
     "methods": {},
