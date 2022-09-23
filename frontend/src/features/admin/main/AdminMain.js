@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import SideBar from "../sidebar/SideBar";
 import styled from "styled-components";
+import NavBar from "../../../common/navbar/NavBar";
+import axios from '../../../common/api/http-common';
+import Table from './table';
 
 const ContainerDiv = styled.div`
   width:1900px;
@@ -14,6 +17,7 @@ const MainDiv = styled.div`
   padding-right: 100px;
   font-size:20px;
   margin-left:400px;
+  margin-top:25px;
   `
 
 const Hr = styled.hr`
@@ -39,13 +43,56 @@ const TitleP = styled.p`
   margin-left: 20px;
   `
 
+const TableDiv = styled.div`
+  margin:auto;
+  width:800px;
+  max-height: 750px;
+  overflow-y: auto;
+  display:flex;
+  flex-direction:column;
+  `
+
 function Home() {
+  const columns = useMemo(
+    () => [
+      {
+        accessor: "num",
+        Header: "번호",
+      },
+      {
+        accessor: "comName",
+        Header: "기업이름",
+      },
+      {
+        accessor: "comAddress",
+        Header: "지갑주소",
+      },
+    ],
+    []
+  );
+
+  const [companies, setCompanies] = useState([])
+  
+  useEffect(() => {
+    var i = 1;
+    axios.post(`/company/list`).then((response) => {
+      for ( const res of response.data ) {
+        res['num'] = i;
+        i = i+1;
+        res['comAddress'] = '0x00'
+      }
+      setCompanies(response.data)
+    })
+  }, []);
+
   return (
     <ContainerDiv>
+      <NavBar/>
       <SideBar/>
       <MainDiv>
       <TitleP>요청 기업 목록</TitleP><Hr/>
         <InfoDiv>
+        <TableDiv><Table columns={columns} data={companies}/></TableDiv>
         </InfoDiv>
       </MainDiv>
     </ContainerDiv>

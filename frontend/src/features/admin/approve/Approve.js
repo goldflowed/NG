@@ -1,6 +1,7 @@
 import React from "react";
 import SideBar from "../sidebar/SideBar";
 import styled from "styled-components";
+import NavBar from "../../../common/navbar/NavBar";
 
 const ContainerDiv = styled.div`
   width:1900px;
@@ -14,6 +15,7 @@ const MainDiv = styled.div`
   padding-right: 100px;
   font-size:20px;
   margin-left:400px;
+  margin-top:25px;
   `
 
 const Hr = styled.hr`
@@ -42,6 +44,7 @@ const TitleP = styled.p`
 function Home() {
   return (
     <ContainerDiv>
+      <NavBar/>
       <SideBar/>
       <MainDiv>
       <TitleP>승인 기업 목록</TitleP><Hr/>

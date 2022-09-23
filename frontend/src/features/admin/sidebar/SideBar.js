@@ -56,7 +56,7 @@ const StyledLink = styled(Link)`
 function SideBar() {
 
   return (
-    <div className="container">
+    <div className="SideContainer">
       <MenuList>
         <List>
           <ListTitle>기업 관리<ListHr/>
