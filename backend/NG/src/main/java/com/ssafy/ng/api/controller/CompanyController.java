@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Api(value = "기업 API", tags = {"Company"})
 @RestController
-@RequestMapping("api/v1/company")
+@RequestMapping("/api/v1/company")
 @CrossOrigin
 public class CompanyController {
 
@@ -23,7 +23,7 @@ public class CompanyController {
     CompanyService companyService;
 
     // 기업정보 생성 =====================================================================================================
-    @PostMapping("/create/")
+    @PostMapping("/create")
     @ApiOperation(value = "기업정보 생성", notes = "주어진 양식에 맞게 기업 정보를 생성한다.")
     @ApiResponses({
             @ApiResponse(code = 200, message = "성공", response = CompanyGetRes.class),
@@ -51,7 +51,7 @@ public class CompanyController {
     }
 
     // 승인 요청한 기업 리스트 조회 =========================================================================================
-    @GetMapping("/list/")
+    @GetMapping("/list")
     @ApiOperation(value = "기업 리스트", notes = "승인 요청한 기업 리스트를 페이지로 불러온다.")
     @ApiResponses({
             @ApiResponse(code = 200, message = "성공", response = CompanyList.class)
