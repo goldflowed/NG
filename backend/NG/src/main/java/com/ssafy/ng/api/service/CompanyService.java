@@ -21,8 +21,8 @@ public interface CompanyService {
     // admin============================================================================================================
 
     // 승인 요청한 기업 리스트
-    Page<CompanyList> comList(Pageable pageable);
+    List<CompanyList> comList(int comPermit);
 
     // 기업 승인
-    boolean permitCompany(String comWallet, CompanyPermitReq permitReq);
+    void permitCompany(String comWallet, CompanyPermitReq permitReq);
 }
