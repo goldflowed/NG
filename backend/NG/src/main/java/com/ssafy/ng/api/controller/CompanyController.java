@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.*;
 
 @Api(value = "기업 API", tags = {"Company"})
 @RestController
-@RequestMapping("/company")
-@CrossOrigin("http://localhost:3000/")
+@RequestMapping("api/v1/company")
+@CrossOrigin
 public class CompanyController {
 
     @Autowired
