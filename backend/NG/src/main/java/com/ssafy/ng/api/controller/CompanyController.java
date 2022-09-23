@@ -51,14 +51,13 @@ public class CompanyController {
     }
 
     // 승인 요청한 기업 리스트 조회 =========================================================================================
-    @GetMapping("/list")
+    @PostMapping("/list")
     @ApiOperation(value = "기업 리스트", notes = "승인 요청한 기업 리스트를 페이지로 불러온다.")
     @ApiResponses({
             @ApiResponse(code = 200, message = "성공", response = CompanyList.class)
     })
-    public ResponseEntity<?> companyList(
-            @RequestBody @ApiParam(value = "기업정보", required = true) Pageable pageable) {
-        return ResponseEntity.status(200).body(companyService.comList(pageable));
+    public ResponseEntity<?> companyList() {
+        return ResponseEntity.status(200).body(companyService.comList());
     }
 
     // 기업 승인 ========================================================================================================

@@ -12,7 +12,9 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service("CompanyService")
 public class CompanyServiceImpl implements CompanyService{
@@ -46,13 +48,12 @@ public class CompanyServiceImpl implements CompanyService{
     }
 
     @Override
-    public Page<CompanyList> comList(Pageable pageable) {
-        PageRequest pageRequest = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize());
-        Page<Company> page = companyRepository.findAll(pageRequest);
-        Page<CompanyList> dtoPage = page
+    public List<CompanyList> comList() {
+        List<Company> page = companyRepository.findAllWaitPermit();
+        List<CompanyList> dtoPage = page.stream()
                 .map(m -> CompanyList.of(
                         m.getComName()
-                ));
+                )).collect(Collectors.toList());
         return dtoPage;
     }
 
