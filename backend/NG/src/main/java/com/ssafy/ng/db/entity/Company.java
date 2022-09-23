@@ -25,7 +25,7 @@ public class Company {
     private String comRegNum;
 
     // 기업 지갑주소
-    @Column(name = "com_wallet", nullable = false)
+    @Column(name = "com_wallet", nullable = false, unique = true)
     private String comWallet;
 
     // 기업 이메일

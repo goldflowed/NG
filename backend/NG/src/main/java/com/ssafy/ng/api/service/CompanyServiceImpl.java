@@ -48,22 +48,23 @@ public class CompanyServiceImpl implements CompanyService{
     }
 
     @Override
-    public List<CompanyList> comList() {
-        List<Company> page = companyRepository.findAllWaitPermit();
+    public List<CompanyList> comList(int comPermit) {
+        List<Company> page = companyRepository.findAllWaitPermit(comPermit);
         List<CompanyList> dtoPage = page.stream()
                 .map(m -> CompanyList.of(
-                        m.getComName()
+                        m.getComName(),
+                        m.getComWallet()
                 )).collect(Collectors.toList());
         return dtoPage;
     }
 
     @Override
-    public boolean permitCompany(String comWallet, CompanyPermitReq permitReq) {
+    public void permitCompany(String comWallet, CompanyPermitReq permitReq) {
+        // 지갑주소에 해당하는 기업을 도출
         Optional<Company> company = companyRepository.getByComWallet(comWallet);
-        if (!company.isPresent()) {
-            return false;
+        // 해당 기업이 존재하지 않거나 승인대기 상태일 때만 변환
+        if ( company.isPresent() || company.get().getComPermit() == 1) {
+            companyRepository.permitCompany(permitReq.getComPermit(), comWallet);
         }
-        companyRepository.permitCompany(comWallet, permitReq.getComPermit());
-        return true;
     }
 }

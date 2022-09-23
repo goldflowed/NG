@@ -43,21 +43,26 @@ public class CompanyController {
     @ApiOperation(value = "기업정보 조회", notes = "해당하는 기업에 대한 정보를 조회한다.")
     @ApiResponses({
             @ApiResponse(code = 200, message = "성공", response = CompanyGetRes.class),
-            @ApiResponse(code = 500, message = "서버 오류")
+            @ApiResponse(code = 404, message = "존재하지 않는 기업입니다.")
     })
     public ResponseEntity<?> getComInfo(
             @PathVariable @ApiParam(value = "해당 기업의 시퀀스", required = true) String comWallet) {
-        return ResponseEntity.status(200).body(companyService.getCompanyByComWallet(comWallet));
+        CompanyGetRes res = companyService.getCompanyByComWallet(comWallet);
+        if (res != null) {
+            return ResponseEntity.status(200).body(res);
+        }
+        return new ResponseEntity<> ("존재하지 않는 기업입니다.", HttpStatus.NOT_FOUND);
     }
 
     // 승인 요청한 기업 리스트 조회 =========================================================================================
-    @PostMapping("/list")
+    @PostMapping("/list/{comPermit}")
     @ApiOperation(value = "기업 리스트", notes = "승인 요청한 기업 리스트를 페이지로 불러온다.")
     @ApiResponses({
             @ApiResponse(code = 200, message = "성공", response = CompanyList.class)
     })
-    public ResponseEntity<?> companyList() {
-        return ResponseEntity.status(200).body(companyService.comList());
+    public ResponseEntity<?> companyList(
+            @PathVariable @ApiParam(value = "승인상태(요청/거부/승인)", required = true) int comPermit) {
+        return ResponseEntity.status(200).body(companyService.comList(comPermit));
     }
 
     // 기업 승인 ========================================================================================================
@@ -70,10 +75,7 @@ public class CompanyController {
     public ResponseEntity<?> judgePermit(
             @PathVariable @ApiParam(value = "기업 지갑주소", required = true) String comWallet,
             @RequestBody @ApiParam(value = "승인 여부", required = true) CompanyPermitReq permitReq) {
-        boolean res = companyService.permitCompany(comWallet, permitReq);
-        if (res == false) {
-            return new ResponseEntity<>("존재하지 않는 기업입니다.", HttpStatus.NOT_FOUND);
-        }
-        return new ResponseEntity<>(HttpStatus.valueOf(200));
+        companyService.permitCompany(comWallet, permitReq);
+        return ResponseEntity.status(200).body(null);
     }
 }

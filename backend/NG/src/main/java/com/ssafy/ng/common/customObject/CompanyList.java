@@ -9,11 +9,13 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CompanyList {
-    private String comName;
 
-    public static CompanyList of(String comName) {
+    private String comName;
+    private String comWallet;
+    public static CompanyList of(String comName, String comWallet) {
         CompanyList list = new CompanyList();
         list.setComName(comName);
+        list.setComWallet(comWallet);
         return list;
     }
 }
