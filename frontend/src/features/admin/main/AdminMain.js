@@ -64,7 +64,7 @@ function Home() {
         Header: "기업이름",
       },
       {
-        accessor: "comAddress",
+        accessor: "comWallet",
         Header: "지갑주소",
       },
     ],
@@ -75,11 +75,10 @@ function Home() {
   
   useEffect(() => {
     var i = 1;
-    axios.post(`/company/list`).then((response) => {
+    axios.post(`/company/list/1`).then((response) => {
       for ( const res of response.data ) {
         res['num'] = i;
         i = i+1;
-        res['comAddress'] = '0x00'
       }
       setCompanies(response.data)
     })
