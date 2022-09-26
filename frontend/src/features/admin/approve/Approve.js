@@ -45,7 +45,7 @@ const TitleP = styled.p`
 
  const TableDiv = styled.div`
   margin:auto;
-  width:800px;
+  width:1000px;
   max-height: 750px;
   overflow-y: auto;
   display:flex;

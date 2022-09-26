@@ -41,17 +41,24 @@ function Table({ columns, data }) {
   const [comWallet, setComWallet] = useState('');
   const [comAddress, setComAddress] = useState('');
 
-  const handleClose = () => setShow(false);
+  const handleClose = () => {
+    setComName('');
+    setComEmail('');
+    setComTel('');
+    setComRegNum('');
+    setComWallet('');
+    setComAddress('');
+    setShow(false);};
 
   const handleShow = (idx) => {
     axios.get(`/company/${idx}`)
     .then((res) => {
-      setComName(res.data.comName)
-      setComEmail(res.data.comEmail)
-      setComTel(res.data.comTel)
-      setComRegNum(res.data.comRegNum)
-      setComWallet(res.data.comWallet)
-      setComAddress(res.data.comAddress)
+      setComName(res.data.comName);
+      setComEmail(res.data.comEmail);
+      setComTel(res.data.comTel);
+      setComRegNum(res.data.comRegNum);
+      setComWallet(res.data.comWallet);
+      setComAddress(res.data.comAddress);
       setShow(true);
       })
   };

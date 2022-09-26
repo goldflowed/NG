@@ -11,12 +11,14 @@ import Approve from '../features/admin/approve/Approve';
 import Deny from '../features/admin/deny/Deny';
 import 'bootstrap/dist/css/bootstrap.css';
 import CompanyRoute from '../common/companyroute/CompanyRoute';
+import BrandRegister from '../features/main/brandregister/brandregister'
 
 function App() {
   return (
     <Router>
       <Routes>
         <Route exact path="/" element={ <Main/> } />
+        <Route exact path="/brandregister" element={ <BrandRegister/> } />
         <Route exact path="/company/123" element={ <CompanyRoute><CompanyMain/></CompanyRoute>}/>
         <Route exact path="/company/123/register" element={ <CompanyRoute><CompanyRegister/></CompanyRoute> }/>
         <Route exact path="/company/123/nfts" element={ <CompanyRoute><Nfts/></CompanyRoute>}/>
