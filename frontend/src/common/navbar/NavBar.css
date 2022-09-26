@@ -1,0 +1,23 @@
+.navbar {
+    height: 5rem;
+}
+
+.navbar-brand {
+    font-size: 25px;
+    margin-left: 3rem;
+}
+
+.navbar-nav {
+    font-size: 20px;
+}
+
+.nav-link {
+    margin-right: 1rem;
+}
+
+.connect-wallet {
+    margin-right: 2rem;
+}
+
+
+
