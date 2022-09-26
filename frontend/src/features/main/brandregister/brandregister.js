@@ -64,7 +64,7 @@ function BrandRegister() {
 
     function onSubmit(event){
 
-        axios.post("http://localhost:8080/company/create/", formValues)
+        axios.post("localhost:8080/company/create/", formValues)
             .then((response) => {
                 alert("브랜드 등록 완료!")
             })

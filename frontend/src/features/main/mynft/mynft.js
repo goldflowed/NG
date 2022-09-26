@@ -2,53 +2,90 @@
 import NavBar from "../../../common/navbar/NavBar"
 import Footer from "../../../common/footer/Footer"
 import { nftContract, web3 } from "../../../common/web3/web3Config"
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import {
+    MDBCard,
+    MDBCardBody,
+    MDBCardText,
+    MDBCardImage
+  } from 'mdb-react-ui-kit';
 
 // tokenId 번호 -> tokenId에 따른 블록 정보 불러오기
 function MyNft() {
 
-    const [brandNm, setbrandNm] = useState("");
-    const [productNo, setproductNo] = useState("");
-    const [serialNo, setserialNo] = useState("");
-    const [mfd, setmfd] = useState("");
-    const [madeIn, setmadeIn] = useState("");
+    const [brandNm, setbrandNm] = useState([]);
+    const [productNo, setproductNo] = useState([]);
+    const [serialNo, setserialNo] = useState([]);
+    const [mfd, setmfd] = useState([]);
+    const [madeIn, setmadeIn] = useState([]);
+    const [token, setToken] = useState([]);
 
-    // nft 토큰 배열 만들어서 데이터 넣음
-    const [tokenNum, settokenNum] = useState();
-    const [nftToken, setnftToken] = useState([]);
+    const [tokenNum, settokenNum] = useState([]);
 
-    
-    // 지갑 주소 받기
     const [tokenlength, settokenlength] = useState("");
 
-    // 현재 지갑 주소 
-    const currnet_wallet = window.localStorage.getItem('wallet');
-    console.log(currnet_wallet);
+        
 
-    // 지갑 주소에 존재하는 tokenId 받기 및 배열 길이 받기
-    const tokenId_array1 = nftContract.methods.getOwnedTokens(currnet_wallet).call()
-    const tokenId_array = nftContract.methods.getOwnedTokens(currnet_wallet).call()
-        // .then((res) => settokenlength(res.length));
-        .then((res) => settokenlength(res.length));
-    console.log(tokenId_array1);
-    console.log(tokenlength);
+        useEffect( () => {
+            const current_wallet = window.localStorage.getItem('wallet');
 
-    console.log()
+            console.log(current_wallet);
 
-    // for(let i=0; i < tokenlength; i++){
-    //     const ArrTokenId = nftContract.methods.getOwnedTokens(currnet_wallet).call()
-    //         .then((res) => settokenNum(res.result[0]))
-    //     console.log(tokenNum);
-    // }
+            nftContract.methods.getOwnedTokens(current_wallet).call().then((res) => {
 
-
+                settokenNum(res);
+                settokenlength(res.length);})
     
+                console.log(tokenNum);
+                console.log(tokenlength);
+
+                var tokenInfo = [];
+
+                for(var i = 0; i < tokenlength; i++){
+                    nftContract.methods.ngs(i).call()
+                    .then((res) => {
+                        console.log(res)
+                        tokenInfo.push(res)
+                    })
+                    console.log(tokenInfo)
+                    setToken(tokenInfo)
+                }
+
+        }, [tokenlength])
 
     return(
         <div>
             <NavBar/>
             <div style={{height:500}}>
-
+                <p style={{marginTop:'100px'}}></p>
+                {/* <div>13{tokendetail(token)}</div> */}
+                <div>
+                    <table>
+                        <tr>
+                            <th>브랜드명</th>
+                            <th>제품번호</th>
+                            <th>시리얼번호</th>
+                        </tr>
+                        {/* {tokenlength} */}
+                        {/* {JSON.stringify(token)} */}
+                        {token && 
+                            token.map((token) => (
+                                <MDBCard key={token.serialNo}>
+                                <MDBCardBody>{token.brandNm}, {token.productNo}, {token.serialNo}
+                                <button>detail</button>
+                                 </MDBCardBody>
+                                </MDBCard>
+                                // <div key={token.serialNo}>
+                                //     <div>
+                                //         <td>{token.brandNm}</td>
+                                //         <td>{token.productNo}</td>
+                                //         <td>{token.serialNo}</td>
+                                //     </div>
+                                // </div>
+                            ))
+                        }
+                    </table>
+                </div>
             </div>
             <Footer/>
         </div>

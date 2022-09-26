@@ -9,6 +9,8 @@ import {
   MDBBtn
 } from 'mdb-react-ui-kit';
 
+import LOGO from '../../assets/img/logo2.jpg';
+
 
 // import { fetchAccount } from '../../store/actions/thunks/account';
 // import { connectWallet } from '../../core/ethereum';
@@ -81,6 +83,9 @@ function NavBar(props){
 
     return(
     <Navbar className="navbar" fixed="top" collapseOnSelect expand="lg" bg="dark" variant="dark">
+        <div>
+          <img src={LOGO} style={{height:60, width:60}}/>
+        </div>
         <Navbar.Brand href="/">Nft Guarantee</Navbar.Brand>
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
