@@ -73,14 +73,7 @@ function Register() {
     
     const { event } = await nftContract.methods
       .mint(brand, productNumber, serialNumber, makingDate, country)
-      .send({ from: "0x69f69c1c64e68c81da2a02686e3e4d86c657eace" });
-
-
-    // console.log(brand)
-    // console.log(productNumber)
-    // console.log(serialNumber)
-    // console.log(makingDate)
-    // console.log(country)
+      .send({ from: window.localStorage.wallet });
   }
 
   return (

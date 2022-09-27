@@ -7,6 +7,7 @@ import styled from "styled-components";
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import axios from '../../../common/api/http-common';
+import { nftContract } from "../../../common/web3/web3Config"
 
 const AdminTd = styled.td`
   padding-top: 10px;
@@ -64,11 +65,17 @@ function Table({ columns, data }) {
   };
   
   const approval = () => {
-    const body = {"comPermit": 2};
-    axios.post(`/company/permit/${comWallet}`, body).then(() => {
-      setShow(false);
-      history('/admin/approve');
-    })
+    nftContract.methods.setBrandAccountAuth(comWallet).send({from: window.localStorage.wallet})
+    .then(() => {
+      const body = {"comPermit": 2};
+      axios.post(`/company/permit/${comWallet}`, body).then(() => {
+        setShow(false);
+        history('/admin/approve');
+      })
+      })
+    .catch((err) => {
+      console.log(err)
+      alert('관리자 권한이 없습니다.')});
   }
   
   const deny = () => {
