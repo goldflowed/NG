@@ -14,6 +14,7 @@ import CompanyRoute from '../common/companyroute/CompanyRoute';
 import AboutUs from '../features/main/aboutus/aboutus'
 import SearchNft from "../features/main/searchnft/searchnft"
 import MyNft from "../features/main/mynft/mynft"
+import DetailNft from "../features/main/mynft/detailnft"
 import 'bootstrap/dist/css/bootstrap.css';
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
         <Route exact path="/aboutus" element={ <AboutUs/> } />
         <Route exact path="/searchnft" element={ <SearchNft/> } />
         <Route exact path="/mynft" element={ <MyNft/> } />
+        <Route exact path="/mynft/:serialNo" element={ <DetailNft/> } />
         <Route exact path="/company/123" element={ <CompanyMain/>}/>
         <Route exact path="/company/123/register" element={ <CompanyRegister/> }/>
         <Route exact path="/company/123/nfts" element={ <Nfts/>}/>
