@@ -9,5 +9,6 @@ RUN ls -al /var/jenkins_home/workspace/deploy-test
 FROM nginx:stable-alpine
 COPY --from=build-stage /var/jenkins_home/workspace/deploy-test/frontend/build /usr/share/nginx/html
 COPY --from=build-stage /var/jenkins_home/workspace/deploy-test/frontend/deploy_conf/nginx.conf /etc/nginx/conf.d/default.conf
+RUN cat /etc/nginx/conf.d/default.conf
 EXPOSE 80
 CMD ["nginx", "-g","daemon off;"]
