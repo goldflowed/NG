@@ -4,6 +4,7 @@ COPY package*.json /var/jenkins_home/workspace/deploy-test/frontend/
 RUN npm install
 COPY ./ /var/jenkins_home/workspace/deploy-test/frontend/
 RUN npm run build
+RUN ls -al /var/jenkins_home/workspace/deploy-test
 
 FROM nginx:stable-alpine
 COPY --from=build-stage /var/jenkins_home/workspace/deploy-test/frontend/build /usr/share/nginx/html
