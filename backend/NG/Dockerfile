@@ -1,6 +1,5 @@
 FROM openjdk:11
-RUN pwd
-RUN ls -al
+RUN ls -al /var/
 RUN chmod +x gradlew
 RUN ./gradlew bootJar
 ARG JAR_FILE=/build/libs/*.jar
