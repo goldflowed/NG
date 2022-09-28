@@ -9,4 +9,4 @@ RUN ./gradlew clean build
 ARG JAR_FILE=/build/libs/*.jar
 COPY ${JAR_FILE} ng_springboot.jar
 RUN ls -al
-ENTRYPOINT ["java", "-jar", "/ng_springboot.jar"]
+ENTRYPOINT ["java", "-jar", "./ng_springboot.jar"]
