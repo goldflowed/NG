@@ -12761,51 +12761,51 @@
     "absolutePath": "project:/src/contracts/tokens/ERC721/ERC721Connector.sol",
     "exportedSymbols": {
       "Address": [
-        2764
+        3121
       ],
       "Context": [
-        2786
+        3143
       ],
       "ERC165": [
-        3011
+        3368
       ],
       "ERC721": [
-        1886
+        2243
       ],
       "ERC721Connector": [
-        1923
+        2280
       ],
       "ERC721Enumerable": [
-        2339
+        2696
       ],
       "ERC721Metadata": [
-        2423
+        2780
       ],
       "IERC165": [
-        3023
+        3380
       ],
       "IERC721": [
-        2037
+        2394
       ],
       "IERC721Enumerable": [
-        2447
+        2804
       ],
       "IERC721Metadata": [
-        2467
+        2824
       ],
       "IERC721Receiver": [
-        2053
+        2410
       ],
       "Strings": [
-        2989
+        3346
       ]
     },
-    "id": 1924,
+    "id": 2281,
     "license": "MIT",
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 1888,
+        "id": 2245,
         "literals": [
           "solidity",
           "^",
@@ -12818,11 +12818,11 @@
       {
         "absolutePath": "project:/src/contracts/tokens/ERC721/extensions/ERC721Metadata.sol",
         "file": "./extensions/ERC721Metadata.sol",
-        "id": 1889,
+        "id": 2246,
         "nameLocation": "-1:-1:-1",
         "nodeType": "ImportDirective",
-        "scope": 1924,
-        "sourceUnit": 2424,
+        "scope": 2281,
+        "sourceUnit": 2781,
         "src": "60:41:8",
         "symbolAliases": [],
         "unitAlias": ""
@@ -12830,11 +12830,11 @@
       {
         "absolutePath": "project:/src/contracts/tokens/ERC721/extensions/ERC721Enumerable.sol",
         "file": "./extensions/ERC721Enumerable.sol",
-        "id": 1890,
+        "id": 2247,
         "nameLocation": "-1:-1:-1",
         "nodeType": "ImportDirective",
-        "scope": 1924,
-        "sourceUnit": 2340,
+        "scope": 2281,
+        "sourceUnit": 2697,
         "src": "103:43:8",
         "symbolAliases": [],
         "unitAlias": ""
@@ -12844,31 +12844,31 @@
         "baseContracts": [
           {
             "baseName": {
-              "id": 1891,
+              "id": 2248,
               "name": "ERC721Metadata",
               "nameLocations": [
                 "178:14:8"
               ],
               "nodeType": "IdentifierPath",
-              "referencedDeclaration": 2423,
+              "referencedDeclaration": 2780,
               "src": "178:14:8"
             },
-            "id": 1892,
+            "id": 2249,
             "nodeType": "InheritanceSpecifier",
             "src": "178:14:8"
           },
           {
             "baseName": {
-              "id": 1893,
+              "id": 2250,
               "name": "ERC721Enumerable",
               "nameLocations": [
                 "194:16:8"
               ],
               "nodeType": "IdentifierPath",
-              "referencedDeclaration": 2339,
+              "referencedDeclaration": 2696,
               "src": "194:16:8"
             },
-            "id": 1894,
+            "id": 2251,
             "nodeType": "InheritanceSpecifier",
             "src": "194:16:8"
           }
@@ -12877,18 +12877,18 @@
         "contractDependencies": [],
         "contractKind": "contract",
         "fullyImplemented": true,
-        "id": 1923,
+        "id": 2280,
         "linearizedBaseContracts": [
-          1923,
-          2339,
-          1886,
-          2037,
-          2423,
-          3011,
-          3023,
-          2786,
-          2447,
-          2467
+          2280,
+          2696,
+          2243,
+          2394,
+          2780,
+          3368,
+          3380,
+          3143,
+          2804,
+          2824
         ],
         "name": "ERC721Connector",
         "nameLocation": "159:15:8",
@@ -12896,23 +12896,23 @@
         "nodes": [
           {
             "body": {
-              "id": 1905,
+              "id": 2262,
               "nodeType": "Block",
               "src": "406:2:8",
               "statements": []
             },
-            "id": 1906,
+            "id": 2263,
             "implemented": true,
             "kind": "constructor",
             "modifiers": [
               {
                 "arguments": [
                   {
-                    "id": 1901,
+                    "id": 2258,
                     "name": "name",
                     "nodeType": "Identifier",
                     "overloadedDeclarations": [],
-                    "referencedDeclaration": 1896,
+                    "referencedDeclaration": 2253,
                     "src": "387:4:8",
                     "typeDescriptions": {
                       "typeIdentifier": "t_string_memory_ptr",
@@ -12920,11 +12920,11 @@
                     }
                   },
                   {
-                    "id": 1902,
+                    "id": 2259,
                     "name": "symbol",
                     "nodeType": "Identifier",
                     "overloadedDeclarations": [],
-                    "referencedDeclaration": 1898,
+                    "referencedDeclaration": 2255,
                     "src": "393:6:8",
                     "typeDescriptions": {
                       "typeIdentifier": "t_string_memory_ptr",
@@ -12932,16 +12932,16 @@
                     }
                   }
                 ],
-                "id": 1903,
+                "id": 2260,
                 "kind": "baseConstructorSpecifier",
                 "modifierName": {
-                  "id": 1900,
+                  "id": 2257,
                   "name": "ERC721Metadata",
                   "nameLocations": [
                     "372:14:8"
                   ],
                   "nodeType": "IdentifierPath",
-                  "referencedDeclaration": 2423,
+                  "referencedDeclaration": 2780,
                   "src": "372:14:8"
                 },
                 "nodeType": "ModifierInvocation",
@@ -12952,17 +12952,17 @@
             "nameLocation": "-1:-1:-1",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 1899,
+              "id": 2256,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1896,
+                  "id": 2253,
                   "mutability": "mutable",
                   "name": "name",
                   "nameLocation": "335:4:8",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1906,
+                  "scope": 2263,
                   "src": "321:18:8",
                   "stateVariable": false,
                   "storageLocation": "memory",
@@ -12971,7 +12971,7 @@
                     "typeString": "string"
                   },
                   "typeName": {
-                    "id": 1895,
+                    "id": 2252,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
                     "src": "321:6:8",
@@ -12984,12 +12984,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 1898,
+                  "id": 2255,
                   "mutability": "mutable",
                   "name": "symbol",
                   "nameLocation": "355:6:8",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1906,
+                  "scope": 2263,
                   "src": "341:20:8",
                   "stateVariable": false,
                   "storageLocation": "memory",
@@ -12998,7 +12998,7 @@
                     "typeString": "string"
                   },
                   "typeName": {
-                    "id": 1897,
+                    "id": 2254,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
                     "src": "341:6:8",
@@ -13013,12 +13013,12 @@
               "src": "320:42:8"
             },
             "returnParameters": {
-              "id": 1904,
+              "id": 2261,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "406:0:8"
             },
-            "scope": 1923,
+            "scope": 2280,
             "src": "309:99:8",
             "stateMutability": "nonpayable",
             "virtual": false,
@@ -13026,11 +13026,11 @@
           },
           {
             "baseFunctions": [
-              2212,
-              3010
+              2569,
+              3367
             ],
             "body": {
-              "id": 1921,
+              "id": 2278,
               "nodeType": "Block",
               "src": "583:62:8",
               "statements": [
@@ -13038,11 +13038,11 @@
                   "expression": {
                     "arguments": [
                       {
-                        "id": 1918,
+                        "id": 2275,
                         "name": "interfaceId",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 1908,
+                        "referencedDeclaration": 2265,
                         "src": "625:11:8",
                         "typeDescriptions": {
                           "typeIdentifier": "t_bytes4",
@@ -13058,18 +13058,18 @@
                         }
                       ],
                       "expression": {
-                        "id": 1916,
+                        "id": 2273,
                         "name": "super",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
                         "referencedDeclaration": 4294967271,
                         "src": "601:5:8",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_type$_t_super$_ERC721Connector_$1923_$",
+                          "typeIdentifier": "t_type$_t_super$_ERC721Connector_$2280_$",
                           "typeString": "type(contract super ERC721Connector)"
                         }
                       },
-                      "id": 1917,
+                      "id": 2274,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": false,
@@ -13077,14 +13077,14 @@
                       "memberLocation": "607:17:8",
                       "memberName": "supportsInterface",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 2212,
+                      "referencedDeclaration": 2569,
                       "src": "601:23:8",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_internal_view$_t_bytes4_$returns$_t_bool_$",
                         "typeString": "function (bytes4) view returns (bool)"
                       }
                     },
-                    "id": 1919,
+                    "id": 2276,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -13100,15 +13100,15 @@
                       "typeString": "bool"
                     }
                   },
-                  "functionReturnParameters": 1915,
-                  "id": 1920,
+                  "functionReturnParameters": 2272,
+                  "id": 2277,
                   "nodeType": "Return",
                   "src": "594:43:8"
                 }
               ]
             },
             "functionSelector": "01ffc9a7",
-            "id": 1922,
+            "id": 2279,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
@@ -13116,44 +13116,44 @@
             "nameLocation": "425:17:8",
             "nodeType": "FunctionDefinition",
             "overrides": {
-              "id": 1912,
+              "id": 2269,
               "nodeType": "OverrideSpecifier",
               "overrides": [
                 {
-                  "id": 1910,
+                  "id": 2267,
                   "name": "ERC721Enumerable",
                   "nameLocations": [
                     "528:16:8"
                   ],
                   "nodeType": "IdentifierPath",
-                  "referencedDeclaration": 2339,
+                  "referencedDeclaration": 2696,
                   "src": "528:16:8"
                 },
                 {
-                  "id": 1911,
+                  "id": 2268,
                   "name": "ERC165",
                   "nameLocations": [
                     "546:6:8"
                   ],
                   "nodeType": "IdentifierPath",
-                  "referencedDeclaration": 3011,
+                  "referencedDeclaration": 3368,
                   "src": "546:6:8"
                 }
               ],
               "src": "519:34:8"
             },
             "parameters": {
-              "id": 1909,
+              "id": 2266,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1908,
+                  "id": 2265,
                   "mutability": "mutable",
                   "name": "interfaceId",
                   "nameLocation": "450:11:8",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1922,
+                  "scope": 2279,
                   "src": "443:18:8",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -13162,7 +13162,7 @@
                     "typeString": "bytes4"
                   },
                   "typeName": {
-                    "id": 1907,
+                    "id": 2264,
                     "name": "bytes4",
                     "nodeType": "ElementaryTypeName",
                     "src": "443:6:8",
@@ -13177,17 +13177,17 @@
               "src": "442:20:8"
             },
             "returnParameters": {
-              "id": 1915,
+              "id": 2272,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1914,
+                  "id": 2271,
                   "mutability": "mutable",
                   "name": "",
                   "nameLocation": "-1:-1:-1",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1922,
+                  "scope": 2279,
                   "src": "572:4:8",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -13196,7 +13196,7 @@
                     "typeString": "bool"
                   },
                   "typeName": {
-                    "id": 1913,
+                    "id": 2270,
                     "name": "bool",
                     "nodeType": "ElementaryTypeName",
                     "src": "572:4:8",
@@ -13210,14 +13210,14 @@
               ],
               "src": "571:6:8"
             },
-            "scope": 1923,
+            "scope": 2280,
             "src": "416:229:8",
             "stateMutability": "view",
             "virtual": true,
             "visibility": "public"
           }
         ],
-        "scope": 1924,
+        "scope": 2281,
         "src": "150:498:8",
         "usedErrors": []
       }
@@ -13230,7 +13230,7 @@
   },
   "networks": {},
   "schemaVersion": "3.4.9",
-  "updatedAt": "2022-09-26T00:50:09.465Z",
+  "updatedAt": "2022-09-27T08:46:00.337Z",
   "devdoc": {
     "kind": "dev",
     "methods": {

@@ -18,7 +18,6 @@ contract NG is ERC721Connector {
         string productNo;
         string mfd;
         string madeIn;
-        string price;
     }
 
     // 브랜드가 등록한 품목 리스트
@@ -171,8 +170,7 @@ contract NG is ERC721Connector {
         string memory _productName,
         string memory _productNo,
         string memory _mfd,
-        string memory _madeIn,
-        string memory _price
+        string memory _madeIn
     ) {
         bool check = false;
         for (uint256 i = 0; i < brandToProduct[msg.sender].length; i++) {
@@ -186,9 +184,7 @@ contract NG is ERC721Connector {
                 keccak256(bytes(brandToProduct[msg.sender][i].mfd)) ==
                 keccak256(bytes(_mfd)) &&
                 keccak256(bytes(brandToProduct[msg.sender][i].madeIn)) ==
-                keccak256(bytes(_madeIn)) &&
-                keccak256(bytes(brandToProduct[msg.sender][i].price)) ==
-                keccak256(bytes(_price))
+                keccak256(bytes(_madeIn))
             ) {
                 check = true;
             }
@@ -257,19 +253,14 @@ contract NG is ERC721Connector {
         string memory _productName,
         string memory _productNo,
         string memory _mfd,
-        string memory _madeIn,
-        string memory _price
-    )
-        public
-        productExists(_brandNm, _productName, _productNo, _mfd, _madeIn, _price)
-    {
+        string memory _madeIn
+    ) public productExists(_brandNm, _productName, _productNo, _mfd, _madeIn) {
         Product memory category = Product(
             _brandNm,
             _productName,
             _productNo,
             _mfd,
-            _madeIn,
-            _price
+            _madeIn
         );
 
         ProductToIndex[msg.sender][_productNo] = brandToProduct[msg.sender]
