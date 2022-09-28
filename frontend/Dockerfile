@@ -1,4 +1,6 @@
 FROM node:16.17.0 as build-stage
+RUN ls
+RUN ls /var
 WORKDIR /var/jenkins_home/workspace/deploy-test/frontend
 COPY package*.json /var/jenkins_home/workspace/deploy-test/frontend/
 RUN npm install

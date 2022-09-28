@@ -1,5 +1,4 @@
 FROM openjdk:11
-WORKDIR /var/jenkins_home/workspace/deploy-test/backend/NG
 RUN pwd
 RUN ls -al
 RUN chmod +x gradlew
