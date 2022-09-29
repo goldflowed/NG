@@ -50,7 +50,8 @@ public class CompanyServiceImpl implements CompanyService{
         List<CompanyList> dtoPage = page.stream()
                 .map(m -> CompanyList.of(
                         m.getComName(),
-                        m.getComWallet()
+                        m.getComWallet(),
+                        m.getComPermit()
                 )).collect(Collectors.toList());
         return dtoPage;
     }
