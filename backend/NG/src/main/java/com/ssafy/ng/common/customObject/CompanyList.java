@@ -12,13 +12,11 @@ public class CompanyList {
 
     private String comName;
     private String comWallet;
-    private int comPermit;
 
-    public static CompanyList of(String comName, String comWallet, int comPermit) {
+    public static CompanyList of(String comName, String comWallet) {
         CompanyList list = new CompanyList();
         list.setComName(comName);
         list.setComWallet(comWallet);
-        list.setComPermit(comPermit);
         return list;
     }
 }
