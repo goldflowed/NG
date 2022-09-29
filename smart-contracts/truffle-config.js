@@ -44,13 +44,13 @@
 // require('dotenv').config();
 // const { MNEMONIC, PROJECT_ID } = process.env;
 
-const HDWalletProvider = require('@truffle/hdwallet-provider');
-const fs = require('fs');
-const mnemonic = fs.readFileSync(".mnemonic").toString().trim();
+// const HDWalletProvider = require('@truffle/hdwallet-provider');
+// const fs = require('fs');
+// const mnemonic = fs.readFileSync(".mnemonic").toString().trim();
 
-const PrivateKeyProvider = require("truffle-privatekey-provider")
-// const privateKey = '0x614fc2730af91f88c70923c398c672ade517df9874d7dc79f22a48ecd00ba3b2';
-const privateKey = '0xf1f965c0320bf3b41bb065be17bffe9fabc3e56afedec7d4a27e23b3e1cfd096';
+// const PrivateKeyProvider = require("truffle-privatekey-provider")
+// // const privateKey = '0x614fc2730af91f88c70923c398c672ade517df9874d7dc79f22a48ecd00ba3b2';
+// const privateKey = '0xf1f965c0320bf3b41bb065be17bffe9fabc3e56afedec7d4a27e23b3e1cfd096';
 
 module.exports = {
   /**
@@ -71,17 +71,17 @@ module.exports = {
     // options below to some value.
     //docker trufflesuite/ganache-cli
     development: {
-      host: "127.0.0.1",     // Localhost (default: none)
+      host: "3.34.186.137",     // Localhost (default: none)
       port: 8545,            // Standard Ethereum port (default: none)
       network_id: "*",       // Any network (default: none)
     },
     //ssafy blockchain network 
-    ssafynet: {
-      provider: () => new PrivateKeyProvider(privateKey, `http://20.196.209.2:8545`),
-      // host: "20.196.209.2",
-      // port: 8545,
-      network_id: "*",
-    },
+    // ssafynet: {
+    //   provider: () => new PrivateKeyProvider(privateKey, `http://20.196.209.2:8545`),
+    //   // host: "20.196.209.2",
+    //   // port: 8545,
+    //   network_id: "*",
+    // },
     // An additional network, but with some advanced options…
     // advanced: {
     //   port: 8777,             // Custom port
@@ -93,14 +93,14 @@ module.exports = {
     // },
     // Useful for deploying to a public network.
     // NB: It's important to wrap the provider as a function.
-    ropsten: {
-      provider: () => new HDWalletProvider(mnemonic, `https://ropsten.infura.io/v3/8004d2a5574b4c98894dd262052faaee`),
-      network_id: 3,       // Ropsten's id
-      gas: 5500000,        // Ropsten has a lower block limit than mainnet
-      confirmations: 2,    // # of confs to wait between deployments. (default: 0)
-      timeoutBlocks: 200,  // # of blocks before a deployment times out  (minimum/default: 50)
-      skipDryRun: true     // Skip dry run before migrations? (default: false for public nets )
-    },
+    // ropsten: {
+    //   provider: () => new HDWalletProvider(mnemonic, `https://ropsten.infura.io/v3/8004d2a5574b4c98894dd262052faaee`),
+    //   network_id: 3,       // Ropsten's id
+    //   gas: 5500000,        // Ropsten has a lower block limit than mainnet
+    //   confirmations: 2,    // # of confs to wait between deployments. (default: 0)
+    //   timeoutBlocks: 200,  // # of blocks before a deployment times out  (minimum/default: 50)
+    //   skipDryRun: true     // Skip dry run before migrations? (default: false for public nets )
+    // },
     //
     // Useful for deploying to a public network.
     // Note: It's important to wrap the provider as a function to ensure truffle uses a new provider every time.
