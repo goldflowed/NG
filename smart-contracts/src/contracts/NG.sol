@@ -20,6 +20,13 @@ contract NG is ERC721Connector {
         string madeIn;
     }
 
+    // 토큰의 기록과 transaction 발생 시점을 기록하기 위한 struct
+    struct History {
+        uint256 blockNumber;
+        uint256 year;
+        uint256 month;
+    }
+
     // 브랜드가 등록한 품목 리스트
     mapping(address => Product[]) private brandToProduct;
     // 브랜드가 등록한 품목의 index
@@ -35,8 +42,9 @@ contract NG is ERC721Connector {
     mapping(address => uint256[]) private _mintedTokens;
 
     // mapping for block number (previous txn hash)
-    // tokenId => block numbers
-    mapping(uint256 => uint256[]) private _tokenHistory;
+    // tokenId => History struct array
+    // mapping(uint256 => uint256[]) private _tokenHistory;
+    mapping(uint256 => History[]) private _tokenHistory;
 
     // mapping(NGInfo => bool) _ngExists;
     // mapping(string => bool) _ngExists;
@@ -224,14 +232,21 @@ contract NG is ERC721Connector {
         _;
     }
 
-    function addTokenHistory(uint256 _tokenId) private {
-        _tokenHistory[_tokenId].push(block.number);
+    function addTokenHistory(
+        uint256 _tokenId,
+        uint256 year,
+        uint256 month
+    ) private {
+        // _tokenHistory[_tokenId].push(block.number);
+        History memory history = History(block.number, year, month);
+
+        _tokenHistory[_tokenId].push(history);
     }
 
     function getTokenHistory(uint256 tokenId)
         public
         view
-        returns (uint256[] memory)
+        returns (History[] memory)
     {
         return _tokenHistory[tokenId];
     }
@@ -239,13 +254,15 @@ contract NG is ERC721Connector {
     function transferNG(
         address _from,
         address _to,
-        uint256 _tokenId
+        uint256 _tokenId,
+        uint256 _year,
+        uint256 _month
     ) public {
         _transferNG(_from, _to, _tokenId);
         uint256 _index = getIndexFromTokenId(_tokenId);
         blockNos[_index] = block.number;
 
-        addTokenHistory(_tokenId);
+        addTokenHistory(_tokenId, _year, _month);
     }
 
     function addProduct(
@@ -269,10 +286,12 @@ contract NG is ERC721Connector {
         brandToProduct[msg.sender].push(category);
     }
 
-    function mint(string memory _productNo, string memory _serialNo)
-        public
-        ngExists(_productNo, _serialNo)
-    {
+    function mint(
+        string memory _productNo,
+        string memory _serialNo,
+        uint256 _year,
+        uint256 _month
+    ) public ngExists(_productNo, _serialNo) {
         uint256 idx = getCategoryIndex(msg.sender, _productNo);
         Product[] memory categotys = getAddressToCategorys(msg.sender);
         NGInfo memory _ngInfo = NGInfo(_serialNo, categotys[idx]);
@@ -290,7 +309,7 @@ contract NG is ERC721Connector {
 
         _mint(msg.sender, _id);
         _mintedTokens[msg.sender].push(_id);
-        addTokenHistory(_id);
+        addTokenHistory(_id, _year, _month);
         // _ngExists[_ngInfo] = true;
     }
 
