@@ -2,7 +2,7 @@ import NavBar from "../../../common/navbar/NavBar"
 import Footer from "../../../common/footer/Footer"
 import Form from 'react-bootstrap/Form';
 import React from 'react';
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import {
   MDBInputGroup,
   MDBBtn,
@@ -23,15 +23,16 @@ function SearchNft() {
     const [serialNo, setserialNo] = useState("");
     const [mfd, setmfd] = useState("");
     const [madeIn, setmadeIn] = useState("");
+    const [brandAdd, setbrandArr] = useState("");
+    const [ownAdd, setownArr] = useState("");
 
     const onTxnHandler = (event) => {
         settxnHash(event.currentTarget.value);
-        // console.log(txnHash)
+        console.log('txnHash', txnHash)
     }
 
     const onSearch = async (e) => {
-        e.preventDefault();
-        console.log(txnHash);
+        console.log('검색버튼 클릭 후', txnHash);
         const tokenId = await nftContract.methods
             .getTokenIdFromTxnHash(txnHash).call()
             console.log(tokenId)
@@ -40,12 +41,15 @@ function SearchNft() {
             console.log(nftinfo)
             console.log(nftinfo.brandNm);
 
-        setbrandNm(nftinfo.brandNm);
-        setproductNo(nftinfo.productNo);
-        setserialNo(nftinfo.serialNo);
-        setmfd(nftinfo.mfd);
-        setmadeIn(nftinfo.madeIn);
+        await setbrandNm(nftinfo.brandNm);
+        await setproductNo(nftinfo.productNo);
+        await setserialNo(nftinfo.serialNo);
+        await setmfd(nftinfo.mfd);
+        await setmadeIn(nftinfo.madeIn);
     }
+    useEffect(() => {
+        onSearch();
+    }, [])
     
     return(
         <div>
@@ -64,6 +68,8 @@ function SearchNft() {
                     <MDBCardTitle>시리얼 번호 : {serialNo}</MDBCardTitle>
                     <MDBCardTitle>제조 날짜 : {mfd}</MDBCardTitle>
                     <MDBCardTitle>제조국 : {madeIn}</MDBCardTitle>
+                    <MDBCardTitle>발행자 주소 : {madeIn}</MDBCardTitle>
+                    <MDBCardTitle>소유자 주소 : {madeIn}</MDBCardTitle>
                     <MDBCardText>
                         nft 정보입니다.
                     </MDBCardText>
