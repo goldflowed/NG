@@ -284,28 +284,45 @@ const nftAbi = [
     "outputs": [
       {
         "internalType": "string",
-        "name": "brandNm",
-        "type": "string"
-      },
-      {
-        "internalType": "string",
-        "name": "productNo",
-        "type": "string"
-      },
-      {
-        "internalType": "string",
         "name": "serialNo",
         "type": "string"
       },
       {
-        "internalType": "string",
-        "name": "mfd",
-        "type": "string"
-      },
-      {
-        "internalType": "string",
-        "name": "madeIn",
-        "type": "string"
+        "components": [
+          {
+            "internalType": "string",
+            "name": "brandNm",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "productName",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "productNo",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "mfd",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "madeIn",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "price",
+            "type": "string"
+          }
+        ],
+        "internalType": "struct NG.Product",
+        "name": "product",
+        "type": "tuple"
       }
     ],
     "stateMutability": "view",
@@ -540,6 +557,221 @@ const nftAbi = [
   {
     "inputs": [
       {
+        "internalType": "address",
+        "name": "caller",
+        "type": "address"
+      }
+    ],
+    "name": "getAddressToCategorys",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "string",
+            "name": "brandNm",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "productName",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "productNo",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "mfd",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "madeIn",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "price",
+            "type": "string"
+          }
+        ],
+        "internalType": "struct NG.Product[]",
+        "name": "",
+        "type": "tuple[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "caller",
+        "type": "address"
+      },
+      {
+        "internalType": "string",
+        "name": "productNo",
+        "type": "string"
+      }
+    ],
+    "name": "getCategoryIndex",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "caller",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "categoryIdx",
+        "type": "uint256"
+      }
+    ],
+    "name": "getProductidxToNgs",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "string",
+            "name": "serialNo",
+            "type": "string"
+          },
+          {
+            "components": [
+              {
+                "internalType": "string",
+                "name": "brandNm",
+                "type": "string"
+              },
+              {
+                "internalType": "string",
+                "name": "productName",
+                "type": "string"
+              },
+              {
+                "internalType": "string",
+                "name": "productNo",
+                "type": "string"
+              },
+              {
+                "internalType": "string",
+                "name": "mfd",
+                "type": "string"
+              },
+              {
+                "internalType": "string",
+                "name": "madeIn",
+                "type": "string"
+              },
+              {
+                "internalType": "string",
+                "name": "price",
+                "type": "string"
+              }
+            ],
+            "internalType": "struct NG.Product",
+            "name": "product",
+            "type": "tuple"
+          }
+        ],
+        "internalType": "struct NG.NGInfo[]",
+        "name": "",
+        "type": "tuple[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "caller",
+        "type": "address"
+      },
+      {
+        "internalType": "string",
+        "name": "productNo",
+        "type": "string"
+      }
+    ],
+    "name": "getProductnoToNgs",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "string",
+            "name": "serialNo",
+            "type": "string"
+          },
+          {
+            "components": [
+              {
+                "internalType": "string",
+                "name": "brandNm",
+                "type": "string"
+              },
+              {
+                "internalType": "string",
+                "name": "productName",
+                "type": "string"
+              },
+              {
+                "internalType": "string",
+                "name": "productNo",
+                "type": "string"
+              },
+              {
+                "internalType": "string",
+                "name": "mfd",
+                "type": "string"
+              },
+              {
+                "internalType": "string",
+                "name": "madeIn",
+                "type": "string"
+              },
+              {
+                "internalType": "string",
+                "name": "price",
+                "type": "string"
+              }
+            ],
+            "internalType": "struct NG.Product",
+            "name": "product",
+            "type": "tuple"
+          }
+        ],
+        "internalType": "struct NG.NGInfo[]",
+        "name": "",
+        "type": "tuple[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true
+  },
+  {
+    "inputs": [
+      {
         "internalType": "string",
         "name": "_txnHash",
         "type": "string"
@@ -707,12 +939,12 @@ const nftAbi = [
       },
       {
         "internalType": "string",
-        "name": "_productNo",
+        "name": "_productName",
         "type": "string"
       },
       {
         "internalType": "string",
-        "name": "_serialNo",
+        "name": "_productNo",
         "type": "string"
       },
       {
@@ -724,6 +956,29 @@ const nftAbi = [
         "internalType": "string",
         "name": "_madeIn",
         "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_price",
+        "type": "string"
+      }
+    ],
+    "name": "addProduct",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "_productNo",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_serialNo",
+        "type": "string"
       }
     ],
     "name": "mint",
@@ -733,7 +988,7 @@ const nftAbi = [
   }
 ]
 
-export const nftCA = `0x4BA5Ac63857dfe9E97c969912508C8976E838199`;
+export const nftCA = `0x873EF2D0480eB877A352Da6C5f86d835C3935b38`;
 
 export const web3 = new Web3(window.ethereum);
 

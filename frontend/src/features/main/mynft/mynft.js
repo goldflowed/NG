@@ -1,95 +1,92 @@
 
 import NavBar from "../../../common/navbar/NavBar"
 import Footer from "../../../common/footer/Footer"
-import { nftContract, web3 } from "../../../common/web3/web3Config"
+import { nftContract } from "../../../common/web3/web3Config"
 import { useState, useEffect } from "react"
+import { useNavigate } from 'react-router-dom'
 import {
     MDBCard,
     MDBCardBody,
+    MDBCardTitle,
     MDBCardText,
-    MDBCardImage
+    MDBBtn
   } from 'mdb-react-ui-kit';
-  import { MDBBtn } from 'mdb-react-ui-kit';
-  import {useNavigate}from 'react-router-dom'
-  import DetailNft from './detailnft';
 
 // tokenId 번호 -> tokenId에 따른 블록 정보 불러오기
-function MyNft({pk}) {
+function MyNft() {
+
+    const [tokenlength, settokenlength] = useState(0);
+    const [tokenId, setTokenId] = useState([]);
+    const [tokenInfo, settokenInfo] = useState([]);
+
+    async function getTokenLength(){
+        const Wallet = window.localStorage.getItem('wallet');
+
+        const Token = await nftContract.methods.getOwnedTokens(Wallet).call();
+
+        console.log('토큰 정보 : ', Token);
+        console.log('토큰의 개수 = ', Token.length)
+        
+        // 토큰의 길이가 담겨있는 상황
+        await settokenlength(Token.length);
+        
+        // Token의 Array 지정
+        var ArrToken = [];
+
+        // TokenId 값 삽입
+        for(let i = 0; i < Token.length; i++){
+            await ArrToken.push(Token[i]);
+        }
+        await setTokenId(ArrToken);
+
+        // Token의 Info 삽입
+        var ArrTokenInfo = [];
+        for(let i = 0; i < Token.length; i++){
+            const TokenDetail = await nftContract.methods.ngs(Token[i]).call();
+            // TokenDetail과 TokenId를 배열로 생성해서 ArrTokenInfo에 삽입
+            var DetailId = [TokenDetail, Token[i]];
+            await ArrTokenInfo.push(DetailId);
+            console.log('토큰정보와 아이디', ArrTokenInfo)
+        }
+        
+        await settokenInfo(ArrTokenInfo);
+    }
     const history = useNavigate();
 
-    const [token, setToken] = useState([]);
+    const showDetail = (token) => {
+        
+        history(`${token[0].serialNo}`, {state: {token}});
+    }
 
-    const [tokenNum, settokenNum] = useState([]);
-
-    const [tokenlength, settokenlength] = useState("");
-    const [tokenInfo, settokenInfo] = useState([]);
-    const [response, setresponse] = useState([])
-
-    // 객체 데이터 삽입
-    // const [data, setData] = useState([]);
-
-    // const nftdetail = (pk) => {
-    //     setData(pk);
-    //     history(`/mynft/${pk.serialNo}`)
-    // }
-
-        const asyncFunc = async () => {
-            tokenInfo.push(response);
-            await setToken(tokenInfo);
-        }
-
-        useEffect( () => {
-            const current_wallet = window.localStorage.getItem('wallet');
-
-            console.log(current_wallet);
-
-            nftContract.methods.getOwnedTokens(current_wallet).call().then((res) => {
-
-                settokenNum(res);
-                settokenlength(res.length);
+    useEffect( () => {
+        
+        getTokenLength();
     
-                console.log(tokenNum);
-                console.log(tokenlength);
-
-                let tokenInfo = [];
-
-                console.log(tokenInfo);
-                for(let i = 0; i < tokenlength; i++){
-                    nftContract.methods.ngs(i).call()
-                    .then((res) => {
-                        console.log(i);
-                        console.log(res)
-                        // console.log(tokenInfo)
-                        setresponse(res)
-                        console.log(response)
-                        asyncFunc()
-                        // tokenInfo.push(res)
-                        // setToken(tokenInfo)
-                    })
-                }
-            })
-        }, [tokenlength])
+    }, [])
 
     return(
         <div>
             <NavBar/>
             <div style={{height:500}}>
                 <p style={{marginTop:'100px'}}></p>
-                <div>
-                    {/* <table> */}
-                        {
-                            token.map((pk) => {
-                                return (
-                                    <MDBCard key={pk.serialNo}>
-                                        <MDBCardBody>{pk.brandNm}, {pk.productNo}, {pk.serialNo}
-                                            <button onClick={() => console.log(pk)}>detail</button>
-                                        </MDBCardBody>
-                                    </MDBCard>
-                                );
-                            })
-                        }
-                    {/* </table> */}
-                </div>
+                {/* <p>{tokenlength}</p> */}
+                {/* <p>토큰 아이디 : {tokenId}</p>
+                <p>토큰 정보 : {JSON.stringify(tokenInfo)}</p> */}
+                {/* <p>테스트중</p> */}
+                {tokenInfo.map((token) => {
+                    return(
+                    <MDBCard>
+                        <MDBCardBody>
+                            <MDBCardTitle>시리얼번호 : {token[0].serialNo}</MDBCardTitle>
+                            <MDBCardText>
+                                토큰아이디 : {token[1]} <br/>
+                                브랜드이름 : {token[0].product.brandNm}                                
+                            </MDBCardText>
+                            <MDBBtn onClick={() => showDetail(token)}>Detail</MDBBtn>
+                        </MDBCardBody>
+                    </MDBCard>
+                    )
+                })}
             </div>
             <Footer/>
         </div>

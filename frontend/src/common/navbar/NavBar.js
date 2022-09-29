@@ -11,12 +11,6 @@ import {
 
 import LOGO from '../../assets/img/logo2.jpg';
 
-
-// import { fetchAccount } from '../../store/actions/thunks/account';
-// import { connectWallet } from '../../core/ethereum';
-
-
-
 function NavBar(props){
 
     const [errorMessage, setErrorMessage] = useState(null);
@@ -68,9 +62,9 @@ function NavBar(props){
       console.log({defaultAccount});
     }
 
-    window.ethereum.on('accountsChanged', accountChangeHandler);
+    // window.ethereum.on('accountsChanged', accountChangeHandler);
 
-    window.ethereum.on('chainChanged', chainChangedHandler)
+    // window.ethereum.on('chainChanged', chainChangedHandler)
 
     // useEffect(() => {
     //   window.ethereum.request({method: 'eth_requestAccounts'})
