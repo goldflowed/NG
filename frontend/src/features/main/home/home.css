@@ -1,0 +1,46 @@
+.home{
+    margin-top:5rem;
+}
+
+.scroll {
+    height: 500px;
+}
+
+.scroll2 {
+    display: flex;
+    justify-content: space-around;
+}
+
+#whyng {
+    height: 700px;
+}
+
+.block {
+    padding-top: 10px;
+    height: 30%;
+    width: 80%;
+    margin: auto;
+}
+
+.out-block {
+    width: 50%;
+    margin: 25px;
+    color: white;
+}
+
+#card1, #card3 {
+    text-align: left;
+}
+
+#card2 {
+    text-align: right;
+}
+
+.card_title {
+    margin-bottom: 20px;
+}
+
+#NGimg {
+    width: 600px;
+    height: 500px;
+}

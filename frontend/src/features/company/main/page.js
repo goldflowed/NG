@@ -1,7 +1,8 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import SideBar from "../sidebar/SideBar";
 import styled from "styled-components";
 import NavBar from "../../../common/navbar/NavBar";
+import axios from "../../../common/api/http-common";
 
 const ContainerDiv = styled.div`
   width:1900px;
@@ -60,6 +61,22 @@ const TitleP = styled.p`
   `
 
 function Home() {
+  const [name, setName] = useState('')
+  const [regNum, setRegNum] = useState('')
+  const [tel, setTel] = useState('')
+  const [wallet, setWallet] = useState('')
+  const [address, setAddress] = useState('')
+
+  useEffect(() => {
+    axios.get(`company/${window.localStorage.wallet}`)
+    .then((res) => {
+      setName(res.data.comName)
+      setRegNum(res.data.comRegNum)
+      setTel(res.data.comTel)
+      setWallet(res.data.comWallet)
+      setAddress(res.data.comAddress)
+    })
+  },[])
   return (
     <ContainerDiv>
       <NavBar/>
@@ -68,11 +85,11 @@ function Home() {
         <TitleP>기업 정보 조회</TitleP><Hr/>
         <InfoDiv>
           <div className="info" style={{display:"flex", flexDirection:"column"}}>
-            <p>브랜드명: </p>
-            <p>사업자 등록번호: </p>
-            <p>브랜드 지갑 주소: </p>
-            <p>브랜드 전화번호: </p>
-            <p>기업 주소: </p>
+            <p>브랜드명: {name}</p>
+            <p>사업자 등록번호: {regNum}</p>
+            <p>브랜드 전화번호: {tel}</p>
+            <p>기업 주소: {address}</p>
+            <p>브랜드 지갑 주소: {wallet}</p>
           </div>
           <div className="logo">
             <Logo/>
