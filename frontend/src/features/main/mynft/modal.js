@@ -27,7 +27,7 @@ const modal = (props) => {
         console.log("현재 년도, 월", year+" "+month);
 
 
-        // await nftContract.methods.transferNG(from, to, tokenId);
+        // await nftContract.methods.transferNG(from, to, tokenId).call();
         console.log('NFT 전송 완료')
     }
 
