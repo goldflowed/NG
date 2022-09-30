@@ -80,6 +80,11 @@ function Home() {
         i = i+1;
       }
       setCompanies(response.data)
+      for ( var com of response.data ) {
+        if ( com.comWallet === window.localStorage.wallet ) {
+          console.log('hi')
+        }
+      }
     })
   }, []);
 

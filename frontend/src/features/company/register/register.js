@@ -71,9 +71,12 @@ function Register() {
   const regist = async (e) => {
     e.preventDefault();
     
-    const { event } = await nftContract.methods
+    await nftContract.methods
       .mint(brand, productNumber, serialNumber, makingDate, country)
-      .send({ from: window.localStorage.wallet });
+      .send({ from: window.localStorage.wallet })
+      .then((res) => {
+        console.log(res)
+        alert('성공하였습니다.')});
   }
 
   return (
