@@ -42,7 +42,6 @@ function NavBar(){
         await currentProvider.request({ method: 'eth_requestAccounts' });
         const web3 = new Web3(currentProvider);
         const userAccount = await web3.eth.getAccounts();
-        const chainId = await web3.eth.getChainId();
         const account = userAccount[0];
         saveUserInfo(account);
         if(userAccount.length === 0) {

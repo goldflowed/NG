@@ -13,10 +13,12 @@ import {
   MDBCardHeader
 } from 'mdb-react-ui-kit';
 import { nftContract } from "../../../common/web3/web3Config"
+import "./searchnft.css"
 
 function SearchNft() {
 
     const [txnHash, settxnHash] = useState("");
+    const [tokenId, settokenId] = useState(4)
 
     const [brandNm, setbrandNm] = useState("");
     const [productNo, setproductNo] = useState("");
@@ -35,11 +37,13 @@ function SearchNft() {
         console.log('검색버튼 클릭 후', txnHash);
         const tokenId = await nftContract.methods
             .getTokenIdFromTxnHash(txnHash).call()
-            console.log(tokenId)
+        await settokenId(tokenId);
+        console.log(tokenId)
 
         const nftinfo = await nftContract.methods.ngs(tokenId).call()
             console.log(nftinfo)
-            console.log(nftinfo.brandNm);
+            console.log('nftinfo타입', typeof(nftinfo))
+            // console.log(JSON.stringify(nftinfo.pruduct.brandNm));
 
         await setbrandNm(nftinfo.brandNm);
         await setproductNo(nftinfo.productNo);
@@ -52,14 +56,20 @@ function SearchNft() {
     }, [])
     
     return(
-        <div>
+        <div className="input-add">
             <NavBar/>
-            <div style={{height:500}}>
+            <div className="main-height">
                 <br/><br/><br/><br/>
-                <MDBInputGroup className='mb-3'>
-                    <input className='form-control' placeholder="해쉬 주소를 입력하세요." type='text' onChange={onTxnHandler}/>
-                    <MDBBtn outline onClick={onSearch}>Search</MDBBtn>  
-                </MDBInputGroup>
+                <div>
+                    <h1 style={{marginTop:50}}>상품이 진품임을 확인해 보세요.</h1>
+                    {tokenId}
+                </div>
+                <div className="input-group">
+                    <MDBInputGroup className='mb-6' style={{marginTop:40}}>
+                        <input className='form-control' placeholder="해쉬 주소를 입력하세요." type='text' onChange={onTxnHandler}/>
+                        <MDBBtn outline onClick={onSearch}>Search</MDBBtn>  
+                    </MDBInputGroup>
+                </div>
                 <MDBCard shadow='0' border='info' background='white' className='mb-3'>
                     <MDBCardHeader>NFT 정보</MDBCardHeader>
                     <MDBCardBody>
