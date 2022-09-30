@@ -1,9 +1,13 @@
-import React from "react";
+import React, {useState} from "react";
 import { useTable, useGlobalFilter, useSortBy } from "react-table";
 import {useNavigate}from 'react-router-dom'
 import Search from "./search";
 import "./tableCss.css"
 import styled from "styled-components";
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
+import axios from '../../../common/api/http-common';
+import { nftContract } from "../../../common/web3/web3Config"
 
 const AdminTd = styled.td`
   padding-top: 10px;
@@ -30,6 +34,58 @@ const AdminTable = styled.table`
 
 function Table({ columns, data }) {
   const history = useNavigate();
+  const [show, setShow] = useState(false);
+  const [comName, setComName] = useState('');
+  const [comEmail, setComEmail] = useState('');
+  const [comTel, setComTel] = useState('');
+  const [comRegNum, setComRegNum] = useState('');
+  const [comWallet, setComWallet] = useState('');
+  const [comAddress, setComAddress] = useState('');
+
+  const handleClose = () => {
+    setComName('');
+    setComEmail('');
+    setComTel('');
+    setComRegNum('');
+    setComWallet('');
+    setComAddress('');
+    setShow(false);};
+
+  const handleShow = (idx) => {
+    axios.get(`/company/${idx}`)
+    .then((res) => {
+      setComName(res.data.comName);
+      setComEmail(res.data.comEmail);
+      setComTel(res.data.comTel);
+      setComRegNum(res.data.comRegNum);
+      setComWallet(res.data.comWallet);
+      setComAddress(res.data.comAddress);
+      setShow(true);
+      })
+  };
+  
+  const approval = () => {
+    nftContract.methods.setBrandAccountAuth(comWallet).send({from: window.localStorage.wallet})
+    .then(() => {
+      const body = {"comPermit": 2};
+      axios.post(`/company/permit/${comWallet}`, body).then(() => {
+        setShow(false);
+        history('/admin/approve');
+      })
+      })
+    .catch((err) => {
+      console.log(err)
+      alert('관리자 권한이 없습니다.')});
+  }
+  
+  const deny = () => {
+    const body = {"comPermit": 3};
+    axios.post(`/company/permit/${comWallet}`, body).then(() => {
+      setShow(false);
+      history('/admin/deny');
+    })
+  }
+
   const {
     getTableProps,
     getTableBodyProps,
@@ -39,11 +95,32 @@ function Table({ columns, data }) {
     setGlobalFilter,
   } = useTable({ columns, data }, useGlobalFilter, useSortBy);
 
-  const showDetail = (code) => {
-    console.log(code)
-  }
   return (
     <>
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>기업 상세 정보</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <p>이름: {comName}</p>
+          <p>이메일: {comEmail}</p>
+          <p>전화번호: {comTel}</p>
+          <p>주소: {comAddress}</p>
+          <p>사업자 등록번호: {comRegNum}</p>
+          <p>지갑 주소: {comWallet}</p>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="primary" onClick={approval}>
+            승인
+          </Button>
+          <Button variant="danger" onClick={deny}>
+            거절
+          </Button>
+          <Button variant="secondary" onClick={handleClose}>
+            닫기
+          </Button>
+        </Modal.Footer>
+      </Modal>
       <Search onSubmit={setGlobalFilter}/>
       <AdminTable {...getTableProps()}>
         <thead>
@@ -61,7 +138,7 @@ function Table({ columns, data }) {
           {rows.map((row) => {
             prepareRow(row);
             return (
-              <tr {...row.getRowProps()} onClick={() => showDetail(row.original.comAddress)}>
+              <tr {...row.getRowProps()} onClick={() => handleShow(row.original.comWallet)}>
                 {row.cells.map((cell) => (
                   <AdminTd {...cell.getCellProps()}>{cell.render("Cell")}</AdminTd>
                 ))}

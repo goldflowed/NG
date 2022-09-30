@@ -1,9 +1,9 @@
 import React from "react";
 import { useTable, useGlobalFilter, useSortBy } from "react-table";
-import styled from "styled-components";
 import {useNavigate}from 'react-router-dom'
 import Search from "./search";
 import "./tableCss.css"
+import styled from "styled-components";
 
 const AdminTd = styled.td`
   padding-top: 10px;
@@ -21,8 +21,13 @@ const AdminTh = styled.th`
   padding-right:50px;
   border: 1px solid black;
   text-align: center;
+  background-color: gray;
   `
-  
+
+const AdminTable = styled.table` 
+  border-collapse: collapse;
+  `
+
 function Table({ columns, data }) {
   const history = useNavigate();
   const {
@@ -35,12 +40,12 @@ function Table({ columns, data }) {
   } = useTable({ columns, data }, useGlobalFilter, useSortBy);
 
   const showDetail = (code) => {
-    history(`/company/123/nfts/${code}`)
+    console.log(code)
   }
   return (
     <>
       <Search onSubmit={setGlobalFilter}/>
-      <table {...getTableProps()}>
+      <AdminTable {...getTableProps()}>
         <thead>
           {headerGroups.map((headerGroup) => (
             <tr {...headerGroup.getHeaderGroupProps()}>
@@ -56,7 +61,7 @@ function Table({ columns, data }) {
           {rows.map((row) => {
             prepareRow(row);
             return (
-              <tr {...row.getRowProps()} onClick={() => showDetail(row.original.code)}>
+              <tr {...row.getRowProps()} onClick={() => showDetail(row.original.comWallet)}>
                 {row.cells.map((cell) => (
                   <AdminTd {...cell.getCellProps()}>{cell.render("Cell")}</AdminTd>
                 ))}
@@ -64,7 +69,7 @@ function Table({ columns, data }) {
             );
           })}
         </tbody>
-      </table>
+      </AdminTable>
     </>
   );
 }

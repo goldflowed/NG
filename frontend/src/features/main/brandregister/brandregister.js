@@ -1,7 +1,6 @@
-import axios from "axios";
+import axios from "../../../common/api/http-common";
 import React,{useEffect, useState} from "react";
 import Navbar from "../../../common/navbar/NavBar"
-import Footer from "../../../common/footer/Footer"
 import "./brandregister.css"
 import { MDBInput } from 'mdb-react-ui-kit';
 import { MDBBtn } from 'mdb-react-ui-kit';
@@ -9,11 +8,11 @@ import { useNavigate } from 'react-router-dom';
 
 
 function BrandRegister() {
-
+    const history = useNavigate()
     // 변수 초기화
     const initialValues = { comName: "",
                             comRegNum: "",
-                            comWallet: "",
+                            comWallet: window.localStorage.getItem('wallet'),
                             comEmail: "",
                             comTel: "",
                             comAddress: "",
@@ -42,10 +41,11 @@ function BrandRegister() {
     }
 
     useEffect(() => {
-        console.log(formErrors)
-        if (Object.keys(formErrors).length === 0 && isSubmit){
-            console.log(formValues);
-        }
+        axios.get(`company/${window.localStorage.wallet}`)
+        .then(() => {
+            alert('이미 가입되어있거나 승인 대기중인 계정입니다.')
+            history('/')
+        })
     })
 
     // 이메일 확인 정규식
@@ -64,7 +64,7 @@ function BrandRegister() {
 
     function onSubmit(event){
 
-        axios.post("http://localhost:8080/company/create/", formValues)
+        axios.post("company/create/", formValues)
             .then((response) => {
                 alert("브랜드 등록 완료!")
             })
@@ -78,16 +78,7 @@ function BrandRegister() {
     }
 
     const [isActive, setIsActive] = useState(false)
-
-    // const changeButton = () => {
-        
-    //     if(formValues.comName !== '' && formValues.comRegNum !== '' && formValues.comWallet !=='' && formValues.comEmail !== '' && formValues.comTel !== '' && formValues.comAddress !== '' && formValues.comLogo !== ''){
-    //         this.setIsActive({isActive: true});
-    //     }else{
-    //         this.setIsActive({isActive: false});
-    //     }
-        
-    // }
+    
     const navigate = useNavigate();
 
     const check = (formValues) => {
@@ -128,6 +119,7 @@ function BrandRegister() {
                         <MDBInput 
                           type="text"
                           name="comWallet"
+                          disabled= {true}
                           label="지갑 주소를 입력해주세요."
                           id='form1'
                           value={ formValues.comWallet}
@@ -190,7 +182,6 @@ function BrandRegister() {
             </form>
         </div>
         <br/><br/>
-        <Footer/>
         </div>
     )
 }
