@@ -44,6 +44,7 @@ function NavBar(){
         const userAccount = await web3.eth.getAccounts();
         const account = userAccount[0];
         saveUserInfo(account);
+        console.log('account', account)
         if(userAccount.length === 0) {
           console.log('Please connect to metamask');
         }
