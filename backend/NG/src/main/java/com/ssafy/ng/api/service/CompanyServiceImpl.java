@@ -1,15 +1,12 @@
 package com.ssafy.ng.api.service;
 
-import com.ssafy.ng.api.request.CompanyPermitReq;
-import com.ssafy.ng.api.request.CompanyPostReq;
+import com.ssafy.ng.api.request.company.CompanyPermitReq;
+import com.ssafy.ng.api.request.company.CompanyPostReq;
 import com.ssafy.ng.api.response.CompanyGetRes;
 import com.ssafy.ng.common.customObject.CompanyList;
 import com.ssafy.ng.db.entity.Company;
 import com.ssafy.ng.db.repository.CompanyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

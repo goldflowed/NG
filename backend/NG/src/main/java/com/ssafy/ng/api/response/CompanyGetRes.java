@@ -32,6 +32,9 @@ public class CompanyGetRes {
     @ApiModelProperty(name = "기업 로고")
     String comLogo;
 
+    @ApiModelProperty(name = "기업 승인여부")
+    int comPermit;
+
     public static CompanyGetRes of(Company com) {
         CompanyGetRes res = new CompanyGetRes();
         res.setComName(com.getComName());
@@ -41,6 +44,7 @@ public class CompanyGetRes {
         res.setComAddress(com.getComAddress());
         res.setComTel(com.getComTel());
         res.setComLogo(com.getComLogo());
+        res.setComPermit(com.getComPermit());
         return res;
     }
 }

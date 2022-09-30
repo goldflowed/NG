@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import SideBar from "../sidebar/SideBar";
 import styled from "styled-components";
 import NavBar from "../../../common/navbar/NavBar";
+import axios from '../../../common/api/http-common';
+import Table from './table';
 
 const ContainerDiv = styled.div`
   width:1900px;
@@ -41,7 +43,52 @@ const TitleP = styled.p`
   margin-left: 20px;
   `
 
+ const TableDiv = styled.div`
+  margin:auto;
+  width:1000px;
+  max-height: 750px;
+  overflow-y: auto;
+  display:flex;
+  flex-direction:column;
+  `
 function Home() {
+  const columns = useMemo(
+    () => [
+      {
+        accessor: "num",
+        Header: "번호",
+      },
+      {
+        accessor: "comName",
+        Header: "기업이름",
+      },
+      {
+        accessor: "comWallet",
+        Header: "지갑주소",
+      },
+    ],
+    []
+  );
+
+  const [companies, setCompanies] = useState([])
+  
+  useEffect(() => {
+    var i = 1;
+    axios.post(`/company/list/2`).then((response) => {
+      for ( const res of response.data ) {
+        res['num'] = i;
+        i = i+1;
+      }
+      setCompanies(response.data)
+      for ( var com of response.data ) {
+        if ( com.comWallet === window.localStorage.wallet ) {
+          console.log('hi')
+        }
+      }
+    })
+  }, []);
+
+
   return (
     <ContainerDiv>
       <NavBar/>
@@ -49,6 +96,7 @@ function Home() {
       <MainDiv>
       <TitleP>승인 기업 목록</TitleP><Hr/>
         <InfoDiv>
+        <TableDiv><Table columns={columns} data={companies}/></TableDiv>
         </InfoDiv>
       </MainDiv>
     </ContainerDiv>

@@ -4,7 +4,7 @@ import styled from "styled-components";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import ssafy from '../../../assets/img/ssafy.png';
-import Navbar from "../../../common/navbar/NavBar"
+import NavBar from "../../../common/navbar/NavBar";
 import { nftContract } from "../../../common/web3/web3Config"
 
 const ContainerDiv = styled.div`
@@ -71,21 +71,17 @@ function Register() {
   const regist = async (e) => {
     e.preventDefault();
     
-    const { event } = await nftContract.methods
+    await nftContract.methods
       .mint(brand, productNumber, serialNumber, makingDate, country)
-      .send({ from: "0x7CfD7B7512ab7fdC90E4b85679C4945B8F6915bf" });
-
-
-    // console.log(brand)
-    // console.log(productNumber)
-    // console.log(serialNumber)
-    // console.log(makingDate)
-    // console.log(country)
+      .send({ from: window.localStorage.wallet })
+      .then((res) => {
+        console.log(res)
+        alert('성공하였습니다.')});
   }
 
   return (
     <ContainerDiv>
-      <Navbar/>
+      <NavBar/>
       <SideBar/>
       <MainDiv>
         <TitleP>NFT 인증서 발급</TitleP><Hr/>
