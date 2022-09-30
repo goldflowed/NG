@@ -1,12 +1,10 @@
 package com.ssafy.ng.api.service;
 
-import com.ssafy.ng.api.request.CompanyPermitReq;
-import com.ssafy.ng.api.request.CompanyPostReq;
+import com.ssafy.ng.api.request.company.CompanyPermitReq;
+import com.ssafy.ng.api.request.company.CompanyPostReq;
 import com.ssafy.ng.api.response.CompanyGetRes;
 import com.ssafy.ng.common.customObject.CompanyList;
 import com.ssafy.ng.db.entity.Company;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 

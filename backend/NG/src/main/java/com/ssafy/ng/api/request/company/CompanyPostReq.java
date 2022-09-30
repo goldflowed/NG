@@ -1,4 +1,4 @@
-package com.ssafy.ng.api.request;
+package com.ssafy.ng.api.request.company;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
