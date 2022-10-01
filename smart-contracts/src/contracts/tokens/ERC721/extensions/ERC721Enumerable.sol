@@ -126,7 +126,7 @@ contract ERC721Enumerable is IERC721Enumerable, ERC721 {
         // 1. add address and token id to the _ownedTokens
         // 2. _ownedTokensIndex tokenId set to address of ownedTokens position
         // 3. we want to execute the function with minting
-        _ownedTokens[to].push(tokenId);
         _ownedTokensIndex[tokenId] = _ownedTokens[to].length;
+        _ownedTokens[to].push(tokenId);
     }
 }
