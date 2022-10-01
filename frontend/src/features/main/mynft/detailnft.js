@@ -13,6 +13,7 @@ import {
     MDBCardText,
     MDBBtn
   } from 'mdb-react-ui-kit';
+  import Button from 'react-bootstrap/Button';
   import { MDBTable, MDBTableHead, MDBTableBody } from 'mdb-react-ui-kit';
 
 function detailnft() {
@@ -44,8 +45,8 @@ function detailnft() {
         // receipt를 삽입하는데 사용되는 배열
         const RecArray = [];
         for(let i = 0; i < TokenHistory.length; i++){
-            // tokenHistory[i] -> string to number
-            const DectokenHistory = await Number(TokenHistory[i]);
+            // tokenHistory[i].blockNumber -> string to number()
+            const DectokenHistory = await Number(TokenHistory[i].blockNumber);
 
             // TokenHistory 16진수로 변환
             const hexHistory = await DectokenHistory.toString(16);
@@ -83,7 +84,7 @@ function detailnft() {
     const now = new Date();
     const year = now.getFullYear();
     console.log(year);
-    const month = now.getMonth();
+    const month = now.getMonth()+1;
     console.log(month);
 
     // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -108,7 +109,7 @@ function detailnft() {
                             제조일자 : {tokenInfo[0].product.mfd} <br/>
                             제조국 : {tokenInfo[0].product.madeIn} <br/>
                         </MDBCardText>
-                        <MDBBtn onClick={openModal}>소유권 이전</MDBBtn>
+                        <Button variant="primary" onClick={openModal}>소유권 이전</Button>{' '}
                             <Modal 
                                 open={modalOpen}
                                 close={closeModal}

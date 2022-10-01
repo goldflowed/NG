@@ -18,7 +18,7 @@ import "./searchnft.css"
 function SearchNft() {
 
     const [txnHash, settxnHash] = useState("");
-    const [tokenId, settokenId] = useState(2)
+    const [tokenId, settokenId] = useState("")
 
     const [brandNm, setbrandNm] = useState("");
     const [productNo, setproductNo] = useState("");
@@ -28,30 +28,29 @@ function SearchNft() {
     const [brandAdd, setbrandArr] = useState("");
     const [ownAdd, setownArr] = useState("");
 
-    console.log('토큰아이디', tokenId);
-
     const onTxnHandler = (event) => {
         settxnHash(event.currentTarget.value);
-        console.log('txnHash', txnHash)
     }
 
     const onSearch = async (e) => {
         console.log('검색버튼 클릭 후', txnHash);
         const tokenId = await nftContract.methods
-            .getTokenIdFromTxnHash(txnHash).call()
+            .getTokenIdFromTxnHash('0x6fb2b9c659b4cd3da6462bdb1f1b432145d1c421bc1919ed8fdeff69a50d740d').call()
+            .then((res) => console.log('토큰아이디 : ', res))
+
         await settokenId(tokenId);
-        console.log(tokenId)
+        // console.log('tokenId', tokenId)
 
-        const nftinfo = await nftContract.methods.ngs(tokenId).call()
-            console.log(nftinfo)
-            console.log('nftinfo타입', typeof(nftinfo))
-            // console.log(JSON.stringify(nftinfo.pruduct.brandNm));
+        // const nftinfo = await nftContract.methods.ngs(tokenId).call()
+        //     console.log(nftinfo)
+        //     console.log('nftinfo타입', typeof(nftinfo))
+        //     // console.log(JSON.stringify(nftinfo.pruduct.brandNm));
 
-        await setbrandNm(nftinfo.brandNm);
-        await setproductNo(nftinfo.productNo);
-        await setserialNo(nftinfo.serialNo);
-        await setmfd(nftinfo.mfd);
-        await setmadeIn(nftinfo.madeIn);
+        // await setbrandNm(nftinfo.brandNm);
+        // await setproductNo(nftinfo.productNo);
+        // await setserialNo(nftinfo.serialNo);
+        // await setmfd(nftinfo.mfd);
+        // await setmadeIn(nftinfo.madeIn);
     }
     
     return(
@@ -71,6 +70,7 @@ function SearchNft() {
                 <MDBCard shadow='0' border='info' background='white' className='mb-3' style={{marginTop:40}}>
                     <MDBCardHeader>NFT 정보</MDBCardHeader>
                     <MDBCardBody>
+                    <MDBCardTitle>토큰아이디 : {tokenId}</MDBCardTitle>
                     <MDBCardTitle>브랜드 명 : {brandNm}</MDBCardTitle>
                     <MDBCardTitle>제품 번호 : {productNo}</MDBCardTitle>
                     <MDBCardTitle>시리얼 번호 : {serialNo}</MDBCardTitle>

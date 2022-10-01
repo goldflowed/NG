@@ -80,7 +80,7 @@ function MyNft() {
                             <MDBCardTitle>시리얼번호 : {token[0].serialNo}</MDBCardTitle>
                             <MDBCardText>
                                 토큰아이디 : {token[1]} <br/>
-                                브랜드이름 : {token[0].brandNm}                                
+                                브랜드이름 : {token[0].product.brandNm}                                
                             </MDBCardText>
                             <MDBBtn onClick={() => showDetail(token)}>Detail</MDBBtn>
                         </MDBCardBody>
