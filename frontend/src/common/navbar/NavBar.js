@@ -1,20 +1,21 @@
 import React, { useState } from "react";
 import Web3 from 'web3';
-import { useEffect } from 'react';
 
 import './NavBar.css';
+import {useEffect} from 'react';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import {
-  MDBBtn
-} from 'mdb-react-ui-kit';
+import Button from 'react-bootstrap/Button';
 import {NavLink} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom'
 import LOGO from '../../assets/img/logo2.jpg';
 
 function NavBar(){
 
     const [defaultAccount, setDefaultAccount] = useState(null);
     const [IsConnected, setIsConnected] = useState(false);
+    const navigate = useNavigate();
+
 
     const detectCurrentProvider = () => {
       let provider;
@@ -66,6 +67,8 @@ function NavBar(){
       window.localStorage.removeItem('wallet');
       setDefaultAccount(null);
       setIsConnected(false);
+      alert('지갑 연결이 해제되었습니다.')
+      navigate('/');
     }
 
     useEffect(() => {
@@ -99,11 +102,11 @@ function NavBar(){
               }
             </div>
           </Nav>
-            <div>
+            <div style={{marginRight:20}}>
               {
                 window.localStorage.getItem('wallet')
-                ? <MDBBtn className="connect-wallet" variant="outline-secondary" onClick={onDisconnect}>Disconnect</MDBBtn>
-                : <MDBBtn className="connect-wallet" variant="outline-secondary" onClick={onConnect}>Connect Wallet</MDBBtn>
+                ? <Button variant="primary" onClick={onDisconnect}>Disconnect</Button>
+                : <Button variant="primary" onClick={onConnect}>Connect Wallet</Button>
               }  
             </div>
         </Navbar.Collapse>

@@ -40,7 +40,7 @@ function Home() {
               <h5 className='mt-5'>우리는 고객의 새로운 경험과 함께 건전한 명품 산업의 생태계를 구축하기 위한 서비스입니다.</h5>
               <Link to="./aboutus">
                 <MDBBtn className="mt-5" outline size="lg">
-                  MORE DETAIL
+                  ABUOUT US
                 </MDBBtn>
               </Link>
             </div>
