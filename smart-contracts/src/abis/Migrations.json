@@ -964,7 +964,7 @@
   "sourceMap": "69:1053:0:-:0;;;208:33;;;-1:-1:-1;;;;;;208:33:0;231:10;208:33;;;69:1053;;;;;;;;;;;;;;;;",
   "deployedSourceMap": "69:1053:0:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;941:178;;;;;;:::i;:::-;;:::i;:::-;;248:39;;;;;;;;;451:25:20;;;439:2;424:18;248:39:0;;;;;;;;208:33;;;;;-1:-1:-1;;;;;208:33:0;;;;;;-1:-1:-1;;;;;651:32:20;;;633:51;;621:2;606:18;208:33:0;487:203:20;747:114:0;;;;;;:::i;:::-;;:::i;941:178::-;485:5;;-1:-1:-1;;;;;485:5:0;471:10;:19;449:120;;;;-1:-1:-1;;;449:120:0;;;;;;;:::i;:::-;;;;;;;;;1086:24:::1;::::0;1064:47:::1;::::0;-1:-1:-1;;;1064:47:0;;1041:11;;-1:-1:-1;;;;;1064:21:0;::::1;::::0;::::1;::::0;:47:::1;::::0;::::1;;451:25:20::0;;;439:2;424:18;;305:177;1064:47:0::1;;;;;;;;;;;;;;;;;;::::0;::::1;;;;;;;;;;;;::::0;::::1;;;;;;;;;997:122;941:178:::0;:::o;747:114::-;485:5;;-1:-1:-1;;;;;485:5:0;471:10;:19;449:120;;;;-1:-1:-1;;;449:120:0;;;;;;;:::i;:::-;817:24:::1;:36:::0;747:114::o;14:286:20:-;73:6;126:2;114:9;105:7;101:23;97:32;94:52;;;142:1;139;132:12;94:52;168:23;;-1:-1:-1;;;;;220:31:20;;210:42;;200:70;;266:1;263;256:12;200:70;289:5;14:286;-1:-1:-1;;;14:286:20:o;695:180::-;754:6;807:2;795:9;786:7;782:23;778:32;775:52;;;823:1;820;813:12;775:52;-1:-1:-1;846:23:20;;695:180;-1:-1:-1;695:180:20:o;880:415::-;1082:2;1064:21;;;1121:2;1101:18;;;1094:30;1160:34;1155:2;1140:18;;1133:62;-1:-1:-1;;;1226:2:20;1211:18;;1204:49;1285:3;1270:19;;880:415::o",
   "source": "// SPDX-License-Identifier: MIT\r\npragma solidity >=0.4.22 <0.9.0;\r\n\r\ncontract Migrations {\r\n    // msg.sender == Solidity가 기억하는 특수 전역 변수, 현재 호출자의 주소를 이야기함\r\n    address public owner = msg.sender;\r\n    uint256 public last_completed_migration; // 각 이전(migration) 정보를 보관 (index를 붙이는 것)\r\n\r\n    // modifier 제어자 == 함수를 제한함..?\r\n    modifier restricted() {\r\n        require(\r\n            msg.sender == owner,\r\n            \"This function is restricted to the contract's owner\"\r\n        );\r\n        _; // 함수를 계속해서 실행한다는 의미\r\n    }\r\n\r\n    // 제어범위 restricted : 소유자 만 가능하도록 제한할 것이기 때문에 사용\r\n    function setCompleted(uint256 completed) public restricted {\r\n        last_completed_migration = completed;\r\n    }\r\n\r\n    // update 기능을 위한 함수 작성 : 스마트 계약 이전\r\n    function upgrade(address new_address) public restricted {\r\n        Migrations upgraded = Migrations(new_address);\r\n        upgraded.setCompleted(last_completed_migration);\r\n    }\r\n}\r\n",
-  "sourcePath": "C:\\Users\\SSAFY\\projects\\pjt2\\repo\\S07P22E206\\smart-contracts\\src\\contracts\\Migration.sol",
+  "sourcePath": "C:\\Users\\SSAFY\\Desktop\\PJT_NG\\S07P22E206\\smart-contracts\\src\\contracts\\Migration.sol",
   "ast": {
     "absolutePath": "project:/src/contracts/Migration.sol",
     "exportedSymbols": {
@@ -1622,18 +1622,18 @@
     "202112031219": {
       "events": {},
       "links": {},
-      "address": "0xa7E28B544e1Ef1C66544076C59C896671ebF3022",
-      "transactionHash": "0xff0246d8f55faae0ef0803c5200d7a268118562572df9727fa5a0f376675ffcf"
+      "address": "0xED3657277AF7A3d3920bbE3441e000BC870F4aBB",
+      "transactionHash": "0x6637e5241a949e324659e80fd41933f1e9f533bd90fc78e1077b598e5e318c13"
     },
     "1664427098233": {
       "events": {},
       "links": {},
-      "address": "0xFF1F485bbdFeD5967e81e6b4b5b2ee4A17aAD1BF",
-      "transactionHash": "0x04e53129eae0d70b5e47ac2f509a5deb6ec817182647a2213d73794f7d5f7038"
+      "address": "0xd62879469a03639220303cC3Eb4b0eaE32085e54",
+      "transactionHash": "0xf9bd4e9e222942fac348e045a6083141817d2f3ffff8691a9aca19094b5cdd16"
     }
   },
   "schemaVersion": "3.4.9",
-  "updatedAt": "2022-09-29T05:37:35.613Z",
+  "updatedAt": "2022-10-01T08:45:15.410Z",
   "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",

@@ -22,7 +22,7 @@ const AdminTh = styled.th`
   border: 1px solid black;
   text-align: center;
   `
-
+  
 function Table({ columns, data }) {
   const history = useNavigate();
   const {

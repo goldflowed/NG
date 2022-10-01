@@ -1,7 +1,7 @@
 import React from "react";
 import SideBar from "../sidebar/SideBar";
 import styled from "styled-components";
-import NavBar from "../../../common/navbar/NavBar"
+import NavBar from "../../../common/navbar/NavBar";
 
 const ContainerDiv = styled.div`
   display: flex;
