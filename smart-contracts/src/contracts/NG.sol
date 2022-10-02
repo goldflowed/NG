@@ -302,10 +302,10 @@ contract NG is ERC721Connector {
         uint256 _id = ngs.length - 1;
 
         // mint는 계정권한에 1 또는 2로 등록되어있는 계정만 할 수 있음
-        // require(
-        //     _accountsAuth[msg.sender] != 0,
-        //     "NG : mint requests can only registered accounts for company"
-        // );
+        require(
+            _accountsAuth[msg.sender] != 0,
+            "NG : mint requests can only registered accounts for company"
+        );
 
         _mint(msg.sender, _id);
         _mintedTokens[msg.sender].push(_id);
