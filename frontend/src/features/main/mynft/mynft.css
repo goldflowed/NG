@@ -1,0 +1,17 @@
+.mynft-title {
+    margin-top: 150px;
+    display: flex;
+    justify-content: center
+}
+
+.mynft-main {
+    margin-top: 70px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.mynft-card {
+    margin-left: 1rem;
+    margin-right: 1rem;
+}

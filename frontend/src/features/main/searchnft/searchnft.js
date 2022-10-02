@@ -35,7 +35,7 @@ function SearchNft() {
     const onSearch = async (e) => {
         console.log('검색버튼 클릭 후', txnHash);
         const tokenId = await nftContract.methods
-            .getTokenIdFromTxnHash('0x6fb2b9c659b4cd3da6462bdb1f1b432145d1c421bc1919ed8fdeff69a50d740d').call()
+            .getTokenIdFromTxnHash('0xe52066c3e4d0eed86c53f2f45254740bbde410f1f602b7437ed43f2a39ca3498').call()
             .then((res) => console.log('토큰아이디 : ', res))
 
         await settokenId(tokenId);

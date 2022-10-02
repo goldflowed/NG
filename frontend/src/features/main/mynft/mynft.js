@@ -11,6 +11,7 @@ import {
     MDBCardText,
     MDBBtn
   } from 'mdb-react-ui-kit';
+import './mynft.css'
 
 // tokenId 번호 -> tokenId에 따른 블록 정보 불러오기
 function MyNft() {
@@ -67,26 +68,28 @@ function MyNft() {
     return(
         <div>
             <NavBar/>
-            <div style={{height:500}}>
-                <p style={{marginTop:'100px'}}></p>
-                {/* <p>{tokenlength}</p> */}
-                {/* <p>토큰 아이디 : {tokenId}</p>
-                <p>토큰 정보 : {JSON.stringify(tokenInfo)}</p> */}
-                {/* <p>테스트중</p> */}
-                {tokenInfo.map((token) => {
-                    return(
-                    <MDBCard>
-                        <MDBCardBody>
-                            <MDBCardTitle>시리얼번호 : {token[0].serialNo}</MDBCardTitle>
-                            <MDBCardText>
-                                토큰아이디 : {token[1]} <br/>
-                                브랜드이름 : {token[0].product.brandNm}                                
-                            </MDBCardText>
-                            <MDBBtn onClick={() => showDetail(token)}>Detail</MDBBtn>
-                        </MDBCardBody>
-                    </MDBCard>
-                    )
-                })}
+            <div  style={{height:500}}>
+                <div className="mynft-title">
+                    <h1>소유하고 있는 NFT</h1>
+                </div>
+                <div className="mynft-main">
+                    {tokenInfo.map((token) => {
+                        return(
+                        <MDBCard className="mynft-card">
+                            <MDBCardBody>
+                                <MDBCardTitle>상품 이미지 들어갈 자리</MDBCardTitle>
+                                <MDBCardText style={{marginTop:20}}>
+                                    토큰아이디 : {token[1]} <br/>
+                                    Brand Name : {token[0].product.brandNm} <br/>
+                                    Product Name : {token[0].product.productName} <br/>
+                                    Serial Num : {token[0].serialNo}                            
+                                </MDBCardText>
+                                <MDBBtn style={{marginLeft:150}} onClick={() => showDetail(token)}>Detail</MDBBtn>
+                            </MDBCardBody>
+                        </MDBCard>
+                        )
+                    })}
+                </div>
             </div>
             <Footer/>
         </div>

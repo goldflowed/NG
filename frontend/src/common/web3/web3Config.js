@@ -1000,7 +1000,7 @@ const nftAbi = [
   }
 ]
 
-export const nftCA = `0x1f1e8061C8f27187F7814226cC5f4Db674108217`;
+export const nftCA = `0x3b0782dfBCD41de05C02CB10CAEc6B73672AFC57`;
 
 export const web3 = new Web3(window.ethereum);
 
