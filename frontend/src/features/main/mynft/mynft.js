@@ -77,7 +77,7 @@ function MyNft() {
                         return(
                         <MDBCard className="mynft-card">
                             <MDBCardBody>
-                                <MDBCardTitle>상품 이미지 들어갈 자리</MDBCardTitle>
+                                <MDBCardTitle>제품 이미지 들어갈 자리</MDBCardTitle>
                                 <MDBCardText style={{marginTop:20}}>
                                     토큰아이디 : {token[1]} <br/>
                                     Brand Name : {token[0].product.brandNm} <br/>
