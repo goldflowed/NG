@@ -12,6 +12,7 @@ import {
     MDBBtn
   } from 'mdb-react-ui-kit';
 import './mynft.css'
+import Button from 'react-bootstrap/Button';
 
 // tokenId 번호 -> tokenId에 따른 블록 정보 불러오기
 function MyNft() {
@@ -84,7 +85,7 @@ function MyNft() {
                                     Product Name : {token[0].product.productName} <br/>
                                     Serial Num : {token[0].serialNo}                            
                                 </MDBCardText>
-                                <MDBBtn style={{marginLeft:150}} onClick={() => showDetail(token)}>Detail</MDBBtn>
+                                <Button className="mynft-button" variant="outline-primary" onClick={() => showDetail(token)}>Detail</Button>
                             </MDBCardBody>
                         </MDBCard>
                         )

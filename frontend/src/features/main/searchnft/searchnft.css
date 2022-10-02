@@ -1,3 +1,4 @@
+
 .input-add {
     display: flex;
     flex-direction: column;
@@ -5,10 +6,25 @@
 }
 
 .input-group {
-    width: 100%;
+    width: 30rem;
 }
 
 .main-height {
     diplay: flex;
     height : 1000px;
+    width: 40rem;
+    
+}
+
+.searchnft-title {
+    display: flex;
+    justify-content: center
+}
+
+.search-header {
+    margin-left: 44%;
+}
+
+.search-card {
+    margin-top: 1rem;
 }
