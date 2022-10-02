@@ -3,6 +3,8 @@ import './modal.css';
 import { useState } from "react"
 import { MDBInput } from 'mdb-react-ui-kit';
 import { nftContract } from "../../../common/web3/web3Config"
+import { renderMatches } from 'react-router-dom';
+import Button from 'react-bootstrap/Button';
 
 
 const modal = (props) => {
@@ -43,22 +45,30 @@ const modal = (props) => {
               </button>
             </header>
             <main>
-                브랜드명 : {props.brandNm} <br/>
-                상품명 : {props.productName} <br/>
-                시리얼번호 : {props.serialNo} <br/>
-                제조일 및 생산 국가 : {props.mfd} {props.madeIn}
-                <br/><br/>
-                <MDBInput label='받는 분의 주소를 정확히 입력해 주세요.'
+                <div className="modal-overall">
+                  <div className="modal-image">
+                    상품 이미지
+                  </div>
+                  <div>
+                    <p>브랜드명 : {props.brandNm}</p>
+                    <p>상품명 : {props.productName}</p>
+                    <p>시리얼번호 : {props.serialNo}</p>
+                    <p>제조일 및 생산 국가 : {props.mfd} {props.madeIn} </p>
+                  </div>
+                </div>
+                <br/>
+                <MDBInput style={{width:400}}
+                          // label='받는 분의 주소를 정확히 입력해 주세요.'
                           id='form1'
                           type='text'
                           value = {sendAddress}
                           onChange={onAddHandler} />
+                <div style={{marginLeft:55, marginTop:5, color:'red'}}>받는 분의 주소를 정확히 입력해주세요.</div>
 
                 </main>
             <footer>
-              <button className="transfer" onClick={transfer}>
-                전송
-              </button>
+              <Button variant="outline-primary" onClick={transfer}>전송</Button>{' '}
+              {/* <button className="transfer" onClick={transfer}> */}
             </footer>
           </section>
         ) : null}

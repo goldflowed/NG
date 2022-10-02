@@ -1,3 +1,16 @@
+@font-face {
+    font-family: 'Handon3gyeopsal600g';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_seven@1.2/Handon3gyeopsal600g.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Handon3gyeopsal300g';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_seven@1.2/Handon3gyeopsal600g.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
 
 .input-add {
     display: flex;
@@ -18,13 +31,20 @@
 
 .searchnft-title {
     display: flex;
-    justify-content: center
+    justify-content: center;
+    font-family: 'Handon3gyeopsal600g';
 }
 
 .search-header {
     margin-left: 44%;
+    font-family: 'Handon3gyeopsal600g';
 }
 
 .search-card {
     margin-top: 1rem;
+    font-family: 'Handon3gyeopsal600g';
+}
+
+.mb-6 {
+    font-family: 'Handon3gyeopsal300g';
 }

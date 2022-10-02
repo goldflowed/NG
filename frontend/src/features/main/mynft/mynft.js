@@ -71,7 +71,7 @@ function MyNft() {
             <NavBar/>
             <div  style={{height:500}}>
                 <div className="mynft-title">
-                    <h1>소유하고 있는 NFT</h1>
+                    <h1>나의 NFT 목록</h1>
                 </div>
                 <div className="mynft-main">
                     {tokenInfo.map((token) => {
@@ -79,12 +79,12 @@ function MyNft() {
                         <MDBCard className="mynft-card">
                             <MDBCardBody>
                                 <MDBCardTitle>제품 이미지 들어갈 자리</MDBCardTitle>
-                                <MDBCardText style={{marginTop:20}}>
-                                    토큰아이디 : {token[1]} <br/>
-                                    Brand Name : {token[0].product.brandNm} <br/>
-                                    Product Name : {token[0].product.productName} <br/>
-                                    Serial Num : {token[0].serialNo}                            
-                                </MDBCardText>
+                                <br/>
+                                <MDBCardTitle>토큰아이디 : {token[1]}</MDBCardTitle>
+                                <MDBCardTitle>브랜드 이름 : {token[0].product.brandNm}</MDBCardTitle>
+                                <MDBCardTitle>제품 이름 : {token[0].product.productName}</MDBCardTitle>
+                                <MDBCardTitle>상품 일련 번호 : {token[0].serialNo}  </MDBCardTitle>
+                                <br/>
                                 <Button className="mynft-button" variant="outline-primary" onClick={() => showDetail(token)}>Detail</Button>
                             </MDBCardBody>
                         </MDBCard>

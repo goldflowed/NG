@@ -1,7 +1,15 @@
+@font-face {
+    font-family: 'Handon3gyeopsal600g';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_seven@1.2/Handon3gyeopsal600g.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 .mynft-title {
     margin-top: 150px;
     display: flex;
-    justify-content: center
+    justify-content: center;
+    font-family: 'Handon3gyeopsal600g';
 }
 
 .mynft-main {
@@ -9,9 +17,11 @@
     width: 100%;
     display: flex;
     justify-content: center;
+    font-family: 'Handon3gyeopsal600g';
 }
 
 .mynft-card {
     margin-left: 1rem;
     margin-right: 1rem;
+    font-family: 'Handon3gyeopsal600g';
 }

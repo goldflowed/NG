@@ -73,7 +73,7 @@ function SearchNft() {
                         {tokenId} === 4
                         ? <div>null</div>
                         : <div>
-                            <MDBCard shadow='0' border='info' background='white' className='mb-3' style={{marginTop:40}}>
+                            <MDBCard background='white' className='mb-3' style={{marginTop:40}}>
                                 <MDBCardHeader><div className="search-header">NFT 정보</div></MDBCardHeader>
                                 <MDBCardBody>
                                 <MDBCardTitle className="search-card">토큰아이디 : {tokenId}</MDBCardTitle>

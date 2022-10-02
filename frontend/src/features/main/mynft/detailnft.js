@@ -111,14 +111,14 @@ function detailnft() {
                     <MDBCard className="detailnft-card">
                         <MDBCardBody>
                             <MDBCardText>
-                                블록길이 : {historylength} <br/>
-                                토큰아이디 : {tokenId} <br/>
-                                브랜드명 : {tokenInfo[0].product.brandNm} <br/>
-                                상품명 : {tokenInfo[0].product.productName} <br/> 
-                                상품번호 : {tokenInfo[0].product.productNo} <br/>
-                                시리얼번호 : {tokenInfo[0].serialNo} <br/>
-                                제조일자 : {tokenInfo[0].product.mfd} <br/>
-                                제조국 : {tokenInfo[0].product.madeIn} <br/>
+                                <MDBCardTitle>블록길이 : {historylength}</MDBCardTitle>
+                                <MDBCardTitle>토큰아이디 : {tokenId}</MDBCardTitle>
+                                <MDBCardTitle>브랜드명 : {tokenInfo[0].product.brandNm}</MDBCardTitle>
+                                <MDBCardTitle>상품명 : {tokenInfo[0].product.productName}</MDBCardTitle>
+                                <MDBCardTitle>상품번호 : {tokenInfo[0].product.productNo}</MDBCardTitle>
+                                <MDBCardTitle>시리얼번호 : {tokenInfo[0].serialNo}</MDBCardTitle>
+                                <MDBCardTitle>제조일자 : {tokenInfo[0].product.mfd}</MDBCardTitle>
+                                <MDBCardTitle>제조국 : {tokenInfo[0].product.madeIn}</MDBCardTitle>
                             </MDBCardText>
                             <Button className="detailnft-button" variant="outline-primary" onClick={openModal}>소유권 이전</Button>
                                 <Modal 
