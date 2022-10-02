@@ -1,13 +1,6 @@
 @font-face {
-    font-family: 'Handon3gyeopsal600g';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_seven@1.2/Handon3gyeopsal600g.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'Handon3gyeopsal300g';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_seven@1.2/Handon3gyeopsal600g.woff') format('woff');
+    font-family: 'MaruBuri-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10-21@1.0/MaruBuri-Regular.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }
@@ -32,19 +25,19 @@
 .searchnft-title {
     display: flex;
     justify-content: center;
-    font-family: 'Handon3gyeopsal600g';
+    font-family: 'MaruBuri-Regular';
 }
 
 .search-header {
     margin-left: 44%;
-    font-family: 'Handon3gyeopsal600g';
+    font-family: 'MaruBuri-Regular';
 }
 
 .search-card {
     margin-top: 1rem;
-    font-family: 'Handon3gyeopsal600g';
+    font-family: 'MaruBuri-Regular';
 }
 
 .mb-6 {
-    font-family: 'Handon3gyeopsal300g';
+    font-family: 'MaruBuri-Regular';
 }
