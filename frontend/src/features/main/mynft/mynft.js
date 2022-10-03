@@ -22,6 +22,7 @@ function MyNft() {
     const [tokenInfo, settokenInfo] = useState([]);
 
     async function getTokenLength(){
+        
         const Wallet = window.localStorage.getItem('wallet');
 
         const Token = await nftContract.methods.getOwnedTokens(Wallet).call();

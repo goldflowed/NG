@@ -81,12 +81,12 @@ function detailnft() {
             
             //////////////////////////////////////////////////////// 와 안되노
             // token ID와 transactions 매칭
-            // await nftContract.methods.setTxnHashToTokenId(transactions, tokenId).call();
-            // console.log('tokenId', tokenId);
+            await nftContract.methods.setTxnHashToTokenId(transactions, tokenId).call();
+            console.log('tokenId', tokenId);
 
-            // // transactions로 tokenId 출력 확인
-            // const test =await nftContract.methods.getTokenIdFromTxnHash(transactions).call()
-            // console.log('test', test);
+            // transactions로 tokenId 출력 확인
+            const test =await nftContract.methods.getTokenIdFromTxnHash(transactions).call()
+            console.log('test', test);
             /////////////////////////////////////////////////////////
 
             const receipt = await web3.eth.getTransactionReceipt(transactions);
