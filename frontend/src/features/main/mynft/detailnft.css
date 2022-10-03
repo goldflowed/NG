@@ -1,13 +1,22 @@
+@font-face {
+    font-family: 'MaruBuri-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10-21@1.0/MaruBuri-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 .detailnft-title{
     margin-top: 150px;
     display: flex;
-    justify-content: center
+    justify-content: center;
+    font-family: 'MaruBuri-Regular';
 }
 
 .detailnft-main{
     margin-top :80px;
     display: flex;
     justify-content: center;
+    font-family: 'MaruBuri-Regular';
 }
 
 .detailnft-image {
@@ -21,12 +30,14 @@
     width: 330px;
     height: 300px;
     margin-left: 2rem;
+    font-family: 'MaruBuri-Regular';
 }
 
 .table-title{
     display: flex;
     justify-content: center;
     margin-top: 50px;
+    font-family: 'MaruBuri-Regular';
 }
 
 .detailnft-table {
@@ -34,6 +45,7 @@
     margin-bottom: 50px;
     display: flex;
     justify-content: center;
+    font-family: 'MaruBuri-Regular';
 }
 
 .mynft-button{
@@ -42,4 +54,14 @@
 
 .detailnft-button{
     margin-left: 11rem;
+}
+
+.total-period {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.owner {
+    display: flex;
+    justify-content: center;
 }

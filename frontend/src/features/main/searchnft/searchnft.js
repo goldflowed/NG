@@ -41,10 +41,11 @@ function SearchNft() {
         await settokenId(tokenId);
         // console.log('tokenId', tokenId)
 
-        // const nftinfo = await nftContract.methods.ngs(tokenId).call()
-        //     console.log(nftinfo)
-        //     console.log('nftinfo타입', typeof(nftinfo))
-        //     // console.log(JSON.stringify(nftinfo.pruduct.brandNm));
+        const nftinfo = await nftContract.methods.ngs(tokenId).call()
+        .then((res) => console.log(res))
+            console.log(nftinfo)
+            console.log('nftinfo타입', typeof(nftinfo))
+            // console.log(JSON.stringify(nftinfo.pruduct.brandNm));
 
         // await setbrandNm(nftinfo.brandNm);
         // await setproductNo(nftinfo.productNo);

@@ -3,8 +3,8 @@ import NavBar from '../../../common/navbar/NavBar'
 import Footer from '../../../common/footer/Footer'
 import { useLocation } from "react-router-dom";
 import { useState, useEffect } from 'react';
-import { nftContract, web3 } from "../../../common/web3/web3Config"
-import Modal from './modal.js'
+import { nftContract, web3 } from "../../../common/web3/web3Config";
+import Modal from './modal.js';
  
 import {
     MDBCard,
@@ -37,6 +37,9 @@ function detailnft() {
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const [modalOpen, setModalOpen] = useState(false);
 
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const [totalPeriod, settotalperiod] = useState(0);
+
     async function getDetail() {
         const TokenHistory = await nftContract.methods.getTokenHistory(tokenId).call();
         console.log('TokenHistory',TokenHistory);
@@ -49,6 +52,10 @@ function detailnft() {
 
         // receipt를 삽입하는데 사용되는 배열
         const RecArray = [];
+        var TmpArray = [];
+        var usePeriodYear = 0;
+        var usePeriodMonth = 0;
+        var totalPeriod = 0;
         for(let i = 0; i < TokenHistory.length; i++){
             // tokenHistory[i].blockNumber -> string to number()
             const DectokenHistory = await Number(TokenHistory[i].blockNumber);
@@ -71,10 +78,34 @@ function detailnft() {
             // transaction hash
             const transactions = await block.transactions[0];
             console.log('transactions', transactions)
+            
+            //////////////////////////////////////////////////////// 와 안되노
+            // token ID와 transactions 매칭
+            // await nftContract.methods.setTxnHashToTokenId(transactions, tokenId).call();
+            // console.log('tokenId', tokenId);
+
+            // // transactions로 tokenId 출력 확인
+            // const test =await nftContract.methods.getTokenIdFromTxnHash(transactions).call()
+            // console.log('test', test);
+            /////////////////////////////////////////////////////////
 
             const receipt = await web3.eth.getTransactionReceipt(transactions);
             console.log('receipt', receipt);
-            await RecArray.push(receipt);
+
+            var usePeriod = 0;
+            if(i === 0){
+                // receipt와 TokenHistory를 동시에 담기 위한 배열
+                TmpArray = [receipt, TokenHistory[i], i, TokenHistory[i].year, TokenHistory[i].month, usePeriod, totalPeriod];
+                await settotalperiod(TmpArray[6]);
+            }else {
+                usePeriodYear = TokenHistory[i].year - TokenHistory[i-1].year;
+                usePeriodMonth = TokenHistory[i].month - TokenHistory[i-1].month;
+                usePeriod = usePeriodYear*12 + usePeriodMonth;
+                totalPeriod += (usePeriodYear*12 + usePeriodMonth); 
+                TmpArray = [receipt, TokenHistory[i], i, TokenHistory[i].year, TokenHistory[i].month, usePeriod, totalPeriod]; 
+                await settotalperiod(TmpArray[6]);
+            }
+            await RecArray.push(TmpArray);
         }
         await setreceipt(RecArray);
     }
@@ -111,14 +142,14 @@ function detailnft() {
                     <MDBCard className="detailnft-card">
                         <MDBCardBody>
                             <MDBCardText>
-                                <MDBCardTitle>블록길이 : {historylength}</MDBCardTitle>
-                                <MDBCardTitle>토큰아이디 : {tokenId}</MDBCardTitle>
-                                <MDBCardTitle>브랜드명 : {tokenInfo[0].product.brandNm}</MDBCardTitle>
-                                <MDBCardTitle>상품명 : {tokenInfo[0].product.productName}</MDBCardTitle>
-                                <MDBCardTitle>상품번호 : {tokenInfo[0].product.productNo}</MDBCardTitle>
-                                <MDBCardTitle>시리얼번호 : {tokenInfo[0].serialNo}</MDBCardTitle>
-                                <MDBCardTitle>제조일자 : {tokenInfo[0].product.mfd}</MDBCardTitle>
-                                <MDBCardTitle>제조국 : {tokenInfo[0].product.madeIn}</MDBCardTitle>
+                                {/* <MDBCardTitle>블록길이 : {historylength}</MDBCardTitle>
+                                <MDBCardTitle>토큰아이디 : {tokenId}</MDBCardTitle> */}
+                                <MDBCardTitle style={{marginTop:10}}>브랜드명 : {tokenInfo[0].product.brandNm}</MDBCardTitle>
+                                <MDBCardTitle style={{marginTop:10}}>상품명 : {tokenInfo[0].product.productName}</MDBCardTitle>
+                                <MDBCardTitle style={{marginTop:10}}>상품번호 : {tokenInfo[0].product.productNo}</MDBCardTitle>
+                                <MDBCardTitle style={{marginTop:10}}>시리얼번호 : {tokenInfo[0].serialNo}</MDBCardTitle>
+                                <MDBCardTitle style={{marginTop:10}}>제조일자 : {tokenInfo[0].product.mfd}</MDBCardTitle>
+                                <MDBCardTitle style={{marginTop:10}}>제조국 : {tokenInfo[0].product.madeIn}</MDBCardTitle>
                             </MDBCardText>
                             <Button className="detailnft-button" variant="outline-primary" onClick={openModal}>소유권 이전</Button>
                                 <Modal 
@@ -149,24 +180,34 @@ function detailnft() {
                         <MDBTableHead>
                             <tr>
                             <th scope='col'>#</th>
-                            <th scope='col'>소유자</th>
+                            <th scope='col' className="owner"><div>소유자</div></th>
                             <th scope='col'>NFT 이전 날짜</th>
                             <th scope='col'>사용 기간</th>
                             </tr>
                         </MDBTableHead>
                         {receipt.map((res) => {
+                            console.log('res', res);
                             return(
                                 <MDBTableBody>
                                 <tr>
-                                <th scope='row'>1</th>
-                                <td>{res.logs[0].topics[2]}</td>
-                                <td style={{marginLeft:20, marginRight:20}}>날짜 들어갈 공간</td>
-                                <td style={{marginLeft:20, marginRight:20}}>사용 기간 들어갈 공간</td>
+                                <th scope='row'>{res[2]}</th>
+                                <td>{res[0].logs[0].topics[2]}</td>
+                                <td>{res[1].year}년 {res[1].month}월</td>
+                                <td>
+                                    {
+                                     res[2] === 0
+                                     ? <p>최초발행</p>
+                                     : <p>{res[5]}개월</p>
+                                    }
+                                    </td>
                                 </tr>
                         </MDBTableBody>     
                             )
                         })}
                     </MDBTable>
+                    <div className="total-period">
+                        <p>제품 총 사용 기간 : {totalPeriod}개월</p>
+                    </div>
                 </div>
             </div>
             <Footer/>
