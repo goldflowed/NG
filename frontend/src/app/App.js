@@ -33,7 +33,7 @@ function App() {
         <Route exact path="/company/register" element={ <CompanyRegister/> }/>
         <Route exact path="/company/nfts" element={ <Nfts/>}/>
         <Route exact path="/company/nfts/:productCode" element={ <Detail/>}/>
-        <Route exact path="/company/nfts/:productCode/:productNum" element={ <Nft/>}/>
+        {/* <Route exact path="/company/nfts/:productCode/:productNum" element={ <Nft/>}/> */}
         
         <Route exact path="/admin" element={<AdminMain/>}/>
         <Route exact path="/admin/approve" element={<Approve/>}/>
