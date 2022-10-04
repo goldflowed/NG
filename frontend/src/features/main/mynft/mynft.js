@@ -84,7 +84,7 @@ function MyNft() {
                           </div>
                         : <div className="mynft-main">
                         {tokenInfo.map((token) => {
-                            return(
+                            return( 
                             <MDBCard className="mynft-card">
                                 <MDBCardBody>
                                     <MDBCardTitle>제품 이미지 들어갈 자리</MDBCardTitle>
