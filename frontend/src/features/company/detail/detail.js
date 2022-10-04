@@ -80,7 +80,7 @@ function Detail() {
   const [tokenHistory, setTokenHistory] = useState([]);
   const [historylength, sethistorylength] = useState(0);
   const [tokenlength, settokenlength] = useState(0);
-  const [tokenInfo, settokenInfo] = useState([]);
+  const [tokenInfo, settokenInfo] = useState("");
 
   const params = useParams();
   const { state } = useLocation();
@@ -166,11 +166,12 @@ function Detail() {
         await ArrTokenInfo.push(TokenDetail);
         console.log('토큰정보와 아이디', ArrTokenInfo)
     }
-    await settokenInfo(ArrTokenInfo);
+    // await settokenInfo(ArrTokenInfo);
 
-    for(let i = 0; i <Token.length; i++){
-      const prodNo = tokenInfo[i].product.productNo;
-      console.log(prodNo);  
+    for(let i = 0; i < Token.length; i++){
+      const prodNo = await ArrTokenInfo[i].product.productNo;
+      console.log(prodNo);
+
     }
 
 
@@ -214,6 +215,7 @@ function Detail() {
         <div className="register-overall">
           <div className="nfttable-title">
             <h2>제품 NFT 등록하기</h2>
+            {/* {JSON.stringify(tokenInfo.productNo)} */}
           </div>  
           <div className="nft-register">
             <InputGroup className="mb-3">

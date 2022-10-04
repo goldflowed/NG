@@ -155,7 +155,6 @@ function SearchNft() {
                     </div>
                 </div>
             </div>
-            <Footer/>
         </div>
     )
 
