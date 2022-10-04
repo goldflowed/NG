@@ -3,6 +3,7 @@ import SideBar from "../sidebar/SideBar";
 import styled from "styled-components";
 import Table from './table';
 import NavBar from "../../../common/navbar/NavBar";
+import Footer from "../../../common/footer/Footer";
 import { nftContract } from "../../../common/web3/web3Config";
 
 const ContainerDiv = styled.div`
@@ -100,6 +101,7 @@ function Products() {
           <Table columns={columns} data={products}/>
         </TableDiv>
       </MainDiv>
+      <Footer/>
     </ContainerDiv>
   )
 }

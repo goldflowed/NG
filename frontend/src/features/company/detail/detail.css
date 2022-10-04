@@ -1,0 +1,17 @@
+.nfttable-title{
+    display: flex;
+    justify-content: center;
+    margin-top: 3rem;
+}
+
+.nft-register{
+    margin-top: 2rem;
+}
+
+.detail-table{
+    margin-top: 2rem;
+}
+
+.register-overall{
+    width: 60%;
+}
