@@ -1,9 +1,8 @@
 /* 메인 */
 .about-us {
-  overflow: overlay;
   width: 100%;
   display: grid;
-  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-rows: 800px 800px 1000px;
 }
 
 /* 섹션 1 */
@@ -25,46 +24,35 @@
   position: absolute;
   width: 100%;
   left: 0;
-  top: 60%;
+  top: 50%;
   transform: translate(0, -50%);
   font-weight: 600;
-}
-
-.main {
-  width: 100%;
-  padding: 30px;
-  background: white;
-  opacity: 0;
 }
 
 .content1 .title1 {
   position: relative;
   animation: fadeInUp 2s;
-  font-size: 43px;
 }
 
-.content1 .main-image {
-  position: relative;
-  animation: fadeInUp 2.5s;
-}
 
 /* 섹션 2 */
 .section-2 {
-  height: 90%;
+  height: 100%;
   width: 100%;
   left: 0;
-  padding: 5rem;
-  margin-top: 4rem;
   text-align: center;
+  background-color: #262626;
+  color: #D9D9D9;
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr;
 }
 
 /* 섹션 3 */
 .section-3 {
-  height: 90%;
+  height: 100%;
   width: 100%;
   left: 0;
-  padding: 5rem;
-  margin-top: 4rem;
+  padding-top: 2rem;
   text-align: center;
   background-color: #D9D9D9;
 }
