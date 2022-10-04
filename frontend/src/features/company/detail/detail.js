@@ -2,11 +2,18 @@ import React, {useState, useEffect, useMemo} from "react";
 import SideBar from "../sidebar/SideBar";
 import styled from "styled-components";
 import NavBar from "../../../common/navbar/NavBar";
+import Footer from "../../../common/footer/Footer";
 import { useParams } from "react-router-dom";
 import axios from "../../../common/api/http-common";
-import { nftContract } from "../../../common/web3/web3Config";
+import { nftContract, web3 } from "../../../common/web3/web3Config";
 import { useLocation } from "react-router-dom";
+
 import Table from 'react-bootstrap/Table';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import InputGroup from 'react-bootstrap/InputGroup';
+
+import './detail.css';
 
 const ContainerDiv = styled.div`
   display: flex;
@@ -68,62 +75,107 @@ function Detail() {
   const [productMadeIn, setProductMadeIn] = useState('')
   const [productCode, setProductCode] = useState('')
   const [productMfd, setProductMfd] = useState('')
+  const [serialNo, setSerialNo] = useState('');
+  const [tokenId, setTokenId] = useState('');
+  const [tokenHistory, setTokenHistory] = useState([]);
+  const [historylength, sethistorylength] = useState(0);
+  const [tokenlength, settokenlength] = useState(0);
+  const [tokenInfo, settokenInfo] = useState([]);
+
   const params = useParams();
   const { state } = useLocation();
 
-  var idx = 0
-  const idxUp = () => {
-    idx = idx + 1
-    return idx
+  const from = window.localStorage.getItem('wallet');
+
+  const onSerialHandler = (event) => {
+    setSerialNo(event.currentTarget.value);
   }
 
-  const columns = useMemo(
-    () => [
-      {
-        accessor: "num",
-        Header: "No",
-      },
-      {
-        accessor: "productNum",
-        Header: "제 품 번 호",
-      },
-      {
-        accessor: "isTransact",
-        Header: "전송 여부",
-      },
-    ],
-    []
-  );
-  
-  const data = useMemo(
-    () => 
-      Array(30)
-        .fill()
-        .map(() => ({
-          num: idxUp(),
-          productNum: productCode + idx,
-          isTransact: 'N',
-        })),
-    []
-  );
-  
-  async function getTokenInfo() {
-    var idx = 1
-    const productArray = []
-    let response = await nftContract.methods.getProductnoToNgs(window.localStorage.wallet, state.productNo).call()
-    console.log(response)
-    // for (let res of response) {
-    //   let product = {
-    //     "num" : idx,
-    //     "productNo" : res.productNo,
-    //     "productName" : res.productName,
-    //     "madeIn" : res.madeIn,
-    //     "mfd" : res.mfd,
-    //   }
-    //   productArray.push(product)
-    //   idx = idx+1
-    // }
-    // setNfts(productArray)
+  // 등록 버튼 클릭 시
+  const onRegister = async (e) => {
+    console.log('등록 버튼 클릭 후', serialNo);
+    console.log('productCode', productCode);
+    console.log('serialNo', serialNo);
+    console.log('year', year);
+    console.log('month', month);
+    // nft 발급
+    await nftContract.methods.mint(productCode, serialNo, year, month)
+      .send({from:from});
+
+    // 토큰 아이디 저장
+    const tokenNum = await nftContract.methods.totalSupply().call() - 1;
+    console.log('tokenId', tokenNum);
+
+    const TokenHistory = await nftContract.methods.getTokenHistory(tokenNum).call();
+    await setTokenHistory(TokenHistory);
+    
+    const DectokenHistory = await Number(TokenHistory[0].blockNumber);
+
+    // TokenHistory 16진수로 변환
+    const hexHistory = await DectokenHistory.toString(16);
+    console.log('16진수 변환', hexHistory);
+    const realhex = '0x'+ hexHistory;
+    console.log('realhex', realhex);
+
+     // string to number
+     const numhistory = await Number(realhex);
+     console.log('numhistory', numhistory);
+     console.log('numhistory타입', typeof(numhistory))
+
+    // getblock을 통한 transactions 구하기 
+    const block = await web3.eth.getBlock(numhistory);
+    console.log(block);
+
+    // transaction hash
+    const transactions = await block.transactions[0];
+    console.log('transactions', transactions)
+
+    // setTxnHashToTokenId
+    await nftContract.methods.setTxnHashToTokenId(transactions, tokenNum).send({from:from})
+  }
+
+  // 현재 날짜
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = now.getMonth()+1;
+
+  async function getTable(){
+    const Wallet = window.localStorage.getItem('wallet');
+
+    const Token = await nftContract.methods.getOwnedTokens(Wallet).call();
+
+    console.log('토큰 정보 : ', Token);
+    console.log('토큰의 개수 = ', Token.length)
+
+    // 토큰의 길이가 담겨있는 상황
+    await settokenlength(Token.length);
+
+    // Token의 Array 지정
+    var ArrToken = [];
+
+    // TokenId 값 삽입
+    for(let i = 0; i < Token.length; i++){
+      await ArrToken.push(Token[i]);
+    }
+    await setTokenId(ArrToken);
+
+    // Token의 Info 삽입
+    var ArrTokenInfo = [];
+    for(let i = 0; i < Token.length; i++){
+        const TokenDetail = await nftContract.methods.ngs(Token[i]).call();
+        await ArrTokenInfo.push(TokenDetail);
+        console.log('토큰정보와 아이디', ArrTokenInfo)
+    }
+    await settokenInfo(ArrTokenInfo);
+
+    for(let i = 0; i <Token.length; i++){
+      const prodNo = tokenInfo[i].product.productNo;
+      console.log(prodNo);  
+    }
+
+
+
+
   }
 
   useEffect(() => {
@@ -137,6 +189,9 @@ function Detail() {
     setProductMadeIn(state.madeIn)
     setProductCode(state.productNo)
     setProductMfd(state.mfd)
+
+    // 테이블 정보 얻기
+    getTable();
   }, []);
 
   return (
@@ -156,38 +211,47 @@ function Detail() {
             </InfoPDiv>
           </InfoDiv>
         </ProductDiv><Hr/>
-        <div>
+        <div className="register-overall">
           <div className="nfttable-title">
             <h2>제품 NFT 등록하기</h2>
           </div>  
           <div className="nft-register">
-
+            <InputGroup className="mb-3">
+              <Form.Control
+                placeholder="시리얼 번호를 입력하세요."
+                aria-label="Recipient's username"
+                aria-describedby="basic-addon2"
+                onChange={onSerialHandler}
+              />
+              <Button variant="outline-secondary" id="button-addon2" onClick={onRegister}>
+                NFT 등록
+              </Button>
+            </InputGroup>
+          </div>
+          <div className="detail-table">
+          <Table striped bordered hover>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>시리얼 번호</th>
+                <th>전송 여부</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>Mark</td>
+                <td>Otto</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>Jacob</td>
+                <td>Thornton</td>
+              </tr>
+            </tbody>
+          </Table>
           </div>
         </div>
-        <Table striped bordered hover>
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>First Name</th>
-              <th>Last Name</th>
-              <th>Username</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>1</td>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td>Jacob</td>
-              <td>Thornton</td>
-              <td>@fat</td>
-            </tr>
-          </tbody>
-        </Table>
       </MainDiv>
     </ContainerDiv>
   )
