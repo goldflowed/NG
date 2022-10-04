@@ -5,6 +5,7 @@ import BrandRegister from '../features/main/brandregister/brandregister'
 import AboutUs from '../features/main/aboutus/aboutus'
 import SearchNft from "../features/main/searchnft/searchnft"
 import MyNft from "../features/main/mynft/mynft"
+import MyNftDetail from "../features/main/mynft/detailnft"
 
 import CompanyMain from '../features/company/main/page';
 import CompanyRegister from '../features/company/register/register';
@@ -25,6 +26,7 @@ function App() {
         <Route exact path="/aboutus" element={ <AboutUs/> } />
         <Route exact path="/searchnft" element={ <SearchNft/> } />
         <Route exact path="/mynft" element={ <MyNft/> } />
+        <Route exact path="/mynft/:serialNo" element={ <MyNftDetail/>} />
         <Route exact path="/brandregister" element={ <BrandRegister/> } />
 
         <Route exact path="/company" element={ <CompanyMain/>}/>

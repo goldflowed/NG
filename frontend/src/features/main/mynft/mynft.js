@@ -11,6 +11,8 @@ import {
     MDBCardText,
     MDBBtn
   } from 'mdb-react-ui-kit';
+import './mynft.css'
+import Button from 'react-bootstrap/Button';
 
 // tokenId 번호 -> tokenId에 따른 블록 정보 불러오기
 function MyNft() {
@@ -20,6 +22,7 @@ function MyNft() {
     const [tokenInfo, settokenInfo] = useState([]);
 
     async function getTokenLength(){
+        
         const Wallet = window.localStorage.getItem('wallet');
 
         const Token = await nftContract.methods.getOwnedTokens(Wallet).call();
@@ -67,26 +70,38 @@ function MyNft() {
     return(
         <div>
             <NavBar/>
-            <div style={{height:500}}>
-                <p style={{marginTop:'100px'}}></p>
-                {/* <p>{tokenlength}</p> */}
-                {/* <p>토큰 아이디 : {tokenId}</p>
-                <p>토큰 정보 : {JSON.stringify(tokenInfo)}</p> */}
-                {/* <p>테스트중</p> */}
-                {tokenInfo.map((token) => {
-                    return(
-                    <MDBCard>
-                        <MDBCardBody>
-                            <MDBCardTitle>시리얼번호 : {token[0].serialNo}</MDBCardTitle>
-                            <MDBCardText>
-                                토큰아이디 : {token[1]} <br/>
-                                브랜드이름 : {token[0].brandNm}                                
-                            </MDBCardText>
-                            <MDBBtn onClick={() => showDetail(token)}>Detail</MDBBtn>
-                        </MDBCardBody>
-                    </MDBCard>
-                    )
-                })}
+            <div  style={{height:500}}>
+                <div className="mynft-title">
+                    <h1>나의 NFT 목록</h1>
+                </div>
+                <div>
+                    {
+                        tokenlength === 0
+                        ? <div className="mynft-none-parent">
+                            <div className="mynft-none">
+                                <h2>No items to display</h2>
+                            </div>   
+                          </div>
+                        : <div className="mynft-main">
+                        {tokenInfo.map((token) => {
+                            return(
+                            <MDBCard className="mynft-card">
+                                <MDBCardBody>
+                                    <MDBCardTitle>제품 이미지 들어갈 자리</MDBCardTitle>
+                                    <br/>
+                                    <MDBCardTitle>토큰아이디 : {token[1]}</MDBCardTitle>
+                                    <MDBCardTitle>브랜드 이름 : {token[0].product.brandNm}</MDBCardTitle>
+                                    <MDBCardTitle>제품 이름 : {token[0].product.productName}</MDBCardTitle>
+                                    <MDBCardTitle>상품 일련 번호 : {token[0].serialNo}  </MDBCardTitle>
+                                    <br/>
+                                    <Button className="mynft-button" variant="outline-primary" onClick={() => showDetail(token)}>Detail</Button>
+                                </MDBCardBody>
+                            </MDBCard>
+                            )
+                        })}
+                    </div>
+                    }
+                </div>
             </div>
             <Footer/>
         </div>

@@ -1,0 +1,45 @@
+@font-face {
+    font-family: 'MaruBuri-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10-21@1.0/MaruBuri-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.mynft-title {
+    margin-top: 150px;
+    display: flex;
+    justify-content: center;
+    font-family: 'MaruBuri-Regular';
+}
+
+.mynft-main {
+    margin-top: 70px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    font-family: 'MaruBuri-Regular';
+}
+
+.mynft-card {
+    margin-left: 1rem;
+    margin-right: 1rem;
+    font-family: 'MaruBuri-Regular';
+}
+
+.mynft-none-parent {
+    display: flex;
+    justify-content: center;
+}
+
+.mynft-none {
+    width: 63rem;
+    height: 20rem;
+    border: 1px solid grey;
+    border-radius: 10px;
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: grey;
+    font-family: 'MaruBuri-Regular';
+}

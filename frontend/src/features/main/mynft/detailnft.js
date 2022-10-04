@@ -3,8 +3,8 @@ import NavBar from '../../../common/navbar/NavBar'
 import Footer from '../../../common/footer/Footer'
 import { useLocation } from "react-router-dom";
 import { useState, useEffect } from 'react';
-import { nftContract, web3 } from "../../../common/web3/web3Config"
-import Modal from './modal.js'
+import { nftContract, web3 } from "../../../common/web3/web3Config";
+import Modal from './modal.js';
  
 import {
     MDBCard,
@@ -13,7 +13,10 @@ import {
     MDBCardText,
     MDBBtn
   } from 'mdb-react-ui-kit';
+  import Button from 'react-bootstrap/Button';
   import { MDBTable, MDBTableHead, MDBTableBody } from 'mdb-react-ui-kit';
+  import './detailnft.css';
+  
 
 function detailnft() {
     
@@ -22,6 +25,8 @@ function detailnft() {
     const tokenInfo = location.state.token;
     console.log('토큰 정보', tokenInfo);
 
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const [tokenHistory, setTokenHistory] = useState([]);
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const [tokenId, settokenId] = useState(tokenInfo[1]);
     // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -32,10 +37,14 @@ function detailnft() {
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const [modalOpen, setModalOpen] = useState(false);
 
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const [totalPeriod, settotalperiod] = useState(0);
+
     async function getDetail() {
         const TokenHistory = await nftContract.methods.getTokenHistory(tokenId).call();
         console.log('TokenHistory',TokenHistory);
         console.log('TokenHistory[0]',TokenHistory[0]);
+        await setTokenHistory(TokenHistory);
         console.log('TokenHistory[0]타입', typeof(TokenHistory[0]))
         console.log('TokenHistory타입', typeof(TokenHistory))
         console.log('TokenHistory 길이', TokenHistory.length)
@@ -43,9 +52,13 @@ function detailnft() {
 
         // receipt를 삽입하는데 사용되는 배열
         const RecArray = [];
+        var TmpArray = [];
+        var usePeriodYear = 0;
+        var usePeriodMonth = 0;
+        var totalPeriod = 0;
         for(let i = 0; i < TokenHistory.length; i++){
-            // tokenHistory[i] -> string to number
-            const DectokenHistory = await Number(TokenHistory[i]);
+            // tokenHistory[i].blockNumber -> string to number()
+            const DectokenHistory = await Number(TokenHistory[i].blockNumber);
 
             // TokenHistory 16진수로 변환
             const hexHistory = await DectokenHistory.toString(16);
@@ -65,10 +78,34 @@ function detailnft() {
             // transaction hash
             const transactions = await block.transactions[0];
             console.log('transactions', transactions)
+            
+            //////////////////////////////////////////////////////// 와 안되노
+            // token ID와 transactions 매칭
+            await nftContract.methods.setTxnHashToTokenId(transactions, tokenId).call();
+            console.log('tokenId', tokenId);
+
+            // transactions로 tokenId 출력 확인
+            const test =await nftContract.methods.getTokenIdFromTxnHash(transactions).call()
+            console.log('test', test);
+            /////////////////////////////////////////////////////////
 
             const receipt = await web3.eth.getTransactionReceipt(transactions);
             console.log('receipt', receipt);
-            await RecArray.push(receipt);
+
+            var usePeriod = 0;
+            if(i === 0){
+                // receipt와 TokenHistory를 동시에 담기 위한 배열
+                TmpArray = [receipt, TokenHistory[i], i, TokenHistory[i].year, TokenHistory[i].month, usePeriod, totalPeriod];
+                await settotalperiod(TmpArray[6]);
+            }else {
+                usePeriodYear = TokenHistory[i].year - TokenHistory[i-1].year;
+                usePeriodMonth = TokenHistory[i].month - TokenHistory[i-1].month;
+                usePeriod = usePeriodYear*12 + usePeriodMonth;
+                totalPeriod += (usePeriodYear*12 + usePeriodMonth); 
+                TmpArray = [receipt, TokenHistory[i], i, TokenHistory[i].year, TokenHistory[i].month, usePeriod, totalPeriod]; 
+                await settotalperiod(TmpArray[6]);
+            }
+            await RecArray.push(TmpArray);
         }
         await setreceipt(RecArray);
     }
@@ -83,7 +120,7 @@ function detailnft() {
     const now = new Date();
     const year = now.getFullYear();
     console.log(year);
-    const month = now.getMonth();
+    const month = now.getMonth()+1;
     console.log(month);
 
     // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -94,60 +131,84 @@ function detailnft() {
     return(
         <div>
             <NavBar/>
-            <div style={{height:500,}}>
-                <MDBCard style={{marginTop:100}}>
-                    <MDBCardBody>
-                        <MDBCardTitle>NFT 상세 정보</MDBCardTitle>
-                        <MDBCardText>
-                            블록길이 : {historylength} <br/>
-                            토큰아이디 : {tokenId} <br/>
-                            브랜드명 : {tokenInfo[0].product.brandNm} <br/>
-                            상품명 : {tokenInfo[0].product.productName} <br/> 
-                            상품번호 : {tokenInfo[0].product.productNo} <br/>
-                            시리얼번호 : {tokenInfo[0].serialNo} <br/>
-                            제조일자 : {tokenInfo[0].product.mfd} <br/>
-                            제조국 : {tokenInfo[0].product.madeIn} <br/>
-                        </MDBCardText>
-                        <MDBBtn onClick={openModal}>소유권 이전</MDBBtn>
-                            <Modal 
-                                open={modalOpen}
-                                close={closeModal}
-                                tokenId = {tokenId}
-                                header="NFT 전송하기"
-                                brandNm = {tokenInfo[0].product.brandNm}
-                                productName = {tokenInfo[0].product.productName}
-                                serialNo = {tokenInfo[0].serialNo}
-                                mfd = {tokenInfo[0].product.mfd}
-                                madeIn = {tokenInfo[0].product.madeIn}
-                                year = {year}
-                                month = {month}
-                                >
-                            </Modal>
-                    </MDBCardBody>
-                </MDBCard>
+            <div className="detailnft-title">
+                <h1>{tokenInfo[0].product.productName}의 상세 정보</h1>
+            </div>
+            <div className="detailnft-main">
+                <div className="detailnft-image">
+                    <p>제품 이미지 들어갈 자리</p>
+                </div>
+                <div>
+                    <MDBCard className="detailnft-card">
+                        <MDBCardBody>
+                            <MDBCardText>
+                                {/* <MDBCardTitle>블록길이 : {historylength}</MDBCardTitle>
+                                <MDBCardTitle>토큰아이디 : {tokenId}</MDBCardTitle> */}
+                                <MDBCardTitle style={{marginTop:10}}>브랜드명 : {tokenInfo[0].product.brandNm}</MDBCardTitle>
+                                <MDBCardTitle style={{marginTop:10}}>상품명 : {tokenInfo[0].product.productName}</MDBCardTitle>
+                                <MDBCardTitle style={{marginTop:10}}>상품번호 : {tokenInfo[0].product.productNo}</MDBCardTitle>
+                                <MDBCardTitle style={{marginTop:10}}>시리얼번호 : {tokenInfo[0].serialNo}</MDBCardTitle>
+                                <MDBCardTitle style={{marginTop:10}}>제조일자 : {tokenInfo[0].product.mfd}</MDBCardTitle>
+                                <MDBCardTitle style={{marginTop:10}}>제조국 : {tokenInfo[0].product.madeIn}</MDBCardTitle>
+                            </MDBCardText>
+                            <Button className="detailnft-button" variant="outline-primary" onClick={openModal}>소유권 이전</Button>
+                                <Modal 
+                                    open={modalOpen}
+                                    close={closeModal}
+                                    tokenId = {tokenId}
+                                    header="NFT 전송하기"
+                                    brandNm = {tokenInfo[0].product.brandNm}
+                                    productName = {tokenInfo[0].product.productName}
+                                    serialNo = {tokenInfo[0].serialNo}
+                                    mfd = {tokenInfo[0].product.mfd}
+                                    madeIn = {tokenInfo[0].product.madeIn}
+                                    year = {year}
+                                    month = {month}
+                                    >
+                                </Modal>
+                        </MDBCardBody>
+                    </MDBCard>
+                </div>
+            </div>
 
-                <MDBTable striped>
-                    <MDBTableHead>
-                        <tr>
-                        <th scope='col'>#</th>
-                        <th scope='col'>소유자</th>
-                        <th scope='col'>NFT 이전 날짜</th>
-                        <th scope='col'>사용 기간</th>
-                        </tr>
-                    </MDBTableHead>
-                    {receipt.map((res) => {
-                        return(
-                            <MDBTableBody>
+            <div className="table-title">
+                <h3>NFT 사용 기록</h3>
+            </div>
+            <div className="detailnft-table">
+                <div>
+                    <MDBTable striped>
+                        <MDBTableHead>
                             <tr>
-                            <th scope='row'>1</th>
-                            <td>{res.logs[0].topics[2]}</td>
-                            <td>날짜 들어갈 공간</td>
-                            <td>사용 기간 들어갈 공간</td>
+                            <th scope='col'>#</th>
+                            <th scope='col' className="owner"><div>소유자</div></th>
+                            <th scope='col'>NFT 이전 날짜</th>
+                            <th scope='col'>사용 기간</th>
                             </tr>
-                    </MDBTableBody>     
-                        )
-                    })}
-                </MDBTable>
+                        </MDBTableHead>
+                        {receipt.map((res) => {
+                            console.log('res', res);
+                            return(
+                                <MDBTableBody>
+                                <tr>
+                                <th scope='row'>{res[2]}</th>
+                                <td>{res[0].logs[0].topics[2]}</td>
+                                <td>{res[1].year}년 {res[1].month}월</td>
+                                <td>
+                                    {
+                                     res[2] === 0
+                                     ? <p>최초발행</p>
+                                     : <p>{res[5]}개월</p>
+                                    }
+                                    </td>
+                                </tr>
+                        </MDBTableBody>     
+                            )
+                        })}
+                    </MDBTable>
+                    <div className="total-period">
+                        <p>제품 총 사용 기간 : {totalPeriod}개월</p>
+                    </div>
+                </div>
             </div>
             <Footer/>
         </div>
