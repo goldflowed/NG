@@ -1,9 +1,12 @@
 import React, {useState, useEffect, useMemo} from "react";
 import SideBar from "../sidebar/SideBar";
 import styled from "styled-components";
-import Sample from "../../../assets/img/sample.png"
 import Table from './table';
 import NavBar from "../../../common/navbar/NavBar";
+import { useParams } from "react-router-dom";
+import axios from "../../../common/api/http-common";
+import { nftContract } from "../../../common/web3/web3Config";
+import { useLocation } from "react-router-dom";
 
 const ContainerDiv = styled.div`
   display: flex;
@@ -60,7 +63,13 @@ const TableDiv = styled.div`
 
 function Detail() {
   const [nfts, setNfts] = useState([])
-  const productCode = "SADSDADSDA"
+  const [productImg, setProductImg] = useState('')
+  const [productName, setProductName] = useState('')
+  const [productMadeIn, setProductMadeIn] = useState('')
+  const [productCode, setProductCode] = useState('')
+  const [productMfd, setProductMfd] = useState('')
+  const params = useParams();
+  const { state } = useLocation();
 
   var idx = 0
   const idxUp = () => {
@@ -98,8 +107,36 @@ function Detail() {
     []
   );
   
+  async function getTokenInfo() {
+    var idx = 1
+    const productArray = []
+    let response = await nftContract.methods.getProductnoToNgs(window.localStorage.wallet, state.productNo).call()
+    console.log(response)
+    // for (let res of response) {
+    //   let product = {
+    //     "num" : idx,
+    //     "productNo" : res.productNo,
+    //     "productName" : res.productName,
+    //     "madeIn" : res.madeIn,
+    //     "mfd" : res.mfd,
+    //   }
+    //   productArray.push(product)
+    //   idx = idx+1
+    // }
+    // setNfts(productArray)
+  }
+
   useEffect(() => {
-    setNfts(data)
+    console.log(params.productCode)
+    axios.get(`product/${params.productCode}`)
+    .then((res) => {
+      setProductImg(res.data.proUrl)
+    })
+    console.log(state)
+    setProductName(state.productName)
+    setProductMadeIn(state.madeIn)
+    setProductCode(state.productNo)
+    setProductMfd(state.mfd)
   }, []);
 
   return (
@@ -110,12 +147,12 @@ function Detail() {
         <TitleP>등록 제품 정보 {'>'} 제품 상세 페이지</TitleP><Hr/>
         <ProductDiv>
           <InfoDiv>
-            <img src={Sample} alt="productImage" style={{width:"33%"}}/>
+            <img src={productImg} alt="productImage" style={{width:"33%"}}/>
             <InfoPDiv>
-              <p>제 품 명 : 비싼가방</p>
+              <p>제 품 명 : {productName}</p>
               <p>제 품 코 드 : {productCode}</p>
-              <p>가 격 : 1125$</p>
-              <p>제 조 국 : 어디로하지</p>
+              <p>출 고 일 : {productMfd}</p>
+              <p>제 조 국 : {productMadeIn}</p>
             </InfoPDiv>
           </InfoDiv>
         </ProductDiv><Hr/>
