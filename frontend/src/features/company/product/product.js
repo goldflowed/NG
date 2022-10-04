@@ -31,7 +31,7 @@ const TitleP = styled.p`
   margin: 0;
   margin-left: 20px;
   `
-function Nft() {
+function Product() {
   return (
     <ContainerDiv>
       <NavBar/>
@@ -42,4 +42,4 @@ function Nft() {
     </ContainerDiv>
   )
 }
-export default Nft;
+export default Product;

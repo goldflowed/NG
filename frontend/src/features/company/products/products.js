@@ -3,6 +3,7 @@ import SideBar from "../sidebar/SideBar";
 import styled from "styled-components";
 import Table from './table';
 import NavBar from "../../../common/navbar/NavBar";
+import Footer from "../../../common/footer/Footer";
 import { nftContract } from "../../../common/web3/web3Config";
 
 const ContainerDiv = styled.div`
@@ -43,15 +44,7 @@ const TitleP = styled.p`
   margin-left: 20px;
   `
 
-function Nfts() {
-  var idx = 0
-  const idxUp = () => {
-    idx = idx + 1
-    return idx
-  }
-
-  // const getRandom = (min, max) => Math.floor(Math.random() * (max-min) + min);
-
+function Products() {
   const columns = useMemo(
     () => [
       {
@@ -60,11 +53,11 @@ function Nfts() {
       },
       {
         accessor: "productNo",
-        Header: "상품명",
+        Header: "제품코드",
       },
       {
-        accessor: "serialNo",
-        Header: "상품코드",
+        accessor: "productName",
+        Header: "제품명",
       },
       {
         accessor: "madeIn",
@@ -73,34 +66,20 @@ function Nfts() {
     ],
     []
   );
-  
-  // const data = useMemo(
-  //   () => 
-  //     Array(30)
-  //       .fill()
-  //       .map(() => ({
-  //         num: idxUp(),
-  //         name: "이름" + idx,
-  //         code : "상품코드" + idx,
-  //         price : getRandom(10,99) * 1000,
-  //       })),
-  //   []
-  // );
 
   const [products, setProducts] = useState([])
 
   async function getTokenInfo() {
     var idx = 1
     const productArray = []
-    let response = await nftContract.methods.getOwnedTokens(window.localStorage.wallet).call()
+    let response = await nftContract.methods.getAddressToCategorys(window.localStorage.wallet).call()
     for (let res of response) {
-      let data = await nftContract.methods.ngs(res).call()
       let product = {
         "num" : idx,
-        "productNo" : data.productNo,
-        "serialNo" : data.serialNo,
-        "madeIn" : data.madeIn,
-        "mfd" : data.mfd,
+        "productNo" : res.productNo,
+        "productName" : res.productName,
+        "madeIn" : res.madeIn,
+        "mfd" : res.mfd,
       }
       productArray.push(product)
       idx = idx+1
@@ -122,7 +101,8 @@ function Nfts() {
           <Table columns={columns} data={products}/>
         </TableDiv>
       </MainDiv>
+      <Footer/>
     </ContainerDiv>
   )
 }
-export default Nfts;
+export default Products;

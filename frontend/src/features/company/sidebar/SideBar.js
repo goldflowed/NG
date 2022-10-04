@@ -74,15 +74,14 @@ function SideBar() {
     })
   }, []);
 
-
   return (
     <div className="SideContainer">
       <MenuList>
         <List>
           <ListTitle>NFT 인증서 관리<ListHr/>
             <Item>
-              <StyledLink to={"/company/register"}><ListItem>NFT 인증서 발급</ListItem></StyledLink>
-              <StyledLink to={"/company/nfts"}><ListItem>등록 제품 조회</ListItem></StyledLink>
+              <StyledLink to={"/company/register"}><ListItem>제품 등록</ListItem></StyledLink>
+              <StyledLink to={"/company/products"}><ListItem>등록 제품 조회</ListItem></StyledLink>
             </Item>
           </ListTitle>
           <ListTitle>기업 정보 관리<ListHr/>
