@@ -4,6 +4,7 @@ import styled from "styled-components";
 import {useNavigate}from 'react-router-dom'
 import Search from "./search";
 import "./tableCss.css"
+import { nftContract } from "../../../common/web3/web3Config";
 
 const AdminTd = styled.td`
   padding-top: 10px;
@@ -35,8 +36,11 @@ function Table({ columns, data }) {
   } = useTable({ columns, data }, useGlobalFilter, useSortBy);
 
   const showDetail = (code) => {
-    history(`/company/123/nfts/${code}`)
+    // nftContract.methods.getCategoryIndex(window.localStorage.wallet, code).call()
+    // .then((res) => console.log(res))
+    history(`/company/products/${code.productNo}`, {state : code})
   }
+
   return (
     <>
       <Search onSubmit={setGlobalFilter}/>
@@ -56,7 +60,7 @@ function Table({ columns, data }) {
           {rows.map((row) => {
             prepareRow(row);
             return (
-              <tr {...row.getRowProps()} onClick={() => showDetail(row.original.code)}>
+              <tr {...row.getRowProps()} onClick={() => showDetail(row.original)}>
                 {row.cells.map((cell) => (
                   <AdminTd {...cell.getCellProps()}>{cell.render("Cell")}</AdminTd>
                 ))}

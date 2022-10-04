@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Web3 from 'web3';
-
+import axios from '../api/http-common';
 import './NavBar.css';
 import {useEffect} from 'react';
 import Nav from 'react-bootstrap/Nav';
@@ -13,6 +13,7 @@ import LOGO from '../../assets/img/logo2.jpg';
 function NavBar(){
 
     const [defaultAccount, setDefaultAccount] = useState(null);
+    const [myRole, setMyRole] = useState(0);
     const [IsConnected, setIsConnected] = useState(false);
     const navigate = useNavigate();
 
@@ -72,14 +73,16 @@ function NavBar(){
     }
 
     useEffect(() => {
-      function checkConnectWallet() {
-        const userData = localStorage.getItem('wallet');
-        if (userData != null){
-          setDefaultAccount(userData);
-          setIsConnected(true);
-        }
-      }
-      checkConnectWallet();
+      window.ethereum.request({method: 'eth_requestAccounts'})
+      .then( result => {
+        window.localStorage.setItem('wallet', result[0]);
+        setDefaultAccount(result[0]);
+        axios.get(`company/${result[0]}`)
+        .then((res) => {
+          setMyRole(res.data.comPermit)
+        })
+        .catch(() => {})
+      })
     }, []);
 
     return(
@@ -94,11 +97,12 @@ function NavBar(){
           <Nav>
             <Nav.Link href="/aboutus">Abuout US</Nav.Link>
             <Nav.Link href="/searchnft">Search NFT</Nav.Link>
+            <Nav.Link href="/mynft">My NFT</Nav.Link>
             <div>
               {
-                window.localStorage.getItem('wallet')
-                ? <Nav.Link href="/mynft">My NFT</Nav.Link>
-                : <Nav.Link href="/brandregister">Brand Register</Nav.Link>
+                myRole !== 0
+                ? <Nav.Link href="/company">My Company</Nav.Link>
+                : <Nav.Link href="/brandregister">Brand Registration</Nav.Link>
               }
             </div>
           </Nav>
