@@ -1,3 +1,10 @@
+@font-face {
+    font-family: 'MaruBuri-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10-21@1.0/MaruBuri-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 .input-add {
     display: flex;
     flex-direction: column;
@@ -5,10 +12,32 @@
 }
 
 .input-group {
-    width: 100%;
+    width: 30rem;
 }
 
 .main-height {
     diplay: flex;
     height : 1000px;
+    width: 60rem;
+    
+}
+
+.searchnft-title {
+    display: flex;
+    justify-content: center;
+    font-family: 'MaruBuri-Regular';
+}
+
+.search-header {
+    margin-left: 44%;
+    font-family: 'MaruBuri-Regular';
+}
+
+.search-card {
+    margin-top: 1rem;
+    font-family: 'MaruBuri-Regular';
+}
+
+.mb-6 {
+    font-family: 'MaruBuri-Regular';
 }
