@@ -7,6 +7,7 @@ import ssafy from '../../../assets/img/ssafy.png';
 import NavBar from "../../../common/navbar/NavBar";
 import { nftContract } from "../../../common/web3/web3Config"
 import axios from '../../../common/api/http-common'
+import { FileUpload } from "react-ipfs-uploader";
 
 const ContainerDiv = styled.div`
   display: flex;
@@ -72,68 +73,83 @@ function Register() {
   }
 
   const onImgUrlHandler = (event) => {
+
     setImgUrl(event.currentTarget.value);
   }
 
   const regist = async (e) => {
     e.preventDefault();
-    
+
     await nftContract.methods
-      .addProduct(brand,productName, productNumber, makingDate, country)
+      .addProduct(brand, productName, productNumber, makingDate, country)
       .send({ from: window.localStorage.wallet })
       .then((res) => {
-        const body = {"proNo": productNumber,
-                      "proUrl": imgUrl,};
+        const body = {
+          "proNo": productNumber,
+          "proUrl": imgUrl,
+        };
         axios.post(`product/create`, body)
-        .then((res) => console.log(res))
+          .then((res) => console.log(res))
         console.log(res)
-        alert('성공하였습니다.')});
+        alert('성공하였습니다.')
+      });
   }
 
   useEffect(() => {
     axios.get(`company/${window.localStorage.wallet}`)
-    .then((res) => {
-      setBrand(res.data.comName)
-      setLogoUrl(res.data.comLogo)
-    })
-  },[])
+      .then((res) => {
+        setBrand(res.data.comName)
+        setLogoUrl(res.data.comLogo)
+      })
+  }, [])
 
   return (
     <ContainerDiv>
-      <NavBar/>
-      <SideBar/>
+      <NavBar />
+      <SideBar />
       <MainDiv>
-        <TitleP>제품 등록</TitleP><Hr/>
+        <TitleP>제품 등록</TitleP><Hr />
         <InfoDiv>
-          <Form style={{width:"1300px",}}>
-            <Logo style={{display:"block", margin:"auto"}} src={logoUrl}/>
+          <Form style={{ width: "1300px", }}>
+            <Logo style={{ display: "block", margin: "auto" }} src={logoUrl} />
 
-            <Form.Group style={{display:"flex", justifyContent:"center", marginTop: "35px", marginBottom: "35px"}} >
-              <Form.Label style={{marginRight:"10px"}}>제품 이름: </Form.Label>
-              <Form.Control style={{width:"500px"}} type="text" value={productName} onChange={onProductNameHandler}/>
+            <Form.Group style={{ display: "flex", justifyContent: "center", marginTop: "35px", marginBottom: "35px" }} >
+              <Form.Label style={{ marginRight: "10px" }}>제품 이름: </Form.Label>
+              <Form.Control style={{ width: "500px" }} type="text" value={productName} onChange={onProductNameHandler} />
             </Form.Group>
 
-            <Form.Group style={{display:"flex", justifyContent:"center", marginTop: "35px", marginBottom: "35px"}} >
-              <Form.Label style={{marginRight:"10px"}}>제품 번호: </Form.Label>
-              <Form.Control style={{width:"500px"}} type="text" value={productNumber} onChange={onPNHandler}/>
+            <Form.Group style={{ display: "flex", justifyContent: "center", marginTop: "35px", marginBottom: "35px" }} >
+              <Form.Label style={{ marginRight: "10px" }}>제품 번호: </Form.Label>
+              <Form.Control style={{ width: "500px" }} type="text" value={productNumber} onChange={onPNHandler} />
             </Form.Group>
 
-            <Form.Group style={{display:"flex", justifyContent:"center", marginTop: "35px", marginBottom: "35px"}} >
-              <Form.Label style={{marginRight:"35px"}}>출고일: </Form.Label>
-              <Form.Control style={{width:"500px"}} type="text" value={makingDate} onChange={onMDHandler}/>
+            <Form.Group style={{ display: "flex", justifyContent: "center", marginTop: "35px", marginBottom: "35px" }} >
+              <Form.Label style={{ marginRight: "35px" }}>출고일: </Form.Label>
+              <Form.Control style={{ width: "500px" }} type="text" value={makingDate} onChange={onMDHandler} />
             </Form.Group>
 
-            <Form.Group style={{display:"flex", justifyContent:"center", marginTop: "35px", marginBottom: "35px"}} >
-              <Form.Label style={{marginRight:"35px"}}>제조국: </Form.Label>
-              <Form.Control style={{width:"500px"}} type="text" value={country} onChange={onCHandler}/>
+            <Form.Group style={{ display: "flex", justifyContent: "center", marginTop: "35px", marginBottom: "35px" }} >
+              <Form.Label style={{ marginRight: "35px" }}>제조국: </Form.Label>
+              <Form.Control style={{ width: "500px" }} type="text" value={country} onChange={onCHandler} />
             </Form.Group>
 
-            <Form.Group style={{display:"flex", justifyContent:"center", marginTop: "35px", marginBottom: "35px"}} >
-              <Form.Label style={{marginRight:"35px"}}>이미지: </Form.Label>
-              <Form.Control style={{width:"500px"}} type="text" value={imgUrl} onChange={onImgUrlHandler}/>
-            </Form.Group>
+            {/* <Form.Group style={{ display: "flex", justifyContent: "center", marginTop: "35px", marginBottom: "35px" }} >
+              <Form.Label style={{ marginRight: "35px" }}>이미지: </Form.Label>
+              <Form.Control style={{ width: "500px" }} type="file" value={imgUrl} onChange={onImgUrlHandler} />
+              <Button type="submit">파일 업로드</Button> */}
+            {/* <Form.Control style={{ width: "500px" }} type="text" value={imgUrl} onChange={onImgUrlHandler} /> */}
+            {/* </Form.Group> */}
+            <FileUpload setUrl={setImgUrl} />
+            FileUrl: <a
+              href={imgUrl}
+              target='_blank'
+              rel='noopener noreferrer'
+            >
+              {imgUrl}
+            </a>
 
-            <Button style={{display:"block", margin:"auto"}} variant="primary" type="submit" onClick={regist}>
+
+            <Button style={{ display: "block", margin: "auto" }} variant="primary" type="submit" onClick={regist}>
               발급
             </Button>
           </Form>
