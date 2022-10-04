@@ -1,39 +1,111 @@
 import NavBar from "../../../common/navbar/NavBar"
 import Footer from "../../../common/footer/Footer"
+import { useEffect, useRef } from "react"
+import "./aboutus.css"
 
 function AboutUs() {
+    
+    const section1 = useRef(null);
+    const section2 = useRef(null);
+    const section3 = useRef(null);
+
+    useEffect(() => {
+        var video = document.querySelector('#video');
+        if (video.paused) {
+            video.play();
+        }
+    }, []);
 
     return(
-        <div>
+        <div className="about-us">
         <NavBar/>
-            <div
-            className='p-5 text-center bg-image mt-5'
-            style={{ height: '300px', backgroundColor: 'rgba(0, 0, 0, 0.3)' }}
-            >
-                <div>
-                    <h1> 진품 인증에 관심이 많은 ~~~ 만들었다 ~~~~</h1>
+            <div className='section-1'>
+                <video autoPlay muted loop id="video">
+                    <source src={ require('../../../assets/img/BGV1.mp4') } type="video/mp4" />
+                </video>
+                <div className="content1 text-center" ref={ section1 }>
+                    <div className="main1">
+                        <p className="title1 fs-1 fw-bold">소비자의 권리와 제품의 가치를 끌어올리기 위해</p>
+                    </div>    
                 </div>
             </div>
-            <div
-            className='p-5 text-center bg-image'
-            style={{ height: '400px', backgroundColor: 'rgba(0, 0, 0, 0)' }}
-            >
-                <div>
-                    <h1> 우리의 미션 우리의 비전 우리의 가치</h1>
+            <div className='section-2 p-4' ref={ section2 }>                
+                <div className="">
+                    <p className="m-3 text-start fs-1 fw-bold">우리의 미션</p>
+                    <p className="m-3 fs-4 text-start">블록체인 솔루션을 통해서 투명성과 추적성을 제공합니다.
+                    명품의 선순환적인 거래 및 위조방지를 위해 기술을 제공합니다.</p> 
                 </div>
+                <div className=" border-top border-light">
+                    <p className="m-3 text-end fs-1 fw-bold">우리의 비전</p>
+                    <p className="m-3 fs-4 text-end">소비자 및 기업의 신뢰성과 진정성 보장을 가장 중요하게 생각합니다.
+                    위조 및 회색시장 방지, 선순환적인 경제활동을 장려하기 위해 노력합니다.</p>
+                </div>
+                <div className=" border-top border-light"> 
+                    <p className="m-3 text-start fs-1 fw-bold">우리의 가치</p>
+                    <p className="m-3 fs-4 text-start">고객 경험에 새로운 패러다임을 제공
+                    무한한 확장 가능성, 브랜드/물건</p>   
+                </div>                
             </div>
-            <div
-            className='p-5 text-center bg-image'
-            style={{ height: '500px', backgroundColor: 'rgba(0, 0, 0, 0.2)' }}
-            >
-                <div>
+            <div className='section-3'>
+                <div ref={ section3 }>
                     <h1> 우리 소개</h1>
+                    <div className="introduce">
+                        <div className="team1">
+                            <div className="teammate">
+                                <div className="teammate-img">
+                                    <img src={require("../../../assets/img/ham.jpg")}
+                                    style={{ height:"100%", width:"100%" }}/>
+                                </div>
+                                <p className="my-2">팀원1</p>
+                                <p className="my-2">파트 : 프론트엔드</p>
+                                <p className="my-2">솰라솰라</p>
+                            </div>
+                            <div className="teammate">
+                                <div className="teammate-img">
+                                    <img src={require("../../../assets/img/ham.jpg")}
+                                    style={{ height:"100%", width:"100%" }}/>
+                                </div>
+                                <p className="my-2">팀원2</p>
+                                <p className="my-2">파트 : 프론트엔드</p>
+                                <p className="my-2">솰라솰라</p>
+                            </div>
+                            <div className="teammate">
+                                <div className="teammate-img">
+                                    <img src={require("../../../assets/img/ham.jpg")}
+                                    style={{ height:"100%", width:"100%" }}/>
+                                </div>
+                                <p className="my-2">팀원3</p>
+                                <p className="my-2">파트 : 프론트엔드</p>
+                                <p className="my-2">솰라솰라</p>
+                            </div>
+                        </div>
+                        <div className="team2">
+                            <div className="teammate">
+                                <div className="teammate-img">
+                                    <img src={require("../../../assets/img/ham.jpg")}
+                                    style={{ height:"100%", width:"100%" }}/>
+                                </div>
+                                <p className="my-2">팀원4</p>
+                                <p className="my-2">파트 : 프론트엔드</p>
+                                <p className="my-2">솰라솰라</p>
+                            </div>
+                            <div className="teammate">
+                                <div className="teammate-img">
+                                    <img src={require("../../../assets/img/ham.jpg")}
+                                    style={{ height:"100%", width:"100%" }}/>
+                                </div>
+                                <p className="my-2">팀원5</p>
+                                <p className="my-2">파트 : 프론트엔드</p>
+                                <p className="my-2">솰라솰라</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <Footer/>
         </div>
     )
-
+        
 }
 
 export default AboutUs

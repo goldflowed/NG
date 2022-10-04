@@ -48,8 +48,9 @@ const Logo = styled.div`
   width:300px;
   height: 300px;
   border-radius: 10px;
-  background-color: gray;
   float: right;
+  display:flex;
+  justify-content: center;
   `
 
 const TitleP = styled.p`
@@ -66,6 +67,7 @@ function Home() {
   const [tel, setTel] = useState('')
   const [wallet, setWallet] = useState('')
   const [address, setAddress] = useState('')
+  const [logoUrl, setLogoUrl] = useState('')
 
   useEffect(() => {
     axios.get(`company/${window.localStorage.wallet}`)
@@ -75,8 +77,10 @@ function Home() {
       setTel(res.data.comTel)
       setWallet(res.data.comWallet)
       setAddress(res.data.comAddress)
+      setLogoUrl(res.data.comLogo)
     })
   },[])
+  
   return (
     <ContainerDiv>
       <NavBar/>
@@ -92,7 +96,9 @@ function Home() {
             <p>브랜드 지갑 주소: {wallet}</p>
           </div>
           <div className="logo">
-            <Logo/>
+            <Logo>
+              <img src={logoUrl} style={{width:"100%"}}></img>
+            </Logo>
           </div>
         </InfoDiv><Hr/>
         <Button>수정</Button>

@@ -1,20 +1,22 @@
 import React, { useState } from "react";
 import Web3 from 'web3';
-import { useEffect } from 'react';
-
+import axios from '../api/http-common';
 import './NavBar.css';
+import {useEffect} from 'react';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import {
-  MDBBtn
-} from 'mdb-react-ui-kit';
+import Button from 'react-bootstrap/Button';
 import {NavLink} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom'
 import LOGO from '../../assets/img/logo2.jpg';
 
 function NavBar(){
 
     const [defaultAccount, setDefaultAccount] = useState(null);
+    const [myRole, setMyRole] = useState(0);
     const [IsConnected, setIsConnected] = useState(false);
+    const navigate = useNavigate();
+
 
     const detectCurrentProvider = () => {
       let provider;
@@ -66,17 +68,21 @@ function NavBar(){
       window.localStorage.removeItem('wallet');
       setDefaultAccount(null);
       setIsConnected(false);
+      alert('지갑 연결이 해제되었습니다.')
+      navigate('/');
     }
 
     useEffect(() => {
-      function checkConnectWallet() {
-        const userData = localStorage.getItem('wallet');
-        if (userData != null){
-          setDefaultAccount(userData);
-          setIsConnected(true);
-        }
-      }
-      checkConnectWallet();
+      window.ethereum.request({method: 'eth_requestAccounts'})
+      .then( result => {
+        window.localStorage.setItem('wallet', result[0]);
+        setDefaultAccount(result[0]);
+        axios.get(`company/${result[0]}`)
+        .then((res) => {
+          setMyRole(res.data.comPermit)
+        })
+        .catch(() => {})
+      })
     }, []);
 
     return(
@@ -91,19 +97,20 @@ function NavBar(){
           <Nav>
             <Nav.Link href="/aboutus">Abuout US</Nav.Link>
             <Nav.Link href="/searchnft">Search NFT</Nav.Link>
+            <Nav.Link href="/mynft">My NFT</Nav.Link>
             <div>
               {
-                window.localStorage.getItem('wallet')
-                ? <Nav.Link href="/mynft">My NFT</Nav.Link>
-                : <Nav.Link href="/brandregister">Brand Register</Nav.Link>
+                myRole !== 0
+                ? <Nav.Link href="/company">My Company</Nav.Link>
+                : <Nav.Link href="/brandregister">Brand Registration</Nav.Link>
               }
             </div>
           </Nav>
-            <div>
+            <div style={{marginRight:20}}>
               {
                 window.localStorage.getItem('wallet')
-                ? <MDBBtn className="connect-wallet" variant="outline-secondary" onClick={onDisconnect}>Disconnect</MDBBtn>
-                : <MDBBtn className="connect-wallet" variant="outline-secondary" onClick={onConnect}>Connect Wallet</MDBBtn>
+                ? <Button variant="primary" onClick={onDisconnect}>Disconnect</Button>
+                : <Button variant="primary" onClick={onConnect}>Connect Wallet</Button>
               }  
             </div>
         </Navbar.Collapse>
