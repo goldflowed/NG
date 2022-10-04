@@ -12,6 +12,7 @@ public class CompanyList {
 
     private String comName;
     private String comWallet;
+
     public static CompanyList of(String comName, String comWallet) {
         CompanyList list = new CompanyList();
         list.setComName(comName);

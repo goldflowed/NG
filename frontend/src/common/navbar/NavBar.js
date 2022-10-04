@@ -1,106 +1,116 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import Web3 from 'web3';
+import axios from '../api/http-common';
 import './NavBar.css';
-import {ethers} from 'ethers'
-
+import {useEffect} from 'react';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import NavButton from 'react-bootstrap/Button';
-import {
-  MDBBtn
-} from 'mdb-react-ui-kit';
+import Button from 'react-bootstrap/Button';
+import {NavLink} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom'
+import LOGO from '../../assets/img/logo2.jpg';
 
+function NavBar(){
 
-// import { fetchAccount } from '../../store/actions/thunks/account';
-// import { connectWallet } from '../../core/ethereum';
-
-
-
-function NavBar(props){
-
-    const [errorMessage, setErrorMessage] = useState(null);
     const [defaultAccount, setDefaultAccount] = useState(null);
-    const [userBalance, setUserBalance] = useState(null);
-    const [connButtonText, setConnButtonText] = useState('Connect Wallet');
-    const [disconnButton, setDisconnButton] = useState('Disconnect')
+    const [myRole, setMyRole] = useState(0);
+    const [IsConnected, setIsConnected] = useState(false);
+    const navigate = useNavigate();
 
 
-    const onConnectWallet = () => {
-       if(window.ethereum) {
-        window.ethereum.request({method: 'eth_requestAccounts'})
-        .then( result => {
-          accountChangeHandler(result[0]);
-          window.localStorage.setItem('wallet', result[0])
-        })
-       }else{
-        alert("Install MetaMask");
+    const detectCurrentProvider = () => {
+      let provider;
+      if (window.ethereum) {
+        provider = window.ethereum;
+      } else if (window.web3){
+        provider = window.web3.currentProvider;
+      } else{
+        alert("Please Install MetaMask");
         window.open('https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn',
          '_blank',
-         )
-        setErrorMessage("Install MetaMask");
-       }
-       console.log("클릭 확인")
+        )
+      }
+      return provider;
     }
 
-    const accountChangeHandler = (newAccount) => {
-      window.localStorage.setItem('wallet', newAccount);
-      setDefaultAccount(newAccount);
-      getUserBalance(newAccount.toString());
-      console.log({defaultAccount});
+    const onConnect = async() => {
+      try{
+        const currentProvider = detectCurrentProvider();
+        if ( currentProvider !== window.ethereum ){
+          console.log(
+            'Non-Ethereum browser detected. You should consider trying MetaMask!'
+          )
+        }
+        await currentProvider.request({ method: 'eth_requestAccounts' });
+        const web3 = new Web3(currentProvider);
+        const userAccount = await web3.eth.getAccounts();
+        const account = userAccount[0];
+        saveUserInfo(account);
+        console.log('account', account)
+        if(userAccount.length === 0) {
+          console.log('Please connect to metamask');
+        }
+      } catch (err){
+        console.log(
+          'There was an error fetching your accounts. Make sure your Ethereum client is configured correctly.'
+        )
+      }
+    }
+    // 로컬 스토리지에 계좌 저장(새로 고침해도 정보 저장)
+    const saveUserInfo = (account) => {
+      window.localStorage.setItem('wallet', (account));
+      setDefaultAccount(account);
+      setIsConnected(true);
     }
 
-    const getUserBalance = (address) => {
-      window.ethereum.request({method: 'eth_getBalance', params: [address, 'latest']})
-      .then(balance => {
-        setUserBalance(ethers.utils.formatEther(balance));
-      })
-    }
-
-    const chainChangedHandler = () => {
-      window.location.reload();
-    }
-
-    const offConnectWallet = () => {
-      window.localStorage.removeItem('wallet')
+    // 로컬 스토리지 계좌 삭제
+    const onDisconnect = () => {
+      window.localStorage.removeItem('wallet');
       setDefaultAccount(null);
-      setUserBalance(null);
-      console.log({defaultAccount});
+      setIsConnected(false);
+      alert('지갑 연결이 해제되었습니다.')
+      navigate('/');
     }
 
-    window.ethereum.on('accountsChanged', accountChangeHandler);
-
-    window.ethereum.on('chainChanged', chainChangedHandler)
-
-    // useEffect(() => {
-    //   window.ethereum.request({method: 'eth_requestAccounts'})
-    //   .then( result => {
-    //     window.localStorage.setItem('wallet', result[0]);
-    //     setDefaultAccount(result[0]);
-    //     setUserBalance(result[0]);
-    //   })
-    // }, []);
+    useEffect(() => {
+      window.ethereum.request({method: 'eth_requestAccounts'})
+      .then( result => {
+        window.localStorage.setItem('wallet', result[0]);
+        setDefaultAccount(result[0]);
+        axios.get(`company/${result[0]}`)
+        .then((res) => {
+          setMyRole(res.data.comPermit)
+        })
+        .catch(() => {})
+      })
+    }, []);
 
     return(
     <Navbar className="navbar" fixed="top" collapseOnSelect expand="lg" bg="dark" variant="dark">
-        <Navbar.Brand href="/">Nft Guarantee</Navbar.Brand>
+        <NavLink to="/">
+          <img src={LOGO} style={{marginLeft:20, height:60, width:60}}/>
+        </NavLink>
+        <Navbar.Brand style={{marginLeft:0}}href="/">Nft Guarantee</Navbar.Brand>
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
           </Nav>
           <Nav>
             <Nav.Link href="/aboutus">Abuout US</Nav.Link>
             <Nav.Link href="/searchnft">Search NFT</Nav.Link>
+            <Nav.Link href="/mynft">My NFT</Nav.Link>
             <div>
               {
-                window.localStorage.getItem('wallet')
-                ? <Nav.Link href="/mynft">My NFT</Nav.Link>
-                : <Nav.Link href="/brandregister">Brand Register</Nav.Link>
+                myRole !== 0
+                ? <Nav.Link href="/company">My Company</Nav.Link>
+                : <Nav.Link href="/brandregister">Brand Registration</Nav.Link>
               }
             </div>
           </Nav>
-            <div>
+            <div style={{marginRight:20}}>
               {
                 window.localStorage.getItem('wallet')
-                ? <MDBBtn className="connect-wallet" variant="outline-secondary" onClick={offConnectWallet}>{disconnButton}</MDBBtn>
-                : <MDBBtn className="connect-wallet" variant="outline-secondary" onClick={onConnectWallet}>{connButtonText}</MDBBtn>
+                ? <Button variant="primary" onClick={onDisconnect}>Disconnect</Button>
+                : <Button variant="primary" onClick={onConnect}>Connect Wallet</Button>
               }  
             </div>
         </Navbar.Collapse>

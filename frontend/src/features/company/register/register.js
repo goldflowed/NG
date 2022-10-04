@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import SideBar from "../sidebar/SideBar";
 import styled from "styled-components";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import ssafy from '../../../assets/img/ssafy.png';
-import Navbar from "../../../common/navbar/NavBar"
+import NavBar from "../../../common/navbar/NavBar";
 import { nftContract } from "../../../common/web3/web3Config"
+import axios from '../../../common/api/http-common'
 
 const ContainerDiv = styled.div`
   display: flex;
@@ -48,16 +49,18 @@ const Logo = styled.img`
 
 function Register() {
   const [productNumber, setPN] = useState("");
-  const [serialNumber, setSN] = useState("");
+  const [productName, setProductName] = useState("");
   const [makingDate, setMD] = useState("");
   const [country, setC] = useState("");
-  const brand = "ssafy"
+  const [imgUrl, setImgUrl] = useState("");
+  const [brand, setBrand] = useState("");
+  const [logoUrl, setLogoUrl] = useState('')
   const onPNHandler = (event) => {
     setPN(event.currentTarget.value);
   }
 
-  const onSNHandler = (event) => {
-    setSN(event.currentTarget.value);
+  const onProductNameHandler = (event) => {
+    setProductName(event.currentTarget.value);
   }
 
   const onMDHandler = (event) => {
@@ -68,30 +71,47 @@ function Register() {
     setC(event.currentTarget.value);
   }
 
+  const onImgUrlHandler = (event) => {
+    setImgUrl(event.currentTarget.value);
+  }
+
   const regist = async (e) => {
     e.preventDefault();
     
-    const { event } = await nftContract.methods
-      .mint(brand, productNumber, serialNumber, makingDate, country)
-      .send({ from: "0x7CfD7B7512ab7fdC90E4b85679C4945B8F6915bf" });
-
-
-    // console.log(brand)
-    // console.log(productNumber)
-    // console.log(serialNumber)
-    // console.log(makingDate)
-    // console.log(country)
+    await nftContract.methods
+      .addProduct(brand,productName, productNumber, makingDate, country)
+      .send({ from: window.localStorage.wallet })
+      .then((res) => {
+        const body = {"proNo": productNumber,
+                      "proUrl": imgUrl,};
+        axios.post(`product/create`, body)
+        .then((res) => console.log(res))
+        console.log(res)
+        alert('성공하였습니다.')});
   }
+
+  useEffect(() => {
+    axios.get(`company/${window.localStorage.wallet}`)
+    .then((res) => {
+      setBrand(res.data.comName)
+      setLogoUrl(res.data.comLogo)
+    })
+  },[])
 
   return (
     <ContainerDiv>
-      <Navbar/>
+      <NavBar/>
       <SideBar/>
       <MainDiv>
-        <TitleP>NFT 인증서 발급</TitleP><Hr/>
+        <TitleP>제품 등록</TitleP><Hr/>
         <InfoDiv>
           <Form style={{width:"1300px",}}>
-            <Logo style={{display:"block", margin:"auto"}} src={ssafy}/>
+            <Logo style={{display:"block", margin:"auto"}} src={logoUrl}/>
+
+            <Form.Group style={{display:"flex", justifyContent:"center", marginTop: "35px", marginBottom: "35px"}} >
+              <Form.Label style={{marginRight:"10px"}}>제품 이름: </Form.Label>
+              <Form.Control style={{width:"500px"}} type="text" value={productName} onChange={onProductNameHandler}/>
+            </Form.Group>
 
             <Form.Group style={{display:"flex", justifyContent:"center", marginTop: "35px", marginBottom: "35px"}} >
               <Form.Label style={{marginRight:"10px"}}>제품 번호: </Form.Label>
@@ -99,18 +119,18 @@ function Register() {
             </Form.Group>
 
             <Form.Group style={{display:"flex", justifyContent:"center", marginTop: "35px", marginBottom: "35px"}} >
-              <Form.Label style={{marginRight:"10px"}}>일련 번호: </Form.Label>
-              <Form.Control style={{width:"500px"}} type="text" value={serialNumber} onChange={onSNHandler}/>
-            </Form.Group>
-
-            <Form.Group style={{display:"flex", justifyContent:"center", marginTop: "35px", marginBottom: "35px"}} >
-              <Form.Label style={{marginRight:"10px"}}>제조 일자: </Form.Label>
+              <Form.Label style={{marginRight:"35px"}}>출고일: </Form.Label>
               <Form.Control style={{width:"500px"}} type="text" value={makingDate} onChange={onMDHandler}/>
             </Form.Group>
 
             <Form.Group style={{display:"flex", justifyContent:"center", marginTop: "35px", marginBottom: "35px"}} >
               <Form.Label style={{marginRight:"35px"}}>제조국: </Form.Label>
               <Form.Control style={{width:"500px"}} type="text" value={country} onChange={onCHandler}/>
+            </Form.Group>
+
+            <Form.Group style={{display:"flex", justifyContent:"center", marginTop: "35px", marginBottom: "35px"}} >
+              <Form.Label style={{marginRight:"35px"}}>이미지: </Form.Label>
+              <Form.Control style={{width:"500px"}} type="text" value={imgUrl} onChange={onImgUrlHandler}/>
             </Form.Group>
 
             <Button style={{display:"block", margin:"auto"}} variant="primary" type="submit" onClick={regist}>

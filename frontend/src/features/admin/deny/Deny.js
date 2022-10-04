@@ -1,8 +1,9 @@
-import React, {useEffect} from "react";
-import {useNavigate}from 'react-router-dom'
+import React, { useState, useEffect, useMemo } from "react";
 import SideBar from "../sidebar/SideBar";
 import styled from "styled-components";
 import NavBar from "../../../common/navbar/NavBar";
+import axios from '../../../common/api/http-common';
+import Table from './table';
 
 const ContainerDiv = styled.div`
   width:1900px;
@@ -42,13 +43,46 @@ const TitleP = styled.p`
   margin-left: 20px;
   `
 
-function Deny() {
-  const history = useNavigate();
+ const TableDiv = styled.div`
+  margin:auto;
+  width:1000px;
+  max-height: 750px;
+  overflow-y: auto;
+  display:flex;
+  flex-direction:column;
+  `
+function Home() {
+  const columns = useMemo(
+    () => [
+      {
+        accessor: "num",
+        Header: "번호",
+      },
+      {
+        accessor: "comName",
+        Header: "기업이름",
+      },
+      {
+        accessor: "comWallet",
+        Header: "지갑주소",
+      },
+    ],
+    []
+  );
+
+  const [companies, setCompanies] = useState([])
+  
   useEffect(() => {
-      if (false) {
-        history('/admin/approve')
+    var i = 1;
+    axios.post(`/company/list/3`).then((response) => {
+      for ( const res of response.data ) {
+        res['num'] = i;
+        i = i+1;
       }
-    }, []);
+      setCompanies(response.data)
+    })
+  }, []);
+
 
   return (
     <ContainerDiv>
@@ -57,9 +91,10 @@ function Deny() {
       <MainDiv>
       <TitleP>거부 기업 목록</TitleP><Hr/>
         <InfoDiv>
+        <TableDiv><Table columns={columns} data={companies}/></TableDiv>
         </InfoDiv>
       </MainDiv>
     </ContainerDiv>
   )
 }
-export default Deny;
+export default Home;

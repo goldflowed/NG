@@ -1,17 +1,20 @@
-const isCompany = () => {
+import axios from '../api/http-common'
 
-    window.ethereum.request({method: 'eth_requestAccounts'})
-        .then( result => {
-          window.localStorage.setItem('wallet', result[0]);
-        })
+const isCompany = async () => {
+
+  window.ethereum.request({method: 'eth_requestAccounts'})
+      .then( result => {
+        window.localStorage.setItem('wallet', result[0]);
+      })
   
-    const walletAddress = window.localStorage.getItem('wallet')
-    if (walletAddress === "0x69f69c1c64e68c81da2a02686e3e4d86c657eace") {
+  axios.get(`company/${window.localStorage.wallet}`)
+  .then((res) => {
+    if (res.data.comPermit === 2 ) {
       return true
     } else {
       return false
     }
-  };
-  
-  export default isCompany;
-  
+  })
+};
+
+export default isCompany;
