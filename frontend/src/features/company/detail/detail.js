@@ -174,9 +174,6 @@ function Detail() {
 
     }
 
-
-
-
   }
 
   useEffect(() => {
