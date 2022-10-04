@@ -72,18 +72,18 @@ function NavBar(){
       navigate('/');
     }
 
-    // useEffect(() => {
-    //   window.ethereum.request({method: 'eth_requestAccounts'})
-    //   .then( result => {
-    //     window.localStorage.setItem('wallet', result[0]);
-    //     setDefaultAccount(result[0]);
-    //     axios.get(`company/${result[0]}`)
-    //     .then((res) => {
-    //       setMyRole(res.data.comPermit)
-    //     })
-    //     .catch(() => {})
-    //   })
-    // }, []);
+    useEffect(() => {
+      window.ethereum.request({method: 'eth_requestAccounts'})
+      .then( result => {
+        window.localStorage.setItem('wallet', result[0]);
+        setDefaultAccount(result[0]);
+        axios.get(`company/${result[0]}`)
+        .then((res) => {
+          setMyRole(res.data.comPermit)
+        })
+        .catch(() => {})
+      })
+    }, []);
 
     return(
     <Navbar className="navbar" fixed="top" collapseOnSelect expand="lg" bg="dark" variant="dark">

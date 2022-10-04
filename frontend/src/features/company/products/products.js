@@ -101,7 +101,6 @@ function Products() {
           <Table columns={columns} data={products}/>
         </TableDiv>
       </MainDiv>
-      <Footer/>
     </ContainerDiv>
   )
 }
