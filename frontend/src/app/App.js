@@ -29,11 +29,13 @@ function App() {
         <Route exact path="/mynft/:serialNo" element={ <MyNftDetail/>} />
         <Route exact path="/brandregister" element={ <BrandRegister/> } />
 
+
         <Route exact path="/company" element={ <CompanyMain/>}/>
         <Route exact path="/company/register" element={ <CompanyRegister/> }/>
         <Route exact path="/company/products" element={ <Products/>}/>
         <Route exact path="/company/products/:productCode" element={ <Detail/>}/>
         <Route exact path="/company/products/:productCode/:productNum" element={ <Product/>}/>
+
         
         <Route exact path="/admin" element={<AdminMain/>}/>
         <Route exact path="/admin/approve" element={<Approve/>}/>
