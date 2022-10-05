@@ -32,23 +32,31 @@ function AboutUs() {
             <div className='section-2 p-4' ref={ section2 }>                
                 <div className="">
                     <p className="m-3 text-start fs-1 fw-bold">우리의 미션</p>
-                    <p className="m-3 fs-4 text-start">블록체인 솔루션을 통해서 투명성과 추적성을 제공합니다.
-                    명품의 선순환적인 거래 및 위조방지를 위해 기술을 제공합니다.</p> 
+                    <p className="m-3 fs-4 text-start">
+                        블록체인 솔루션을 통해서 <strong>투명성</strong>과 <strong>추적성</strong>을 제공합니다.
+                        명품의 <strong>선순환적인 거래 및 위조방지</strong>를 위해 기술을 제공합니다.
+                    </p> 
                 </div>
                 <div className=" border-top border-light">
                     <p className="m-3 text-end fs-1 fw-bold">우리의 비전</p>
-                    <p className="m-3 fs-4 text-end">소비자 및 기업의 신뢰성과 진정성 보장을 가장 중요하게 생각합니다.
-                    위조 및 회색시장 방지, 선순환적인 경제활동을 장려하기 위해 노력합니다.</p>
+                    <p className="m-3 fs-4 text-end">
+                        소비자 및 기업의 <strong>신뢰성과 진정성 보장</strong>을 가장 중요하게 생각합니다.
+                        <strong>위조 및 회색시장 방지</strong>, 선순환적인 경제활동을 장려하기 위해 노력합니다.
+                    </p>
                 </div>
                 <div className=" border-top border-light"> 
                     <p className="m-3 text-start fs-1 fw-bold">우리의 가치</p>
-                    <p className="m-3 fs-4 text-start">고객 경험에 새로운 패러다임을 제공
-                    무한한 확장 가능성, 브랜드/물건</p>   
+                    <p className="m-3 fs-4 text-start">
+                        고객 경험에 <strong>새로운 패러다임</strong>을 제공합니다.
+                        브랜드나 제품에 국한되지 않는 <strong>무한한 확장 가능성</strong>을 목표합니다.
+                    </p>   
                 </div>                
             </div>
             <div className='section-3'>
                 <div ref={ section3 }>
-                    <h1> 우리 소개</h1>
+                    <div className="m-5">
+                        <h1> 우리 소개</h1>
+                    </div>
                     <div className="introduce">
                         <div className="team1">
                             <div className="teammate">
