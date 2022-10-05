@@ -102,7 +102,7 @@ function MyNft() {
                                         <div className="col-lg-3 mt-4" style={{ minWidth: 300, maxWidth: 400 }}>
                                             <MDBCard className="mynft-card">
                                                 <MDBCardBody>
-                                                    <img src={productImg} alt="productImage" style={{ width: "20rem" }} />
+                                                    <img src={token[2]} alt="productImage" style={{ width: "20rem" }} />
                                                     <br /><br />
                                                     {/* <MDBCardTitle>토큰아이디 : {token[1]}</MDBCardTitle> */}
                                                     <MDBCardTitle>브랜드 이름 : {token[0].product.brandNm}</MDBCardTitle>

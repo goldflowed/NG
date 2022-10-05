@@ -12,98 +12,105 @@ import Footer from "../../../common/footer/Footer"
 
 
 function BrandRegister() {
-    const history = useNavigate();
+  const history = useNavigate();
 
-    // 이메일 유효성 검사
-    const [emailMessage, setEmailMessage] = useState("")
-    const [isEmail, setIsEmail] = useState(false)
+  // 이메일 유효성 검사
+  const [emailMessage, setEmailMessage] = useState("")
+  const [isEmail, setIsEmail] = useState(false)
 
-    //유리
-    const [comName, setComName] = useState("")
-    const [comRegNum, setComRegNum] = useState("")
-    const [comWallet, setComWallet] = useState(window.localStorage.getItem('wallet'))
-    const [comEmail, setComEmail] = useState("")
-    const [comTel, setComTel] = useState("")
-    const [comAddress, setComAddress] = useState("")
-    const [comLogo, setComLogo] = useState()
+  //유리
+  const [comName, setComName] = useState("")
+  const [comRegNum, setComRegNum] = useState("")
+  const [comWallet, setComWallet] = useState(window.localStorage.getItem('wallet'))
+  const [comEmail, setComEmail] = useState("")
+  const [comTel, setComTel] = useState("")
+  const [comAddress, setComAddress] = useState("")
+  const [comLogo, setComLogo] = useState()
 
-    useEffect(() => {
-        axios.get(`company/${window.localStorage.wallet}`)
-            .then(() => {
-                alert('이미 가입되어있거나 승인 대기중인 계정입니다.')
-                history('/')
-            })
-    })
-
-    // 이메일 확인 정규식
-    const emailRegEx = /^[A-Za-z0-9]([-_.]?[A-Za-z0-9])*@[A-Za-z0-9]([-_.]?[A-Za-z0-9])*\.[A-Za-z]{2,3}$/i;
-    const checkEmail = (e) => {
-        const emailCurrent = e.target.value;
-
-        if (!emailRegEx.test(emailCurrent)) {
-            setEmailMessage('올바른 이메일을 입력해주세요.')
-            setIsEmail(false)
-        } else {
-            setEmailMessage('')
-            setIsEmail(true)
-        }
-    }
-
-    const handlerComName = (e) => {
-        setComName(e.target.value)
-    }
-
-    const handlerComRegNum = (e) => {
-        setComRegNum(e.target.value)
-    }
-
-    const handlerComEmail = (e) => {
-        setComEmail(e.target.value)
-    }
-
-    const handlerComTel = (e) => {
-        setComTel(e.target.value)
-    }
-
-    const handlerComAddress = (e) => {
-        setComAddress(e.target.value)
-    }
-
-    const handlerComLogo = (e) => {
-        setComLogo(e.target.files[0])
-    }
-
-    function onSubmit(e) {
-        // e.preventDefault()
-        const formData = new FormData()
-        formData.append('comName', comName)
-        formData.append('comRegNum', comRegNum)
-        formData.append('comWallet', comWallet)
-        formData.append('comEmail', comEmail)
-        formData.append('comAddress', comAddress)
-        formData.append('comTel', comTel)
-        formData.append('comLogo', comLogo)
-
-        axios.post("company/create/", formData, {
-            headers: {
-                'Content-Type': 'multipart/form-data'
-            }
-        })
-            .then((res) => {
-                console.log(res);
-            })
-            .catch((err) => {
-                if (!err.response) {
-                    alert(err);
-                } else {
-                    alert(err.response.date)
-                }
-            })
-        alert("브랜드 회원가입 신청 완료!")
+  useEffect(() => {
+    axios.get(`company/${window.localStorage.wallet}`)
+      .then(() => {
+        alert('이미 가입되어있거나 승인 대기중인 계정입니다.')
         history('/')
-    }
+      })
+  })
 
-    return (
+  // 이메일 확인 정규식
+  const emailRegEx = /^[A-Za-z0-9]([-_.]?[A-Za-z0-9])*@[A-Za-z0-9]([-_.]?[A-Za-z0-9])*\.[A-Za-z]{2,3}$/i;
+  const checkEmail = (e) => {
+    const emailCurrent = e.target.value;
+
+    if (!emailRegEx.test(emailCurrent)) {
+      setEmailMessage('올바른 이메일을 입력해주세요.')
+      setIsEmail(false)
+    } else {
+      setEmailMessage('')
+      setIsEmail(true)
+    }
+  }
+
+  const handlerComName = (e) => {
+    setComName(e.target.value)
+  }
+
+  const handlerComRegNum = (e) => {
+    setComRegNum(e.target.value)
+  }
+
+  const handlerComEmail = (e) => {
+    setComEmail(e.target.value)
+  }
+
+  const handlerComTel = (e) => {
+    setComTel(e.target.value)
+  }
+
+  const handlerComAddress = (e) => {
+    setComAddress(e.target.value)
+  }
+
+  const handlerComLogo = (e) => {
+    setComLogo(e.target.files[0])
+  }
+
+  function onSubmit(e) {
+    // e.preventDefault()
+    const formData = new FormData()
+    formData.append('comName', comName)
+    formData.append('comRegNum', comRegNum)
+    formData.append('comWallet', comWallet)
+    formData.append('comEmail', comEmail)
+    formData.append('comAddress', comAddress)
+    formData.append('comTel', comTel)
+    formData.append('comLogo', comLogo)
+
+    axios.post("company/create/", formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        if (!err.response) {
+          alert(err);
+        } else {
+          alert(err.response.date)
+        }
+      })
+    alert("브랜드 회원가입 신청 완료!")
+    history('/')
+  }
+
+  return (
+    <div>
+      <Navbar />
+      <div className="brandregister text-center">
+        {/* <pre>{JSON.stringify(formValues, undefined, 2)}</pre> */}
+        <h1>기업 회원 가입</h1>
+        <br />
+        <p>저희 서비스를 이용하기 위해서는, 먼저 서비스 가입을 요청해야 합니다. 아래의 정보를 입력해서 제출해주세요.</p>
         <div>
             <Navbar />
             <div className="brandregister text-center">

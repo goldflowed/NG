@@ -47,6 +47,11 @@ function SearchNft() {
             .getTokenIdFromTxnHash(txnHash).call()
         .then((res) => console.log('토큰아이디 : ', res))
 
+        console.log(tokenId);
+        if (tokenId === '0') {
+            alert('존재하지 않는 해시입니다.')
+            return
+        }
         await settokenId(tokenId);
         // console.log('tokenId', tokenId)
 

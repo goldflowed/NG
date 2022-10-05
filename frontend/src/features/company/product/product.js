@@ -22,6 +22,8 @@ import Button from 'react-bootstrap/Button';
 import './product.css'
 import axios from "../../../common/api/http-common";
 
+import ipfs_apis from "../../../common/api/ipfs";
+
 const ContainerDiv = styled.div`
   display: flex;
   flex-direction: row;
@@ -154,7 +156,7 @@ function Product() {
     console.log(state[0].product.productNo);
     axios.get(`product/${state[0].product.productNo}`)
       .then((res) => {
-        setProductImg(res.data.proUrl)
+        setProductImg(ipfs_apis.https_public.concat(res.data.proUrl))
       })
     getDetail();
   }, [])
