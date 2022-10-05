@@ -44,6 +44,9 @@ function detailnft() {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const [totalPeriod, settotalperiod] = useState(0);
 
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const [txnHash, setTxnHash] = useState()
+
   async function getDetail() {
     console.log('tokenInfo[2]', tokenInfo[2]);
     setproductImg(tokenInfo[2]);
@@ -86,6 +89,7 @@ function detailnft() {
       // transaction hash
       const transactions = await block.transactions[0];
       console.log('transactions', transactions)
+      setTxnHash(transactions)
 
       //////////////////////////////////////////////////////// 와 안되노
       // token ID와 transactions 매칭
@@ -180,6 +184,9 @@ function detailnft() {
             </MDBCardBody>
           </MDBCard>
         </div>
+      </div>
+      <div className="table-title">
+        해시 값: {txnHash}
       </div>
 
       <div className="table-title">
