@@ -44,7 +44,9 @@ const modal = (props) => {
         const TokenHistory = await nftContract.methods.getTokenHistory(tokenId).call();
         await setTokenHistory(TokenHistory);
         
-        const DectokenHistory = await Number(TokenHistory[0].blockNumber);
+        const TokenHisLength = TokenHistory.length-1;
+        console.log('TokenHisLength', TokenHisLength);
+        const DectokenHistory = await Number(TokenHistory[TokenHisLength].blockNumber);
     
         // TokenHistory 16진수로 변환
         const hexHistory = await DectokenHistory.toString(16);
@@ -63,8 +65,8 @@ const modal = (props) => {
     
         // transaction hash
         const transactions = await block.transactions[0];
-        console.log('transactions', transactions)
-    
+        console.log('transactions', transactions);
+        console.log('tokenId', tokenId);
         // setTxnHashToTokenId
         await nftContract.methods.setTxnHashToTokenId(transactions, tokenId).send({from:from})
 
@@ -100,12 +102,14 @@ const modal = (props) => {
                   </div>
                 </div>
                 <br/>
-                <MDBInput style={{width:'100%'}}
+                <div className="detail-input">
+                <MDBInput
                           // label='받는 분의 주소를 정확히 입력해 주세요.'
                           id='form1'
                           type='text'
                           value = {sendAddress}
                           onChange={onAddHandler} />
+                </div>
                 <div style={{marginLeft:120, marginTop:5, color:'red'}}>받는 분의 주소를 정확히 입력해주세요.</div>
 
                 </main>

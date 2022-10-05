@@ -2,7 +2,7 @@ import React from 'react';
 import './modal.css';
 import { useState } from "react"
 import { MDBInput } from 'mdb-react-ui-kit';
-import { nftContract } from "../../../common/web3/web3Config"
+import { nftContract, web3 } from "../../../common/web3/web3Config"
 import { renderMatches } from 'react-router-dom';
 import {useNavigate} from 'react-router-dom'
 
@@ -18,6 +18,9 @@ const modal = (props) => {
     const onAddHandler = (event) => {
         setsendAddress(event.currentTarget.value);
     }
+
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const [tokenHistory, setTokenHistory] = useState([]);
 
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const navigate = useNavigate();
@@ -37,6 +40,36 @@ const modal = (props) => {
         try{
         await nftContract.methods.transferNG(from, to, tokenId, year, month)
         .send({from:from});
+
+        const TokenHistory = await nftContract.methods.getTokenHistory(tokenId).call();
+        await setTokenHistory(TokenHistory);
+        
+        const TokenHisLength = TokenHistory.length-1;
+        console.log('TokenHisLength', TokenHisLength);
+        const DectokenHistory = await Number(TokenHistory[TokenHisLength].blockNumber);
+    
+        // TokenHistory 16진수로 변환
+        const hexHistory = await DectokenHistory.toString(16);
+        console.log('16진수 변환', hexHistory);
+        const realhex = '0x'+ hexHistory;
+        console.log('realhex', realhex);
+    
+         // string to number
+         const numhistory = await Number(realhex);
+         console.log('numhistory', numhistory);
+         console.log('numhistory타입', typeof(numhistory))
+    
+        // getblock을 통한 transactions 구하기 
+        const block = await web3.eth.getBlock(numhistory);
+        console.log(block);
+    
+        // transaction hash
+        const transactions = await block.transactions[0];
+        console.log('transactions', transactions);
+        console.log('tokenId', tokenId);
+        // setTxnHashToTokenId
+        await nftContract.methods.setTxnHashToTokenId(transactions, tokenId).send({from:from})
+
         alert('전송이 완료되었습니다.');
         navigate('/mynft');
       } catch(err){
@@ -58,23 +91,24 @@ const modal = (props) => {
             <main>
                 <div className="modal-overall">
                   <div className="modal-image">
-                    상품 이미지
+                    <img src={props.ImgUrl} alt="productImage" style={{width:"13rem", height:"13rem"}}/>
                   </div>
                   <div>
                     <p>브랜드명 : {props.brandNm}</p>
                     <p>상품명 : {props.productName}</p>
                     <p>시리얼번호 : {props.serialNo}</p>
-                    <p>제조일 및 생산 국가 : {props.mfd} {props.madeIn} </p>
+                    <p>제조 일자 : {props.mfd}</p>
+                    <p>생산 국가 : {props.madeIn}</p>
                   </div>
                 </div>
                 <br/>
-                <MDBInput style={{width:400}}
+                <MDBInput style={{width:'100%'}}
                           // label='받는 분의 주소를 정확히 입력해 주세요.'
                           id='form1'
                           type='text'
                           value = {sendAddress}
                           onChange={onAddHandler} />
-                <div style={{marginLeft:55, marginTop:5, color:'red'}}>받는 분의 주소를 정확히 입력해주세요.</div>
+                <div style={{marginLeft:120, marginTop:5, color:'red'}}>받는 분의 주소를 정확히 입력해주세요.</div>
 
                 </main>
             <footer>

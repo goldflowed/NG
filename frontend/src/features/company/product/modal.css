@@ -68,9 +68,13 @@
     justify-content: space-around;
   }
 
-  /* .form-outline {
-    width: 100%;
-  } */
+  .detail-input {
+
+  }
+
+  .form-outline {
+    width: 35.5rem;
+  }
 
   @keyframes modal-show {
     from {

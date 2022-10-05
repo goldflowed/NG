@@ -43,3 +43,8 @@
     color: grey;
     font-family: 'MaruBuri-Regular';
 }
+
+.myButton{
+    display: flex;
+    justify-content: flex-end;
+}
