@@ -64,27 +64,24 @@ function AboutUs() {
                                     <img src={require("../../../assets/img/ham.jpg")}
                                     style={{ height:"100%", width:"100%" }}/>
                                 </div>
-                                <p className="my-2">팀원1</p>
-                                <p className="my-2">파트 : 프론트엔드</p>
-                                <p className="my-2">솰라솰라</p>
+                                <p className="my-2">유도경</p>
+                                <p className="my-2">Front-End</p>
                             </div>
                             <div className="teammate">
                                 <div className="teammate-img">
                                     <img src={require("../../../assets/img/ham.jpg")}
                                     style={{ height:"100%", width:"100%" }}/>
                                 </div>
-                                <p className="my-2">팀원2</p>
-                                <p className="my-2">파트 : 프론트엔드</p>
-                                <p className="my-2">솰라솰라</p>
+                                <p className="my-2">강병수</p>
+                                <p className="my-2">Front-End</p>
                             </div>
                             <div className="teammate">
                                 <div className="teammate-img">
                                     <img src={require("../../../assets/img/ham.jpg")}
                                     style={{ height:"100%", width:"100%" }}/>
                                 </div>
-                                <p className="my-2">팀원3</p>
-                                <p className="my-2">파트 : 프론트엔드</p>
-                                <p className="my-2">솰라솰라</p>
+                                <p className="my-2">김대영</p>
+                                <p className="my-2">Back-End</p>
                             </div>
                         </div>
                         <div className="team2">
@@ -93,18 +90,16 @@ function AboutUs() {
                                     <img src={require("../../../assets/img/ham.jpg")}
                                     style={{ height:"100%", width:"100%" }}/>
                                 </div>
-                                <p className="my-2">팀원4</p>
-                                <p className="my-2">파트 : 프론트엔드</p>
-                                <p className="my-2">솰라솰라</p>
+                                <p className="my-2">김유리</p>
+                                <p className="my-2">Blockchain</p>
                             </div>
                             <div className="teammate">
                                 <div className="teammate-img">
                                     <img src={require("../../../assets/img/ham.jpg")}
                                     style={{ height:"100%", width:"100%" }}/>
                                 </div>
-                                <p className="my-2">팀원5</p>
-                                <p className="my-2">파트 : 프론트엔드</p>
-                                <p className="my-2">솰라솰라</p>
+                                <p className="my-2">서광석</p>
+                                <p className="my-2">Blockchain</p>
                             </div>
                         </div>
                     </div>
