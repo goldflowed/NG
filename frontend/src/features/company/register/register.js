@@ -119,7 +119,7 @@ function Register() {
       <NavBar />
       <SideBar />
       <MainDiv>
-        <TitleP>제품 등록</TitleP><Hr />
+        <TitleP>제품 등록</TitleP>
         <InfoDiv>
           <Form encType="multipart/form-data">
 
@@ -148,8 +148,8 @@ function Register() {
               <Form.Control placeholder="이미지 주소를 넣어주세요." style={{width:"500px"}} type="file" onChange={onimgFileHandler} />
             </Form.Group>
 
-            <Button style={{display:"block", margin:"auto"}} variant="primary" type="submit" onClick={regist}>
-              발급
+            <Button style={{display:"block", marginLeft: '33.5rem'}} variant="primary" type="submit" onClick={regist}>
+              등록
           </Button>  
           </Form>
         </InfoDiv>
