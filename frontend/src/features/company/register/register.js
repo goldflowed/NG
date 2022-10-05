@@ -123,38 +123,38 @@ function Register() {
         <InfoDiv>
           <Form encType="multipart/form-data">
 
-          <Form.Group style={{display:"flex", justifyContent:"center", marginTop: "35px", marginBottom: "35px"}} >
+            <Form.Group style={{ display: "flex", justifyContent: "center", marginTop: "35px", marginBottom: "35px" }} >
               {/* <Form.Label style={{ marginRight: "10px" }}>제품 이름: </Form.Label> */}
-              <Form.Control placeholder="제품 이름을 입력해주세요." style={{width:"500px"}} type="text" value={productName} onChange={onProductNameHandler}/>
+              <Form.Control placeholder="제품 이름을 입력해주세요." style={{ width: "500px" }} type="text" value={productName} onChange={onProductNameHandler} />
             </Form.Group>
 
-            <Form.Group style={{display:"flex", justifyContent:"center", marginTop: "35px", marginBottom: "35px"}} >
+            <Form.Group style={{ display: "flex", justifyContent: "center", marginTop: "35px", marginBottom: "35px" }} >
               {/* <Form.Label style={{ marginRight: "10px" }}>제품 번호: </Form.Label> */}
-              <Form.Control placeholder="제품 번호를 입력해주세요." style={{width:"500px"}} type="text" value={productNumber} onChange={onPNHandler}/>
+              <Form.Control placeholder="제품 번호를 입력해주세요." style={{ width: "500px" }} type="text" value={productNumber} onChange={onPNHandler} />
             </Form.Group>
 
-            <Form.Group style={{display:"flex", justifyContent:"center", marginTop: "35px", marginBottom: "35px"}} >
+            <Form.Group style={{ display: "flex", justifyContent: "center", marginTop: "35px", marginBottom: "35px" }} >
               {/* <Form.Label style={{ marginRight: "35px" }}>출고일: </Form.Label> */}
-              <Form.Control placeholder="출고일을 입력해주세요." style={{width:"500px"}} type="text" value={makingDate} onChange={onMDHandler}/>
+              <Form.Control placeholder="출고일을 입력해주세요." style={{ width: "500px" }} type="text" value={makingDate} onChange={onMDHandler} />
             </Form.Group>
 
-            <Form.Group style={{display:"flex", justifyContent:"center", marginTop: "35px", marginBottom: "35px"}} >
+            <Form.Group style={{ display: "flex", justifyContent: "center", marginTop: "35px", marginBottom: "35px" }} >
               {/* <Form.Label style={{ marginRight: "35px" }}>제조국: </Form.Label> */}
-              <Form.Control placeholder="제조국을 입력해주세요." style={{width:"500px"}} type="text" value={country} onChange={onCHandler}/>
+              <Form.Control placeholder="제조국을 입력해주세요." style={{ width: "500px" }} type="text" value={country} onChange={onCHandler} />
             </Form.Group>
 
-            <Form.Group style={{display:"flex", justifyContent:"center", marginTop: "35px", marginBottom: "35px"}} >
+            <Form.Group style={{ display: "flex", justifyContent: "center", marginTop: "35px", marginBottom: "35px" }} >
               {/* <Form.Label style={{ marginRight: "35px" }}>이미지: </Form.Label> */}
-              <Form.Control placeholder="이미지 주소를 넣어주세요." style={{width:"500px"}} type="file" onChange={onimgFileHandler} />
+              <Form.Control placeholder="이미지 주소를 넣어주세요." style={{ width: "500px" }} type="file" onChange={onimgFileHandler} />
             </Form.Group>
 
-            <Button style={{display:"block", marginLeft: '33.5rem'}} variant="primary" type="submit" onClick={regist}>
+            <Button style={{ display: "block", marginLeft: '33.5rem' }} variant="primary" type="submit" onClick={regist}>
               등록
-          </Button>  
+            </Button>
           </Form>
         </InfoDiv>
       </MainDiv>
-      <Footer/>
+      <Footer />
     </ContainerDiv>
   )
 }
