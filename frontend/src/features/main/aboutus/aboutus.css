@@ -91,36 +91,37 @@
 
 .teammate {
   margin: 1rem;
-  width: 320px;
-  height: 450px;
-  
+  width: 150px;
+  height: 240px;
+
   background-color: #D9D9D9;
 }
 
 .teammate-img {
-  height:70%;
+  height: 70%;
   object-fit: cover;
 }
 
 /* 애니메이션부 */
 @keyframes fadeInUp {
   from {
-    transform: translate3d(0,40px,0);
+    transform: translate3d(0, 40px, 0);
   }
+
   to {
-    transform: translate3d(0,0,0);
+    transform: translate3d(0, 0, 0);
     opacity: 1;
   }
 }
 
 @-webkit-keyframes fadeInUp {
   from {
-      transform: translate3d(0,40px,0)
+    transform: translate3d(0, 40px, 0)
   }
 
   to {
-      transform: translate3d(0,0,0);
-      opacity: 1
+    transform: translate3d(0, 0, 0);
+    opacity: 1
   }
 }
 
