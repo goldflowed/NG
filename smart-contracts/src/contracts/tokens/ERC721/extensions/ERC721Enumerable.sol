@@ -47,8 +47,6 @@ contract ERC721Enumerable is IERC721Enumerable, ERC721 {
         _ownedTokens[_from].pop();
 
         _addTokensToOwnerEnumeration(_to, _tokenId);
-        // _ownedTokens[_to].push(_tokenId);
-        // _ownedTokensIndex[_tokenId] = _ownedTokens[_to].length - 1;
     }
 
     //NG에서 _allTokensIndex에 접근하기 위해 추가함 (function transfer)
@@ -122,10 +120,6 @@ contract ERC721Enumerable is IERC721Enumerable, ERC721 {
     }
 
     function _addTokensToOwnerEnumeration(address to, uint256 tokenId) private {
-        // EXERCISE - CHALLENGE - DO THESE THREE THINGS:
-        // 1. add address and token id to the _ownedTokens
-        // 2. _ownedTokensIndex tokenId set to address of ownedTokens position
-        // 3. we want to execute the function with minting
         _ownedTokensIndex[tokenId] = _ownedTokens[to].length;
         _ownedTokens[to].push(tokenId);
     }

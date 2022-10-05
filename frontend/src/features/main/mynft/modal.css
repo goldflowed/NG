@@ -11,7 +11,6 @@
   .modal button {
     outline: none;
     cursor: pointer;
-    border: 0;
   }
   .modal > section {
     width: 90%;
@@ -39,6 +38,7 @@
     text-align: center;
     color: #999;
     background-color: transparent;
+    border: 0;
   }
   .modal > section > main {
     padding: 16px;
@@ -51,8 +51,8 @@
   }
   .modal > section > footer button {
     padding: 6px 12px;
-    color: #fff;
-    background-color: #6c757d;
+    /* color: #fff; */
+    /* background-color: #6c757d; */
     border-radius: 5px;
     font-size: 13px;
   }
@@ -62,6 +62,18 @@
     /* 팝업이 열릴때 스르륵 열리는 효과 */
     animation: modal-bg-show 0.3s;
   }
+
+  .modal-overall {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .modal-image {
+    width: 150px;
+    height: 150px;
+    background-color: grey;
+  }
+
   @keyframes modal-show {
     from {
       opacity: 0;

@@ -41,6 +41,33 @@
 }
 
 #NGimg {
-    width: 600px;
-    height: 500px;
+    width: 90%;
+    height: 80%;
+    margin-top: 50px;
+    margin-left: 25px;
+}
+
+/* Tab Contents */
+.benefitCard {
+    width: 30%;
+    height: 90%;
+    margin-left: 3%;
+}
+
+/* benefit Tab */
+.benefitImg {
+    width: 70%;
+    margin: auto;
+    margin-top: 20px;
+}
+
+.customerCardTitle, .brandCardTitle {
+    text-align: center;
+    font-size: xx-large;
+    margin-bottom: 10px;
+}
+
+.customerCardBody, .brandCardBody {
+    text-align: center;
+    font-size: medium;
 }
