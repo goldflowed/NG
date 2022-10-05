@@ -95,7 +95,7 @@ function NavBar(){
           <Nav className="me-auto">
           </Nav>
           <Nav>
-            <Nav.Link href="/aboutus">Abuout US</Nav.Link>
+            <Nav.Link href="/aboutus">About US</Nav.Link>
             <Nav.Link href="/searchnft">Search NFT</Nav.Link>
             <Nav.Link href="/mynft">My NFT</Nav.Link>
             <div>

@@ -21,7 +21,7 @@ function AboutUs() {
         <NavBar/>
             <div className='section-1'>
                 <video autoPlay muted loop id="video">
-                    <source src={ require('../../../assets/img/BGV1.mp4') } type="video/mp4" />
+                    <source src={ require('../../../assets/img/aboutus/BGV1.mp4') } type="video/mp4" />
                 </video>
                 <div className="content1 text-center" ref={ section1 }>
                     <div className="main1">
@@ -61,7 +61,7 @@ function AboutUs() {
                         <div className="team1">
                             <div className="teammate">
                                 <div className="teammate-img">
-                                    <img src={require("../../../assets/img/ham.jpg")}
+                                    <img src={require("../../../assets/img/aboutus/captain.jpg")}
                                     style={{ height:"100%", width:"100%" }}/>
                                 </div>
                                 <p className="my-2">유도경</p>
@@ -69,7 +69,7 @@ function AboutUs() {
                             </div>
                             <div className="teammate">
                                 <div className="teammate-img">
-                                    <img src={require("../../../assets/img/ham.jpg")}
+                                    <img src={require("../../../assets/img/aboutus/byeongsoo.jpg")}
                                     style={{ height:"100%", width:"100%" }}/>
                                 </div>
                                 <p className="my-2">강병수</p>
@@ -77,7 +77,7 @@ function AboutUs() {
                             </div>
                             <div className="teammate">
                                 <div className="teammate-img">
-                                    <img src={require("../../../assets/img/ham.jpg")}
+                                    <img src={require("../../../assets/img/aboutus/daeyeong.jpg")}
                                     style={{ height:"100%", width:"100%" }}/>
                                 </div>
                                 <p className="my-2">김대영</p>
@@ -87,7 +87,7 @@ function AboutUs() {
                         <div className="team2">
                             <div className="teammate">
                                 <div className="teammate-img">
-                                    <img src={require("../../../assets/img/ham.jpg")}
+                                    <img src={require("../../../assets/img/aboutus/yuri.jpg")}
                                     style={{ height:"100%", width:"100%" }}/>
                                 </div>
                                 <p className="my-2">김유리</p>
@@ -95,7 +95,7 @@ function AboutUs() {
                             </div>
                             <div className="teammate">
                                 <div className="teammate-img">
-                                    <img src={require("../../../assets/img/ham.jpg")}
+                                    <img src={require("../../../assets/img/aboutus/gwangseok.jpg")}
                                     style={{ height:"100%", width:"100%" }}/>
                                 </div>
                                 <p className="my-2">서광석</p>
