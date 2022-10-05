@@ -1,5 +1,13 @@
+@font-face {
+  font-family: 'MaruBuri-Regular';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10-21@1.0/MaruBuri-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
 table {
     border-collapse: collapse;
+    font-family: 'MaruBuri-Regular';
   }
   
 th,
@@ -10,4 +18,5 @@ td {
   padding-right:50px;
   border: 1px solid black;
   text-align: center;
+  font-family: 'MaruBuri-Regular';
 }

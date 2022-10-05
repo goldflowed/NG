@@ -7,27 +7,27 @@ import { useParams } from "react-router-dom";
 import axios from "../../../common/api/http-common";
 import { nftContract, web3 } from "../../../common/web3/web3Config";
 import { useLocation } from "react-router-dom";
+import {useNavigate} from 'react-router-dom';
 
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
+import Card from 'react-bootstrap/Card';
+
 
 import './detail.css';
 
 const ContainerDiv = styled.div`
-  display: flex;
-  flex-direction: row;
   `
 
 const MainDiv = styled.div`
-  /* background-color: red; */
-  width: 1550px;
   padding-top:50px;
   padding-right: 100px;
   font-size:20px;
-  margin-left:400px;
   margin-top:25px;
+  margin-left: 35rem;
+  width: 50rem;
   `
 
 const Hr = styled.hr`
@@ -37,27 +37,31 @@ const Hr = styled.hr`
   `
 
 const TitleP = styled.p`
-  width:1350px;
-  font-size: 50px;
+  font-size: 40px;
   font-weight: bold;
-  margin: 0;
-  margin-left: 20px;
+  font-family: 'MaruBuri-Regular';
+  margin-top: 4rem;
+  display: flex;
+  justify-content: center
   `
 
 const ProductDiv = styled.div`
+  margin-top: 4rem;
   width:100%;
   `
 
 const InfoDiv = styled.div`
   display:flex;
   flex-direction:row;
+  margin-left: 5rem;
+  font-family: 'MaruBuri-Regular';
   `
 
 const InfoPDiv = styled.div`
   margin-left:10px;
   display: flex;
-  flex-direction: column;
-  justify-content:space-between;
+  justify-content: center
+  font-family: 'MaruBuri-Regular';
   `
 const TableDiv = styled.div`
   margin:auto;
@@ -69,6 +73,7 @@ const TableDiv = styled.div`
   `
 
 function Detail() {
+  
   const [nfts, setNfts] = useState([])
   const [productImg, setProductImg] = useState('')
   const [productName, setProductName] = useState('')
@@ -81,6 +86,14 @@ function Detail() {
   const [historylength, sethistorylength] = useState(0);
   const [tokenlength, settokenlength] = useState(0);
   const [tokenInfo, settokenInfo] = useState("");
+  const [sameArr, setSameArr] = useState([]);
+
+  const history = useNavigate();
+  
+
+  // 두번째 history
+  const [SndtokenHistory, setSndTokenHistory] = useState([]);
+  const [Sndhistorylength, setSndhistorylength] = useState(0);
 
   const params = useParams();
   const { state } = useLocation();
@@ -98,6 +111,7 @@ function Detail() {
     console.log('serialNo', serialNo);
     console.log('year', year);
     console.log('month', month);
+    console.log('from', from);
     // nft 발급
     await nftContract.methods.mint(productCode, serialNo, year, month)
       .send({from:from});
@@ -132,6 +146,11 @@ function Detail() {
 
     // setTxnHashToTokenId
     await nftContract.methods.setTxnHashToTokenId(transactions, tokenNum).send({from:from})
+
+    alert("NFT 등록 완료")
+    // 새로고침
+    // eslint-disable-next-line no-restricted-globals
+    await location.reload();
   }
 
   // 현재 날짜
@@ -141,14 +160,81 @@ function Detail() {
 
   async function getTable(){
     const Wallet = window.localStorage.getItem('wallet');
+    // 전체 토큰 개수
+    const tokenCnt =  await nftContract.methods.totalSupply().call() - 1;
+    console.log('tokenCnt', tokenCnt)
+    
+    var proArr = [];
+    var count = 0;
 
+    for(let i=0; i <= tokenCnt+1; i++){
+      // 발행자 주소를 찾아서 Wallet과 같을 경우 배열에 담아서 출력
+      const SndTokenHistory = await nftContract.methods.getTokenHistory(i).call();
+      await setSndTokenHistory(SndTokenHistory);
+      await setSndhistorylength(SndTokenHistory.length);
+      console.log('SndTokenHistory', SndTokenHistory);
+      console.log('SndTokenHistory.length', SndTokenHistory.length);
+
+      // tokenHistory[i].blockNumber -> string to number()
+      const SndDectokenHistory = await Number(SndTokenHistory[0].blockNumber);
+      console.log('SndDectokenHistory', SndDectokenHistory)
+
+      // TokenHistory 16진수로 변환
+      const SndhexHistory = await SndDectokenHistory.toString(16);
+      console.log('Snd16진수 변환', SndhexHistory);
+      const Sndrealhex = '0x'+ SndhexHistory;
+      console.log('Sndrealhex', Sndrealhex);
+
+      // string to number
+      const Sndnumhistory = await Number(Sndrealhex);
+      console.log('Sndnumhistory', Sndnumhistory);
+      console.log('Sndnumhistory타입', typeof(Sndnumhistory))
+
+      // getblock을 통한 transactions 구하기 
+      const Sndblock = await web3.eth.getBlock(Sndnumhistory);
+      console.log(Sndblock);
+
+      // transaction hash
+      const Sndtransactions = await Sndblock.transactions[0];
+      console.log('Sndtransactions', Sndtransactions)
+
+      const Sndreceipt = await web3.eth.getTransactionReceipt(Sndtransactions);
+      console.log('Sndreceipt', Sndreceipt);
+
+      console.log('Sndreceipt.logs[0].topics[2]', Sndreceipt.logs[0].topics[2]);
+
+      const FirstAdd =  Sndreceipt.logs[0].topics[2];
+      // console.log('FirstAdd.slice(-3)', FirstAdd.slice(-4));
+      const newFirstAdd = FirstAdd.slice(-4);
+      const newWallet = Wallet.slice(-4);
+      console.log(newFirstAdd);
+      console.log(newWallet);
+
+      if(newFirstAdd === newWallet){
+        const SndTokenDetail = await nftContract.methods.ngs(i).call();
+        console.log('SndTokenDetail', SndTokenDetail);
+        console.log('productNo', SndTokenDetail.product.productNo);
+        console.log(params.productCode);
+        if(params.productCode === SndTokenDetail.product.productNo){
+          count++;
+          var productArr = [SndTokenDetail, count, SndTokenHistory.length, i];
+          await proArr.push(productArr);
+        }
+      }
+      console.log('proArr', proArr);
+      setSameArr(proArr);
+    }
+    
+    
+    
+    /*
     const Token = await nftContract.methods.getOwnedTokens(Wallet).call();
 
-    console.log('토큰 정보 : ', Token);
-    console.log('토큰의 개수 = ', Token.length)
+    // console.log('토큰 정보 : ', Token);
+    // console.log('토큰의 개수 = ', Token.length)
 
     // 토큰의 길이가 담겨있는 상황
-    await settokenlength(Token.length);
+    // await settokenlength(Token.length);
 
     // Token의 Array 지정
     var ArrToken = [];
@@ -168,15 +254,26 @@ function Detail() {
     }
     // await settokenInfo(ArrTokenInfo);
 
+    //  배열 만들어서 같은 productNo이면 삽입
+    var proArr = [];
+    var count = 0;
     for(let i = 0; i < Token.length; i++){
       const prodNo = await ArrTokenInfo[i].product.productNo;
       console.log(prodNo);
+      console.log();
 
+      if(state.productNo === prodNo){
+        count++;
+        var productArr = [ArrTokenInfo[i], count];
+        await proArr.push(productArr);
+      }
     }
+    setSameArr(proArr);
+    */
+  }
 
-
-
-
+  const showNftDetail = (data) => {
+    history(`${data[0].serialNo}`, {state: data})
   }
 
   useEffect(() => {
@@ -184,6 +281,7 @@ function Detail() {
     axios.get(`product/${params.productCode}`)
     .then((res) => {
       setProductImg(res.data.proUrl)
+      // console.log(res);
     })
     console.log(state)
     setProductName(state.productName)
@@ -200,15 +298,19 @@ function Detail() {
       <NavBar/>
       <SideBar/>
       <MainDiv>
-        <TitleP>등록 제품 정보 {'>'} 제품 상세 페이지</TitleP><Hr/>
+        <TitleP>{productName}</TitleP>
         <ProductDiv>
           <InfoDiv>
-            <img src={productImg} alt="productImage" style={{width:"33%"}}/>
+            <img src={productImg} alt="productImage" style={{width:"12rem"}}/>
             <InfoPDiv>
-              <p>제 품 명 : {productName}</p>
-              <p>제 품 코 드 : {productCode}</p>
-              <p>출 고 일 : {productMfd}</p>
-              <p>제 조 국 : {productMadeIn}</p>
+            <Card style={{ width: '22rem', height: '12rem' }}>
+              <Card.Body>
+                <Card.Title style={{marginTop:20}}>제 품 명 : {productName}</Card.Title>
+                <Card.Title style={{marginTop:10}}>제 품 코 드 : {productCode}</Card.Title>
+                <Card.Title style={{marginTop:10}}>출 고 일 : {productMfd}</Card.Title>
+                <Card.Title style={{marginTop:10}}>제 조 국 : {productMadeIn}</Card.Title>
+              </Card.Body>
+            </Card>
             </InfoPDiv>
           </InfoDiv>
         </ProductDiv><Hr/>
@@ -234,27 +336,34 @@ function Detail() {
           <Table striped bordered hover>
             <thead>
               <tr>
-                <th>#</th>
-                <th>시리얼 번호</th>
-                <th>전송 여부</th>
+                <th className="table-th1"><div>#</div></th>
+                <th className="table-th2"><div>시리얼 번호</div></th>
+                <th className="table-th3"><div>전송 여부</div></th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>1</td>
-                <td>Mark</td>
-                <td>Otto</td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>Jacob</td>
-                <td>Thornton</td>
-              </tr>
+              {sameArr.map((res) => {
+                console.log('res', res);
+                return(
+                  <tr style={{cursor:"pointer"}} onClick={() => showNftDetail(res)}>
+                    <td>{res[1]}</td>
+                    <td>{res[0].serialNo}</td>
+                    <td>
+                      {
+                      res[2] === 1
+                      ? <h5>No</h5>
+                      : <h5>Yes</h5>
+                      }
+                      </td>
+                  </tr>   
+                )
+              })}
             </tbody>
           </Table>
           </div>
         </div>
       </MainDiv>
+      <Footer/>
     </ContainerDiv>
   )
 }
