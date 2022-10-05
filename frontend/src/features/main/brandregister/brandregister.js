@@ -190,8 +190,8 @@ function BrandRegister() {
                             }}>뒤로가기</MDBBtn>
                             {
                                 !!comName && !!comRegNum && !!comWallet && !!comEmail && !!comAddress && !!comTel && emailRegEx.test(comEmail)
-                                    ? <MDBBtn style={{ marginLeft: 50 }} outline color='success' type="submit" onClick={() => onSubmit()}>제출하기</MDBBtn>
-                                    : <MDBBtn style={{ marginLeft: 50 }} outline color='success' disabled onClick={() => onSubmit()}>제출하기</MDBBtn>
+                                ? <Button style={{marginLeft:50}} variant="outline-primary" onClick={() => onSubmit()}>제출하기</Button>
+                                : <Button style={{marginLeft:50}} variant="outline-primary" onClick={() => onSubmit()} disabled>제출하기</Button>
                             }
                         </Form>
                     </div>
