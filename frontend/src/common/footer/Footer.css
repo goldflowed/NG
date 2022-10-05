@@ -1,0 +1,33 @@
+.footerTop {
+    height: 100px;
+    margin: auto;
+}
+
+.headImg {
+    height: 50%;
+}
+
+.footerMid {
+    display: flex;
+}
+
+.footerText{
+    width: 40%;
+    margin: auto;
+    padding-right: 10%;
+}
+
+.footerLink {
+    width: 40%;
+    margin: auto;
+    padding-left: 10%;
+}
+
+li {
+    margin: 10px 0;
+    text-align: left;
+}
+
+li a {
+    text-decoration: none;
+}
