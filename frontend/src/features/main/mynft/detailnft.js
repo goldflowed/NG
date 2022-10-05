@@ -16,10 +16,14 @@ import {
   import Button from 'react-bootstrap/Button';
   import { MDBTable, MDBTableHead, MDBTableBody } from 'mdb-react-ui-kit';
   import './detailnft.css';
+
+  import axios from "../../../common/api/http-common";
   
 
 function detailnft() {
-    
+
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const [productImg, setproductImg] = useState();
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const location = useLocation();    
     const tokenInfo = location.state.token;
@@ -41,6 +45,10 @@ function detailnft() {
     const [totalPeriod, settotalperiod] = useState(0);
 
     async function getDetail() {
+        console.log('tokenInfo[2]', tokenInfo[2]);
+        setproductImg(tokenInfo[2]);
+    
+
         const TokenHistory = await nftContract.methods.getTokenHistory(tokenId).call();
         console.log('TokenHistory',TokenHistory);
         console.log('TokenHistory[0]',TokenHistory[0]);
@@ -125,6 +133,8 @@ function detailnft() {
 
     // eslint-disable-next-line react-hooks/rules-of-hooks
     useEffect(() => {
+
+
         getDetail();
     }, [])
 
@@ -136,7 +146,7 @@ function detailnft() {
             </div>
             <div className="detailnft-main">
                 <div className="detailnft-image">
-                    <p>제품 이미지 들어갈 자리</p>
+                    <img src={productImg} alt="productImage" style={{width:"20rem", height:"18rem"}}/>
                 </div>
                 <div>
                     <MDBCard className="detailnft-card">
@@ -164,6 +174,7 @@ function detailnft() {
                                     madeIn = {tokenInfo[0].product.madeIn}
                                     year = {year}
                                     month = {month}
+                                    ImgUrl = {productImg}
                                     >
                                 </Modal>
                         </MDBCardBody>
@@ -175,7 +186,7 @@ function detailnft() {
                 <h3>NFT 사용 기록</h3>
             </div>
             <div className="detailnft-table">
-                <div>
+                <div style={{width:"55rem"}}>
                     <MDBTable striped>
                         <MDBTableHead>
                             <tr>
@@ -191,7 +202,7 @@ function detailnft() {
                                 <MDBTableBody>
                                 <tr>
                                 <th scope='row'>{res[2]}</th>
-                                <td>{res[0].logs[0].topics[2]}</td>
+                                <td>{res[0].logs[0].topics[2].replace('000000000000000000000000', '')}</td>
                                 <td>{res[1].year}년 {res[1].month}월</td>
                                 <td>
                                     {

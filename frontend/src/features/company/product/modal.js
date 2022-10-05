@@ -102,12 +102,14 @@ const modal = (props) => {
                   </div>
                 </div>
                 <br/>
-                <MDBInput style={{width:'100%'}}
+                <div className="detail-input">
+                <MDBInput
                           // label='받는 분의 주소를 정확히 입력해 주세요.'
                           id='form1'
                           type='text'
                           value = {sendAddress}
                           onChange={onAddHandler} />
+                </div>
                 <div style={{marginLeft:120, marginTop:5, color:'red'}}>받는 분의 주소를 정확히 입력해주세요.</div>
 
                 </main>

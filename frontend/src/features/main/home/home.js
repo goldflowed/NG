@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import NavBar from "../../../common/navbar/NavBar"
 import "./home.css"
 import "bootstrap/dist/css/bootstrap.min.css"
@@ -39,6 +39,18 @@ function Home() {
     setBasicActive(value);
   }
 
+  useEffect(() => {
+    // console.log(typeof(web3))
+    if (typeof(web3) === 'undefined') {
+      // alert('저희 서비스를 이용하기위해서는 metamask 설치가 필요합니다. \n설치페이지로 이동하시겠습니까?')
+      if (window.confirm('저희 서비스를 이용하기위해서는 MetaMask 설치가 필요합니다. \n설치페이지로 이동하시겠습니까?') == true) {
+        window.open('https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn')
+      } else {
+        console.log('아니오')
+      }
+    }
+  }, []);
+
   return (
     <div className="home">
       <NavBar></NavBar>
@@ -53,7 +65,7 @@ function Home() {
               <h3 className='mt-3'>명품 브랜드를 위한 블록체인 솔루션</h3>
               <h5 className='mt-5'>우리는 고객의 새로운 경험과 함께 건전한 명품 산업의 생태계를 구축하기 위한 서비스입니다.</h5>
               <Link to="./aboutus">
-                <MDBBtn className="mt-5" tag="a" outline size="lg">
+                <MDBBtn className="mt-5" outline size="lg">
                   MORE DETAIL
                 </MDBBtn>
               </Link>
