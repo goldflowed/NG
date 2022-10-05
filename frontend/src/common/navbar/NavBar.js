@@ -25,7 +25,7 @@ function NavBar(){
       } else if (window.web3){
         provider = window.web3.currentProvider;
       } else{
-        alert("Please Install MetaMask");
+        alert("MetaMask를 설치해 주십시오.");
         window.open('https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn',
          '_blank',
         )
@@ -73,16 +73,20 @@ function NavBar(){
     }
 
     useEffect(() => {
-      window.ethereum.request({method: 'eth_requestAccounts'})
-      .then( result => {
-        window.localStorage.setItem('wallet', result[0]);
-        setDefaultAccount(result[0]);
-        axios.get(`company/${result[0]}`)
-        .then((res) => {
-          setMyRole(res.data.comPermit)
+      // console.log(typeof(web3))
+      if (typeof(web3) !== 'undefined') {
+        window.ethereum.request({method: 'eth_requestAccounts'})
+        .then( result => {
+          window.localStorage.setItem('wallet', result[0]);
+          setDefaultAccount(result[0]);
+          axios.get(`company/${result[0]}`)
+          .then((res) => {
+            setMyRole(res.data.comPermit)
+          })
+          .catch(() => {})
         })
-        .catch(() => {})
-      })
+        .catch((err) => console.log(err))
+      }
     }, []);
 
     return(

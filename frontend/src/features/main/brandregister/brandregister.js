@@ -10,9 +10,16 @@ import { useNavigate } from 'react-router-dom';
 function BrandRegister() {
     const history = useNavigate()
     // 변수 초기화
+    const walletAddress = () => {
+        if (window.localStorage.getItem('wallet')) {
+            return window.localStorage.getItem('wallet')
+        } else {
+            return '지갑정보가 없습니다.'
+        }
+    }
     const initialValues = { comName: "",
                             comRegNum: "",
-                            comWallet: window.localStorage.getItem('wallet'),
+                            comWallet: walletAddress(),
                             comEmail: "",
                             comTel: "",
                             comAddress: "",
@@ -67,6 +74,7 @@ function BrandRegister() {
         axios.post("company/create/", formValues)
             .then((response) => {
                 alert("브랜드 등록 완료!")
+                history('/')
             })
             .catch((err) => {
                 if(!err.response){

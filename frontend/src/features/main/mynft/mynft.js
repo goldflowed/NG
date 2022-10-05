@@ -80,7 +80,7 @@ function MyNft() {
                         ? <div className="mynft-none-parent">
                             <div className="mynft-none">
                                 <h2>No items to display</h2>
-                            </div>   
+                            </div>
                           </div>
                         : <div className="mynft-main">
                         {tokenInfo.map((token) => {
