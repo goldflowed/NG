@@ -33,7 +33,7 @@ function Footer() {
           <section className="footerText">
             <div style={{ textAlign: "right" }}>
               <div> NG Service </div>
-              <div> 대표 유도경 </div>
+              <div> 대표 E206 </div>
               <div> 부산 강서구 녹산산업중로 333 </div>
               <div> nftguarantee@ssafyng.com </div>
               <div> 051-000-0000 </div>

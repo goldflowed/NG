@@ -23,6 +23,10 @@
     padding-left: 10%;
 }
 
+.text-center{
+    width: 100%;
+}
+
 li {
     margin: 10px 0;
     text-align: left;
