@@ -105,103 +105,123 @@ function BrandRegister() {
 
     return (
         <div>
-            <Navbar />
-            <div className="brandregister text-center">
-                {/* <pre>{JSON.stringify(formValues, undefined, 2)}</pre> */}
-                <h1>기업 회원 가입</h1>
-                <br />
-                <p>저희 서비스를 이용하기 위해서는, 먼저 서비스 가입을 요청해야 합니다. 아래의 정보를 입력해서 제출해주세요.</p>
-                <div>
-                    <div className="ui form display">
-                        <Form encType="multipart/form-data">
-                            <Form.Group style={{ display: "flex", marginTop: "35px", marginBottom: "35px" }} >
-                                <MDBInput
-                                    style={{ width: "560px" }}
-                                    type="text"
-                                    name="comName"
-                                    label="브랜드 명을 입력해주세요."
-                                    id='form1'
-                                    onChange={handlerComName} />
-                            </Form.Group>
+          <div className="ui form display">
+            <Form encType="multipart/form-data">
+              <Form.Group style={{ display: "flex", marginTop: "35px", marginBottom: "35px" }} >
+                <MDBInput
+                  style={{ width: "560px" }}
+                  type="text"
+                  name="comName"
+                  placeholder="브랜드 명을 입력해주세요."
+                  id='form1'
+                  onChange={handlerComName} />
+              </Form.Group>
 
 
-                            <Form.Group style={{ display: "flex", marginTop: "35px", marginBottom: "35px" }} >
-                                <MDBInput
-                                    style={{ width: "560px" }}
-                                    type="text"
-                                    name="comRegNum"
-                                    label="사업자 등록 번호를 입력해 주세요."
-                                    id='form1'
-                                    onChange={handlerComRegNum} />
-                            </Form.Group>
+              <Form.Group style={{ display: "flex", marginTop: "35px", marginBottom: "35px" }} >
+                <MDBInput
+                  style={{ width: "560px" }}
+                  type="text"
+                  name="comRegNum"
+                  placeholder="사업자 등록 번호를 입력해 주세요."
+                  id='form1'
+                  onChange={handlerComRegNum} />
+              </Form.Group>
 
-                            <Form.Group style={{ display: "flex", marginTop: "35px", marginBottom: "35px" }} >
-                                <MDBInput
-                                    style={{ width: "560px" }}
-                                    type="text"
-                                    name="comWallet"
-                                    disabled={true}
-                                    id='form1'
-                                    value={comWallet} />
-                            </Form.Group>
+              <Form.Group style={{ display: "flex", marginTop: "35px", marginBottom: "35px" }} >
+                <MDBInput
+                  style={{ width: "560px" }}
+                  type="text"
+                  name="comWallet"
+                  disabled={true}
+                  id='form1'
+                  value={comWallet} />
+              </Form.Group>
 
-                            <Form.Group style={{ display: "flex", marginTop: "35px", marginBottom: "35px" }} >
-                                <MDBInput
-                                    style={{ width: "560px" }}
-                                    type="text"
-                                    name="comEmail"
-                                    label="이메일을 입력해 주세요."
-                                    id='form1'
-                                    onChange={handlerComEmail}
-                                    onBlur={checkEmail} />
-                            </Form.Group>
+              <Form.Group style={{ display: "flex", marginTop: "35px", marginBottom: "35px" }} >
+                <MDBInput
+                  style={{ width: "560px" }}
+                  type="text"
+                  name="comEmail"
+                  placeholder="이메일을 입력해 주세요."
+                  id='form1'
+                  onChange={handlerComEmail}
+                  onBlur={checkEmail} />
+              </Form.Group>
+              <div>
+                {comEmail.length > 0 && <div className={`message ${isEmail ? 'success' : 'error'}`}>{emailMessage}</div>}
+              </div>
 
-                            <Form.Group style={{ display: "flex", marginTop: "35px", marginBottom: "35px" }} >
-                                <MDBInput
-                                    style={{ width: "560px" }}
-                                    type="text"
-                                    name="comAddress"
-                                    label="회사 주소를 입력해주세요."
-                                    id='form1'
-                                    onChange={handlerComAddress} />
-                            </Form.Group>
+              <Form.Group style={{ display: "flex", marginTop: "35px", marginBottom: "35px" }} >
+                <MDBInput
+                  style={{ width: "560px" }}
+                  type="text"
+                  name="comAddress"
+                  placeholder="회사 주소를 입력해주세요."
+                  id='form1'
+                  onChange={handlerComAddress} />
+              </Form.Group>
 
-                            <Form.Group style={{ display: "flex", marginTop: "35px", marginBottom: "35px" }} >
-                                <MDBInput
-                                    style={{ width: "560px" }}
-                                    type="text"
-                                    name="comTel"
-                                    label="회사 전화번호를 입력해주세요."
-                                    id='form1'
-                                    onChange={handlerComTel} />
-                            </Form.Group>
+              <Form.Group style={{ display: "flex", marginTop: "35px", marginBottom: "35px" }} >
+                <MDBInput
+                  style={{ width: "560px" }}
+                  type="text"
+                  name="comTel"
+                  placeholder="회사 전화번호를 입력해주세요."
+                  id='form1'
+                  onChange={handlerComTel} />
+              </Form.Group>
 
-                            <Form.Group style={{ display: "flex", marginTop: "35px", marginBottom: "35px" }} >
-                                <MDBInput
-                                    style={{ width: "560px" }}
-                                    type="file"
-                                    name="comLogo"
-                                    label="로고를 첨부해주세요."
-                                    id='form1'
-                                    onChange={handlerComLogo} />
-                            </Form.Group>
-
-                            <MDBBtn style={{ marginRight: 50 }} outline className='mx-2' color='dark' onClick={() => {
-                                history('/')
-                            }}>뒤로가기</MDBBtn>
-                            {
-                                !!comName && !!comRegNum && !!comWallet && !!comEmail && !!comAddress && !!comTel && emailRegEx.test(comEmail)
-                                ? <Button style={{marginLeft:50}} variant="outline-primary" onClick={() => onSubmit()}>제출하기</Button>
-                                : <Button style={{marginLeft:50}} variant="outline-primary" onClick={() => onSubmit()} disabled>제출하기</Button>
-                            }
-                        </Form>
-                    </div>
-                </div>
-            </div>
-            <br /><br />
-            <Footer></Footer>
-        </div >
-    )
+              <Form.Group style={{ display: "flex", marginTop: "35px", marginBottom: "35px" }} >
+                <Form.Label
+                  style={{
+                    display: "flex",
+                    // border: "1px solid #ced4da",
+                    border: "1px solid #6d757e",
+                    backgroundColor: "#6d757e",
+                    borderRadius: "0.375rem",
+                    transition: "border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out",
+                    color: "#fff",
+                    lineHeight: "1.5",
+                    fontSize: "1rem",
+                    fontWeight: "400",
+                    padding: "0.375rem 0.75rem",
+                    width: "560px",
+                    cursor: "pointer",
+                    paddingLeft: "240px"
+                  }}
+                  id='logo-label'
+                  for='logo'>
+                  로고 업로드
+                </Form.Label>
+              </Form.Group>
+              <MDBInput
+                style={{ width: "560px", display: "none" }}
+                type="file"
+                name="comLogo"
+                placeholder="로고를 첨부해주세요."
+                id='logo'
+                onChange={handlerComLogo} />
+              {/* {comLogo.name} */}
+              <div>
+                {comLogo && <div className="com-logo-name">{comLogo.name}</div>}
+              </div>
+              <MDBBtn style={{ marginRight: 50 }} outline className='mx-2' color='dark' onClick={() => {
+                history('/')
+              }}>뒤로가기</MDBBtn>
+              {
+                !!comName && !!comRegNum && !!comWallet && !!comEmail && !!comAddress && !!comTel && emailRegEx.test(comEmail)
+                  ? <Button style={{ marginLeft: 50 }} variant="outline-primary" onClick={() => onSubmit()}>제출하기</Button>
+                  : <Button style={{ marginLeft: 50 }} variant="outline-primary" onClick={() => onSubmit()} disabled>제출하기</Button>
+              }
+            </Form>
+          </div>
+        </div>
+      </div>
+      <br /><br />
+      <Footer></Footer>
+    </div >
+  )
 }
 
 export default BrandRegister;
