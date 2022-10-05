@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import NavBar from "../../../common/navbar/NavBar"
 import "./home.css"
+import "bootstrap/dist/css/bootstrap.min.css"
+import 'bootstrap/dist/js/bootstrap.bundle.min'
 import {
   MDBBtn,
   MDBTabs,
@@ -20,7 +22,11 @@ import CustomerImg02 from '../../../assets/img/Customer02.png'
 import CustomerImg03 from '../../../assets/img/Customer03.png'
 import BrandImg01 from '../../../assets/img/Brand01.png'
 import BrandImg02 from '../../../assets/img/Brand02.png'
-// import BrandImg03 from '../../../assets/img/Brand03.png'
+import BrandImg03 from '../../../assets/img/Brand03.png'
+import Cycle01 from '../../../assets/img/Cycle01.png'
+import Cycle02 from '../../../assets/img/Cycle02.png'
+import Cycle03 from '../../../assets/img/Cycle03.png'
+import Cycle04 from '../../../assets/img/Cycle04.png'
 
 function Home() {
 
@@ -96,11 +102,6 @@ function Home() {
                 For Brand
               </MDBTabsLink>
             </MDBTabsItem>
-            <MDBTabsItem>
-              <MDBTabsLink onClick={() => handleBasicClick('tab3')} active={basicActive === 'tab3'}>
-                Tab 3
-              </MDBTabsLink>
-            </MDBTabsItem>
           </MDBTabs>
 
           <MDBTabsContent>
@@ -164,36 +165,113 @@ function Home() {
                     <div style={{ margin: "15px" }}>
                       <div className="brandCardTitle"> <b>고객 신뢰성 향상</b> </div>
                       <div className="brandCardBody">
-                        블록체인을 통한 정품 인증서 관리로 제품의 양도/재판매/증여 시
-                        본인 소유의 인증서에서 정확한 상대의 계정으로만 전송이 가능합니다.
+                        발행자와 브랜드 지갑을 확인할 수 있어 가품문제에 대한 예방 및 확인이 가능하여
+                        브랜드에 대한 고객의 신뢰성을 기대할 수 있습니다.
                       </div>
                     </div>
                   </MDBCardBody>
                 </MDBCard>
                 <MDBCard className="benefitCard">
                   <MDBCardBody>
-                    <img className="benefitImg" src={CustomerImg02} alt="중고거래감시" />
+                    <img className="benefitImg" src={BrandImg03} alt="중고거래감시" />
                     <div style={{ margin: "15px" }}>
                       <div className="brandCardTitle"> <b>중고거래 감시</b> </div>
                       <div className="brandCardBody">
-                        인증서에 표시되는 거래 기록으로 최초 발급자를 확인가능하며
-                        현재 소유자 및 이전 소유기록 또한 조회/확인이 가능합니다.
+                        빠르게 성장하는 중고 시장에서의 불법 및 가품 문제에 있어
+                        정확한 기록과 정보를 통해 확인 및 통제할 수 있습니다.
                       </div>
                     </div>
                   </MDBCardBody>
                 </MDBCard>
               </div>
             </MDBTabsPane>
-            <MDBTabsPane show={basicActive === 'tab3'}>Tab 3 content</MDBTabsPane>
           </MDBTabsContent>
         </>
       </div>
       <div
         className='p-5 text-center bg-image'
-        style={{ height: '700px', backgroundColor: 'rgba(0, 0, 0, 0.3)' }}
+        style={{ height: '700px', backgroundColor: 'rgba(87, 87, 87, 100)' }}
       >
         <div>
-          <h1> 생명 주기 적을 예정</h1>
+          <h1 className="text-light"> 지속 가능한 제품의 생명주기 </h1>
+          <div className="text-light" style={{ "marginTop": "20px", "paddingBottom": "7%" }}>제품의 등록부터 거래내역까지 생명주기의 확인 가능</div>
+          <div id="carouselExampleControls" className="carousel slide" data-bs-ride="carousel">
+            <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+              <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span className="visually-hidden">Previous</span>
+            </button>
+            <div className="carousel-inner cycleBox">
+              <div className="carousel-item active" data-bs-interval="3000">
+                <div className="cycleCard">
+                  <img src={Cycle01} className="d-block cycleImg" alt="..." />
+                  <div className="cycleText">
+                    <h2>생산</h2>
+                    <hr />
+                    <div className="cycleTextBody">
+                      생산된 상품을 등록하여 이후 거래 기록들을 모두 추적할 수 있는
+                      고유한 디지털 id와 hash를 생성
+                    </div>
+                    <br />
+                    <div className="cycleTextBody">
+                      생성된 id로 제품의 고유한 인증서를 조회/확인
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="carousel-item" data-bs-interval="3000">
+                <div className="cycleCard">
+                  <img src={Cycle02} className="d-block cycleImg" alt="..." />
+                  <div className="cycleText">
+                    <h2>구입</h2>
+                    <hr />
+                    <div className="cycleTextBody">
+                      제품을 구매하고 고유한 NG를 받으세요. 제품의 진품을 보장합니다.
+                    </div>
+                    <br />
+                    <div className="cycleTextBody">
+                      제품의 정보에 접근할 수 있는 NFT Guarantee를 통해 신뢰할 수 있는 거래경험을 선사합니다.
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="carousel-item" data-bs-interval="3000">
+                <div className="cycleCard">
+                  <img src={Cycle03} className="d-block cycleImg" alt="..." />
+                  <div className="cycleText">
+                    <h2>기록</h2>
+                    <hr />
+                    <div className="cycleTextBody">
+                      제품의 등록 부터 발생하는 모든 거래의 기록을 보관하세요.
+                    </div>
+                    <br />
+                    <div className="cycleTextBody">
+                      거래 기록을 통해 제품의 사용기간을 확인하고 거래의 역추적 또한 가능합니다.
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="carousel-item" data-bs-interval="3000">
+                <div className="cycleCard">
+                  <img src={Cycle04} className="d-block cycleImg" alt="..." />
+                  <div className="cycleText">
+                    <h2>재판매</h2>
+                    <hr />
+                    <div className="cycleTextBody">
+                      인증서를 조회하고 제품과 비교한 뒤 중고 시장 거래를 진행하세요.
+                    </div>
+                    <br />
+                    <div className="cycleTextBody">
+                      NG Service를 기반으로 발급 및 거래된 디지털 인증서를 기반으로 보다 높은 신뢰성을 제공합니다.
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+              <span className="carousel-control-next-icon" aria-hidden="true"></span>
+              <span className="visually-hidden">Next</span>
+            </button>
+          </div>
         </div>
       </div>
       <Footer />
