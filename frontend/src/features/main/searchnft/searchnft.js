@@ -42,10 +42,10 @@ function SearchNft() {
 
     const onSearch = async (e) => {
         console.log('검색버튼 클릭 후', txnHash);
-        // const tokenId = 
-        await nftContract.methods
-            .getTokenIdFromTxnHash(txnHash).call()
-        .then((res) => console.log('토큰아이디 : ', res))
+        const tokenId =
+            await nftContract.methods
+                .getTokenIdFromTxnHash(txnHash).call()
+        // .then((res) => console.log('토큰아이디 : ', res))
 
         console.log(tokenId);
         if (tokenId === '0') {
@@ -140,29 +140,29 @@ function SearchNft() {
                 <div>
                     <div>
                         {
-                        {tokenId} === 0
-                            ? <div>null</div>
-                            : <div>
-                                <MDBCard background='white' className='mb-3' style={{ marginTop: 40 }}>
-                                    <MDBCardHeader><div className="search-header">NFT 정보</div></MDBCardHeader>
-                                    <MDBCardBody>
-                                        <MDBCardTitle className="search-card">토큰아이디 : {tokenId}</MDBCardTitle>
-                                        <MDBCardTitle className="search-card">브랜드 명 : {brandNm}</MDBCardTitle>
-                                        <MDBCardTitle className="search-card">제품 번호 : {productNo}</MDBCardTitle>
-                                        <MDBCardTitle className="search-card">시리얼 번호 : {serialNo}</MDBCardTitle>
-                                        <MDBCardTitle className="search-card">제조 날짜 : {mfd}</MDBCardTitle>
-                                        <MDBCardTitle className="search-card">제조국 : {madeIn}</MDBCardTitle>
-                                        <MDBCardTitle className="search-card">발행자 주소 : {Arrreceipt[0]}</MDBCardTitle>
-                                        <MDBCardTitle className="search-card">소유자 주소 : {Arrreceipt[historylength - 1]}</MDBCardTitle>
-                                    </MDBCardBody>
-                                </MDBCard>
-                            </div>
+                            { tokenId } === 0
+                                ? <div>null</div>
+                                : <div>
+                                    <MDBCard background='white' className='mb-3' style={{ marginTop: 40 }}>
+                                        <MDBCardHeader><div className="search-header">NFT 정보</div></MDBCardHeader>
+                                        <MDBCardBody>
+                                            <MDBCardTitle className="search-card">토큰아이디 : {tokenId}</MDBCardTitle>
+                                            <MDBCardTitle className="search-card">브랜드 명 : {brandNm}</MDBCardTitle>
+                                            <MDBCardTitle className="search-card">제품 번호 : {productNo}</MDBCardTitle>
+                                            <MDBCardTitle className="search-card">시리얼 번호 : {serialNo}</MDBCardTitle>
+                                            <MDBCardTitle className="search-card">제조 날짜 : {mfd}</MDBCardTitle>
+                                            <MDBCardTitle className="search-card">제조국 : {madeIn}</MDBCardTitle>
+                                            <MDBCardTitle className="search-card">발행자 주소 : {Arrreceipt[0]}</MDBCardTitle>
+                                            <MDBCardTitle className="search-card">소유자 주소 : {Arrreceipt[historylength - 1]}</MDBCardTitle>
+                                        </MDBCardBody>
+                                    </MDBCard>
+                                </div>
                         }
                     </div>
                 </div>
             </div>
-            <Footer style={{width:"100%"}}></Footer>    
-        </div>        
+            <Footer style={{ width: "100%" }}></Footer>
+        </div>
     )
 
 }

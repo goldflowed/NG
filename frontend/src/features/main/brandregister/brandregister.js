@@ -119,7 +119,7 @@ function BrandRegister() {
                   style={{ width: "560px" }}
                   type="text"
                   name="comName"
-                  label="브랜드 명을 입력해주세요."
+                  placeholder="브랜드 명을 입력해주세요."
                   id='form1'
                   onChange={handlerComName} />
               </Form.Group>
@@ -130,7 +130,7 @@ function BrandRegister() {
                   style={{ width: "560px" }}
                   type="text"
                   name="comRegNum"
-                  label="사업자 등록 번호를 입력해 주세요."
+                  placeholder="사업자 등록 번호를 입력해 주세요."
                   id='form1'
                   onChange={handlerComRegNum} />
               </Form.Group>
@@ -150,18 +150,21 @@ function BrandRegister() {
                   style={{ width: "560px" }}
                   type="text"
                   name="comEmail"
-                  label="이메일을 입력해 주세요."
+                  placeholder="이메일을 입력해 주세요."
                   id='form1'
                   onChange={handlerComEmail}
                   onBlur={checkEmail} />
               </Form.Group>
+              <div>
+                {comEmail.length > 0 && <div className={`message ${isEmail ? 'success' : 'error'}`}>{emailMessage}</div>}
+              </div>
 
               <Form.Group style={{ display: "flex", marginTop: "35px", marginBottom: "35px" }} >
                 <MDBInput
                   style={{ width: "560px" }}
                   type="text"
                   name="comAddress"
-                  label="회사 주소를 입력해주세요."
+                  placeholder="회사 주소를 입력해주세요."
                   id='form1'
                   onChange={handlerComAddress} />
               </Form.Group>
@@ -171,21 +174,45 @@ function BrandRegister() {
                   style={{ width: "560px" }}
                   type="text"
                   name="comTel"
-                  label="회사 전화번호를 입력해주세요."
+                  placeholder="회사 전화번호를 입력해주세요."
                   id='form1'
                   onChange={handlerComTel} />
               </Form.Group>
 
               <Form.Group style={{ display: "flex", marginTop: "35px", marginBottom: "35px" }} >
-                <MDBInput
-                  style={{ width: "560px" }}
-                  type="file"
-                  name="comLogo"
-                  label="로고를 첨부해주세요."
-                  id='form1'
-                  onChange={handlerComLogo} />
+                <Form.Label
+                  style={{
+                    display: "flex",
+                    // border: "1px solid #ced4da",
+                    border: "1px solid #6d757e",
+                    backgroundColor: "#6d757e",
+                    borderRadius: "0.375rem",
+                    transition: "border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out",
+                    color: "#fff",
+                    lineHeight: "1.5",
+                    fontSize: "1rem",
+                    fontWeight: "400",
+                    padding: "0.375rem 0.75rem",
+                    width: "560px",
+                    cursor: "pointer",
+                    paddingLeft: "240px"
+                  }}
+                  id='logo-label'
+                  for='logo'>
+                  로고 업로드
+                </Form.Label>
               </Form.Group>
-
+              <MDBInput
+                style={{ width: "560px", display: "none" }}
+                type="file"
+                name="comLogo"
+                placeholder="로고를 첨부해주세요."
+                id='logo'
+                onChange={handlerComLogo} />
+              {/* {comLogo.name} */}
+              <div>
+                {comLogo && <div className="com-logo-name">{comLogo.name}</div>}
+              </div>
               <MDBBtn style={{ marginRight: 50 }} outline className='mx-2' color='dark' onClick={() => {
                 history('/')
               }}>뒤로가기</MDBBtn>
