@@ -69,41 +69,43 @@ function MyNft() {
 
     return(
         <div>
-            <NavBar/>
-            <div  style={{height:500}}>
+            <NavBar />
+            <div>
                 <div className="mynft-title">
                     <h1>나의 NFT 목록</h1>
                 </div>
-                <div>
+                <div className="mynft-contents">
                     {
                         tokenlength === 0
-                        ? <div className="mynft-none-parent">
-                            <div className="mynft-none">
-                                <h2>No items to display</h2>
-                            </div>   
-                          </div>
-                        : <div className="mynft-main">
-                        {tokenInfo.map((token) => {
-                            return( 
-                            <MDBCard className="mynft-card">
-                                <MDBCardBody>
-                                    <MDBCardTitle>제품 이미지 들어갈 자리</MDBCardTitle>
-                                    <br/>
-                                    <MDBCardTitle>토큰아이디 : {token[1]}</MDBCardTitle>
-                                    <MDBCardTitle>브랜드 이름 : {token[0].product.brandNm}</MDBCardTitle>
-                                    <MDBCardTitle>제품 이름 : {token[0].product.productName}</MDBCardTitle>
-                                    <MDBCardTitle>상품 일련 번호 : {token[0].serialNo}  </MDBCardTitle>
-                                    <br/>
-                                    <Button className="mynft-button" variant="outline-primary" onClick={() => showDetail(token)}>Detail</Button>
-                                </MDBCardBody>
-                            </MDBCard>
-                            )
-                        })}
-                    </div>
+                            ? <div className="mynft-none-parent">
+                                <div className="mynft-none">
+                                    <h2>No items to display</h2>
+                                </div>
+                            </div>
+                            : <div className="mynft-main row">
+                                {tokenInfo.map((token) => {
+                                    return (
+                                        <div className="col-lg-3 mt-4" style={{ minWidth: 300, maxWidth: 400 }}>
+                                            <MDBCard className="mynft-card">
+                                                <MDBCardBody>
+                                                    <MDBCardTitle>제품 이미지 들어갈 자리</MDBCardTitle>
+                                                    <br />
+                                                    <MDBCardTitle>토큰아이디 : {token[1]}</MDBCardTitle>
+                                                    <MDBCardTitle>브랜드 이름 : {token[0].product.brandNm}</MDBCardTitle>
+                                                    <MDBCardTitle>제품 이름 : {token[0].product.productName}</MDBCardTitle>
+                                                    <MDBCardTitle>상품 일련 번호 : {token[0].serialNo}  </MDBCardTitle>
+                                                    <br />
+                                                    <Button className="mynft-button" variant="outline-primary" onClick={() => showDetail(token)}>Detail</Button>
+                                                </MDBCardBody>
+                                            </MDBCard>
+                                        </div>
+                                    )
+                                })}
+                            </div>
                     }
                 </div>
             </div>
-            <Footer/>
+            <Footer />
         </div>
     )
 }

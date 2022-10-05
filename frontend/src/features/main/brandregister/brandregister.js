@@ -5,6 +5,7 @@ import "./brandregister.css"
 import { MDBInput } from 'mdb-react-ui-kit';
 import { MDBBtn } from 'mdb-react-ui-kit';
 import { useNavigate } from 'react-router-dom';
+import Button from 'react-bootstrap/Button';
 
 
 function BrandRegister() {
@@ -66,7 +67,8 @@ function BrandRegister() {
 
         axios.post("company/create/", formValues)
             .then((response) => {
-                alert("브랜드 등록 완료!")
+                alert("브랜드 등록 완료!");
+                history('/');
             })
             .catch((err) => {
                 if(!err.response){
@@ -173,8 +175,8 @@ function BrandRegister() {
                     }}>뒤로가기</MDBBtn>
                     {
                       !!formValues.comName && !!formValues.comRegNum && !!formValues.comWallet && !!formValues.comEmail && !!formValues.comAddress && !!formValues.comTel && emailRegEx.test(formValues.comEmail)
-                      ? <MDBBtn style={{marginLeft:50}} outline color='success' onClick={() => onSubmit() }>제출하기</MDBBtn>
-                      : <MDBBtn style={{marginLeft:50}} outline color='success' disabled onClick={() => onSubmit() }>제출하기</MDBBtn>
+                      ? <Button style={{marginLeft:50}} variant="outline-primary" onClick={() => onSubmit()}>제출하기</Button>
+                      : <Button style={{marginLeft:50}} variant="outline-primary" onClick={() => onSubmit()} disabled>제출하기</Button>
                     }
                     {/* <MDBBtn style={{marginLeft:50}} outline color='success' disabled onClick={() => onSubmit() }>제출하기</MDBBtn> */}
                     </div>

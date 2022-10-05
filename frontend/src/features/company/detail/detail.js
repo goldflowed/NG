@@ -7,27 +7,27 @@ import { useParams } from "react-router-dom";
 import axios from "../../../common/api/http-common";
 import { nftContract, web3 } from "../../../common/web3/web3Config";
 import { useLocation } from "react-router-dom";
+import {useNavigate} from 'react-router-dom';
 
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
+import Card from 'react-bootstrap/Card';
+
 
 import './detail.css';
 
 const ContainerDiv = styled.div`
-  display: flex;
-  flex-direction: row;
   `
 
 const MainDiv = styled.div`
-  /* background-color: red; */
-  width: 1550px;
   padding-top:50px;
   padding-right: 100px;
   font-size:20px;
-  margin-left:400px;
   margin-top:25px;
+  margin-left: 35rem;
+  width: 50rem;
   `
 
 const Hr = styled.hr`
@@ -37,27 +37,31 @@ const Hr = styled.hr`
   `
 
 const TitleP = styled.p`
-  width:1350px;
-  font-size: 50px;
+  font-size: 40px;
   font-weight: bold;
-  margin: 0;
-  margin-left: 20px;
+  font-family: 'MaruBuri-Regular';
+  margin-top: 4rem;
+  display: flex;
+  justify-content: center
   `
 
 const ProductDiv = styled.div`
+  margin-top: 4rem;
   width:100%;
   `
 
 const InfoDiv = styled.div`
   display:flex;
   flex-direction:row;
+  margin-left: 5rem;
+  font-family: 'MaruBuri-Regular';
   `
 
 const InfoPDiv = styled.div`
   margin-left:10px;
   display: flex;
-  flex-direction: column;
-  justify-content:space-between;
+  justify-content: center
+  font-family: 'MaruBuri-Regular';
   `
 const TableDiv = styled.div`
   margin:auto;
@@ -69,6 +73,7 @@ const TableDiv = styled.div`
   `
 
 function Detail() {
+  
   const [nfts, setNfts] = useState([])
   const [productImg, setProductImg] = useState('')
   const [productName, setProductName] = useState('')
@@ -82,6 +87,8 @@ function Detail() {
   const [tokenlength, settokenlength] = useState(0);
   const [tokenInfo, settokenInfo] = useState("");
   const [sameArr, setSameArr] = useState([]);
+
+  const history = useNavigate();
   
 
   // 두번째 history
@@ -104,6 +111,7 @@ function Detail() {
     console.log('serialNo', serialNo);
     console.log('year', year);
     console.log('month', month);
+    console.log('from', from);
     // nft 발급
     await nftContract.methods.mint(productCode, serialNo, year, month)
       .send({from:from});
@@ -193,7 +201,7 @@ function Detail() {
       const Sndreceipt = await web3.eth.getTransactionReceipt(Sndtransactions);
       console.log('Sndreceipt', Sndreceipt);
 
-      console.log('receipt.logs[0].topics[2]', Sndreceipt.logs[0].topics[2]);
+      console.log('Sndreceipt.logs[0].topics[2]', Sndreceipt.logs[0].topics[2]);
 
       const FirstAdd =  Sndreceipt.logs[0].topics[2];
       // console.log('FirstAdd.slice(-3)', FirstAdd.slice(-4));
@@ -209,7 +217,7 @@ function Detail() {
         console.log(params.productCode);
         if(params.productCode === SndTokenDetail.product.productNo){
           count++;
-          var productArr = [SndTokenDetail, count, SndTokenHistory.length];
+          var productArr = [SndTokenDetail, count, SndTokenHistory.length, i];
           await proArr.push(productArr);
         }
       }
@@ -264,9 +272,9 @@ function Detail() {
     */
   }
 
-  // function onDetail(data) {
-  //   console.log(data);
-  // }
+  const showNftDetail = (data) => {
+    history(`${data[0].serialNo}`, {state: data})
+  }
 
   useEffect(() => {
     console.log(params.productCode)
@@ -289,15 +297,19 @@ function Detail() {
       <NavBar/>
       <SideBar/>
       <MainDiv>
-        <TitleP>등록 제품 정보 {'>'} 제품 상세 페이지</TitleP><Hr/>
+        <TitleP>{productName}</TitleP>
         <ProductDiv>
           <InfoDiv>
-            <img src={productImg} alt="productImage" style={{width:"33%"}}/>
+            <img src={productImg} alt="productImage" style={{width:"12rem"}}/>
             <InfoPDiv>
-              <p>제 품 명 : {productName}</p>
-              <p>제 품 코 드 : {productCode}</p>
-              <p>출 고 일 : {productMfd}</p>
-              <p>제 조 국 : {productMadeIn}</p>
+            <Card style={{ width: '22rem', height: '12rem' }}>
+              <Card.Body>
+                <Card.Title style={{marginTop:20}}>제 품 명 : {productName}</Card.Title>
+                <Card.Title style={{marginTop:10}}>제 품 코 드 : {productCode}</Card.Title>
+                <Card.Title style={{marginTop:10}}>출 고 일 : {productMfd}</Card.Title>
+                <Card.Title style={{marginTop:10}}>제 조 국 : {productMadeIn}</Card.Title>
+              </Card.Body>
+            </Card>
             </InfoPDiv>
           </InfoDiv>
         </ProductDiv><Hr/>
@@ -332,7 +344,7 @@ function Detail() {
               {sameArr.map((res) => {
                 console.log('res', res);
                 return(
-                  <tr style={{cursor:"pointer"}}>
+                  <tr style={{cursor:"pointer"}} onClick={() => showNftDetail(res)}>
                     <td>{res[1]}</td>
                     <td>{res[0].serialNo}</td>
                     <td>
@@ -350,6 +362,7 @@ function Detail() {
           </div>
         </div>
       </MainDiv>
+      <Footer/>
     </ContainerDiv>
   )
 }

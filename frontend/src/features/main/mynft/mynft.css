@@ -4,14 +4,15 @@
     font-weight: normal;
     font-style: normal;
 }
-
 .mynft-title {
     margin-top: 150px;
     display: flex;
     justify-content: center;
     font-family: 'MaruBuri-Regular';
 }
-
+.mynft-contents {
+    margin-bottom: 50px;
+}
 .mynft-main {
     margin-top: 70px;
     width: 100%;
@@ -19,18 +20,15 @@
     justify-content: center;
     font-family: 'MaruBuri-Regular';
 }
-
 .mynft-card {
-    margin-left: 1rem;
-    margin-right: 1rem;
+    /* margin-left: 1rem; */
+    /* margin-right: 1rem; */
     font-family: 'MaruBuri-Regular';
 }
-
 .mynft-none-parent {
     display: flex;
     justify-content: center;
 }
-
 .mynft-none {
     width: 63rem;
     height: 20rem;

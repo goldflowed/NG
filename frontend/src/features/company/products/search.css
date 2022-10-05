@@ -5,23 +5,8 @@
     font-style: normal;
 }
 
-.nfttable-title{
+.input-main{
     display: flex;
-    justify-content: center;
-    margin-top: 3rem;
+    justify-content: flex-end;
     font-family: 'MaruBuri-Regular';
-}
-
-.nft-register{
-    margin-top: 2rem;
-    font-family: 'MaruBuri-Regular';
-}
-
-.detail-table{
-    margin-top: 2rem;
-    margin-bottom: 5rem;
-}
-
-.register-overall{
-    width: 100%;
 }

@@ -191,7 +191,7 @@ function detailnft() {
                                 <MDBTableBody>
                                 <tr>
                                 <th scope='row'>{res[2]}</th>
-                                <td>{res[0].logs[0].topics[2]}</td>
+                                <td>{res[0].logs[0].topics[2].replace('000000000000000000000000', '')}</td>
                                 <td>{res[1].year}년 {res[1].month}월</td>
                                 <td>
                                     {
