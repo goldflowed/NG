@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import NavBar from "../../../common/navbar/NavBar"
 import "./home.css"
 import "bootstrap/dist/css/bootstrap.min.css"
@@ -38,6 +38,18 @@ function Home() {
     }
     setBasicActive(value);
   }
+
+  useEffect(() => {
+    // console.log(typeof(web3))
+    if (typeof(web3) === 'undefined') {
+      // alert('저희 서비스를 이용하기위해서는 metamask 설치가 필요합니다. \n설치페이지로 이동하시겠습니까?')
+      if (window.confirm('저희 서비스를 이용하기위해서는 MetaMask 설치가 필요합니다. \n설치페이지로 이동하시겠습니까?') == true) {
+        window.open('https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn')
+      } else {
+        console.log('아니오')
+      }
+    }
+  }, []);
 
   return (
     <div className="home">

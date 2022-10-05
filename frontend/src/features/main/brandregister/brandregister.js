@@ -11,9 +11,16 @@ import Button from 'react-bootstrap/Button';
 function BrandRegister() {
     const history = useNavigate()
     // 변수 초기화
+    const walletAddress = () => {
+        if (window.localStorage.getItem('wallet')) {
+            return window.localStorage.getItem('wallet')
+        } else {
+            return '지갑정보가 없습니다.'
+        }
+    }
     const initialValues = { comName: "",
                             comRegNum: "",
-                            comWallet: window.localStorage.getItem('wallet'),
+                            comWallet: walletAddress(),
                             comEmail: "",
                             comTel: "",
                             comAddress: "",
