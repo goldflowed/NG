@@ -8,6 +8,8 @@ import { useNavigate } from 'react-router-dom';
 import styled from "styled-components";
 import { Form, Button } from "react-bootstrap";
 
+import Footer from "../../../common/footer/Footer"
+
 
 function BrandRegister() {
     const history = useNavigate();
@@ -114,7 +116,7 @@ function BrandRegister() {
                         <Form encType="multipart/form-data">
                             <Form.Group style={{ display: "flex", marginTop: "35px", marginBottom: "35px" }} >
                                 <MDBInput
-                                    style={{ width: "500px" }}
+                                    style={{ width: "560px" }}
                                     type="text"
                                     name="comName"
                                     label="브랜드 명을 입력해주세요."
@@ -125,7 +127,7 @@ function BrandRegister() {
 
                             <Form.Group style={{ display: "flex", marginTop: "35px", marginBottom: "35px" }} >
                                 <MDBInput
-                                    style={{ width: "500px" }}
+                                    style={{ width: "560px" }}
                                     type="text"
                                     name="comRegNum"
                                     label="사업자 등록 번호를 입력해 주세요."
@@ -135,7 +137,7 @@ function BrandRegister() {
 
                             <Form.Group style={{ display: "flex", marginTop: "35px", marginBottom: "35px" }} >
                                 <MDBInput
-                                    style={{ width: "500px" }}
+                                    style={{ width: "560px" }}
                                     type="text"
                                     name="comWallet"
                                     disabled={true}
@@ -146,7 +148,7 @@ function BrandRegister() {
 
                             <Form.Group style={{ display: "flex", marginTop: "35px", marginBottom: "35px" }} >
                                 <MDBInput
-                                    style={{ width: "500px" }}
+                                    style={{ width: "560px" }}
                                     type="text"
                                     name="comEmail"
                                     label="이메일을 입력해 주세요."
@@ -157,7 +159,7 @@ function BrandRegister() {
 
                             <Form.Group style={{ display: "flex", marginTop: "35px", marginBottom: "35px" }} >
                                 <MDBInput
-                                    style={{ width: "500px" }}
+                                    style={{ width: "560px" }}
                                     type="text"
                                     name="comAddress"
                                     label="회사 주소를 입력해주세요."
@@ -167,7 +169,7 @@ function BrandRegister() {
 
                             <Form.Group style={{ display: "flex", marginTop: "35px", marginBottom: "35px" }} >
                                 <MDBInput
-                                    style={{ width: "500px" }}
+                                    style={{ width: "560px" }}
                                     type="text"
                                     name="comTel"
                                     label="회사 전화번호를 입력해주세요."
@@ -177,7 +179,7 @@ function BrandRegister() {
 
                             <Form.Group style={{ display: "flex", marginTop: "35px", marginBottom: "35px" }} >
                                 <MDBInput
-                                    style={{ width: "500px" }}
+                                    style={{ width: "560px" }}
                                     type="file"
                                     name="comLogo"
                                     label="로고를 첨부해주세요."
@@ -198,6 +200,7 @@ function BrandRegister() {
                 </div>
             </div>
             <br /><br />
+            <Footer></Footer>
         </div >
     )
 }

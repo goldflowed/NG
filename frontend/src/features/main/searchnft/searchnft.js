@@ -12,8 +12,8 @@ import {
     MDBCardHeader
 } from 'mdb-react-ui-kit';
 import Button from 'react-bootstrap/Button';
-import { nftContract, web3 } from "../../../common/web3/web3Config"
-import "./searchnft.css"
+import { nftContract, web3 } from "../../../common/web3/web3Config";
+import "./searchnft.css";
 
 function SearchNft() {
 
@@ -156,7 +156,8 @@ function SearchNft() {
                     </div>
                 </div>
             </div>
-        </div>
+            <Footer style={{width:"100%"}}></Footer>    
+        </div>        
     )
 
 }
