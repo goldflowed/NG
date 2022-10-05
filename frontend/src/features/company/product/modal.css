@@ -14,7 +14,7 @@
   }
   .modal > section {
     width: 90%;
-    max-width: 450px;
+    max-width: 600px;
     margin: 0 auto;
     border-radius: 0.3rem;
     background-color: #fff;
@@ -68,11 +68,9 @@
     justify-content: space-around;
   }
 
-  .modal-image {
-    width: 150px;
-    height: 150px;
-    background-color: grey;
-  }
+  /* .form-outline {
+    width: 100%;
+  } */
 
   @keyframes modal-show {
     from {

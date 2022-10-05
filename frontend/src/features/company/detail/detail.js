@@ -281,6 +281,7 @@ function Detail() {
     axios.get(`product/${params.productCode}`)
     .then((res) => {
       setProductImg(res.data.proUrl)
+      // console.log(res);
     })
     console.log(state)
     setProductName(state.productName)
@@ -335,9 +336,9 @@ function Detail() {
           <Table striped bordered hover>
             <thead>
               <tr>
-                <th>#</th>
-                <th>시리얼 번호</th>
-                <th>전송 여부</th>
+                <th className="table-th1"><div>#</div></th>
+                <th className="table-th2"><div>시리얼 번호</div></th>
+                <th className="table-th3"><div>전송 여부</div></th>
               </tr>
             </thead>
             <tbody>

@@ -89,23 +89,24 @@ const modal = (props) => {
             <main>
                 <div className="modal-overall">
                   <div className="modal-image">
-                    상품 이미지
+                    <img src={props.ImgUrl} alt="productImage" style={{width:"13rem", height:"13rem"}}/>
                   </div>
                   <div>
                     <p>브랜드명 : {props.brandNm}</p>
                     <p>상품명 : {props.productName}</p>
                     <p>시리얼번호 : {props.serialNo}</p>
-                    <p>제조일 및 생산 국가 : {props.mfd} {props.madeIn} </p>
+                    <p>제조 일자 : {props.mfd}</p>
+                    <p>생산 국가 : {props.madeIn}</p>
                   </div>
                 </div>
                 <br/>
-                <MDBInput style={{width:400}}
+                <MDBInput style={{width:'100%'}}
                           // label='받는 분의 주소를 정확히 입력해 주세요.'
                           id='form1'
                           type='text'
                           value = {sendAddress}
                           onChange={onAddHandler} />
-                <div style={{marginLeft:55, marginTop:5, color:'red'}}>받는 분의 주소를 정확히 입력해주세요.</div>
+                <div style={{marginLeft:120, marginTop:5, color:'red'}}>받는 분의 주소를 정확히 입력해주세요.</div>
 
                 </main>
             <footer>

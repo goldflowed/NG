@@ -12,6 +12,8 @@
 }
 .mynft-contents {
     margin-bottom: 50px;
+    display: flex;
+    justify-content: center;
 }
 .mynft-main {
     margin-top: 70px;

@@ -7,6 +7,7 @@ import { nftContract, web3 } from "../../../common/web3/web3Config";
 
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import { useParams } from 'react-router-dom';
 
 import {
   MDBCard,
@@ -19,6 +20,7 @@ import { MDBTable, MDBTableHead, MDBTableBody } from 'mdb-react-ui-kit';
 import Button from 'react-bootstrap/Button';
 
 import './product.css'
+import axios from "../../../common/api/http-common";
 
 const ContainerDiv = styled.div`
   display: flex;
@@ -51,6 +53,7 @@ const Hr = styled.hr`
   `
 
   function Product() {
+    const params = useParams();
     const location = useLocation()
     const { state } = location
  
@@ -71,7 +74,10 @@ const Hr = styled.hr`
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const [totalPeriod, settotalperiod] = useState(0);
 
+    const [productImg, setProductImg] = useState('');
+
     async function getDetail() {
+      
       const TokenHistory = await nftContract.methods.getTokenHistory(tokenId).call();
       console.log('TokenHistory',TokenHistory);
       console.log('TokenHistory[0]',TokenHistory[0]);
@@ -145,6 +151,11 @@ const Hr = styled.hr`
     console.log(month);
 
     useEffect(() => {
+      console.log(state[0].product.productNo);
+      axios.get(`product/${state[0].product.productNo}`)
+      .then((res) => {
+        setProductImg(res.data.proUrl)
+    })
       getDetail();
     }, [])
   
@@ -155,8 +166,8 @@ const Hr = styled.hr`
       <MainDiv>
       <TitleP>{state[0].product.productName}의 상세 정보</TitleP>
       <div className="detailnft-main">
-        <div className="detailnft-image">
-          <p>제품 이미지 들어갈 자리</p>
+        <div>
+          <img src={productImg} alt="productImage" style={{width:"20rem", height:"17rem"}}/>
         </div>
         <div>
         <MDBCard className="detailnft-card">
@@ -164,12 +175,12 @@ const Hr = styled.hr`
                 <MDBCardText>
                     {/* <MDBCardTitle>블록길이 : {historylength}</MDBCardTitle>
                     <MDBCardTitle>토큰아이디 : {tokenId}</MDBCardTitle> */}
-                    <MDBCardTitle style={{marginTop:10}}>브랜드명 : {state[0].product.brandNm}</MDBCardTitle>
-                    <MDBCardTitle style={{marginTop:10}}>상품명 : {state[0].product.productName}</MDBCardTitle>
-                    <MDBCardTitle style={{marginTop:10}}>상품번호 : {state[0].product.productNo}</MDBCardTitle>
-                    <MDBCardTitle style={{marginTop:10}}>시리얼번호 : {state[0].serialNo}</MDBCardTitle>
-                    <MDBCardTitle style={{marginTop:10}}>제조일자 : {state[0].product.mfd}</MDBCardTitle>
-                    <MDBCardTitle style={{marginTop:10}}>제조국 : {state[0].product.madeIn}</MDBCardTitle>
+                    <MDBCardTitle style={{marginTop:13}}>브랜드명 : {state[0].product.brandNm}</MDBCardTitle>
+                    <MDBCardTitle style={{marginTop:13}}>상품명 : {state[0].product.productName}</MDBCardTitle>
+                    <MDBCardTitle style={{marginTop:13}}>상품번호 : {state[0].product.productNo}</MDBCardTitle>
+                    <MDBCardTitle style={{marginTop:13}}>시리얼번호 : {state[0].serialNo}</MDBCardTitle>
+                    <MDBCardTitle style={{marginTop:13}}>제조일자 : {state[0].product.mfd}</MDBCardTitle>
+                    <MDBCardTitle style={{marginTop:13}}>제조국 : {state[0].product.madeIn}</MDBCardTitle>
                 </MDBCardText>
                 {
                   state[2] === 1
@@ -188,18 +199,19 @@ const Hr = styled.hr`
                         madeIn = {state[0].product.madeIn}
                         year = {year}
                         month = {month}
+                        ImgUrl = {productImg}
                         >
                     </Modal>
             </MDBCardBody>
         </MDBCard>
       </div>
     </div>
-    
+    <Hr style={{marginTop:20}}></Hr>
     <div className="table-title">
-                <h3>NFT 사용 기록</h3>
+                <h3>제품 사용 기록</h3>
             </div>
             <div className="detailnft-table">
-                <div>
+                <div style={{width: "55rem"}}>
                     <MDBTable striped>
                         <MDBTableHead>
                             <tr>
@@ -209,12 +221,12 @@ const Hr = styled.hr`
                             <th scope='col'>사용 기간</th>
                             </tr>
                         </MDBTableHead>
+                        <MDBTableBody>
                         {receipt.map((res) => {
                             console.log('res', res);
                             return(
-                                <MDBTableBody>
                                 <tr>
-                                <th scope='row'>{res[2]}</th>
+                                <th scope='row'>{res[2]+1}</th>
                                 <td>{res[0].logs[0].topics[2].replace('000000000000000000000000', '')}</td>
                                 <td>{res[1].year}년 {res[1].month}월</td>
                                 <td>
@@ -225,9 +237,9 @@ const Hr = styled.hr`
                                     }
                                     </td>
                                 </tr>
-                        </MDBTableBody>     
                             )
                         })}
+                        </MDBTableBody>
                     </MDBTable>
                     <div className="total-period">
                         <p>제품 총 사용 기간 : {totalPeriod}개월</p>

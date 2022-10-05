@@ -53,7 +53,7 @@ function Home() {
               <h3 className='mt-3'>명품 브랜드를 위한 블록체인 솔루션</h3>
               <h5 className='mt-5'>우리는 고객의 새로운 경험과 함께 건전한 명품 산업의 생태계를 구축하기 위한 서비스입니다.</h5>
               <Link to="./aboutus">
-                <MDBBtn className="mt-5" tag="a" outline size="lg">
+                <MDBBtn className="mt-5" outline size="lg">
                   MORE DETAIL
                 </MDBBtn>
               </Link>

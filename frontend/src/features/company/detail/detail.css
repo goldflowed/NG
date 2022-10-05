@@ -25,3 +25,17 @@
 .register-overall{
     width: 100%;
 }
+
+.table-th1 {
+    margin-left: 2rem;
+}
+
+.table-th2 {
+    display: flex;
+    justify-content: center;
+}
+
+/* .table-th3 {
+    display: flex;
+    justify-content: center;
+} */
