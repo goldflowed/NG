@@ -10,11 +10,12 @@ import {
     MDBCardTitle,
     MDBCardText,
     MDBBtn
-  } from 'mdb-react-ui-kit';
+} from 'mdb-react-ui-kit';
 import './mynft.css'
 import Button from 'react-bootstrap/Button';
 
 import axios from "../../../common/api/http-common";
+import ipfs_apis from "../../../common/api/ipfs"
 
 // tokenId 번호 -> tokenId에 따른 블록 정보 불러오기
 function MyNft() {
@@ -24,23 +25,23 @@ function MyNft() {
     const [tokenInfo, settokenInfo] = useState([]);
     const [productImg, setproductImg] = useState();
 
-    async function getTokenLength(){
-        
+    async function getTokenLength() {
+
         const Wallet = window.localStorage.getItem('wallet');
 
         const Token = await nftContract.methods.getOwnedTokens(Wallet).call();
 
         console.log('토큰 정보 : ', Token);
         console.log('토큰의 개수 = ', Token.length)
-        
+
         // 토큰의 길이가 담겨있는 상황
         await settokenlength(Token.length);
-        
+
         // Token의 Array 지정
         var ArrToken = [];
 
         // TokenId 값 삽입
-        for(let i = 0; i < Token.length; i++){
+        for (let i = 0; i < Token.length; i++) {
             await ArrToken.push(Token[i]);
         }
         await setTokenId(ArrToken);
@@ -48,21 +49,21 @@ function MyNft() {
         // Token의 Info 삽입
         var ArrTokenInfo = [];
         var ImgUrl = "";
-        for(let i = 0; i < Token.length; i++){
+        for (let i = 0; i < Token.length; i++) {
             const TokenDetail = await nftContract.methods.ngs(Token[i]).call();
             console.log('TokenDetail', TokenDetail);
             await axios.get(`product/${TokenDetail.product.productNo}`)
-            // eslint-disable-next-line no-loop-func
-            .then((res) => {
-                setproductImg(res.data.proUrl);
-                ImgUrl = res.data.proUrl;
-            })
+                // eslint-disable-next-line no-loop-func
+                .then((res) => {
+                    setproductImg(ipfs_apis.https_public.concat(res.data.proUrl));
+                    ImgUrl = ipfs_apis.https_public.concat(res.data.proUrl);
+                })
             // TokenDetail과 TokenId를 배열로 생성해서 ArrTokenInfo에 삽입
             var DetailId = [TokenDetail, Token[i], ImgUrl];
             await ArrTokenInfo.push(DetailId);
             console.log('토큰정보와 아이디', ArrTokenInfo)
         }
-        
+
         await settokenInfo(ArrTokenInfo);
 
 
@@ -70,17 +71,17 @@ function MyNft() {
     const history = useNavigate();
 
     const showDetail = (token) => {
-        
-        history(`${token[0].serialNo}`, {state: {token}});
+
+        history(`${token[0].serialNo}`, { state: { token } });
     }
 
-    useEffect( () => {
-        
+    useEffect(() => {
+
         getTokenLength();
-        
+
     }, [])
 
-    return(
+    return (
         <div>
             <NavBar />
             <div>
@@ -101,7 +102,7 @@ function MyNft() {
                                         <div className="col-lg-3 mt-4" style={{ minWidth: 300, maxWidth: 400 }}>
                                             <MDBCard className="mynft-card">
                                                 <MDBCardBody>
-                                                <img src={productImg} alt="productImage" style={{width:"20rem"}}/>
+                                                    <img src={productImg} alt="productImage" style={{ width: "20rem" }} />
                                                     <br /><br />
                                                     {/* <MDBCardTitle>토큰아이디 : {token[1]}</MDBCardTitle> */}
                                                     <MDBCardTitle>브랜드 이름 : {token[0].product.brandNm}</MDBCardTitle>

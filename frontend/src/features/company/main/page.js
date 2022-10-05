@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import SideBar from "../sidebar/SideBar";
 import styled from "styled-components";
 import NavBar from "../../../common/navbar/NavBar";
@@ -8,6 +8,8 @@ import Card from 'react-bootstrap/Card';
 import Footer from "../../../common/footer/Footer";
 
 import './page.css';
+
+import ipfs_apis from "../../../common/api/ipfs";
 
 const ContainerDiv = styled.div`
 
@@ -74,35 +76,35 @@ function Home() {
 
   useEffect(() => {
     axios.get(`company/${window.localStorage.wallet}`)
-    .then((res) => {
-      setName(res.data.comName)
-      setRegNum(res.data.comRegNum)
-      setTel(res.data.comTel)
-      setWallet(res.data.comWallet)
-      setAddress(res.data.comAddress)
-      setLogoUrl(res.data.comLogo)
-    })
-  },[])
-  
+      .then((res) => {
+        setName(res.data.comName)
+        setRegNum(res.data.comRegNum)
+        setTel(res.data.comTel)
+        setWallet(res.data.comWallet)
+        setAddress(res.data.comAddress)
+        setLogoUrl(ipfs_apis.https_public.concat(res.data.comLogo))
+      })
+  }, [])
+
   return (
     <ContainerDiv>
-      <NavBar/>
-      <SideBar/>
+      <NavBar />
+      <SideBar />
       <MainDiv>
         <TitleP>나의 기업 정보</TitleP>
         <div className="company-main">
           <Card style={{ width: '48rem', marginTop: '3rem', marginLeft: '1.5rem', marginRight: 10 }}>
             <Card.Body className="company-base">
-              <Card.Title style={{marginTop:20}}>브랜드명 : {name}</Card.Title>                    
-              <Card.Title style={{marginTop:20}}>사업자 등록번호 : {regNum}</Card.Title>                    
-              <Card.Title style={{marginTop:20}}>브랜드 전화번호 : {tel}</Card.Title>                    
-              <Card.Title style={{marginTop:20}}>기업 주소 : {address}</Card.Title>                    
-              <Card.Title style={{marginTop:20}}>브랜드 지갑 주소 : {wallet}</Card.Title>                    
+              <Card.Title style={{ marginTop: 20 }}>브랜드명 : {name}</Card.Title>
+              <Card.Title style={{ marginTop: 20 }}>사업자 등록번호 : {regNum}</Card.Title>
+              <Card.Title style={{ marginTop: 20 }}>브랜드 전화번호 : {tel}</Card.Title>
+              <Card.Title style={{ marginTop: 20 }}>기업 주소 : {address}</Card.Title>
+              <Card.Title style={{ marginTop: 20 }}>브랜드 지갑 주소 : {wallet}</Card.Title>
             </Card.Body>
           </Card>
-          <img src={logoUrl} style={{marginTop: '3rem', marginLeft:10, width: "16rem", height: "16rem"}}></img>
-          </div>
-        
+          <img src={logoUrl} style={{ marginTop: '3rem', marginLeft: 10, width: "16rem", height: "16rem" }}></img>
+        </div>
+
         {/* <InfoDiv>
           <div className="info" style={{display:"flex", flexDirection:"column", marginTop:50}}>
             <p>브랜드명: {name}</p>
@@ -119,7 +121,7 @@ function Home() {
         </InfoDiv> */}
         {/* <Button>수정</Button> */}
       </MainDiv>
-      <Footer/>
+      <Footer />
     </ContainerDiv>
   )
 }

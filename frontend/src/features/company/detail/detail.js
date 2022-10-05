@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useMemo} from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import SideBar from "../sidebar/SideBar";
 import styled from "styled-components";
 import NavBar from "../../../common/navbar/NavBar";
@@ -7,7 +7,7 @@ import { useParams } from "react-router-dom";
 import axios from "../../../common/api/http-common";
 import { nftContract, web3 } from "../../../common/web3/web3Config";
 import { useLocation } from "react-router-dom";
-import {useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
@@ -73,7 +73,7 @@ const TableDiv = styled.div`
   `
 
 function Detail() {
-  
+
   const [nfts, setNfts] = useState([])
   const [productImg, setProductImg] = useState('')
   const [productName, setProductName] = useState('')
@@ -89,7 +89,7 @@ function Detail() {
   const [sameArr, setSameArr] = useState([]);
 
   const history = useNavigate();
-  
+
 
   // 두번째 history
   const [SndtokenHistory, setSndTokenHistory] = useState([]);
@@ -114,7 +114,7 @@ function Detail() {
     console.log('from', from);
     // nft 발급
     await nftContract.methods.mint(productCode, serialNo, year, month)
-      .send({from:from});
+      .send({ from: from });
 
     // 토큰 아이디 저장
     const tokenNum = await nftContract.methods.totalSupply().call() - 1;
@@ -122,19 +122,19 @@ function Detail() {
 
     const TokenHistory = await nftContract.methods.getTokenHistory(tokenNum).call();
     await setTokenHistory(TokenHistory);
-    
+
     const DectokenHistory = await Number(TokenHistory[0].blockNumber);
 
     // TokenHistory 16진수로 변환
     const hexHistory = await DectokenHistory.toString(16);
     console.log('16진수 변환', hexHistory);
-    const realhex = '0x'+ hexHistory;
+    const realhex = '0x' + hexHistory;
     console.log('realhex', realhex);
 
-     // string to number
-     const numhistory = await Number(realhex);
-     console.log('numhistory', numhistory);
-     console.log('numhistory타입', typeof(numhistory))
+    // string to number
+    const numhistory = await Number(realhex);
+    console.log('numhistory', numhistory);
+    console.log('numhistory타입', typeof (numhistory))
 
     // getblock을 통한 transactions 구하기 
     const block = await web3.eth.getBlock(numhistory);
@@ -145,7 +145,7 @@ function Detail() {
     console.log('transactions', transactions)
 
     // setTxnHashToTokenId
-    await nftContract.methods.setTxnHashToTokenId(transactions, tokenNum).send({from:from})
+    await nftContract.methods.setTxnHashToTokenId(transactions, tokenNum).send({ from: from })
 
     alert("NFT 등록 완료")
     // 새로고침
@@ -156,18 +156,18 @@ function Detail() {
   // 현재 날짜
   const now = new Date();
   const year = now.getFullYear();
-  const month = now.getMonth()+1;
+  const month = now.getMonth() + 1;
 
-  async function getTable(){
+  async function getTable() {
     const Wallet = window.localStorage.getItem('wallet');
     // 전체 토큰 개수
-    const tokenCnt =  await nftContract.methods.totalSupply().call() - 1;
+    const tokenCnt = await nftContract.methods.totalSupply().call() - 1;
     console.log('tokenCnt', tokenCnt)
-    
+
     var proArr = [];
     var count = 0;
 
-    for(let i=0; i <= tokenCnt+1; i++){
+    for (let i = 0; i <= tokenCnt + 1; i++) {
       // 발행자 주소를 찾아서 Wallet과 같을 경우 배열에 담아서 출력
       const SndTokenHistory = await nftContract.methods.getTokenHistory(i).call();
       await setSndTokenHistory(SndTokenHistory);
@@ -182,13 +182,13 @@ function Detail() {
       // TokenHistory 16진수로 변환
       const SndhexHistory = await SndDectokenHistory.toString(16);
       console.log('Snd16진수 변환', SndhexHistory);
-      const Sndrealhex = '0x'+ SndhexHistory;
+      const Sndrealhex = '0x' + SndhexHistory;
       console.log('Sndrealhex', Sndrealhex);
 
       // string to number
       const Sndnumhistory = await Number(Sndrealhex);
       console.log('Sndnumhistory', Sndnumhistory);
-      console.log('Sndnumhistory타입', typeof(Sndnumhistory))
+      console.log('Sndnumhistory타입', typeof (Sndnumhistory))
 
       // getblock을 통한 transactions 구하기 
       const Sndblock = await web3.eth.getBlock(Sndnumhistory);
@@ -203,19 +203,19 @@ function Detail() {
 
       console.log('Sndreceipt.logs[0].topics[2]', Sndreceipt.logs[0].topics[2]);
 
-      const FirstAdd =  Sndreceipt.logs[0].topics[2];
+      const FirstAdd = Sndreceipt.logs[0].topics[2];
       // console.log('FirstAdd.slice(-3)', FirstAdd.slice(-4));
       const newFirstAdd = FirstAdd.slice(-4);
       const newWallet = Wallet.slice(-4);
       console.log(newFirstAdd);
       console.log(newWallet);
 
-      if(newFirstAdd === newWallet){
+      if (newFirstAdd === newWallet) {
         const SndTokenDetail = await nftContract.methods.ngs(i).call();
         console.log('SndTokenDetail', SndTokenDetail);
         console.log('productNo', SndTokenDetail.product.productNo);
         console.log(params.productCode);
-        if(params.productCode === SndTokenDetail.product.productNo){
+        if (params.productCode === SndTokenDetail.product.productNo) {
           count++;
           var productArr = [SndTokenDetail, count, SndTokenHistory.length, i];
           await proArr.push(productArr);
@@ -224,9 +224,9 @@ function Detail() {
       console.log('proArr', proArr);
       setSameArr(proArr);
     }
-    
-    
-    
+
+
+
     /*
     const Token = await nftContract.methods.getOwnedTokens(Wallet).call();
 
@@ -273,16 +273,16 @@ function Detail() {
   }
 
   const showNftDetail = (data) => {
-    history(`${data[0].serialNo}`, {state: data})
+    history(`${data[0].serialNo}`, { state: data })
   }
 
   useEffect(() => {
     console.log(params.productCode)
     axios.get(`product/${params.productCode}`)
-    .then((res) => {
-      setProductImg(res.data.proUrl)
-      // console.log(res);
-    })
+      .then((res) => {
+        setProductImg('https://ipfs.io/ipfs/'.concat(res.data.proUrl))
+        // console.log(res);
+      })
     console.log(state)
     setProductName(state.productName)
     setProductMadeIn(state.madeIn)
@@ -295,30 +295,30 @@ function Detail() {
 
   return (
     <ContainerDiv>
-      <NavBar/>
-      <SideBar/>
+      <NavBar />
+      <SideBar />
       <MainDiv>
         <TitleP>{productName}</TitleP>
         <ProductDiv>
           <InfoDiv>
-            <img src={productImg} alt="productImage" style={{width:"12rem"}}/>
+            <img src={productImg} alt="productImage" style={{ width: "12rem" }} />
             <InfoPDiv>
-            <Card style={{ width: '22rem', height: '12rem' }}>
-              <Card.Body>
-                <Card.Title style={{marginTop:20}}>제 품 명 : {productName}</Card.Title>
-                <Card.Title style={{marginTop:10}}>제 품 코 드 : {productCode}</Card.Title>
-                <Card.Title style={{marginTop:10}}>출 고 일 : {productMfd}</Card.Title>
-                <Card.Title style={{marginTop:10}}>제 조 국 : {productMadeIn}</Card.Title>
-              </Card.Body>
-            </Card>
+              <Card style={{ width: '22rem', height: '12rem' }}>
+                <Card.Body>
+                  <Card.Title style={{ marginTop: 20 }}>제 품 명 : {productName}</Card.Title>
+                  <Card.Title style={{ marginTop: 10 }}>제 품 코 드 : {productCode}</Card.Title>
+                  <Card.Title style={{ marginTop: 10 }}>출 고 일 : {productMfd}</Card.Title>
+                  <Card.Title style={{ marginTop: 10 }}>제 조 국 : {productMadeIn}</Card.Title>
+                </Card.Body>
+              </Card>
             </InfoPDiv>
           </InfoDiv>
-        </ProductDiv><Hr/>
+        </ProductDiv><Hr />
         <div className="register-overall">
           <div className="nfttable-title">
             <h2>제품 NFT 등록하기</h2>
             {/* {JSON.stringify(tokenInfo.productNo)} */}
-          </div>  
+          </div>
           <div className="nft-register">
             <InputGroup className="mb-3">
               <Form.Control
@@ -333,37 +333,37 @@ function Detail() {
             </InputGroup>
           </div>
           <div className="detail-table">
-          <Table striped bordered hover>
-            <thead>
-              <tr>
-                <th className="table-th1"><div>#</div></th>
-                <th className="table-th2"><div>시리얼 번호</div></th>
-                <th className="table-th3"><div>전송 여부</div></th>
-              </tr>
-            </thead>
-            <tbody>
-              {sameArr.map((res) => {
-                console.log('res', res);
-                return(
-                  <tr style={{cursor:"pointer"}} onClick={() => showNftDetail(res)}>
-                    <td>{res[1]}</td>
-                    <td>{res[0].serialNo}</td>
-                    <td>
-                      {
-                      res[2] === 1
-                      ? <h5>No</h5>
-                      : <h5>Yes</h5>
-                      }
+            <Table striped bordered hover>
+              <thead>
+                <tr>
+                  <th className="table-th1"><div>#</div></th>
+                  <th className="table-th2"><div>시리얼 번호</div></th>
+                  <th className="table-th3"><div>전송 여부</div></th>
+                </tr>
+              </thead>
+              <tbody>
+                {sameArr.map((res) => {
+                  console.log('res', res);
+                  return (
+                    <tr style={{ cursor: "pointer" }} onClick={() => showNftDetail(res)}>
+                      <td>{res[1]}</td>
+                      <td>{res[0].serialNo}</td>
+                      <td>
+                        {
+                          res[2] === 1
+                            ? <h5>No</h5>
+                            : <h5>Yes</h5>
+                        }
                       </td>
-                  </tr>   
-                )
-              })}
-            </tbody>
-          </Table>
+                    </tr>
+                  )
+                })}
+              </tbody>
+            </Table>
           </div>
         </div>
       </MainDiv>
-      <Footer/>
+      <Footer />
     </ContainerDiv>
   )
 }
