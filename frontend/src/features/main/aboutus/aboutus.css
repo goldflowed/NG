@@ -2,7 +2,7 @@
 .about-us {
   width: 100%;
   display: grid;
-  grid-template-rows: 800px 800px 1000px;
+  grid-template-rows: 1fr 1fr 1fr;
 }
 
 /* 섹션 1 */

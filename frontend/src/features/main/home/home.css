@@ -71,3 +71,30 @@
     text-align: center;
     font-size: medium;
 }
+
+.cycleBox {
+    padding-left: 20%;
+}
+
+.cycleCard {
+    width: 80%;
+    height: 100%;
+    display: flex;
+    text-align: left;
+}
+
+.cycleImg {
+    width: 35%;
+    height: 35%;
+}
+
+.cycleText {
+    color: white;
+    padding-left: 10%;
+    padding-top: 5%;
+}
+
+.cycleTextBody {
+    padding-left: 3%;
+    text-indent: 15px;
+}
