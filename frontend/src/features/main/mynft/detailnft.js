@@ -5,6 +5,7 @@ import { useLocation } from "react-router-dom";
 import { useState, useEffect } from 'react';
 import { nftContract, web3 } from "../../../common/web3/web3Config";
 import Modal from './modal.js';
+import Modal2 from './modal2.js';
 
 import {
   MDBCard,
@@ -40,6 +41,9 @@ function detailnft() {
   // modal 관련 함수
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const [modalOpen, setModalOpen] = useState(false);
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const [modalOpen2, setModalOpen2] = useState(false);
+
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const [totalPeriod, settotalperiod] = useState(0);
@@ -91,16 +95,6 @@ function detailnft() {
       console.log('transactions', transactions)
       setTxnHash(transactions)
 
-      //////////////////////////////////////////////////////// 와 안되노
-      // token ID와 transactions 매칭
-      // await nftContract.methods.setTxnHashToTokenId(transactions, tokenId).call();
-      // console.log('tokenId', tokenId);
-
-      // // transactions로 tokenId 출력 확인
-      // const test =await nftContract.methods.getTokenIdFromTxnHash(transactions).call()
-      // console.log('test', test);
-      /////////////////////////////////////////////////////////
-
       const receipt = await web3.eth.getTransactionReceipt(transactions);
       console.log('receipt', receipt);
 
@@ -127,6 +121,13 @@ function detailnft() {
   };
   const closeModal = () => {
     setModalOpen(false);
+  };
+
+  const openModal2 = () => {
+    setModalOpen2(true);
+  };
+  const closeModal2 = () => {
+    setModalOpen2(false);
   };
 
   const now = new Date();
@@ -186,7 +187,15 @@ function detailnft() {
         </div>
       </div>
       <div className="table-title">
-        해시 값: {txnHash}
+      <Button variant="outline-success" onClick={openModal2}>해쉬 주소 확인하기</Button>
+      <Modal2
+        open={modalOpen2}
+        close={closeModal2}
+        header="해쉬 주소"
+        txnHash={txnHash}
+      >
+      </Modal2>
+        {/* 해시 값: {txnHash} */}
       </div>
 
       <div className="table-title">
@@ -203,25 +212,25 @@ function detailnft() {
                 <th scope='col'>사용 기간</th>
               </tr>
             </MDBTableHead>
+            <MDBTableBody>
             {receipt.map((res) => {
               console.log('res', res);
               return (
-                <MDBTableBody>
-                  <tr>
-                    <th scope='row'>{res[2]}</th>
-                    <td>{res[0].logs[0].topics[2].replace('000000000000000000000000', '')}</td>
-                    <td>{res[1].year}년 {res[1].month}월</td>
-                    <td>
-                      {
-                        res[2] === 0
-                          ? <p>최초발행</p>
-                          : <p>{res[5]}개월</p>
-                      }
-                    </td>
-                  </tr>
-                </MDBTableBody>
+                <tr>
+                  <th scope='row'>{res[2]+1}</th>
+                  <td>{res[0].logs[0].topics[2].replace('000000000000000000000000', '')}</td>
+                  <td>{res[1].year}년 {res[1].month}월</td>
+                  <td>
+                    {
+                      res[2] === 0
+                        ? <p>최초발행</p>
+                        : <p>{res[5]}개월</p>
+                    }
+                  </td>
+                </tr>
               )
             })}
+            </MDBTableBody>
           </MDBTable>
           <div className="total-period">
             <p>제품 총 사용 기간 : {totalPeriod}개월</p>

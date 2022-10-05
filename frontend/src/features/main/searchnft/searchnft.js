@@ -42,9 +42,9 @@ function SearchNft() {
 
     const onSearch = async (e) => {
         console.log('검색버튼 클릭 후', txnHash);
-        const tokenId =
-            await nftContract.methods
-                .getTokenIdFromTxnHash(txnHash).call()
+        // const tokenId = 
+        const tokenId = await nftContract.methods
+            .getTokenIdFromTxnHash(txnHash).call()
         // .then((res) => console.log('토큰아이디 : ', res))
 
         console.log(tokenId);
