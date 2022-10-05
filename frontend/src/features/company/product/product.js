@@ -23,6 +23,7 @@ import './product.css'
 import axios from "../../../common/api/http-common";
 
 import ipfs_apis from "../../../common/api/ipfs";
+import Modal2 from './modal2.js';
 
 const ContainerDiv = styled.div`
   display: flex;
@@ -72,9 +73,13 @@ function Product() {
   // modal 관련 함수
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const [modalOpen, setModalOpen] = useState(false);
+   // eslint-disable-next-line react-hooks/rules-of-hooks
+   const [modalOpen2, setModalOpen2] = useState(false);
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const [totalPeriod, settotalperiod] = useState(0);
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const [txnHash, setTxnHash] = useState()
 
   const [productImg, setProductImg] = useState('');
 
@@ -117,6 +122,7 @@ function Product() {
       // transaction hash
       const transactions = await block.transactions[0];
       console.log('transactions', transactions)
+      setTxnHash(transactions)
 
       const receipt = await web3.eth.getTransactionReceipt(transactions);
       console.log('receipt', receipt);
@@ -144,6 +150,12 @@ function Product() {
   };
   const closeModal = () => {
     setModalOpen(false);
+  };
+  const openModal2 = () => {
+    setModalOpen2(true);
+  };
+  const closeModal2 = () => {
+    setModalOpen2(false);
   };
 
   const now = new Date();
@@ -208,6 +220,17 @@ function Product() {
             </MDBCard>
           </div>
         </div>
+        <div className="table-title">
+      <Button variant="outline-success" onClick={openModal2}>해쉬 주소 확인하기</Button>
+      <Modal2
+        open={modalOpen2}
+        close={closeModal2}
+        header="해쉬 주소"
+        txnHash={txnHash}
+      >
+      </Modal2>
+        {/* 해시 값: {txnHash} */}
+      </div>
         <Hr style={{ marginTop: 20 }}></Hr>
         <div className="table-title">
           <h3>제품 사용 기록</h3>
