@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3fa7e72d-bc59-4c14-9e27-96a7536bad8e" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/NG/src/main/java/com/ssafy/ng/config/WebMvcConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/NG/src/main/java/com/ssafy/ng/config/WebMvcConfig.java" afterDir="false" />
-    </list>
+    <list default="true" id="3fa7e72d-bc59-4c14-9e27-96a7536bad8e" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -41,7 +39,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1665031454395</updated>
-      <workItem from="1665031456109" duration="90000" />
+      <workItem from="1665031456109" duration="724000" />
     </task>
     <servers />
   </component>
