@@ -27,17 +27,17 @@ contract NG is ERC721Connector {
         uint256 month;
     }
 
+    // 전체 ng와 block 관리를 위한 배열
+    // tokenId 관리를 위한 전체 ngs 목록
+    NGInfo[] public ngs;
+    uint256[] public blockNos;
+
     // 브랜드가 등록한 품목 리스트
     mapping(address => Product[]) private brandToProduct;
     // 브랜드가 등록한 품목의 index
     mapping(address => mapping(string => uint256)) private ProductToIndex;
     // 브랜드가 등록한 품목의 serial number당 인증서 목록
     mapping(address => mapping(uint256 => NGInfo[])) private ProductToNg;
-    // tokenId 관리를 위한 전체 ngs 목록
-    NGInfo[] public ngs;
-
-    uint256[] public blockNos;
-
     // minted account address => token ids
     mapping(address => uint256[]) private _mintedTokens;
 
@@ -45,9 +45,6 @@ contract NG is ERC721Connector {
     // tokenId => History struct array
     // mapping(uint256 => uint256[]) private _tokenHistory;
     mapping(uint256 => History[]) private _tokenHistory;
-
-    // mapping(NGInfo => bool) _ngExists;
-    // mapping(string => bool) _ngExists;
 
     mapping(address => uint8) _accountsAuth; // 일반: 0, 기업: 1, 관리자: 2
 
@@ -113,14 +110,6 @@ contract NG is ERC721Connector {
     function getMintedTokens() public view returns (uint256[] memory) {
         return _mintedTokens[msg.sender];
     }
-
-    // function getTxnHash(uint256 _tokenId) public view returns (string memory) {
-    //     return txnHashes[_tokenId];
-    // }
-
-    // function setTxnHash(uint256 _tokenId, string memory _txnHash) public {
-    //     txnHashes[_tokenId] = _txnHash;
-    // }
 
     function getBlockHash(uint256 _idx) public view returns (bytes32) {
         uint256 _blockNo = blockNos[_idx];
@@ -237,7 +226,6 @@ contract NG is ERC721Connector {
         uint256 year,
         uint256 month
     ) private {
-        // _tokenHistory[_tokenId].push(block.number);
         History memory history = History(block.number, year, month);
 
         _tokenHistory[_tokenId].push(history);
@@ -280,6 +268,12 @@ contract NG is ERC721Connector {
             _madeIn
         );
 
+        // product 등록은 계정권한에 1 또는 2로 등록되어있는 계정만 할 수 있음
+        require(
+            _accountsAuth[msg.sender] != 0,
+            "NG : mint requests can only registered accounts for company"
+        );
+
         ProductToIndex[msg.sender][_productNo] = brandToProduct[msg.sender]
             .length;
 
@@ -310,7 +304,6 @@ contract NG is ERC721Connector {
         _mint(msg.sender, _id);
         _mintedTokens[msg.sender].push(_id);
         addTokenHistory(_id, _year, _month);
-        // _ngExists[_ngInfo] = true;
     }
 
     constructor(string memory named, string memory symbolified)

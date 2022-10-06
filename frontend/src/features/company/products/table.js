@@ -5,6 +5,7 @@ import {useNavigate}from 'react-router-dom'
 import Search from "./search";
 import "./tableCss.css"
 import { nftContract } from "../../../common/web3/web3Config";
+import Table from 'react-bootstrap/Table';
 
 const AdminTd = styled.td`
   padding-top: 10px;
@@ -24,7 +25,7 @@ const AdminTh = styled.th`
   text-align: center;
   `
   
-function Table({ columns, data }) {
+function TTable({ columns, data }) {
   const history = useNavigate();
   const {
     getTableProps,
@@ -44,7 +45,7 @@ function Table({ columns, data }) {
   return (
     <>
       <Search onSubmit={setGlobalFilter}/>
-      <table {...getTableProps()}>
+      <table {...getTableProps()} style={{marginTop: '1rem'}}>
         <thead>
           {headerGroups.map((headerGroup) => (
             <tr {...headerGroup.getHeaderGroupProps()}>
@@ -73,4 +74,4 @@ function Table({ columns, data }) {
   );
 }
 
-export default Table;
+export default TTable;

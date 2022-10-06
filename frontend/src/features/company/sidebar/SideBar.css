@@ -1,14 +1,22 @@
+@font-face {
+  font-family: 'MaruBuri-Regular';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10-21@1.0/MaruBuri-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
 .SideContainer {
   position: absolute;
   background-color: #2D2D2D;
   width: 300px;
   height: 85%;
   margin: 0px;
-  display:flex;
+  display: flex;
   justify-content: center;
   flex-direction: column;
   border-radius: 10px;
-  margin-left:20px;
-  margin-top:110px;
+  margin-left: 20px;
+  margin-top: 110px;
   align-items: center;
+  font-family: 'MaruBuri-Regular';
 }

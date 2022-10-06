@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @Api(value = "기업 API", tags = {"Company"})
 @RestController
@@ -29,10 +30,23 @@ public class CompanyController {
             @ApiResponse(code = 500, message = "서버 오류")
     })
     public ResponseEntity<?> registCom(
-            @RequestBody @ApiParam(value = "기업정보", required = true) CompanyPostReq comInfo
-//            @RequestPart(required = false) @ApiParam(value = "기업 로고 이미지 파일")MultipartFile file) throws IOException
+            @RequestParam("comLogo")MultipartFile comLogo,
+            @RequestParam("comName") String comName,
+            @RequestParam("comRegNum") String comRegNum,
+            @RequestParam("comWallet") String comWallet,
+            @RequestParam("comEmail") String comEmail,
+            @RequestParam("comTel") String comTel,
+            @RequestParam("comAddress") String comAddress
+//            @RequestBody @ApiParam(value = "기업정보", required = true) CompanyPostReq comInfo
     ){
-
+        CompanyPostReq comInfo = new CompanyPostReq();
+        comInfo.setComName(comName);
+        comInfo.setComRegNum(comRegNum);
+        comInfo.setComWallet(comWallet);
+        comInfo.setComEmail(comEmail);
+        comInfo.setComTel(comTel);
+        comInfo.setComAddress(comAddress);
+        comInfo.setComLogo(comLogo);
         companyService.createCompany(comInfo);
         return new ResponseEntity<>("기업등록이 완료되었습니다", HttpStatus.valueOf(200));
     }

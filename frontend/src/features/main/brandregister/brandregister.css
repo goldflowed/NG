@@ -1,5 +1,13 @@
+@font-face {
+    font-family: 'MaruBuri-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10-21@1.0/MaruBuri-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 .brandregister {
     margin-top: 10rem;
+    font-family: 'MaruBuri-Regular';
 }
 
 .form-outline {
@@ -10,4 +18,18 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.error {
+    margin-top: -24px;
+    color: red;
+}
+
+.com-logo-name {
+    margin-top: -36px;
+    margin-bottom: 36px;
+}
+
+#logo-label {
+    text-align: left;
 }
