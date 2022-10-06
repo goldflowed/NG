@@ -9,6 +9,7 @@ import com.ssafy.ng.common.customObject.CompanyList;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -23,7 +24,7 @@ public class CompanyController {
     CompanyService companyService;
 
     // 기업정보 생성 =====================================================================================================
-    @PostMapping("/create")
+    @PostMapping(value = "/create", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @ApiOperation(value = "기업정보 생성", notes = "주어진 양식에 맞게 기업 정보를 생성한다.")
     @ApiResponses({
             @ApiResponse(code = 200, message = "성공", response = CompanyGetRes.class),
