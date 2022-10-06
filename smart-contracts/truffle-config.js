@@ -49,9 +49,9 @@
 // const mnemonic = fs.readFileSync(".mnemonic").toString().trim();
 
 const PrivateKeyProvider = require("truffle-privatekey-provider")
-// const privateKey = '0x614fc2730af91f88c70923c398c672ade517df9874d7dc79f22a48ecd00ba3b2';
+const privateKey = '0x614fc2730af91f88c70923c398c672ade517df9874d7dc79f22a48ecd00ba3b2';
 // const privateKey = '0xf1f965c0320bf3b41bb065be17bffe9fabc3e56afedec7d4a27e23b3e1cfd096';
-const privateKey = '0xf3648f70f84c533f1da5328653ce99ee8a2b38395da593a74fdb1df01bbf83a1';
+// const privateKey = '0xf3648f70f84c533f1da5328653ce99ee8a2b38395da593a74fdb1df01bbf83a1';
 
 module.exports = {
   /**

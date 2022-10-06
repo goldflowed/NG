@@ -30,6 +30,7 @@ function MyNft() {
         const Wallet = window.localStorage.getItem('wallet');
 
         const Token = await nftContract.methods.getOwnedTokens(Wallet).call();
+        console.log(Token);
 
         // 토큰의 길이가 담겨있는 상황
         await settokenlength(Token.length);
