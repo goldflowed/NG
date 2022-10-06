@@ -180,6 +180,7 @@ function detailnft() {
                 year={year}
                 month={month}
                 ImgUrl={productImg}
+                txnHash={txnHash}
               >
               </Modal>
             </MDBCardBody>

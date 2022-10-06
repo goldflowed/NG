@@ -100,9 +100,9 @@ function Register() {
             'Content-Type': 'multipart/form-data'
           }
         })
-          .then((res) => console.log(res))
-        console.log(res)
+          .then(() => {})
         alert('성공하였습니다.')
+        history('/company/products')
       });
   }
 

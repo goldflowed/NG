@@ -31,9 +31,6 @@ function MyNft() {
 
         const Token = await nftContract.methods.getOwnedTokens(Wallet).call();
 
-        console.log('토큰 정보 : ', Token);
-        console.log('토큰의 개수 = ', Token.length)
-
         // 토큰의 길이가 담겨있는 상황
         await settokenlength(Token.length);
 
@@ -51,7 +48,6 @@ function MyNft() {
         var ImgUrl = "";
         for (let i = 0; i < Token.length; i++) {
             const TokenDetail = await nftContract.methods.ngs(Token[i]).call();
-            console.log('TokenDetail', TokenDetail);
             await axios.get(`product/${TokenDetail.product.productNo}`)
                 // eslint-disable-next-line no-loop-func
                 .then((res) => {
@@ -61,7 +57,6 @@ function MyNft() {
             // TokenDetail과 TokenId를 배열로 생성해서 ArrTokenInfo에 삽입
             var DetailId = [TokenDetail, Token[i], ImgUrl];
             await ArrTokenInfo.push(DetailId);
-            console.log('토큰정보와 아이디', ArrTokenInfo)
         }
 
         await settokenInfo(ArrTokenInfo);

@@ -1,9 +1,6 @@
 import React from 'react';
 import './modal2.css';
 import { useState } from "react"
-import { MDBInput } from 'mdb-react-ui-kit';
-import { nftContract, web3 } from "../../../common/web3/web3Config"
-import { renderMatches } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom'
 
 import Button from 'react-bootstrap/Button';
@@ -25,7 +22,7 @@ const modal = (props) => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const navigate = useNavigate();
 
-  const handleCopyClipBoard = async (text: string) => {
+  const handleCopyClipBoard = async (text) => {
     try{
       await navigator.clipboard.writeText(text);
       alert('해쉬주소가 복사되었습니다') 

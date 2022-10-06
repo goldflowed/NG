@@ -89,8 +89,7 @@ function BrandRegister() {
                 'Content-Type': 'multipart/form-data'
             }
         })
-            .then((res) => {
-                console.log(res);
+            .then(() => {
             })
             .catch((err) => {
                 if (!err.response) {

@@ -60,7 +60,6 @@ function Product() {
   const location = useLocation()
   const { state } = location
 
-  console.log('state 정보', state);
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const [tokenHistory, setTokenHistory] = useState([]);
@@ -86,12 +85,7 @@ function Product() {
   async function getDetail() {
 
     const TokenHistory = await nftContract.methods.getTokenHistory(tokenId).call();
-    console.log('TokenHistory', TokenHistory);
-    console.log('TokenHistory[0]', TokenHistory[0]);
     await setTokenHistory(TokenHistory);
-    console.log('TokenHistory[0]타입', typeof (TokenHistory[0]))
-    console.log('TokenHistory타입', typeof (TokenHistory))
-    console.log('TokenHistory 길이', TokenHistory.length)
     await sethistorylength(TokenHistory.length);
 
     // receipt를 삽입하는데 사용되는 배열
@@ -106,26 +100,19 @@ function Product() {
 
       // TokenHistory 16진수로 변환
       const hexHistory = await DectokenHistory.toString(16);
-      console.log('16진수 변환', hexHistory);
       const realhex = '0x' + hexHistory;
-      console.log('realhex', realhex);
 
       // string to number
       const numhistory = await Number(realhex);
-      console.log('numhistory', numhistory);
-      console.log('numhistory타입', typeof (numhistory))
 
       // getblock을 통한 transactions 구하기 
       const block = await web3.eth.getBlock(numhistory);
-      console.log(block);
 
       // transaction hash
       const transactions = await block.transactions[0];
-      console.log('transactions', transactions)
       setTxnHash(transactions)
 
       const receipt = await web3.eth.getTransactionReceipt(transactions);
-      console.log('receipt', receipt);
 
       var usePeriod = 0;
       if (i === 0) {
@@ -160,12 +147,9 @@ function Product() {
 
   const now = new Date();
   const year = now.getFullYear();
-  console.log(year);
   const month = now.getMonth() + 1;
-  console.log(month);
 
   useEffect(() => {
-    console.log(state[0].product.productNo);
     axios.get(`product/${state[0].product.productNo}`)
       .then((res) => {
         setProductImg(ipfs_apis.https_public.concat(res.data.proUrl))
@@ -208,6 +192,7 @@ function Product() {
                   header="NFT 전송하기"
                   brandNm={state[0].product.brandNm}
                   productName={state[0].product.productName}
+                  productNo = {state[0].product.productNo}
                   serialNo={state[0].serialNo}
                   mfd={state[0].product.mfd}
                   madeIn={state[0].product.madeIn}
@@ -248,7 +233,6 @@ function Product() {
               </MDBTableHead>
               <MDBTableBody>
                 {receipt.map((res) => {
-                  console.log('res', res);
                   return (
                     <tr>
                       <th scope='row'>{res[2] + 1}</th>

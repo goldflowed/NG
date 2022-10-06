@@ -106,19 +106,12 @@ function Detail() {
 
   // 등록 버튼 클릭 시
   const onRegister = async (e) => {
-    console.log('등록 버튼 클릭 후', serialNo);
-    console.log('productCode', productCode);
-    console.log('serialNo', serialNo);
-    console.log('year', year);
-    console.log('month', month);
-    console.log('from', from);
     // nft 발급
     await nftContract.methods.mint(productCode, serialNo, year, month)
       .send({ from: from });
 
     // 토큰 아이디 저장
     const tokenNum = await nftContract.methods.totalSupply().call() - 1;
-    console.log('tokenId', tokenNum);
 
     const TokenHistory = await nftContract.methods.getTokenHistory(tokenNum).call();
     await setTokenHistory(TokenHistory);
@@ -127,22 +120,16 @@ function Detail() {
 
     // TokenHistory 16진수로 변환
     const hexHistory = await DectokenHistory.toString(16);
-    console.log('16진수 변환', hexHistory);
     const realhex = '0x' + hexHistory;
-    console.log('realhex', realhex);
 
     // string to number
     const numhistory = await Number(realhex);
-    console.log('numhistory', numhistory);
-    console.log('numhistory타입', typeof (numhistory))
 
     // getblock을 통한 transactions 구하기 
     const block = await web3.eth.getBlock(numhistory);
-    console.log(block);
 
     // transaction hash
     const transactions = await block.transactions[0];
-    console.log('transactions', transactions)
 
     // setTxnHashToTokenId
     await nftContract.methods.setTxnHashToTokenId(transactions, tokenNum).send({ from: from })
@@ -162,7 +149,6 @@ function Detail() {
     const Wallet = window.localStorage.getItem('wallet');
     // 전체 토큰 개수
     const tokenCnt = await nftContract.methods.totalSupply().call() - 1;
-    console.log('tokenCnt', tokenCnt)
 
     var proArr = [];
     var count = 0;
@@ -172,56 +158,37 @@ function Detail() {
       const SndTokenHistory = await nftContract.methods.getTokenHistory(i).call();
       await setSndTokenHistory(SndTokenHistory);
       await setSndhistorylength(SndTokenHistory.length);
-      console.log('SndTokenHistory', SndTokenHistory);
-      console.log('SndTokenHistory.length', SndTokenHistory.length);
 
       // tokenHistory[i].blockNumber -> string to number()
       const SndDectokenHistory = await Number(SndTokenHistory[0].blockNumber);
-      console.log('SndDectokenHistory', SndDectokenHistory)
 
       // TokenHistory 16진수로 변환
       const SndhexHistory = await SndDectokenHistory.toString(16);
-      console.log('Snd16진수 변환', SndhexHistory);
       const Sndrealhex = '0x' + SndhexHistory;
-      console.log('Sndrealhex', Sndrealhex);
 
       // string to number
       const Sndnumhistory = await Number(Sndrealhex);
-      console.log('Sndnumhistory', Sndnumhistory);
-      console.log('Sndnumhistory타입', typeof (Sndnumhistory))
 
       // getblock을 통한 transactions 구하기 
       const Sndblock = await web3.eth.getBlock(Sndnumhistory);
-      console.log(Sndblock);
 
       // transaction hash
       const Sndtransactions = await Sndblock.transactions[0];
-      console.log('Sndtransactions', Sndtransactions)
 
       const Sndreceipt = await web3.eth.getTransactionReceipt(Sndtransactions);
-      console.log('Sndreceipt', Sndreceipt);
-
-      console.log('Sndreceipt.logs[0].topics[2]', Sndreceipt.logs[0].topics[2]);
 
       const FirstAdd = Sndreceipt.logs[0].topics[2];
-      // console.log('FirstAdd.slice(-3)', FirstAdd.slice(-4));
       const newFirstAdd = FirstAdd.slice(-4);
       const newWallet = Wallet.slice(-4);
-      console.log(newFirstAdd);
-      console.log(newWallet);
 
       if (newFirstAdd === newWallet) {
         const SndTokenDetail = await nftContract.methods.ngs(i).call();
-        console.log('SndTokenDetail', SndTokenDetail);
-        console.log('productNo', SndTokenDetail.product.productNo);
-        console.log(params.productCode);
         if (params.productCode === SndTokenDetail.product.productNo) {
           count++;
           var productArr = [SndTokenDetail, count, SndTokenHistory.length, i];
           await proArr.push(productArr);
         }
       }
-      console.log('proArr', proArr);
       setSameArr(proArr);
     }
 
@@ -277,13 +244,10 @@ function Detail() {
   }
 
   useEffect(() => {
-    console.log(params.productCode)
     axios.get(`product/${params.productCode}`)
       .then((res) => {
         setProductImg('https://ipfs.io/ipfs/'.concat(res.data.proUrl))
-        // console.log(res);
       })
-    console.log(state)
     setProductName(state.productName)
     setProductMadeIn(state.madeIn)
     setProductCode(state.productNo)
@@ -343,7 +307,6 @@ function Detail() {
               </thead>
               <tbody>
                 {sameArr.map((res) => {
-                  console.log('res', res);
                   return (
                     <tr style={{ cursor: "pointer" }} onClick={() => showNftDetail(res)}>
                       <td>{res[1]}</td>

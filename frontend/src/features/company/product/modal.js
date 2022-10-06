@@ -28,14 +28,9 @@ const modal = (props) => {
     const transfer = async(from, to, tokenId, year, month) => {
         from = await window.localStorage.getItem('wallet');
         to = sendAddress; 
-        console.log('from', from);
-        console.log('to', to);
         tokenId = props.tokenId;
-        console.log('tokenId', tokenId);
         year = props.year;
         month = props.month;
-
-        console.log("현재 년도, 월", year+" "+month);
 
         try{
         await nftContract.methods.transferNG(from, to, tokenId, year, month)
@@ -45,33 +40,25 @@ const modal = (props) => {
         await setTokenHistory(TokenHistory);
         
         const TokenHisLength = TokenHistory.length-1;
-        console.log('TokenHisLength', TokenHisLength);
         const DectokenHistory = await Number(TokenHistory[TokenHisLength].blockNumber);
     
         // TokenHistory 16진수로 변환
         const hexHistory = await DectokenHistory.toString(16);
-        console.log('16진수 변환', hexHistory);
         const realhex = '0x'+ hexHistory;
-        console.log('realhex', realhex);
     
          // string to number
          const numhistory = await Number(realhex);
-         console.log('numhistory', numhistory);
-         console.log('numhistory타입', typeof(numhistory))
-    
+
         // getblock을 통한 transactions 구하기 
         const block = await web3.eth.getBlock(numhistory);
-        console.log(block);
     
         // transaction hash
         const transactions = await block.transactions[0];
-        console.log('transactions', transactions);
-        console.log('tokenId', tokenId);
         // setTxnHashToTokenId
         await nftContract.methods.setTxnHashToTokenId(transactions, tokenId).send({from:from})
 
         alert('전송이 완료되었습니다.');
-        navigate('/mynft');
+        window.location.reload()
       } catch(err){
           alert('올바른 주소를 입력해 주세요.');
         }
