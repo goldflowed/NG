@@ -14,7 +14,9 @@ import org.springframework.web.multipart.MultipartFile;
 @Api(value = "제품 API", tags = {"Product"})
 @RestController
 @RequestMapping("/api/v1/product")
-@CrossOrigin(origins = {"*"}, allowCredentials = "true")
+@CrossOrigin(origins = {"https://localhost:3000",
+        "https://j7e206.p.ssafy.io",
+        "https://localhost:13000"}, allowCredentials = "true")
 public class ProductController {
 
     @Autowired
