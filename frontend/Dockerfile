@@ -3,7 +3,7 @@ WORKDIR /var/jenkins_home/workspace/deploy-test/frontend
 COPY package*.json /var/jenkins_home/workspace/deploy-test/frontend/
 COPY ./ /var/jenkins_home/workspace/deploy-test/frontend/
 RUN npm run build
-RUN npm install -g serve
+# RUN npm install -g serve
 # RUN mkdir ./build
 # COPY ./build ./build
 ENTRYPOINT ["serve", "-s", "build"]
