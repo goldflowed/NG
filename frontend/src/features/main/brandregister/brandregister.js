@@ -84,9 +84,9 @@ function BrandRegister() {
     formData.append('comTel', comTel)
     formData.append('comLogo', comLogo)
 
-    await axios.post(`company/create/`, formData, {
+    await axios.post(`company/create`, formData, {
       headers: {
-        'Content-Type': 'multipart/form-data'
+        'Content-Type': 'multipart/form-data; boundary=' + formData.getBoundary()
       },
     })
       .then(() => {
