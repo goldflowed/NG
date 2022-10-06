@@ -38,7 +38,6 @@ public class CompanyController {
             @RequestParam("comTel") String comTel,
             @RequestParam("comAddress") String comAddress,
             @RequestParam("comLogo")MultipartFile comLogo
-//            @RequestBody @ApiParam(value = "기업정보", required = true) CompanyPostReq comInfo
     ){
         CompanyPostReq comInfo = new CompanyPostReq();
         comInfo.setComName(comName);

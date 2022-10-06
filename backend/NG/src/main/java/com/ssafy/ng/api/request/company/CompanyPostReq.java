@@ -29,6 +29,7 @@ public class CompanyPostReq {
     @ApiModelProperty(name = "기업 전화번호")
     String comTel;
 
-    @ApiModelProperty(name = "기업 로고이미지")
+    @ApiModelProperty(name = "기업 로고")
     MultipartFile comLogo;
+
 }
