@@ -17,9 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 @Api(value = "기업 API", tags = {"Company"})
 @RestController
 @RequestMapping("/api/v1/company")
-@CrossOrigin(origins = {"http://localhost:3000",
-        "http://j7e206.p.ssafy.io",
-        "http://localhost:13000"}, allowCredentials = "true")
+@CrossOrigin
 public class CompanyController {
 
     @Autowired
