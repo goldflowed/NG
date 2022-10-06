@@ -31,13 +31,13 @@ public class CompanyController {
             @ApiResponse(code = 500, message = "서버 오류")
     })
     public ResponseEntity<?> registCom(
-            @RequestParam("comLogo")MultipartFile comLogo,
             @RequestParam("comName") String comName,
             @RequestParam("comRegNum") String comRegNum,
             @RequestParam("comWallet") String comWallet,
             @RequestParam("comEmail") String comEmail,
             @RequestParam("comTel") String comTel,
-            @RequestParam("comAddress") String comAddress
+            @RequestParam("comAddress") String comAddress,
+            @RequestParam("comLogo")MultipartFile comLogo
 //            @RequestBody @ApiParam(value = "기업정보", required = true) CompanyPostReq comInfo
     ){
         CompanyPostReq comInfo = new CompanyPostReq();

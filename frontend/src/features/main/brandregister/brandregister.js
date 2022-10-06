@@ -73,7 +73,7 @@ function BrandRegister() {
     setComLogo(e.target.files[0])
   }
 
-  function onSubmit(e) {
+  const onSubmit = async (e) => {
     // e.preventDefault()
     const formData = new FormData()
     formData.append('comName', comName)
@@ -84,7 +84,7 @@ function BrandRegister() {
     formData.append('comTel', comTel)
     formData.append('comLogo', comLogo)
 
-    axios.post("company/create/", formData, {
+    await axios.post(`company/create/`, formData, {
       headers: {
         'Content-Type': 'multipart/form-data'
       }
