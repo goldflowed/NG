@@ -2,8 +2,6 @@ FROM node:16.17.0 as build-stage
 WORKDIR /var/jenkins_home/workspace/deploy-test/frontend
 COPY package*.json /var/jenkins_home/workspace/deploy-test/frontend/
 RUN npm install -g serve
-RUN mkdir /app
-WORKDIR /app
 RUN mkdir ./build
 COPY ./build ./build
 ENTRYPOINT ["serve", "-s", "build"]
