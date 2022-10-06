@@ -87,7 +87,7 @@ function BrandRegister() {
     await axios.post(`company/create/`, formData, {
       headers: {
         'Content-Type': 'multipart/form-data'
-      }
+      },
     })
       .then(() => {
         alert("브랜드 회원가입 신청 완료!")

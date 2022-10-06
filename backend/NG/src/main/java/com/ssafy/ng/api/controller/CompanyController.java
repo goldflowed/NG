@@ -24,29 +24,30 @@ public class CompanyController {
     CompanyService companyService;
 
     // 기업정보 생성 =====================================================================================================
-    @PostMapping(value = "/create", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PostMapping(value = "/create", consumes = {"multipart/form-data"})
     @ApiOperation(value = "기업정보 생성", notes = "주어진 양식에 맞게 기업 정보를 생성한다.")
     @ApiResponses({
             @ApiResponse(code = 200, message = "성공", response = CompanyGetRes.class),
             @ApiResponse(code = 500, message = "서버 오류")
     })
     public ResponseEntity<?> registCom(
-            @RequestParam("comName") String comName,
-            @RequestParam("comRegNum") String comRegNum,
-            @RequestParam("comWallet") String comWallet,
-            @RequestParam("comEmail") String comEmail,
-            @RequestParam("comTel") String comTel,
-            @RequestParam("comAddress") String comAddress,
-            @RequestParam("comLogo")MultipartFile comLogo
+            @ModelAttribute CompanyPostReq comInfo
+//            @RequestParam("comName") String comName,
+//            @RequestParam("comRegNum") String comRegNum,
+//            @RequestParam("comWallet") String comWallet,
+//            @RequestParam("comEmail") String comEmail,
+//            @RequestParam("comTel") String comTel,
+//            @RequestParam("comAddress") String comAddress,
+//            @RequestParam("comLogo")MultipartFile comLogo
     ){
-        CompanyPostReq comInfo = new CompanyPostReq();
-        comInfo.setComName(comName);
-        comInfo.setComRegNum(comRegNum);
-        comInfo.setComWallet(comWallet);
-        comInfo.setComEmail(comEmail);
-        comInfo.setComTel(comTel);
-        comInfo.setComAddress(comAddress);
-        comInfo.setComLogo(comLogo);
+//        CompanyPostReq comInfo = new CompanyPostReq();
+//        comInfo.setComName(comName);
+//        comInfo.setComRegNum(comRegNum);
+//        comInfo.setComWallet(comWallet);
+//        comInfo.setComEmail(comEmail);
+//        comInfo.setComTel(comTel);
+//        comInfo.setComAddress(comAddress);
+//        comInfo.setComLogo(comLogo);
         companyService.createCompany(comInfo);
         return new ResponseEntity<>("기업등록이 완료되었습니다", HttpStatus.valueOf(200));
     }
