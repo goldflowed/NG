@@ -32,23 +32,10 @@ public class CompanyController {
     })
     public ResponseEntity<?> registCom(
             @RequestParam("comLogo")MultipartFile comLogo,
-            @RequestParam("comName") String comName,
-            @RequestParam("comRegNum") String comRegNum,
-            @RequestParam("comWallet") String comWallet,
-            @RequestParam("comEmail") String comEmail,
-            @RequestParam("comTel") String comTel,
-            @RequestParam("comAddress") String comAddress
-//            @RequestBody @ApiParam(value = "기업정보", required = true) CompanyPostReq comInfo
+            @RequestBody @ApiParam(value = "기업정보", required = true) CompanyPostReq comInfo
     ){
-        CompanyPostReq comInfo = new CompanyPostReq();
-        comInfo.setComName(comName);
-        comInfo.setComRegNum(comRegNum);
-        comInfo.setComWallet(comWallet);
-        comInfo.setComEmail(comEmail);
-        comInfo.setComTel(comTel);
-        comInfo.setComAddress(comAddress);
-        comInfo.setComLogo(comLogo);
-        companyService.createCompany(comInfo);
+
+        companyService.createCompany(comInfo, comLogo);
         return new ResponseEntity<>("기업등록이 완료되었습니다", HttpStatus.valueOf(200));
     }
 

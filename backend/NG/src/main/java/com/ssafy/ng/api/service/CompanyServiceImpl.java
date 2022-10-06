@@ -12,6 +12,7 @@ import io.ipfs.api.MerkleNode;
 import io.ipfs.api.NamedStreamable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
@@ -29,11 +30,11 @@ public class CompanyServiceImpl implements CompanyService {
     private IPFSConfig ipfsConfig;
 
     @Override
-    public Company createCompany(CompanyPostReq comInfo) {
+    public Company createCompany(CompanyPostReq comInfo, MultipartFile comLogo) {
         System.out.println("createCompany");
         String hash = null;
         try {
-            InputStream is = new ByteArrayInputStream(comInfo.getComLogo().getBytes());
+            InputStream is = new ByteArrayInputStream(comLogo.getBytes());
             NamedStreamable.InputStreamWrapper inputStreamWrapper = new NamedStreamable.InputStreamWrapper(is);
             IPFS ipfs = ipfsConfig.ipfs;
 
