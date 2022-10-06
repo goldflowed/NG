@@ -105,7 +105,8 @@ function BrandRegister() {
 
     return (
         <div>
-          <div className="ui form display">
+          <Navbar/>
+          <div className="ui form display" style={{marginTop:"100px"}}>
             <Form encType="multipart/form-data">
               <Form.Group style={{ display: "flex", marginTop: "35px", marginBottom: "35px" }} >
                 <MDBInput
@@ -216,8 +217,6 @@ function BrandRegister() {
               }
             </Form>
           </div>
-        </div>
-      </div>
       <br /><br />
       <Footer></Footer>
     </div >
