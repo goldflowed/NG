@@ -86,7 +86,7 @@ function BrandRegister() {
 
     await axios.post(`company/create`, formData, {
       headers: {
-        'Content-Type': 'multipart/form-data; boundary=' + formData.getBoundary()
+        'Content-Type': 'multipart/form-data'
       },
     })
       .then(() => {
