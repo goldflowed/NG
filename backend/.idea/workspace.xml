@@ -4,23 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a564b388-8abd-4e87-a525-253d685b2fae" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/NG/src/main/java/com/ssafy/ng/api/controller/CompanyController.java" beforeDir="false" afterPath="$PROJECT_DIR$/NG/src/main/java/com/ssafy/ng/api/controller/CompanyController.java" afterDir="false" />
+    <list default="true" id="3fa7e72d-bc59-4c14-9e27-96a7536bad8e" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/NG/src/main/java/com/ssafy/ng/config/WebMvcConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/NG/src/main/java/com/ssafy/ng/config/WebMvcConfig.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExternalProjectsData">
-    <projectState path="$PROJECT_DIR$">
-      <ProjectState />
-    </projectState>
-  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="ProjectId" id="2Epnjy1uKZtzmr6EXPhsSNPffpE" />
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2FkM6ixIELarTLKVypqqlLn5TOa" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -31,18 +29,19 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/SSAFY/Desktop/S07P22E206/backend/NG"
+    "last_opened_file_path": "C:/Users/SSAFY/Desktop/S07P22E206/backend",
+    "nodejs_package_manager_path": "npm"
   }
 }]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="a564b388-8abd-4e87-a525-253d685b2fae" name="Changes" comment="" />
-      <created>1663301533596</created>
+      <changelist id="3fa7e72d-bc59-4c14-9e27-96a7536bad8e" name="Changes" comment="" />
+      <created>1665031454395</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1663301533596</updated>
-      <workItem from="1663301535462" duration="621000" />
+      <updated>1665031454395</updated>
+      <workItem from="1665031456109" duration="90000" />
     </task>
     <servers />
   </component>
