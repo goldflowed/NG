@@ -4,13 +4,10 @@ import SideBar from "../sidebar/SideBar";
 import styled from "styled-components";
 
 const ContainerDiv = styled.div`
-  width:1900px;
-  display: flex;
-  flex-direction: row;
+
   `
 
 const MainDiv = styled.div`
-  width: 1450px;
   padding-top:50px;
   padding-right: 100px;
   font-size:20px;
@@ -33,11 +30,12 @@ const InfoDiv = styled.div`
   `
 
 const TitleP = styled.p`
-  width:1350px;
-  font-size: 50px;
+  font-size: 40px;
   font-weight: bold;
-  margin: 0;
-  margin-left: 20px;
+  font-family: 'MaruBuri-Regular';
+  margin-top: 4rem;
+  display: flex;
+  justify-content: center
   `
 
 function Home() {

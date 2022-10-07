@@ -70,8 +70,17 @@ dependencies {
 
     annotationProcessor("jakarta.persistence:jakarta.persistence-api")
     annotationProcessor("jakarta.annotation:jakarta.annotation-api")
+
+    // https://mvnrepository.com/artifact/com.github.ipfs/java-ipfs-http-client
+    implementation group: 'com.github.ipfs', name: 'java-ipfs-http-client', version: 'v1.3.3'
+
 }
 
 test {
     useJUnitPlatform()
+}
+allprojects {
+    repositories {
+        maven { url 'https://jitpack.io' }
+    }
 }

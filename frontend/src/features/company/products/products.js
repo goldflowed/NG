@@ -8,26 +8,27 @@ import { nftContract } from "../../../common/web3/web3Config";
 
 const ContainerDiv = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  width: 1900px;
   `
 
 const MainDiv = styled.div`
   /* background-color: red; */
-  width: 1550px;
   padding-top:50px;
   padding-right: 100px;
   font-size:20px;
-  margin-left:400px;
+  /* margin-left:26rem; */
   margin-top:25px;
   `
 
 const TableDiv = styled.div`
   margin:auto;
-  width:800px;
+  width:900px;
   max-height: 750px;
   overflow-y: auto;
   display:flex;
   flex-direction:column;
+  margin-bottom: 30rem;
   `
   
 const Hr = styled.hr`
@@ -37,11 +38,12 @@ const Hr = styled.hr`
   `
 
 const TitleP = styled.p`
-  width:1350px;
-  font-size: 50px;
+  font-size: 40px;
   font-weight: bold;
-  margin: 0;
-  margin-left: 20px;
+  font-family: 'MaruBuri-Regular';
+  margin-top: 4rem;
+  display: flex;
+  justify-content: center;
   `
 
 function Products() {
@@ -94,12 +96,19 @@ function Products() {
   return (
     <ContainerDiv>
       <NavBar/>
-      <SideBar/>
+      {/* <SideBar/> */}
       <MainDiv>
-        <TitleP>등록 제품 조회</TitleP><Hr/>
+        <SideBar/>
+        <div>
+          <TitleP>NG에 등록된 제품입니다.</TitleP>
+          <TableDiv>
+            <Table columns={columns} data={products}/>
+          </TableDiv>
+        </div>
+        {/* <TitleP>NG에 등록된 제품입니다.</TitleP>
         <TableDiv>
           <Table columns={columns} data={products}/>
-        </TableDiv>
+        </TableDiv> */}
       </MainDiv>
       <Footer/>
     </ContainerDiv>

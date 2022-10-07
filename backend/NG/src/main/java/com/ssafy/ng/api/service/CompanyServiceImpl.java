@@ -4,23 +4,47 @@ import com.ssafy.ng.api.request.company.CompanyPermitReq;
 import com.ssafy.ng.api.request.company.CompanyPostReq;
 import com.ssafy.ng.api.response.CompanyGetRes;
 import com.ssafy.ng.common.customObject.CompanyList;
+import com.ssafy.ng.config.IPFSConfig;
 import com.ssafy.ng.db.entity.Company;
 import com.ssafy.ng.db.repository.CompanyRepository;
+import io.ipfs.api.IPFS;
+import io.ipfs.api.MerkleNode;
+import io.ipfs.api.NamedStreamable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service("CompanyService")
-public class CompanyServiceImpl implements CompanyService{
+public class CompanyServiceImpl implements CompanyService {
 
     @Autowired
     CompanyRepository companyRepository;
 
+    @Autowired
+    private IPFSConfig ipfsConfig;
+
     @Override
     public Company createCompany(CompanyPostReq comInfo) {
+        System.out.println("createCompany");
+        String hash = null;
+        try {
+            InputStream is = new ByteArrayInputStream(comInfo.getComLogo().getBytes());
+            NamedStreamable.InputStreamWrapper inputStreamWrapper = new NamedStreamable.InputStreamWrapper(is);
+            IPFS ipfs = ipfsConfig.ipfs;
+
+            MerkleNode merkleNode = ipfs.add(inputStreamWrapper).get(0);
+            hash = merkleNode.hash.toBase58();
+            System.out.println("merkleNode.hash.toBase58(): "+merkleNode.hash.toBase58());
+        } catch (Exception e) {
+            throw new RuntimeException("Error whilst communication with the IPFS node", e);
+        }
+        System.out.println("hash: "+hash);
         Company company = Company.builder()
                 .comName(comInfo.getComName())
                 .comRegNum(comInfo.getComRegNum())
@@ -28,7 +52,7 @@ public class CompanyServiceImpl implements CompanyService{
                 .comEmail(comInfo.getComEmail())
                 .comAddress(comInfo.getComAddress())
                 .comTel(comInfo.getComTel())
-                .comLogo(comInfo.getComLogo())
+                .comLogo(hash)
                 .comPermit(1)
                 .build();
         return companyRepository.save(company);

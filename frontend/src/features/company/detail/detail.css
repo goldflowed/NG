@@ -1,17 +1,41 @@
+@font-face {
+    font-family: 'MaruBuri-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10-21@1.0/MaruBuri-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 .nfttable-title{
     display: flex;
     justify-content: center;
     margin-top: 3rem;
+    font-family: 'MaruBuri-Regular';
 }
 
 .nft-register{
     margin-top: 2rem;
+    font-family: 'MaruBuri-Regular';
 }
 
 .detail-table{
     margin-top: 2rem;
+    margin-bottom: 5rem;
 }
 
 .register-overall{
-    width: 60%;
+    width: 100%;
 }
+
+.table-th1 {
+    margin-left: 2rem;
+}
+
+.table-th2 {
+    display: flex;
+    justify-content: center;
+}
+
+/* .table-th3 {
+    display: flex;
+    justify-content: center;
+} */

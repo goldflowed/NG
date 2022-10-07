@@ -1,4 +1,5 @@
 import React from 'react';
+import './Footer.css'
 import {
   MDBFooter,
   MDBIcon,
@@ -7,186 +8,93 @@ import {
   MDBRow,
   MDBBtn
 } from 'mdb-react-ui-kit';
+import LogoImg from '../../assets/img/로고2.png'
+import Cycle01 from '../../assets/img/footCycle01.png'
+import Cycle02 from '../../assets/img/footCycle02.png'
+import Cycle03 from '../../assets/img/footCycle03.png'
+import Cycle04 from '../../assets/img/footCycle04.png'
 
 function Footer() {
   return (
     <MDBFooter className='text-center' color='white' bgColor='dark'>
+      <br />
       <div className='p-4'>
-        <section className='mb-4'>
-          <MDBBtn outline color="light" floating className='m-1' href='#!' role='button'>
-            <MDBIcon fab icon='facebook-f' />
-          </MDBBtn>
-
-          <MDBBtn outline color="light" floating className='m-1' href='#!' role='button'>
-            <MDBIcon fab icon='twitter' />
-          </MDBBtn>
-
-          <MDBBtn outline color="light" floating className='m-1' href='#!' role='button'>
-            <MDBIcon fab icon='google' />
-          </MDBBtn>
-
-          <MDBBtn outline color="light" floating className='m-1' href='#!' role='button'>
-            <MDBIcon fab icon='instagram' />
-          </MDBBtn>
-
-          <MDBBtn outline color="light" floating className='m-1' href='#!' role='button'>
-            <MDBIcon fab icon='linkedin-in' />
-          </MDBBtn>
-
-          <MDBBtn outline color="light" floating className='m-1' href='#!' role='button'>
-            <MDBIcon fab icon='github' />
-          </MDBBtn>
+        <section className='footerTop mb-1'>
+          <img className="headImg" src={Cycle01} alt="cycleImg" />
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          <img className="headImg" src={Cycle02} alt="cycleImg" />
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          <img className="headImg" src={Cycle03} alt="cycleImg" />
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          <img className="headImg" src={Cycle04} alt="cycleImg" />
         </section>
 
-        <section className=''>
-          <form action=''>
-            <MDBRow className='d-flex justify-content-center'>
-              <MDBCol size="auto">
-                <p className='pt-2'>
-                  <strong>Sign up for our newsletter</strong>
-                </p>
+        <div className="footerMid">
+          <section className="footerText">
+            <div style={{ textAlign: "right" }}>
+              <div> NG Service </div>
+              <div> 대표 E206 </div>
+              <div> 부산 강서구 녹산산업중로 333 </div>
+              <div> nftguarantee@ssafyng.com </div>
+              <div> 051-000-0000 </div>
+            </div>
+          </section>
+
+          <img style={{ width: "10%", height: "10%" }} src={LogoImg} alt="페이지로고" />
+
+          <section className="footerLink">
+            <MDBRow>
+              <MDBCol lg='3' md='6' className='mb-4 mb-md-0'>
+                <ul className='list-unstyled mb-0'>
+                  <li>
+                    <a href='/aboutus' className='text-white'>
+                      AboutUs
+                    </a>
+                  </li>
+                  <li>
+                    <a href='/searchnft' className='text-white'>
+                      SerarchNFT
+                    </a>
+                  </li>
+                  <li>
+                    <a href='/mynft' className='text-white'>
+                      MyNFT
+                    </a>
+                  </li>
+                </ul>
               </MDBCol>
 
-              <MDBCol md='5' start='12'>
-                <MDBInput contrast type='email' label='Email address' className='mb-4' />
-              </MDBCol>
-
-              <MDBCol size="auto">
-                <MDBBtn outline color='light' type='submit' className='mb-4'>
-                  Subscribe
-                </MDBBtn>
+              <MDBCol lg='3' md='6' className='mb-4 mb-md-0'>
+                <ul className='list-unstyled mb-0'>
+                  <li>
+                    <a href='/' className='text-white'>
+                      HOME
+                    </a>
+                  </li>
+                  <li>
+                    <a href='https://map.naver.com/v5/entry/place/1882570816?c=14343455.6082713,4176965.6014261,15,0,0,0,dh' className='text-white'>
+                      Company Map
+                    </a>
+                  </li>
+                  <li>
+                    <a href='/brandregister' className='text-white'>
+                      BrandRegister
+                    </a>
+                  </li>
+                </ul>
               </MDBCol>
             </MDBRow>
-          </form>
-        </section>
-
-        <section className='mb-4'>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt distinctio earum repellat quaerat
-            voluptatibus placeat nam, commodi optio pariatur est quia magnam eum harum corrupti dicta, aliquam
-            sequi voluptate quas.
-          </p>
-        </section>
-
-        <section className=''>
-          <MDBRow>
-            <MDBCol lg='3' md='6' className='mb-4 mb-md-0'>
-              <h5 className='text-uppercase'>Links</h5>
-
-              <ul className='list-unstyled mb-0'>
-                <li>
-                  <a href='#!' className='text-white'>
-                    Link 1
-                  </a>
-                </li>
-                <li>
-                  <a href='#!' className='text-white'>
-                    Link 2
-                  </a>
-                </li>
-                <li>
-                  <a href='#!' className='text-white'>
-                    Link 3
-                  </a>
-                </li>
-                <li>
-                  <a href='#!' className='text-white'>
-                    Link 4
-                  </a>
-                </li>
-              </ul>
-            </MDBCol>
-
-            <MDBCol lg='3' md='6' className='mb-4 mb-md-0'>
-              <h5 className='text-uppercase'>Links</h5>
-
-              <ul className='list-unstyled mb-0'>
-                <li>
-                  <a href='#!' className='text-white'>
-                    Link 1
-                  </a>
-                </li>
-                <li>
-                  <a href='#!' className='text-white'>
-                    Link 2
-                  </a>
-                </li>
-                <li>
-                  <a href='#!' className='text-white'>
-                    Link 3
-                  </a>
-                </li>
-                <li>
-                  <a href='#!' className='text-white'>
-                    Link 4
-                  </a>
-                </li>
-              </ul>
-            </MDBCol>
-
-            <MDBCol lg='3' md='6' className='mb-4 mb-md-0'>
-              <h5 className='text-uppercase'>Links</h5>
-
-              <ul className='list-unstyled mb-0'>
-                <li>
-                  <a href='#!' className='text-white'>
-                    Link 1
-                  </a>
-                </li>
-                <li>
-                  <a href='#!' className='text-white'>
-                    Link 2
-                  </a>
-                </li>
-                <li>
-                  <a href='#!' className='text-white'>
-                    Link 3
-                  </a>
-                </li>
-                <li>
-                  <a href='#!' className='text-white'>
-                    Link 4
-                  </a>
-                </li>
-              </ul>
-            </MDBCol>
-
-            <MDBCol lg='3' md='6' className='mb-4 mb-md-0'>
-              <h5 className='text-uppercase'>Links</h5>
-
-              <ul className='list-unstyled mb-0'>
-                <li>
-                  <a href='#!' className='text-white'>
-                    Link 1
-                  </a>
-                </li>
-                <li>
-                  <a href='#!' className='text-white'>
-                    Link 2
-                  </a>
-                </li>
-                <li>
-                  <a href='#!' className='text-white'>
-                    Link 3
-                  </a>
-                </li>
-                <li>
-                  <a href='#!' className='text-white'>
-                    Link 4
-                  </a>
-                </li>
-              </ul>
-            </MDBCol>
-          </MDBRow>
-        </section>
+          </section>
         </div>
+
+      </div>
       <div className='text-center p-3' style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)' }}>
-        © 2020 Copyright:
-        <a className='text-white' href='https://mdbootstrap.com/'>
-          MDBootstrap.com
+        © 2022 Copyright&nbsp;:&nbsp;
+        <a className='text-white' href='https://www.ssafy.com/'>
+          SSAFY NFT Guarantee. All rights reserved. 333, Noksansaneopjung-ro, Gangseo-gu, Busan, Rep Of Korea
         </a>
       </div>
-    </MDBFooter>
+    </MDBFooter >
   );
 }
 

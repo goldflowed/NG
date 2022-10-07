@@ -1,5 +1,6 @@
 package com.ssafy.ng.config;
 
+import io.swagger.models.HttpMethod;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -23,6 +24,20 @@ public class WebMvcConfig implements WebMvcConfigurer {
 	@Override
 	public void addCorsMappings(CorsRegistry registry) {
 		registry.addMapping("/**")
-				.allowedOrigins("http://localhost:3000", "http://j7e206.p.ssafy.io", "http://localhost:13000");
+				.allowedOrigins(
+						"https://localhost:3000",
+						"https://localhost:3001",
+						"https://j7e206.p.ssafy.io",
+						"http://localhost:3000",
+						"http://localhost:3001",
+						"http://j7e206.p.ssafy.io"
+				)
+				.allowedMethods(
+						HttpMethod.GET.name(),
+						HttpMethod.HEAD.name(),
+						HttpMethod.POST.name(),
+						HttpMethod.PUT.name(),
+						HttpMethod.DELETE.name()
+				);
 	}
 }

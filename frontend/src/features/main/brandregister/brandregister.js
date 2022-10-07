@@ -1,189 +1,227 @@
 import axios from "../../../common/api/http-common";
-import React,{useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../../../common/navbar/NavBar"
 import "./brandregister.css"
 import { MDBInput } from 'mdb-react-ui-kit';
 import { MDBBtn } from 'mdb-react-ui-kit';
 import { useNavigate } from 'react-router-dom';
+import styled from "styled-components";
+import { Form, Button } from "react-bootstrap";
+
+import Footer from "../../../common/footer/Footer"
 
 
 function BrandRegister() {
-    const history = useNavigate()
-    // 변수 초기화
-    const initialValues = { comName: "",
-                            comRegNum: "",
-                            comWallet: window.localStorage.getItem('wallet'),
-                            comEmail: "",
-                            comTel: "",
-                            comAddress: "",
-                            comLogo: "" };
+  const history = useNavigate();
 
-    // 서버로 전달한 formValues
-    const [formValues, setFormValues ] = useState(initialValues);
-    const [formErrors, setFormErrors ] = useState({});
-    const [isSubmit, setIsSubmit] = useState(false);
+  // 이메일 유효성 검사
+  const [emailMessage, setEmailMessage] = useState("")
+  const [isEmail, setIsEmail] = useState(false)
 
-    // 이메일 유효성 검사
-    const [emailMessage, setEmailMessage] = useState("")
-    const [isEmail, setIsEmail] = useState(false)
+  //유리
+  const [comName, setComName] = useState("")
+  const [comRegNum, setComRegNum] = useState("")
+  const [comWallet, setComWallet] = useState(window.localStorage.getItem('wallet'))
+  const [comEmail, setComEmail] = useState("")
+  const [comTel, setComTel] = useState("")
+  const [comAddress, setComAddress] = useState("")
+  const [comLogo, setComLogo] = useState()
 
-    const handleChange = (e) => {
-        console.log(e.target);
-        const {name, value } = e.target;
-        setFormValues({...formValues, [name]:value })
-        console.log(formValues);
+  useEffect(() => {
+    axios.get(`company/${window.localStorage.wallet}`)
+      .then(() => {
+        alert('이미 가입되어있거나 승인 대기중인 계정입니다.')
+        history('/')
+      })
+  })
+
+  // 이메일 확인 정규식
+  const emailRegEx = /^[A-Za-z0-9]([-_.]?[A-Za-z0-9])*@[A-Za-z0-9]([-_.]?[A-Za-z0-9])*\.[A-Za-z]{2,3}$/i;
+  const checkEmail = (e) => {
+    const emailCurrent = e.target.value;
+
+    if (!emailRegEx.test(emailCurrent)) {
+      setEmailMessage('올바른 이메일을 입력해주세요.')
+      setIsEmail(false)
+    } else {
+      setEmailMessage('')
+      setIsEmail(true)
     }
+  }
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        // setFormErrors(validate(formValues));
-        setIsSubmit(true);
-    }
+  const handlerComName = (e) => {
+    setComName(e.target.value)
+  }
 
-    useEffect(() => {
-        axios.get(`company/${window.localStorage.wallet}`)
-        .then(() => {
-            alert('이미 가입되어있거나 승인 대기중인 계정입니다.')
-            history('/')
-        })
+  const handlerComRegNum = (e) => {
+    setComRegNum(e.target.value)
+  }
+
+  const handlerComEmail = (e) => {
+    setComEmail(e.target.value)
+  }
+
+  const handlerComTel = (e) => {
+    setComTel(e.target.value)
+  }
+
+  const handlerComAddress = (e) => {
+    setComAddress(e.target.value)
+  }
+
+  const handlerComLogo = (e) => {
+    setComLogo(e.target.files[0])
+  }
+
+  const onSubmit = async (e) => {
+    // e.preventDefault()
+    const formData = new FormData()
+    formData.append('comName', comName)
+    formData.append('comRegNum', comRegNum)
+    formData.append('comWallet', comWallet)
+    formData.append('comEmail', comEmail)
+    formData.append('comAddress', comAddress)
+    formData.append('comTel', comTel)
+    formData.append('comLogo', comLogo)
+
+    await axios.post(`company/create`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      },
     })
-
-    // 이메일 확인 정규식
-    const emailRegEx = /^[A-Za-z0-9]([-_.]?[A-Za-z0-9])*@[A-Za-z0-9]([-_.]?[A-Za-z0-9])*\.[A-Za-z]{2,3}$/i;
-    const checkEmail = (e) => {
-        const emailCurrent = e.target.value;
-
-        if(!emailRegEx.test(emailCurrent)){
-            setEmailMessage('올바른 이메일을 입력해주세요.')
-            setIsEmail(false)
-        }else{
-            setEmailMessage('')
-            setIsEmail(true)
+      .then(() => {
+        alert("브랜드 회원가입 신청 완료!")
+        history('/')
+      })
+      .catch((err) => {
+        console.log('err: ', err);
+        if (!err.response) {
+          alert('1번alert', err);
+        } else {
+          alert('2번alert', err.response.data)
         }
-    }
+      })
 
-    function onSubmit(event){
+  }
 
-        axios.post("company/create/", formValues)
-            .then((response) => {
-                alert("브랜드 등록 완료!")
-            })
-            .catch((err) => {
-                if(!err.response){
-                    alert(err);
-                }else{
-                    alert(err.response.date)
-                }
-            })
-    }
+  return (
+    <div>
+      <Navbar />
+      <div className="ui form display" style={{ marginTop: "100px" }}>
+        <Form encType="multipart/form-data">
+          <Form.Group style={{ display: "flex", marginTop: "35px", marginBottom: "35px" }} >
+            <MDBInput
+              style={{ width: "560px" }}
+              type="text"
+              name="comName"
+              placeholder="브랜드 명을 입력해주세요."
+              id='form1'
+              onChange={handlerComName} />
+          </Form.Group>
 
-    const [isActive, setIsActive] = useState(false)
-    
-    const navigate = useNavigate();
 
-    const check = (formValues) => {
-        
-    }
+          <Form.Group style={{ display: "flex", marginTop: "35px", marginBottom: "35px" }} >
+            <MDBInput
+              style={{ width: "560px" }}
+              type="text"
+              name="comRegNum"
+              placeholder="사업자 등록 번호를 입력해 주세요."
+              id='form1'
+              onChange={handlerComRegNum} />
+          </Form.Group>
 
-    return(
-        <div>
-        <Navbar/>
-        <div className="brandregister text-center">
-            {/* <pre>{JSON.stringify(formValues, undefined, 2)}</pre> */}
-            <form onSubmit={handleSubmit}>
-                <h1>기업 회원 가입</h1>
-                <br/>
-                <p>저희 서비스를 이용하기 위해서는, 먼저 서비스 가입을 요청해야 합니다. 아래의 정보를 입력해서 제출해주세요.</p>
-                <div className="ui divider"></div>
-                <div className="ui form display">
-                    <div className="field">
-                        <br/><br/>
-                        <MDBInput
-                          type="text"
-                          name="comName"
-                          label="브랜드 명을 입력해주세요."
-                          id='form1'
-                          value={ formValues.comName}
-                          onChange={handleChange}/>
-                    </div>
-                    <div className="field" style={{ marginTop: 40}}>
-                        <MDBInput
-                          type="text"
-                          name="comRegNum"
-                          label="사업자 등록 번호를 입력해 주세요."
-                          id='form1'
-                          value={ formValues.comRegNum}
-                          onChange={handleChange}/>
-                    </div>
-                    <div className="field" style={{ marginTop: 40}}>
-                        <MDBInput 
-                          type="text"
-                          name="comWallet"
-                          disabled= {true}
-                          label="지갑 주소를 입력해주세요."
-                          id='form1'
-                          value={ formValues.comWallet}
-                          onChange={handleChange}/>
-                    </div>
-                    <div className="field" style={{ marginTop: 40}}>
-                        <MDBInput
-                          type="text"
-                          name="comEmail"
-                          label="이메일을 입력해 주세요."
-                          id='form1'
-                          value={ formValues.comEmail}
-                          onChange={handleChange}
-                          onBlur={checkEmail}
-                          />
-                          {formValues.comEmail.length > 0 && <span className={`message ${isEmail ? 'success' : 'error'}`}>{emailMessage}</span>}
-                    </div>
+          <Form.Group style={{ display: "flex", marginTop: "35px", marginBottom: "35px" }} >
+            <MDBInput
+              style={{ width: "560px" }}
+              type="text"
+              name="comWallet"
+              disabled={true}
+              id='form1'
+              value={comWallet} />
+          </Form.Group>
 
-                    <div className="field" style={{ marginTop: 40}}>
-                        <MDBInput
-                          type="text"
-                          name="comAddress"
-                          label="회사 주소를 입력해주세요."
-                          id='form1'
-                          value={ formValues.comAddress}
-                          onChange={handleChange}/>
-                          
-                    </div>
-                    <div className="field" style={{ marginTop: 40}}>
-                        <MDBInput
-                          type="text"
-                          name="comTel"
-                          label="회사 전화번호를 입력해주세요."
-                          id='form1'
-                          value={ formValues.comTel}
-                          onChange={handleChange}/>
-                    </div>
-                    <div className="field" style={{ marginTop: 40}}>
-                        <MDBInput
-                          type="text" 
-                          name="comLogo" 
-                          label="로고를 첨부해주세요."
-                          id='form1' 
-                          value={ formValues.comLogo}
-                          onChange={handleChange}/>
-                    </div>
-                    <br/>
-                    <div>
-                    <MDBBtn style={{marginRight:50}} outline className='mx-2' color='dark' onClick={() => {
-                        navigate('/')
-                    }}>뒤로가기</MDBBtn>
-                    {
-                      !!formValues.comName && !!formValues.comRegNum && !!formValues.comWallet && !!formValues.comEmail && !!formValues.comAddress && !!formValues.comTel && emailRegEx.test(formValues.comEmail)
-                      ? <MDBBtn style={{marginLeft:50}} outline color='success' onClick={() => onSubmit() }>제출하기</MDBBtn>
-                      : <MDBBtn style={{marginLeft:50}} outline color='success' disabled onClick={() => onSubmit() }>제출하기</MDBBtn>
-                    }
-                    {/* <MDBBtn style={{marginLeft:50}} outline color='success' disabled onClick={() => onSubmit() }>제출하기</MDBBtn> */}
-                    </div>
-                </div>
-            </form>
-        </div>
-        <br/><br/>
-        </div>
-    )
+          <Form.Group style={{ display: "flex", marginTop: "35px", marginBottom: "35px" }} >
+            <MDBInput
+              style={{ width: "560px" }}
+              type="text"
+              name="comEmail"
+              placeholder="이메일을 입력해 주세요."
+              id='form1'
+              onChange={handlerComEmail}
+              onBlur={checkEmail} />
+          </Form.Group>
+          <div>
+            {comEmail.length > 0 && <div className={`message ${isEmail ? 'success' : 'error'}`}>{emailMessage}</div>}
+          </div>
+
+          <Form.Group style={{ display: "flex", marginTop: "35px", marginBottom: "35px" }} >
+            <MDBInput
+              style={{ width: "560px" }}
+              type="text"
+              name="comAddress"
+              placeholder="회사 주소를 입력해주세요."
+              id='form1'
+              onChange={handlerComAddress} />
+          </Form.Group>
+
+          <Form.Group style={{ display: "flex", marginTop: "35px", marginBottom: "35px" }} >
+            <MDBInput
+              style={{ width: "560px" }}
+              type="text"
+              name="comTel"
+              placeholder="회사 전화번호를 입력해주세요."
+              id='form1'
+              onChange={handlerComTel} />
+          </Form.Group>
+
+          <Form.Group style={{ display: "flex", marginTop: "35px", marginBottom: "35px" }} >
+            <Form.Label
+              style={{
+                display: "flex",
+                // border: "1px solid #ced4da",
+                border: "1px solid #6d757e",
+                backgroundColor: "#6d757e",
+                borderRadius: "0.375rem",
+                transition: "border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out",
+                color: "#fff",
+                lineHeight: "1.5",
+                fontSize: "1rem",
+                fontWeight: "400",
+                padding: "0.375rem 0.75rem",
+                width: "560px",
+                cursor: "pointer",
+                paddingLeft: "240px"
+              }}
+              id='logo-label'
+              for='logo'>
+              로고 업로드
+            </Form.Label>
+          </Form.Group>
+          <MDBInput
+            style={{ width: "560px", display: "none" }}
+            type="file"
+            name="comLogo"
+            placeholder="로고를 첨부해주세요."
+            id='logo'
+            onChange={handlerComLogo} />
+          {/* {comLogo.name} */}
+          <div>
+            {comLogo && <div className="com-logo-name">{comLogo.name}</div>}
+          </div>
+          <MDBBtn style={{ marginRight: 50 }} outline className='mx-2' color='dark' onClick={() => {
+            history('/')
+          }}>뒤로가기</MDBBtn>
+          {
+            !!comName && !!comRegNum && !!comWallet && !!comEmail && !!comAddress && !!comTel && emailRegEx.test(comEmail)
+              ? <Button style={{ marginLeft: 50 }} variant="outline-primary" onClick={() => onSubmit()}>제출하기</Button>
+              : <Button style={{ marginLeft: 50 }} variant="outline-primary" onClick={() => onSubmit()} disabled>제출하기</Button>
+          }
+        </Form>
+      </div>
+      <br /><br />
+      <Footer></Footer>
+    </div >
+  )
 }
 
 export default BrandRegister;

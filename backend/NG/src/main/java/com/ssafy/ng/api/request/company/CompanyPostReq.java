@@ -4,6 +4,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.web.multipart.MultipartFile;
 
 @Getter
 @Setter
@@ -28,6 +29,7 @@ public class CompanyPostReq {
     @ApiModelProperty(name = "기업 전화번호")
     String comTel;
 
-    @ApiModelProperty(name = "기업 로고이미지")
-    String comLogo;
+    @ApiModelProperty(name = "기업 로고")
+    MultipartFile comLogo;
+
 }
