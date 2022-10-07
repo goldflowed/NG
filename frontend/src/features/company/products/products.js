@@ -7,7 +7,9 @@ import Footer from "../../../common/footer/Footer";
 import { nftContract } from "../../../common/web3/web3Config";
 
 const ContainerDiv = styled.div`
-
+  display: flex;
+  flex-direction: column;
+  width: 1900px;
   `
 
 const MainDiv = styled.div`
@@ -15,7 +17,7 @@ const MainDiv = styled.div`
   padding-top:50px;
   padding-right: 100px;
   font-size:20px;
-  margin-left:26rem;
+  /* margin-left:26rem; */
   margin-top:25px;
   `
 
@@ -41,7 +43,7 @@ const TitleP = styled.p`
   font-family: 'MaruBuri-Regular';
   margin-top: 4rem;
   display: flex;
-  justify-content: center
+  justify-content: center;
   `
 
 function Products() {
@@ -94,12 +96,19 @@ function Products() {
   return (
     <ContainerDiv>
       <NavBar/>
-      <SideBar/>
+      {/* <SideBar/> */}
       <MainDiv>
-        <TitleP>NG에 등록된 제품입니다.</TitleP>
+        <SideBar/>
+        <div>
+          <TitleP>NG에 등록된 제품입니다.</TitleP>
+          <TableDiv>
+            <Table columns={columns} data={products}/>
+          </TableDiv>
+        </div>
+        {/* <TitleP>NG에 등록된 제품입니다.</TitleP>
         <TableDiv>
           <Table columns={columns} data={products}/>
-        </TableDiv>
+        </TableDiv> */}
       </MainDiv>
       <Footer/>
     </ContainerDiv>

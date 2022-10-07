@@ -2,6 +2,7 @@ import React from "react";
 import SideBar from "../sidebar/SideBar";
 import styled from "styled-components";
 import NavBar from "../../../common/navbar/NavBar";
+import Footer from "../../../common/footer/Footer";
 import Modal from './modal.js';
 import { nftContract, web3 } from "../../../common/web3/web3Config";
 
@@ -27,7 +28,7 @@ import Modal2 from './modal2.js';
 
 const ContainerDiv = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   `
 
 const MainDiv = styled.div`
@@ -36,8 +37,12 @@ const MainDiv = styled.div`
   padding-top:50px;
   padding-right: 100px;
   font-size:20px;
-  margin-left:400px;
+  /* margin-left:400px; */
   margin-top:25px;
+  `
+
+const MyDiv = styled.div`
+  margin-left: 500px;
   `
 
 const Hr = styled.hr`
@@ -52,7 +57,7 @@ const TitleP = styled.p`
   font-family: 'MaruBuri-Regular';
   margin-top: 4rem;
   display: flex;
-  justify-content: center
+  justify-content: center;
   `
 
 function Product() {
@@ -160,103 +165,107 @@ function Product() {
   return (
     <ContainerDiv>
       <NavBar />
-      <SideBar />
+      {/* <SideBar /> */}
       <MainDiv>
-        <TitleP>{state[0].product.productName}의 상세 정보</TitleP>
-        <div className="detailnft-main">
-          <div>
-            <img src={productImg} alt="productImage" style={{ width: "20rem", height: "17rem" }} />
-          </div>
-          <div>
-            <MDBCard className="detailnft-card">
-              <MDBCardBody>
-                <MDBCardText>
-                  {/* <MDBCardTitle>블록길이 : {historylength}</MDBCardTitle>
-                    <MDBCardTitle>토큰아이디 : {tokenId}</MDBCardTitle> */}
-                  <MDBCardTitle style={{ marginTop: 13 }}>브랜드명 : {state[0].product.brandNm}</MDBCardTitle>
-                  <MDBCardTitle style={{ marginTop: 13 }}>상품명 : {state[0].product.productName}</MDBCardTitle>
-                  <MDBCardTitle style={{ marginTop: 13 }}>상품번호 : {state[0].product.productNo}</MDBCardTitle>
-                  <MDBCardTitle style={{ marginTop: 13 }}>시리얼번호 : {state[0].serialNo}</MDBCardTitle>
-                  <MDBCardTitle style={{ marginTop: 13 }}>제조일자 : {state[0].product.mfd}</MDBCardTitle>
-                  <MDBCardTitle style={{ marginTop: 13 }}>제조국 : {state[0].product.madeIn}</MDBCardTitle>
-                </MDBCardText>
-                {
-                  state[2] === 1
-                    ? <Button className="detailnft-button" variant="outline-primary" onClick={openModal}>소유권 이전</Button>
-                    : null
-                }
-                <Modal
-                  open={modalOpen}
-                  close={closeModal}
-                  tokenId={state[3]}
-                  header="NFT 전송하기"
-                  brandNm={state[0].product.brandNm}
-                  productName={state[0].product.productName}
-                  productNo = {state[0].product.productNo}
-                  serialNo={state[0].serialNo}
-                  mfd={state[0].product.mfd}
-                  madeIn={state[0].product.madeIn}
-                  year={year}
-                  month={month}
-                  ImgUrl={productImg}
-                >
-                </Modal>
-              </MDBCardBody>
-            </MDBCard>
-          </div>
-        </div>
-        <div className="table-title">
-      <Button variant="outline-success" onClick={openModal2}>해쉬 주소 확인하기</Button>
-      <Modal2
-        open={modalOpen2}
-        close={closeModal2}
-        header="해쉬 주소"
-        txnHash={txnHash}
-      >
-      </Modal2>
-        {/* 해시 값: {txnHash} */}
-      </div>
-        <Hr style={{ marginTop: 20 }}></Hr>
-        <div className="table-title">
-          <h3>제품 사용 기록</h3>
-        </div>
-        <div className="detailnft-table">
-          <div style={{ width: "55rem" }}>
-            <MDBTable striped>
-              <MDBTableHead>
-                <tr>
-                  <th scope='col'>#</th>
-                  <th scope='col' className="owner"><div>소유자</div></th>
-                  <th scope='col'>NFT 이전 날짜</th>
-                  <th scope='col'>사용 기간</th>
-                </tr>
-              </MDBTableHead>
-              <MDBTableBody>
-                {receipt.map((res) => {
-                  return (
-                    <tr>
-                      <th scope='row'>{res[2] + 1}</th>
-                      <td>{res[0].logs[0].topics[2].replace('000000000000000000000000', '')}</td>
-                      <td>{res[1].year}년 {res[1].month}월</td>
-                      <td>
-                        {
-                          res[2] === 0
-                            ? <p>최초발행</p>
-                            : <p>{res[5]}개월</p>
-                        }
-                      </td>
-                    </tr>
-                  )
-                })}
-              </MDBTableBody>
-            </MDBTable>
-            <div className="total-period">
-              <p>제품 총 사용 기간 : {totalPeriod}개월</p>
+        <SideBar />
+        <MyDiv>
+          {/* <SideBar /> */}
+          <TitleP>{state[0].product.productName}의 상세 정보</TitleP>
+          <div className="detailnft-main">
+            <div>
+              <img src={productImg} alt="productImage" style={{ width: "20rem", height: "17rem" }} />
+            </div>
+            <div>
+              <MDBCard className="detailnft-card">
+                <MDBCardBody>
+                  <MDBCardText>
+                    {/* <MDBCardTitle>블록길이 : {historylength}</MDBCardTitle>
+                      <MDBCardTitle>토큰아이디 : {tokenId}</MDBCardTitle> */}
+                    <MDBCardTitle style={{ marginTop: 13 }}>브랜드명 : {state[0].product.brandNm}</MDBCardTitle>
+                    <MDBCardTitle style={{ marginTop: 13 }}>상품명 : {state[0].product.productName}</MDBCardTitle>
+                    <MDBCardTitle style={{ marginTop: 13 }}>상품번호 : {state[0].product.productNo}</MDBCardTitle>
+                    <MDBCardTitle style={{ marginTop: 13 }}>시리얼번호 : {state[0].serialNo}</MDBCardTitle>
+                    <MDBCardTitle style={{ marginTop: 13 }}>제조일자 : {state[0].product.mfd}</MDBCardTitle>
+                    <MDBCardTitle style={{ marginTop: 13 }}>제조국 : {state[0].product.madeIn}</MDBCardTitle>
+                  </MDBCardText>
+                  {
+                    state[2] === 1
+                      ? <Button className="detailnft-button" variant="outline-primary" onClick={openModal}>소유권 이전</Button>
+                      : null
+                  }
+                  <Modal
+                    open={modalOpen}
+                    close={closeModal}
+                    tokenId={state[3]}
+                    header="NFT 전송하기"
+                    brandNm={state[0].product.brandNm}
+                    productName={state[0].product.productName}
+                    productNo = {state[0].product.productNo}
+                    serialNo={state[0].serialNo}
+                    mfd={state[0].product.mfd}
+                    madeIn={state[0].product.madeIn}
+                    year={year}
+                    month={month}
+                    ImgUrl={productImg}
+                  >
+                  </Modal>
+                </MDBCardBody>
+              </MDBCard>
             </div>
           </div>
-        </div>
-
+          <div className="table-title">
+            <Button variant="outline-success" onClick={openModal2}>해쉬 주소 확인하기</Button>
+            <Modal2
+              open={modalOpen2}
+              close={closeModal2}
+              header="해쉬 주소"
+              txnHash={txnHash}
+            >
+            </Modal2>
+              {/* 해시 값: {txnHash} */}
+          </div>
+          <Hr style={{ marginTop: 20 }}></Hr>
+          <div className="table-title">
+            <h3>제품 사용 기록</h3>
+          </div>
+          <div className="detailnft-table">
+            <div style={{ width: "55rem" }}>
+              <MDBTable striped>
+                <MDBTableHead>
+                  <tr>
+                    <th scope='col'>#</th>
+                    <th scope='col' className="owner"><div>소유자</div></th>
+                    <th scope='col'>NFT 이전 날짜</th>
+                    <th scope='col'>사용 기간</th>
+                  </tr>
+                </MDBTableHead>
+                <MDBTableBody>
+                  {receipt.map((res) => {
+                    return (
+                      <tr>
+                        <th scope='row'>{res[2] + 1}</th>
+                        <td>{res[0].logs[0].topics[2].replace('000000000000000000000000', '')}</td>
+                        <td>{res[1].year}년 {res[1].month}월</td>
+                        <td>
+                          {
+                            res[2] === 0
+                              ? <p>최초발행</p>
+                              : <p>{res[5]}개월</p>
+                          }
+                        </td>
+                      </tr>
+                    )
+                  })}
+                </MDBTableBody>
+              </MDBTable>
+              <div className="total-period">
+                <p>제품 총 사용 기간 : {totalPeriod}개월</p>
+              </div>
+            </div>
+          </div>
+        </MyDiv>
       </MainDiv>
+      <Footer/>
     </ContainerDiv>
   )
 }

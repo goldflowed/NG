@@ -16,11 +16,12 @@ const ContainerDiv = styled.div`
   `
 
 const MainDiv = styled.div`
-
+  height: 800px;
+  width: 1900px;
   padding-top:50px;
   padding-right: 100px;
   font-size:20px;
-  margin-left:25rem;
+  /* margin-left:25rem; */
   margin-top:25px;
   `
 
@@ -34,8 +35,9 @@ const InfoDiv = styled.div`
   // width: 98%;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
   padding: 10px;
+  /* margin-left: 5%; */
   `
 
 // const Button = styled.div`
@@ -89,10 +91,26 @@ function Home() {
   return (
     <ContainerDiv>
       <NavBar />
-      <SideBar />
+      {/* <SideBar /> */}
       <MainDiv>
-        <TitleP>나의 기업 정보</TitleP>
-        <div className="company-main">
+        <SideBar />
+        <div>
+          <TitleP>나의 기업 정보</TitleP>
+          <InfoDiv>
+            <Card style={{ width: '48rem', marginTop: '3rem', marginLeft: '1.5rem', marginRight: 10 }}>
+              <Card.Body className="company-base">
+                <Card.Title style={{ marginTop: 20 }}>브랜드명 : {name}</Card.Title>
+                <Card.Title style={{ marginTop: 20 }}>사업자 등록번호 : {regNum}</Card.Title>
+                <Card.Title style={{ marginTop: 20 }}>브랜드 전화번호 : {tel}</Card.Title>
+                <Card.Title style={{ marginTop: 20 }}>기업 주소 : {address}</Card.Title>
+                <Card.Title style={{ marginTop: 20 }}>브랜드 지갑 주소 : {wallet}</Card.Title>
+              </Card.Body>
+            </Card>
+            <img src={logoUrl} style={{ marginTop: '3rem', marginLeft: 10, width: "16rem", height: "16rem" }}></img>
+          </InfoDiv>
+        </div>
+        {/* <TitleP>나의 기업 정보</TitleP> */}
+        {/* <div className="company-main">
           <Card style={{ width: '48rem', marginTop: '3rem', marginLeft: '1.5rem', marginRight: 10 }}>
             <Card.Body className="company-base">
               <Card.Title style={{ marginTop: 20 }}>브랜드명 : {name}</Card.Title>
@@ -103,7 +121,7 @@ function Home() {
             </Card.Body>
           </Card>
           <img src={logoUrl} style={{ marginTop: '3rem', marginLeft: 10, width: "16rem", height: "16rem" }}></img>
-        </div>
+        </div> */}
 
         {/* <InfoDiv>
           <div className="info" style={{display:"flex", flexDirection:"column", marginTop:50}}>

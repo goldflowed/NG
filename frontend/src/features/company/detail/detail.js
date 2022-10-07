@@ -19,9 +19,22 @@ import Card from 'react-bootstrap/Card';
 import './detail.css';
 
 const ContainerDiv = styled.div`
+  width: 1900px;
   `
 
 const MainDiv = styled.div`
+  /* padding-top:50px;
+  padding-right: 100px;
+  font-size:20px;
+  margin-top:25px;
+  width: 50rem; */
+  display:flex;
+  flex-direction: row;
+  margin-top:25px;
+  padding-top:50px;
+  `
+
+const MyDiv = styled.div`
   padding-top:50px;
   padding-right: 100px;
   font-size:20px;
@@ -29,6 +42,7 @@ const MainDiv = styled.div`
   margin-left: 35rem;
   width: 50rem;
   `
+
 
 const Hr = styled.hr`
   height: 1px;
@@ -42,7 +56,7 @@ const TitleP = styled.p`
   font-family: 'MaruBuri-Regular';
   margin-top: 4rem;
   display: flex;
-  justify-content: center
+  justify-content: center;
   `
 
 const ProductDiv = styled.div`
@@ -60,7 +74,7 @@ const InfoDiv = styled.div`
 const InfoPDiv = styled.div`
   margin-left:10px;
   display: flex;
-  justify-content: center
+  justify-content: center;
   font-family: 'MaruBuri-Regular';
   `
 const TableDiv = styled.div`
@@ -260,71 +274,73 @@ function Detail() {
   return (
     <ContainerDiv>
       <NavBar />
-      <SideBar />
       <MainDiv>
-        <TitleP>{productName}</TitleP>
-        <ProductDiv>
-          <InfoDiv>
-            <img src={productImg} alt="productImage" style={{ width: "12rem" }} />
-            <InfoPDiv>
-              <Card style={{ width: '22rem', height: '12rem' }}>
-                <Card.Body>
-                  <Card.Title style={{ marginTop: 20 }}>제 품 명 : {productName}</Card.Title>
-                  <Card.Title style={{ marginTop: 10 }}>제 품 코 드 : {productCode}</Card.Title>
-                  <Card.Title style={{ marginTop: 10 }}>출 고 일 : {productMfd}</Card.Title>
-                  <Card.Title style={{ marginTop: 10 }}>제 조 국 : {productMadeIn}</Card.Title>
-                </Card.Body>
-              </Card>
-            </InfoPDiv>
-          </InfoDiv>
-        </ProductDiv><Hr />
-        <div className="register-overall">
-          <div className="nfttable-title">
-            <h2>제품 NFT 등록하기</h2>
-            {/* {JSON.stringify(tokenInfo.productNo)} */}
+        <SideBar />
+        <MyDiv>
+          <TitleP>{productName}</TitleP>
+          <ProductDiv>
+            <InfoDiv>
+              <img src={productImg} alt="productImage" style={{ width: "12rem" }} />
+              <InfoPDiv>
+                <Card style={{ width: '22rem', height: '12rem' }}>
+                  <Card.Body>
+                    <Card.Title style={{ marginTop: 20 }}>제 품 명 : {productName}</Card.Title>
+                    <Card.Title style={{ marginTop: 10 }}>제 품 코 드 : {productCode}</Card.Title>
+                    <Card.Title style={{ marginTop: 10 }}>출 고 일 : {productMfd}</Card.Title>
+                    <Card.Title style={{ marginTop: 10 }}>제 조 국 : {productMadeIn}</Card.Title>
+                  </Card.Body>
+                </Card>
+              </InfoPDiv>
+            </InfoDiv>
+          </ProductDiv><Hr />
+          <div className="register-overall">
+            <div className="nfttable-title">
+              <h2>제품 NFT 등록하기</h2>
+              {/* {JSON.stringify(tokenInfo.productNo)} */}
+            </div>
+            <div className="nft-register">
+              <InputGroup className="mb-3">
+                <Form.Control
+                  placeholder="시리얼 번호를 입력하세요."
+                  aria-label="Recipient's username"
+                  aria-describedby="basic-addon2"
+                  onChange={onSerialHandler}
+                />
+                <Button variant="outline-secondary" id="button-addon2" onClick={onRegister}>
+                  NFT 등록
+                </Button>
+              </InputGroup>
+            </div>
+            <div className="detail-table">
+              <Table striped bordered hover>
+                <thead>
+                  <tr>
+                    <th className="table-th1"><div>#</div></th>
+                    <th className="table-th2"><div>시리얼 번호</div></th>
+                    <th className="table-th3"><div>전송 여부</div></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {sameArr.map((res) => {
+                    return (
+                      <tr style={{ cursor: "pointer" }} onClick={() => showNftDetail(res)}>
+                        <td>{res[1]}</td>
+                        <td>{res[0].serialNo}</td>
+                        <td>
+                          {
+                            res[2] === 1
+                              ? <h5>No</h5>
+                              : <h5>Yes</h5>
+                          }
+                        </td>
+                      </tr>
+                    )
+                  })}
+                </tbody>
+              </Table>
+            </div>
           </div>
-          <div className="nft-register">
-            <InputGroup className="mb-3">
-              <Form.Control
-                placeholder="시리얼 번호를 입력하세요."
-                aria-label="Recipient's username"
-                aria-describedby="basic-addon2"
-                onChange={onSerialHandler}
-              />
-              <Button variant="outline-secondary" id="button-addon2" onClick={onRegister}>
-                NFT 등록
-              </Button>
-            </InputGroup>
-          </div>
-          <div className="detail-table">
-            <Table striped bordered hover>
-              <thead>
-                <tr>
-                  <th className="table-th1"><div>#</div></th>
-                  <th className="table-th2"><div>시리얼 번호</div></th>
-                  <th className="table-th3"><div>전송 여부</div></th>
-                </tr>
-              </thead>
-              <tbody>
-                {sameArr.map((res) => {
-                  return (
-                    <tr style={{ cursor: "pointer" }} onClick={() => showNftDetail(res)}>
-                      <td>{res[1]}</td>
-                      <td>{res[0].serialNo}</td>
-                      <td>
-                        {
-                          res[2] === 1
-                            ? <h5>No</h5>
-                            : <h5>Yes</h5>
-                        }
-                      </td>
-                    </tr>
-                  )
-                })}
-              </tbody>
-            </Table>
-          </div>
-        </div>
+        </MyDiv>
       </MainDiv>
       <Footer />
     </ContainerDiv>

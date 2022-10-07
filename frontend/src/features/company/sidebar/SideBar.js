@@ -8,7 +8,7 @@ const MenuList = styled.div`
   // background-color: #DDDDDD;
   border-radius: 10px;
   width: 80%;
-  height:90%;
+  height:80%;
   display: flex;
   justify-content: center;
   margin: auto;
@@ -75,7 +75,7 @@ function SideBar() {
   }, []);
 
   return (
-    <div className="SideContainer">
+    <div className="CompanySideContainer">
       <MenuList>
         <List>
           <ListTitle>NFT 인증서 관리<ListHr />

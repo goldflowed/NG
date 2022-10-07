@@ -12,7 +12,7 @@ import { Ipfs } from "../../../common/api/ipfs";
 import Footer from "../../../common/footer/Footer";
 
 const ContainerDiv = styled.div`
-
+  width: 1900px;
   `
 
 const MainDiv = styled.div`
@@ -20,7 +20,7 @@ const MainDiv = styled.div`
   font-size:20px;
   margin-top:25px;
   display: flex;
-  margin-left: 20rem;
+  /* margin-left: 20rem; */
   margin-bottom: 10rem;
   flex-direction: column;
   font-family: 'MaruBuri-Regular';
@@ -38,7 +38,7 @@ const TitleP = styled.p`
   font-family: 'MaruBuri-Regular';
   margin-top: 4rem;
   display: flex;
-  justify-content: center
+  justify-content: center;
   `
 
 const InfoDiv = styled.div`
@@ -117,8 +117,9 @@ function Register() {
   return (
     <ContainerDiv>
       <NavBar />
-      <SideBar />
+      {/* <SideBar /> */}
       <MainDiv>
+        <SideBar />
         <TitleP>제품 등록</TitleP>
         <InfoDiv>
           <Form encType="multipart/form-data">
@@ -148,7 +149,7 @@ function Register() {
               <Form.Control placeholder="이미지 주소를 넣어주세요." style={{ width: "500px" }} type="file" onChange={onimgFileHandler} />
             </Form.Group>
 
-            <Button style={{ display: "block", marginLeft: '33.5rem' }} variant="primary" type="submit" onClick={regist}>
+            <Button style={{ display: "block", marginLeft: '54rem' }} variant="primary" type="submit" onClick={regist}>
               등록
             </Button>
           </Form>
