@@ -23369,48 +23369,20 @@
   "ast": {
     "absolutePath": "project:/src/contracts/NG.sol",
     "exportedSymbols": {
-      "Address": [
-        3137
-      ],
-      "Context": [
-        3159
-      ],
-      "ERC165": [
-        3384
-      ],
-      "ERC721": [
-        2259
-      ],
-      "ERC721Connector": [
-        2296
-      ],
-      "ERC721Enumerable": [
-        2712
-      ],
-      "ERC721Metadata": [
-        2796
-      ],
-      "IERC165": [
-        3396
-      ],
-      "IERC721": [
-        2410
-      ],
-      "IERC721Enumerable": [
-        2820
-      ],
-      "IERC721Metadata": [
-        2840
-      ],
-      "IERC721Receiver": [
-        2426
-      ],
-      "NG": [
-        897
-      ],
-      "Strings": [
-        3362
-      ]
+      "Address": [3137],
+      "Context": [3159],
+      "ERC165": [3384],
+      "ERC721": [2259],
+      "ERC721Connector": [2296],
+      "ERC721Enumerable": [2712],
+      "ERC721Metadata": [2796],
+      "IERC165": [3396],
+      "IERC721": [2410],
+      "IERC721Enumerable": [2820],
+      "IERC721Metadata": [2840],
+      "IERC721Receiver": [2426],
+      "NG": [897],
+      "Strings": [3362]
     },
     "id": 898,
     "license": "MIT",
@@ -23418,12 +23390,7 @@
     "nodes": [
       {
         "id": 55,
-        "literals": [
-          "solidity",
-          "^",
-          "0.8",
-          ".0"
-        ],
+        "literals": ["solidity", "^", "0.8", ".0"],
         "nodeType": "PragmaDirective",
         "src": "32:23:1"
       },
@@ -23446,9 +23413,7 @@
             "baseName": {
               "id": 57,
               "name": "ERC721Connector",
-              "nameLocations": [
-                "119:15:1"
-              ],
+              "nameLocations": ["119:15:1"],
               "nodeType": "IdentifierPath",
               "referencedDeclaration": 2296,
               "src": "119:15:1"
@@ -23464,17 +23429,7 @@
         "fullyImplemented": true,
         "id": 897,
         "linearizedBaseContracts": [
-          897,
-          2296,
-          2712,
-          2259,
-          2410,
-          2796,
-          3384,
-          3396,
-          3159,
-          2820,
-          2840
+          897, 2296, 2712, 2259, 2410, 2796, 3384, 3396, 3159, 2820, 2840
         ],
         "name": "NG",
         "nameLocation": "113:2:1",
@@ -23532,9 +23487,7 @@
                   "pathNode": {
                     "id": 61,
                     "name": "Product",
-                    "nameLocations": [
-                      "306:7:1"
-                    ],
+                    "nameLocations": ["306:7:1"],
                     "nodeType": "IdentifierPath",
                     "referencedDeclaration": 75,
                     "src": "306:7:1"
@@ -23819,9 +23772,7 @@
                 "pathNode": {
                   "id": 83,
                   "name": "NGInfo",
-                  "nameLocations": [
-                    "829:6:1"
-                  ],
+                  "nameLocations": ["829:6:1"],
                   "nodeType": "IdentifierPath",
                   "referencedDeclaration": 64,
                   "src": "829:6:1"
@@ -23920,9 +23871,7 @@
                   "pathNode": {
                     "id": 91,
                     "name": "Product",
-                    "nameLocations": [
-                      "952:7:1"
-                    ],
+                    "nameLocations": ["952:7:1"],
                     "nodeType": "IdentifierPath",
                     "referencedDeclaration": 75,
                     "src": "952:7:1"
@@ -24068,9 +24017,7 @@
                     "pathNode": {
                       "id": 104,
                       "name": "NGInfo",
-                      "nameLocations": [
-                        "1224:6:1"
-                      ],
+                      "nameLocations": ["1224:6:1"],
                       "nodeType": "IdentifierPath",
                       "referencedDeclaration": 64,
                       "src": "1224:6:1"
@@ -24189,9 +24136,7 @@
                   "pathNode": {
                     "id": 116,
                     "name": "History",
-                    "nameLocations": [
-                      "1531:7:1"
-                    ],
+                    "nameLocations": ["1531:7:1"],
                     "nodeType": "IdentifierPath",
                     "referencedDeclaration": 82,
                     "src": "1531:7:1"
@@ -24426,9 +24371,7 @@
                       "pathNode": {
                         "id": 132,
                         "name": "Product",
-                        "nameLocations": [
-                          "1899:7:1"
-                        ],
+                        "nameLocations": ["1899:7:1"],
                         "nodeType": "IdentifierPath",
                         "referencedDeclaration": 75,
                         "src": "1899:7:1"
@@ -24817,9 +24760,7 @@
                       "pathNode": {
                         "id": 164,
                         "name": "NGInfo",
-                        "nameLocations": [
-                          "2468:6:1"
-                        ],
+                        "nameLocations": ["2468:6:1"],
                         "nodeType": "IdentifierPath",
                         "referencedDeclaration": 64,
                         "src": "2468:6:1"
@@ -24857,9 +24798,7 @@
               "src": "2761:107:1",
               "statements": [
                 {
-                  "assignments": [
-                    188
-                  ],
+                  "assignments": [188],
                   "declarations": [
                     {
                       "constant": false,
@@ -25124,9 +25063,7 @@
                       "pathNode": {
                         "id": 182,
                         "name": "NGInfo",
-                        "nameLocations": [
-                          "2740:6:1"
-                        ],
+                        "nameLocations": ["2740:6:1"],
                         "nodeType": "IdentifierPath",
                         "referencedDeclaration": 64,
                         "src": "2740:6:1"
@@ -25583,9 +25520,7 @@
               "src": "3593:86:1",
               "statements": [
                 {
-                  "assignments": [
-                    247
-                  ],
+                  "assignments": [247],
                   "declarations": [
                     {
                       "constant": false,
@@ -25906,10 +25841,7 @@
                       "id": 261,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        4294967278,
-                        4294967278
-                      ],
+                      "overloadedDeclarations": [4294967278, 4294967278],
                       "referencedDeclaration": 4294967278,
                       "src": "3739:7:1",
                       "typeDescriptions": {
@@ -25994,9 +25926,7 @@
               "src": "3927:76:1",
               "statements": [
                 {
-                  "assignments": [
-                    283
-                  ],
+                  "assignments": [283],
                   "declarations": [
                     {
                       "constant": false,
@@ -26112,9 +26042,7 @@
                 "modifierName": {
                   "id": 276,
                   "name": "checkZeroAddress",
-                  "nameLocations": [
-                    "3872:16:1"
-                  ],
+                  "nameLocations": ["3872:16:1"],
                   "nodeType": "IdentifierPath",
                   "referencedDeclaration": 272,
                   "src": "3872:16:1"
@@ -26347,10 +26275,7 @@
                       "id": 299,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        4294967278,
-                        4294967278
-                      ],
+                      "overloadedDeclarations": [4294967278, 4294967278],
                       "referencedDeclaration": 4294967278,
                       "src": "4232:7:1",
                       "typeDescriptions": {
@@ -26498,10 +26423,7 @@
                       "id": 310,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        4294967278,
-                        4294967278
-                      ],
+                      "overloadedDeclarations": [4294967278, 4294967278],
                       "referencedDeclaration": 4294967278,
                       "src": "4351:7:1",
                       "typeDescriptions": {
@@ -26634,10 +26556,7 @@
                       "id": 320,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        4294967278,
-                        4294967278
-                      ],
+                      "overloadedDeclarations": [4294967278, 4294967278],
                       "referencedDeclaration": 4294967278,
                       "src": "4528:7:1",
                       "typeDescriptions": {
@@ -26764,9 +26683,7 @@
                 "modifierName": {
                   "id": 295,
                   "name": "checkZeroAddress",
-                  "nameLocations": [
-                    "4079:16:1"
-                  ],
+                  "nameLocations": ["4079:16:1"],
                   "nodeType": "IdentifierPath",
                   "referencedDeclaration": 272,
                   "src": "4079:16:1"
@@ -26930,9 +26847,7 @@
                 "modifierName": {
                   "id": 340,
                   "name": "checkZeroAddress",
-                  "nameLocations": [
-                    "4852:16:1"
-                  ],
+                  "nameLocations": ["4852:16:1"],
                   "nodeType": "IdentifierPath",
                   "referencedDeclaration": 272,
                   "src": "4852:16:1"
@@ -26998,9 +26913,7 @@
               "src": "5123:869:1",
               "statements": [
                 {
-                  "assignments": [
-                    364
-                  ],
+                  "assignments": [364],
                   "declarations": [
                     {
                       "constant": false,
@@ -28723,9 +28636,7 @@
                   },
                   "id": 487,
                   "initializationExpression": {
-                    "assignments": [
-                      368
-                    ],
+                    "assignments": [368],
                     "declarations": [
                       {
                         "constant": false,
@@ -28871,10 +28782,7 @@
                       "id": 488,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        4294967278,
-                        4294967278
-                      ],
+                      "overloadedDeclarations": [4294967278, 4294967278],
                       "referencedDeclaration": 4294967278,
                       "src": "5926:7:1",
                       "typeDescriptions": {
@@ -29066,9 +28974,7 @@
               "src": "6067:1180:1",
               "statements": [
                 {
-                  "assignments": [
-                    503
-                  ],
+                  "assignments": [503],
                   "declarations": [
                     {
                       "constant": false,
@@ -29119,9 +29025,7 @@
                   "src": "6077:18:1"
                 },
                 {
-                  "assignments": [
-                    507
-                  ],
+                  "assignments": [507],
                   "declarations": [
                     {
                       "constant": false,
@@ -29172,9 +29076,7 @@
                   "src": "6105:23:1"
                 },
                 {
-                  "assignments": [
-                    514
-                  ],
+                  "assignments": [514],
                   "declarations": [
                     {
                       "constant": false,
@@ -29198,9 +29100,7 @@
                           "pathNode": {
                             "id": 511,
                             "name": "Product",
-                            "nameLocations": [
-                              "6189:7:1"
-                            ],
+                            "nameLocations": ["6189:7:1"],
                             "nodeType": "IdentifierPath",
                             "referencedDeclaration": 75,
                             "src": "6189:7:1"
@@ -29664,9 +29564,7 @@
                   },
                   "id": 554,
                   "initializationExpression": {
-                    "assignments": [
-                      521
-                    ],
+                    "assignments": [521],
                     "declarations": [
                       {
                         "constant": false,
@@ -29752,9 +29650,7 @@
                   "src": "6257:237:1"
                 },
                 {
-                  "assignments": [
-                    556
-                  ],
+                  "assignments": [556],
                   "declarations": [
                     {
                       "constant": false,
@@ -30673,9 +30569,7 @@
                   },
                   "id": 628,
                   "initializationExpression": {
-                    "assignments": [
-                      565
-                    ],
+                    "assignments": [565],
                     "declarations": [
                       {
                         "constant": false,
@@ -30821,10 +30715,7 @@
                       "id": 629,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        4294967278,
-                        4294967278
-                      ],
+                      "overloadedDeclarations": [4294967278, 4294967278],
                       "referencedDeclaration": 4294967278,
                       "src": "7182:7:1",
                       "typeDescriptions": {
@@ -30935,9 +30826,7 @@
               "src": "7363:124:1",
               "statements": [
                 {
-                  "assignments": [
-                    648
-                  ],
+                  "assignments": [648],
                   "declarations": [
                     {
                       "constant": false,
@@ -30960,9 +30849,7 @@
                         "pathNode": {
                           "id": 646,
                           "name": "History",
-                          "nameLocations": [
-                            "7373:7:1"
-                          ],
+                          "nameLocations": ["7373:7:1"],
                           "nodeType": "IdentifierPath",
                           "referencedDeclaration": 82,
                           "src": "7373:7:1"
@@ -31399,9 +31286,7 @@
                       "pathNode": {
                         "id": 668,
                         "name": "History",
-                        "nameLocations": [
-                          "7580:7:1"
-                        ],
+                        "nameLocations": ["7580:7:1"],
                         "nodeType": "IdentifierPath",
                         "referencedDeclaration": 82,
                         "src": "7580:7:1"
@@ -31525,9 +31410,7 @@
                   "src": "7814:33:1"
                 },
                 {
-                  "assignments": [
-                    698
-                  ],
+                  "assignments": [698],
                   "declarations": [
                     {
                       "constant": false,
@@ -31952,9 +31835,7 @@
               "src": "8267:571:1",
               "statements": [
                 {
-                  "assignments": [
-                    739
-                  ],
+                  "assignments": [739],
                   "declarations": [
                     {
                       "constant": false,
@@ -31977,9 +31858,7 @@
                         "pathNode": {
                           "id": 737,
                           "name": "Product",
-                          "nameLocations": [
-                            "8277:7:1"
-                          ],
+                          "nameLocations": ["8277:7:1"],
                           "nodeType": "IdentifierPath",
                           "referencedDeclaration": 75,
                           "src": "8277:7:1"
@@ -32231,10 +32110,7 @@
                       "id": 748,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        4294967278,
-                        4294967278
-                      ],
+                      "overloadedDeclarations": [4294967278, 4294967278],
                       "referencedDeclaration": 4294967278,
                       "src": "8545:7:1",
                       "typeDescriptions": {
@@ -32609,9 +32485,7 @@
                 "modifierName": {
                   "id": 729,
                   "name": "productExists",
-                  "nameLocations": [
-                    "8202:13:1"
-                  ],
+                  "nameLocations": ["8202:13:1"],
                   "nodeType": "IdentifierPath",
                   "referencedDeclaration": 496,
                   "src": "8202:13:1"
@@ -32784,9 +32658,7 @@
               "src": "9017:728:1",
               "statements": [
                 {
-                  "assignments": [
-                    796
-                  ],
+                  "assignments": [796],
                   "declarations": [
                     {
                       "constant": false,
@@ -32901,9 +32773,7 @@
                   "src": "9027:54:1"
                 },
                 {
-                  "assignments": [
-                    807
-                  ],
+                  "assignments": [807],
                   "declarations": [
                     {
                       "constant": false,
@@ -32927,9 +32797,7 @@
                           "pathNode": {
                             "id": 804,
                             "name": "Product",
-                            "nameLocations": [
-                              "9091:7:1"
-                            ],
+                            "nameLocations": ["9091:7:1"],
                             "nodeType": "IdentifierPath",
                             "referencedDeclaration": 75,
                             "src": "9091:7:1"
@@ -33021,9 +32889,7 @@
                   "src": "9091:62:1"
                 },
                 {
-                  "assignments": [
-                    815
-                  ],
+                  "assignments": [815],
                   "declarations": [
                     {
                       "constant": false,
@@ -33046,9 +32912,7 @@
                         "pathNode": {
                           "id": 813,
                           "name": "NGInfo",
-                          "nameLocations": [
-                            "9163:6:1"
-                          ],
+                          "nameLocations": ["9163:6:1"],
                           "nodeType": "IdentifierPath",
                           "referencedDeclaration": 64,
                           "src": "9163:6:1"
@@ -33445,9 +33309,7 @@
                   "src": "9310:27:1"
                 },
                 {
-                  "assignments": [
-                    847
-                  ],
+                  "assignments": [847],
                   "declarations": [
                     {
                       "constant": false,
@@ -33662,10 +33524,7 @@
                       "id": 853,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        4294967278,
-                        4294967278
-                      ],
+                      "overloadedDeclarations": [4294967278, 4294967278],
                       "referencedDeclaration": 4294967278,
                       "src": "9479:7:1",
                       "typeDescriptions": {
@@ -33750,9 +33609,7 @@
                       "id": 863,
                       "name": "_mint",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        2668
-                      ],
+                      "overloadedDeclarations": [2668],
                       "referencedDeclaration": 2668,
                       "src": "9626:5:1",
                       "typeDescriptions": {
@@ -34014,9 +33871,7 @@
                 "modifierName": {
                   "id": 790,
                   "name": "ngExists",
-                  "nameLocations": [
-                    "8985:8:1"
-                  ],
+                  "nameLocations": ["8985:8:1"],
                   "nodeType": "IdentifierPath",
                   "referencedDeclaration": 637,
                   "src": "8985:8:1"
@@ -34198,9 +34053,7 @@
                 "modifierName": {
                   "id": 890,
                   "name": "ERC721Connector",
-                  "nameLocations": [
-                    "9819:15:1"
-                  ],
+                  "nameLocations": ["9819:15:1"],
                   "nodeType": "IdentifierPath",
                   "referencedDeclaration": 2296,
                   "src": "9819:15:1"
@@ -34301,8 +34154,8 @@
     "202112031219": {
       "events": {},
       "links": {},
-      "address": "0x68bB4400b254588f8E2024601Ca8AcBB929f82cd",
-      "transactionHash": "0xfb09ebeceb4897efddf3082e7468e41b71772dc4209321cdf79353cdd3f2a141"
+      "address": "0x77203c76dcE6a220676d84F52A3504720562dA92",
+      "transactionHash": "0x3572eb1de1e78d4ce1ce307496b6218fe4715f920c3db424d500f19bdf701121"
     },
     "1664427098233": {
       "events": {},
@@ -34312,7 +34165,7 @@
     }
   },
   "schemaVersion": "3.4.9",
-  "updatedAt": "2022-10-06T21:38:06.629Z",
+  "updatedAt": "2022-10-07T00:13:34.950Z",
   "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",

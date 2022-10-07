@@ -26,12 +26,11 @@ public class WebMvcConfig implements WebMvcConfigurer {
 		registry.addMapping("/**")
 				.allowedOrigins(
 						"https://localhost:3000",
+						"https://localhost:3001",
 						"https://j7e206.p.ssafy.io",
-						"https://localhost:13000",
 						"http://localhost:3000",
-						"http://j7e206.p.ssafy.io",
-						"http://localhost:13000"
-
+						"http://localhost:3001",
+						"http://j7e206.p.ssafy.io"
 				)
 				.allowedMethods(
 						HttpMethod.GET.name(),
